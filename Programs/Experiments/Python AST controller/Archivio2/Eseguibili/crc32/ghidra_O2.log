@@ -1,0 +1,122 @@
+openjdk version "21.0.10" 2026-01-20
+OpenJDK Runtime Environment (Red_Hat-21.0.10.0.7-2) (build 21.0.10+7)
+OpenJDK 64-Bit Server VM (Red_Hat-21.0.10.0.7-2) (build 21.0.10+7, mixed mode)
+Module manifest file error on line 2 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_NAME=GhidraMCP
+Module manifest file error on line 3 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_DESC=An HTTP server plugin for Ghidra
+Module manifest file error on line 2 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_NAME=GhidraMCP
+Module manifest file error on line 3 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_DESC=An HTTP server plugin for Ghidra
+INFO  Using log config file: jar:file:/var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (818 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (SSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (ApplicationTrustManagerFactory)  
+INFO  Headless startup complete (1960 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 57 extension points (18 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/JVM/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Base/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/BytePatterns/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/Atmel/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/PIC/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Debug/Debugger/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/FunctionID/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/PyGhidra/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/DATA/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/8051/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Decompiler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/FileFormats/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/BSim/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Jython/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/VersionTracking/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/PDB/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: /tmp/ghidra_auto/Proj_1780233644 (HeadlessAnalyzer)  
+INFO  Creating project: /tmp/ghidra_auto/Proj_1780233644 (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /tmp/ghidra_auto/Proj_1780233644 (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/crc32/test_O2 (HeadlessAnalyzer)  
+INFO  Using Loader: Executable and Linking Format (ELF) (AutoImporter)  
+INFO  Using Language/Compiler: x86:LE:64:default:gcc (AutoImporter)  
+INFO  Using Library Search Path: [., /bin, /lib, /lib64, /lib/x86_64-linux-gnu, /lib/aarch64-linux-gnu, /usr/bin, /usr/lib, /usr/X11R6/bin, /usr/X11R6/lib, /usr/java/packages/lib, /usr/lib64] (AutoImporter)  
+INFO  Additional info:
+Loading file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/crc32/test_O2?MD5=903bedbf7fa5f4ce22752acd2d20adfa...
+Failed to properly markup GNU Hash table at 00401020: Insufficent memory at address 0040103c (length: 16 bytes)
+Setting block .init_array to read-only
+Setting block .fini_array to read-only
+Setting block .dynamic to read-only
+Failed to markup ELF Note at 00400318: data conflict
+Failed to markup ELF Note at 00401728: data conflict
+Failed to markup ELF Note at 00401768: data conflict
+------------------------------------------------
+
+Linking the External Programs of 'test_O2' to imported libraries...
+  [libm.so.6] -> not found in project
+  [libc.so.6] -> not found in project
+------------------------------------------------
+
+Resolving External Symbols of [/test_O2] - 3 unresolved symbols, no external libraries configured - skipping
+ (AutoImporter)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  ANALYZING all memory and code: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/crc32/test_O2 (HeadlessAnalyzer)  
+INFO  DWARF external debug information found: ExternalDebugInfo [filename=null, crc=0, hash=b01d3e0d8346b84ae2ad136401404661529e2787] (ExternalDebugFileSectionProvider)  
+INFO  Unable to find DWARF information, skipping DWARF analysis (DWARFAnalyzer)  
+INFO  Packed database cache: /var/tmp/pippo-ghidra/packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: generic_clib_64 (ApplyDataArchiveAnalyzer)  
+INFO  -----------------------------------------------------
+    ASCII Strings                              0.318 secs
+    Apply Data Archives                        0.209 secs
+    Call Convention ID                         0.000 secs
+    Call-Fixup Installer                       0.002 secs
+    Create Address Tables                      0.004 secs
+    Create Function                            0.002 secs
+    DWARF                                      0.007 secs
+    Data Reference                             0.005 secs
+    Decompiler Switch Analysis                 0.793 secs
+    Demangler GNU                              0.012 secs
+    Disassemble Entry Points                   0.054 secs
+    ELF Scalar Operand References              0.010 secs
+    Embedded Media                             0.009 secs
+    External Entry References                  0.000 secs
+    Function ID                                0.037 secs
+    Function Start Search                      0.027 secs
+    Function Start Search After Code           0.002 secs
+    Function Start Search After Data           0.000 secs
+    GCC Exception Handlers                     0.036 secs
+    Non-Returning Functions - Discovered       0.002 secs
+    Non-Returning Functions - Known            0.001 secs
+    Reference                                  0.013 secs
+    Shared Return Calls                        0.005 secs
+    Stack                                      0.030 secs
+    Subroutine References                      0.002 secs
+    Subroutine References - One Time           0.000 secs
+    x86 Constant Reference Analyzer            0.085 secs
+-----------------------------------------------------
+     Total Time   1 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/crc32/test_O2 (HeadlessAnalyzer)  
+INFO  SCRIPT: /var/home/pippo/Desktop/Universita/Tesi/GhidraMCP-release-1-4/ghidra_mcp_server.py (HeadlessAnalyzer)  
+Server Ghidra MCP attivo sulla porta 8080
+[MCP REQUEST] list_functions {}
+[MCP REQUEST] strings {'offset': ['0'], 'limit': ['2000']}
+[MCP REQUEST] disassemble_function {'address': ['entry']}
+[MCP REQUEST] exports {'offset': ['0'], 'limit': ['100']}
+[MCP REQUEST] decompile_function {'address': ['0x00400360']}
+[MCP REQUEST] decompile_function {'address': ['0x004003a0']}
+[MCP REQUEST] decompile_function {'address': ['0x00400560']}
+/var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/support/launch.sh: line 231: 88234 Killed                     "${JAVA_CMD}" "${VMARGS_FROM_LAUNCH_PROPS[@]}" "${VMARGS_FROM_LAUNCH_SH[@]}" ${VMARGS_FROM_CALLER} -showversion -cp "${CPATH}" ghidra.Ghidra ${CLASSNAME} "${ARGS[@]}"

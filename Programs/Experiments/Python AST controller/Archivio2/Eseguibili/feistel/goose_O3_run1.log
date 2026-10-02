@@ -1,0 +1,85 @@
+
+    __( O)>  ● new session · custom_unsloth unsloth/gemma-4-12b-it-GGUF
+   \____)    20260824_6 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400380
+
+
+  ────────────────────────────────────────
+  ▸ get_function_xrefs ghidra-mcp
+    name: FUN_00400380
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: __libc_start_main
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003d8
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400400
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path ~/D/U/T/P/E/S/E/feistel/feistel_O3_llm.c
+    content: #include <stdio.h>
+
+/**
+ * Reconstructed from FUN_00400380
+ * This function prints the original and encrypted values.
+ */
+void print_feistel_results(void) {
+    printf("Originale: %08X %08X\n", 0xdeadbeef, 0xcafebabe);
+    printf("Cifrato:   %08X %08X\n", 0x9dee733b, 0xc7802f9d);
+}
+
+/**
+ * Reconstructed from FUN_004003d8
+ * This function acts as the entry point for the main logic, 
+ * calling the result printer and then entering an infinite loop.
+ */
+int main(void) {
+    print_feistel_results();
+    
+    // Reconstructed from the infinite loop in FUN_004003d8
+    while (1) {
+        // Do nothing block with infinite loop
+    }
+    
+    return 0;
+}
+
+
+Created /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/feistel_O3_llm.c (26 lines)DONE

@@ -1,0 +1,268 @@
+
+    __( O)>  ● new session · github_copilot gpt-4.1
+   \____)    20260529_46 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400490
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400360
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004003b0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004003b0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004b0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004004b0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004c0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004f0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004004c0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004004f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400570
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400570
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004005a0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004005d0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400600
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: _DT_INIT
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400630
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400660
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400490
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004004b0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004004c0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004004f0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400570
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004005a0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004005d0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400600
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400360
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004003b0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400360
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004003b0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004003b0
+
+## TODO aggiornato
+
+- [x] Ottenere tutte le funzioni disponibili (Fase 1)
+- [x] Ottenere tutte le stringhe dal binario (Fase 1)
+- [x] Decompilare "entry" per individuare l'indirizzo del main (Fase 2)
+- [x] Gestire errori 500/501 provando metodi alternativi (Fase 2)
+- [x] Decompilare tutte le FUN_... richiamate dal main, ricorsivamente (Fase 3)
+- [x] Ottenere disassemblato di backup quando la decompilazione non funziona (Fase 3)
+- [ ] Ricostruire l’intero codice C utilizzando nomi descrittivi, tipi standard C, sostituendo #include e correggendo nomi/strutture (Fase 4)
+- [ ] Scrivere il file finale `/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/linked_list/linked_list_O2_llm.c` (Fase 5)
+- [ ] Scrivere esattamente la parola: DONE
+
+### Analisi e prossimo passo
+
+Abbiamo le decompilazioni ricostruite e il disassemblato delle funzioni:
+- La funzione `FUN_004003b0` ha tutta la logica principale (creazione, conteggio, somma, stampa e liberazione di una lista collegata di interi).
+- Le altre funzioni (`FUN_00400570`, `FUN_004005a0`, `FUN_004005d0`, `FUN_00400600`) sono utilità per manipolare la lista.
+- Le funzioni tra 0x004004b0 e 0x004004f0 sono vuote.
+
+Procederò ora a scrivere il codice C ricostruito, rispettando tutti i vincoli, in stile idiomatico, inclusivo di `#include`, senza tipi Ghidra, e con nomi sensati per le funzioni. Poi salverò il file e scriverò "DONE".
+  ────────────────────────────────────────
+  ▸ write
+    path ~/D/U/T/P/E/S/E/linked_list/linked_list_O2_llm.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+
+// Nodo della lista collegata
+typedef struct Node {
+    int value;
+    struct Node *next;
+} Node;
+
+// Crea e aggiunge un nodo all'inizio della lista
+Node* insert_front(Node* head, int value) {
+    Node* new_node = (Node*)malloc(sizeof(Node));
+    new_node->value = value;
+    new_node->next = head;
+    return new_node;
+}
+
+// Conta il numero di nodi della lista
+int list_length(Node* head) {
+    int length = 0;
+    while (head) {
+        length++;
+        head = head->next;
+    }
+    return length;
+}
+
+// Calcola la somma dei valori dei nodi
+int list_sum(Node* head) {
+    int sum = 0;
+    while (head) {
+        sum += head->value;
+        head = head->next;
+    }
+    return sum;
+}
+
+// Stampa tutti i valori della lista
+void print_list(Node* head) {
+    while (head) {
+        printf("%d ", head->value);
+        head = head->next;
+    }
+    putchar('\n');
+}
+
+// Libera tutta la memoria occupata dalla lista
+void free_list(Node* head) {
+    Node* tmp;
+    while (head) {
+        tmp = head->next;
+        free(head);
+        head = tmp;
+    }
+}
+
+int main(void) {
+    Node *list = NULL;
+    int value;
+    // Inserisce: 10, 20, 30, 40, 50 (in testa, invertito)
+    for (value = 10; value < 60; value += 10) {
+        list = insert_front(list, value);
+    }
+
+    printf("Lunghezza: %d\n", list_length(list));
+    printf("Somma: %d\n", list_sum(list));
+    print_list(list);
+    free_list(list);
+    return 0;
+}
+
+
+Created /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/linked_list/linked_list_O2_llm.c (70 lines)DONE

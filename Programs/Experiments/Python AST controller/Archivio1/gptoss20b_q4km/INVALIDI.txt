@@ -1,0 +1,1 @@
+Run NON validi: bridge MCP non connesso a Ghidra (ago 2026). Esclusi dall'analisi.

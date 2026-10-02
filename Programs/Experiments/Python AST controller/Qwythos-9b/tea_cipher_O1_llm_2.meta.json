@@ -1,0 +1,13 @@
+{
+  "source": "tea_cipher.c",
+  "model": "Qwythos-9b",
+  "level": "O1",
+  "run": 2,
+  "timestamp": "2026-10-01T19:18:56",
+  "duration_s": 241,
+  "nudges": 0,
+  "goose_session": "re_task_9pqh9r6_",
+  "prompt_sha256": "55a8eac74ed6",
+  "goose_log": "/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/goose_O1_run2.log",
+  "sandbox_violations": []
+}

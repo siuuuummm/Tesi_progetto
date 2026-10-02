@@ -1,0 +1,178 @@
+
+    __( O)>  ● new session · github_copilot gpt-4.1
+   \____)    20260529_8 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    limit: 2000
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400360
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004003d0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400410
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004004a0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004004f8
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400380
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004004bc
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004004a0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004a0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004a0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004bc
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004c3
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004f8
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: builtin_strncpy
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400370
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400380
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400370
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400380
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400360
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path ~/D/U/T/P/E/S/E/xor_cipher/xor_cipher_O1_llm.c
+    content: #include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+
+// Funzione di cifratura XOR su array di byte
+void xor_cipher(uint8_t *data, int len, uint8_t key) {
+    if (len > 0) {
+        uint8_t *end = data + len;
+        while (data != end) {
+            *data ^= key;
+            data++;
+        }
+    }
+}
+
+// Rotate left su 32 bit
+uint32_t rol32(uint32_t value, uint8_t shift) {
+    return (value << (shift & 0x1f)) | (value >> (32 - (shift & 0x1f)));
+}
+
+// Checksum custom: somma e rotazione per ogni byte
+uint32_t custom_checksum(uint8_t *data, int len) {
+    uint32_t result = 0;
+    if (len > 0) {
+        uint8_t *end = data + len;
+        do {
+            result += *data;
+            result = (result << 3) | (result >> 29);
+            data++;
+        } while (data != end);
+        return result;
+    }
+    return 0;
+}
+
+int main(void) {
+    char buffer[23];
+    strncpy(buffer, "secret message", 0xf);
+    
+    size_t msg_len = strlen(buffer);
+
+    uint32_t checksum_originale = custom_checksum((uint8_t *)buffer, (int)msg_len);
+    printf("Checksum originale: %u\n", checksum_originale);
+    
+    xor_cipher((uint8_t *)buffer, (int)msg_len, 0x5A);
+    uint32_t checksum_cifrato = custom_checksum((uint8_t *)buffer, (int)msg_len);
+    printf("Checksum cifrato:   %u\n", checksum_cifrato);
+    
+    xor_cipher((uint8_t *)buffer, (int)msg_len, 0x5A);
+    printf("Decifrato: %s\n", buffer);
+    
+    return 0;
+}
+
+
+Created /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/xor_cipher/xor_cipher_O1_llm.c (53 lines)DONE

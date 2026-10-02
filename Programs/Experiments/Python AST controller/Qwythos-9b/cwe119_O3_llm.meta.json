@@ -1,0 +1,13 @@
+{
+  "source": "cwe119.c",
+  "model": "Qwythos-9b",
+  "level": "O3",
+  "run": 1,
+  "timestamp": "2026-10-01T19:40:47",
+  "duration_s": 108,
+  "nudges": 0,
+  "goose_session": "re_task_2h4ukrcm",
+  "prompt_sha256": "55a8eac74ed6",
+  "goose_log": "/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/goose_O3_run1.log",
+  "sandbox_violations": []
+}

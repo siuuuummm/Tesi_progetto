@@ -1,0 +1,20 @@
+**[1] Re-executability** — *"il codice compila senza errori?"*
+Passa il file decompilato a GCC con `-c`. È la metrica più binaria: o funziona o no. Ghidra spesso produce output con tipi invalidi (`undefined4`, `ulong`) o sintassi rotta che GCC rifiuta. È il filtro minimo di qualità — se fallisce qui, tutto il resto è poco rilevante.
+
+**[2] Edit Similarity** — *"quanto si assomiglia il testo sorgente, carattere per carattere?"*
+Usa `SequenceMatcher` (Levenshtein normalizzato) sul testo grezzo dei due file. È sensibile ai nomi delle variabili (`param_1` vs `i`), alle keyword scelte (`while` vs `for`), alla formattazione. Tende ad essere bassa anche su decompilazioni corrette, perché il compilatore cancella i nomi originali — nel paper i valori tipici sono 6–15%. È utile come lower bound: se è alta, il codice è quasi identico; se è bassa, non significa necessariamente che sia sbagliato.
+
+**[3] AST Node Histogram Similarity** — *"i due alberi usano gli stessi tipi di nodi, nelle stesse proporzioni?"*
+Conta quante volte appare ogni tipo di nodo (`If`, `For`, `BinaryOp`, `Decl`…) in ciascun AST, poi calcola l'overlap normalizzato tra i due istogrammi. Non guarda la struttura — solo il "vocabolario" usato. Due funzioni con lo stesso numero di `if` e `for` ma in ordine diverso avrebbero similarità alta. È la metrica originale del paper LLM4Decompile.
+
+**[4] Tree Edit Distance (Zhang-Shasha)** — *"quante operazioni servono per trasformare un albero nell'altro?"*
+Calcola il numero minimo di inserimenti, cancellazioni e sostituzioni di nodi per passare dall'AST originale a quello decompilato. È la metrica strutturale vera: due `for` annidati e due `while` annidati hanno istogramma simile ([3]) ma TED alto, perché la struttura è diversa. Viene normalizzato in [0, 100] dividendo per la somma delle dimensioni dei due alberi.
+
+**[5] Fan-out Similarity** — *"ogni nodo ha mediamente lo stesso numero di figli?"*
+Confronta le distribuzioni del numero di figli per nodo usando la divergenza di Jensen-Shannon. Un `for` ha tipicamente 4 figli (init, condizione, incremento, corpo); un `while` ne ha 2. Se la decompilazione cambia sistematicamente la struttura del flusso di controllo, questa metrica lo vede anche quando [3] non lo coglie. Un fan-out molto diverso indica che la "forma" del codice è cambiata.
+
+**[6] AST Depth Delta** — *"gli alberi hanno la stessa profondità massima?"*
+Misura la profondità massima dei due AST. Un codice con cicli annidati profondi ha profondità alta; se il decompilatore li ha "appiattiti" (trasformando `for` annidati in un unico `while` con logica inline), la profondità scende. È una proxy semplice ma efficace per capire se la struttura di annidamento è stata preservata.
+
+**[7] Structural Profile** — *"qual è il breakdown per categoria di nodo?"*
+Raggruppa i nodi in 5 categorie — `control_flow` (if/for/while), `declarations` (variabili, tipi), `expressions` (operatori, chiamate), `literals` (costanti, ID), `statements` (return, compound) — e mostra il delta assoluto e percentuale. Serve a capire *dove* divergono i due codici: un +100% nelle dichiarazioni dice che Ghidra ha introdotto molte variabili temporanee extra; un +33% nel control flow dice che ha aggiunto un ramo condizionale in più.

@@ -1,0 +1,177 @@
+
+    __( O)>  ● new session · github_copilot gpt-4.1
+   \____)    20260522_20 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004003f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400400
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400430
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004a6
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004fa
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400550
+
+
+  ────────────────────────────────────────
+  ▸ get_current_function ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    limit: 100
+
+
+  ────────────────────────────────────────
+  ▸ list_exports ghidra-mcp
+    limit: 100
+
+
+  ────────────────────────────────────────
+  ▸ search_functions_by_name ghidra-mcp
+    query: main
+
+
+  ────────────────────────────────────────
+  ▸ get_function_xrefs ghidra-mcp
+    name: __libc_start_main
+    limit: 10
+
+
+  ────────────────────────────────────────
+  ▸ list_segments ghidra-mcp
+    limit: 100
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003c0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400550
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004a6
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004fa
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400400
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400430
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400360
+
+Ecco la mappatura delle funzioni ottenute fin qui:
+- entry → chiama __libc_start_main con FUN_00400550 come “main”
+- FUN_00400550 → logica principale (corrisponde al main effettivo)
+- FUN_004004a6 → codifica una stringa (probabilmente “proteggi_record”)
+- FUN_004004fa → decodifica la stringa (probabilmente “sblocca_record”)
+- FUN_004003f0, FUN_00400400, FUN_00400430, FUN_00400360 → funzioni di stallo o wrapper di avvio, non rilevanti nel main del programma
+
+Procedo ora a ricostruire il codice C, sistemando nomi, tipi e struttura, secondo la tua specifica. Scrivo subito la bozza pronta e documentata, con funzione `main` e helper opportunamente rinominati.
+
+Poi salverò il file come richiesto.
+  ────────────────────────────────────────
+  ▸ write
+    path ~/D/U/T/P/E/S/E/secure_db/secure_db_O0_llm.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define RECORD_MAGIC -559038289 // 0xDEADC0DE
+#define RECORD_DATA_LEN 0x1f
+
+typedef struct {
+    int magic;
+    char data[RECORD_DATA_LEN];
+    void (*coder)(char*);
+} SecureRecord;
+
+void protect_record(char *data) {
+    for (int i = 0; data[i] != '\0'; i++) {
+        data[i] = (data[i] ^ 0x5a) + 1;
+    }
+}
+
+void unlock_record(char *data) {
+    for (int i = 0; data[i] != '\0'; i++) {
+        data[i] = (data[i] - 1U) ^ 0x5a;
+    }
+}
+
+int main(int argc, char **argv) {
+    if (argc < 2) {
+        return 1;
+    }
+
+    SecureRecord *record = malloc(sizeof(SecureRecord));
+    record->magic = RECORD_MAGIC;
+    strncpy(record->data, argv[1], RECORD_DATA_LEN - 1);
+    record->data[RECORD_DATA_LEN-1] = '\0';
+    record->coder = protect_record;
+    record->coder(record->data);
+    if (((record->magic >> 4) & 0xff) > 0x10) {
+        puts("Record protetto creato.");
+    }
+    record->coder = unlock_record;
+    record->coder(record->data);
+    printf("Dato originale: %s\n", record->data);
+    free(record);
+    return 0;
+}
+
+
+Created /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/secure_db/secure_db_O0_llm.c (45 lines)✅ Codice ricostruito, revisionato e salvato su:
+`/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/secure_db/secure_db_O0_llm.c`
+
+Se vuoi spiegazione dettagliata, analisi di sicurezza o test del codice, chiedi pure!

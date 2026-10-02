@@ -1,0 +1,6 @@
+[
+  {"args": ["mario", "resta"]},
+  {"args": ["mario", "resta", "1"]},
+  {"args": ["mario", "logout"]},
+  {"args": ["mario", "logout", "1"]}
+]

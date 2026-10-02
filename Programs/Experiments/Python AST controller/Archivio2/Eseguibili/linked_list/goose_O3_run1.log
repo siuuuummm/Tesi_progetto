@@ -1,0 +1,48 @@
+
+    __( O)>  ● new session · github_copilot gpt-4.1
+   \____)    20260529_47 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004004b0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004004b0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400360
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004003b0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004003b0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004c0
+
+Yes — what would you like me to do?

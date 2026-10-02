@@ -1,0 +1,131 @@
+
+    __( O)>  ● new session · custom_unsloth unsloth/gemma-4-12b-it-GGUF
+   \____)    20260824_38 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ todo_write todo
+    content: - [ ] PHASE 1: ORIENTAMENTO
+  - [ ] List all functions
+  - [ ] List all strings
+- [ ] PHASE 2: TROVA IL MAIN
+  - [ ] Decompile "entry" to find main address
+- [ ] PHASE 3: DECOMPILA TUTTO
+  - [ ] Decompile every FUN_... function
+- [ ] PHASE 4: SCRIVI IL CODICE C
+  - [ ] Reconstruct full C source code
+- [ ] PHASE 5: SALVA IL FILE
+  - [ ] Save to /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/cwe119_O2_llm.c
+  - [ ] Output "DONE"
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003e0
+
+
+  ────────────────────────────────────────
+  ▸ search_functions_by_name ghidra-mcp
+    query: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003b0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400360
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400360
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400390
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004a0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400420
+
+
+  ────────────────────────────────────────
+  ▸ todo_write todo
+    content: - [x] PHASE 1: ORIENTAMENTO
+  - [x] List all functions
+  - [x] List all strings
+- [x] PHASE 2: TROVA IL MAIN
+  - [x] Decompile "entry" to find main address
+- [x] PHASE 3: DECOMPILA TUTTO
+  - [x] Decompile every FUN_... function
+- [ ] PHASE 4: SCRIVI IL CODICE C
+  - [ ] Reconstruct full C source code
+- [ ] PHASE 5: SALVA IL FILE
+  - [ ] Save to /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/cwe119_O2_llm.c
+  - [ ] Output "DONE"
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path ~/D/U/T/P/E/S/E/cwe119/cwe119_O2_llm.c
+    content: #include <stdio.h>
+#include <string.h>
+#include <stdint.h>
+
+void func_00400360(void) {
+    ((void (*)())0x00402ff8)();
+}
+
+void func_004003e0(void) {
+    return;
+}
+
+void func_004003f0(void) {
+    return;
+}
+
+void func_00400420(void) {
+    return;
+}
+
+void print_buffer(char *param_1) {
+    char acStack_48[72];
+    strcpy(acStack_48, param_1);
+    printf("Buffer content: %s\n", acStack_48);
+}
+
+int main(void) {
+    print_buffer("This is a very long input string that will overflow the buffer and cause undefined behavior.");
+    return 0;
+}
+
+
+Created /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/cwe119_O2_llm.c (30 lines)DONE

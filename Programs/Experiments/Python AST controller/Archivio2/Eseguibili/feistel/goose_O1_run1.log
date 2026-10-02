@@ -1,0 +1,288 @@
+
+    __( O)>  ● new session · custom_unsloth unsloth/gemma-4-12b-it-GGUF
+   \____)    20260824_3 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ todo_write todo
+    content: - [ ] FASE 1: ORIENTAMENTO
+  - [ ] list_functions
+  - [ ] list_strings
+- [ ] FASE 2: TROVA IL MAIN
+  - [ ] Decompila "entry" per trovare main
+- [ ] FASE 3: DECOMPILA TUTTO
+  - [ ] Decompila main e funzioni chiamate ricorsivamente
+- [ ] FASE 4: SCRIVI IL CODICE C
+  - [ ] Rinomina funzioni e tipi
+  - [ ] Includi header
+- [ ] FASE 5: SALVA IL FILE
+  - [ ] Scrivi file a /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/feistel_O1_llm.c
+  - [ ] Scrivi "DONE"
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ search_functions_by_name ghidra-mcp
+    query: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400380
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004ba
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004004ba
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_0040048e
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x0040048e
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400480
+
+-32602: Could not interpret tool use parameters for id n6LkC3RCCRMDyny3gDWAIHvx3p06Umge: EOF while parsing a string at line 1 column 342A tool call could not be parsed — the response may have been truncated. Try breaking the task into smaller steps or resending your message.
+
+
+=== NUDGE 1/2 ===
+
+    __( O)>  ● new session · custom_unsloth unsloth/gemma-4-12b-it-GGUF
+   \____)    20260824_4 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ tree
+    path: /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/
+
+feistel_O0_llm.c  [49]
+feistel_O2_llm.c  [2]
+feistel_O3_llm.c  [50]
+ghidra_O0.log  [126]
+ghidra_O1.log  [121]
+ghidra_O2.log  [116]
+ghidra_O3.log  [115]
+goose_O0_run1.log  [132]
+goose_O1_run1.log  [87]
+goose_O2_run1.log  [27]
+goose_O3_run1.log  [79]
+test_O0  [0]
+test_O1  [0]
+test_O2  [0]
+test_O3  [0]
+
+  ────────────────────────────────────────
+  ▸ read_resource extensionmanager
+    uri: ghidra_O1.log
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cat /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/ghidra_O1.log
+
+openjdk version "21.0.10" 2026-01-20
+OpenJDK Runtime Environment (Red_Hat-21.0.10.0.7-2) (build 21.0.10+7)
+OpenJDK 64-Bit Server VM (Red_Hat-21.0.10.0.7-2) (build 21.0.10+7, mixed mode)
+Module manifest file error on line 2 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_NAME=GhidraMCP
+Module manifest file error on line 3 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_DESC=An HTTP server plugin for Ghidra
+Module manifest file error on line 2 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_NAME=GhidraMCP
+Module manifest file error on line 3 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_DESC=An HTTP server plugin for Ghidra
+INFO  Using log config file: jar:file:/var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (749 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (SSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (ApplicationTrustManagerFactory)  
+INFO  Headless startup complete (1813 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 57 extension points (18 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/JVM/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Base/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/BytePatterns/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/Atmel/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/PIC/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Debug/Debugger/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/FunctionID/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/PyGhidra/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/DATA/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/8051/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Decompiler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/FileFormats/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/BSim/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Jython/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/VersionTracking/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/PDB/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: /tmp/ghidra_auto/Proj_1787560584 (HeadlessAnalyzer)  
+INFO  Creating project: /tmp/ghidra_auto/Proj_1787560584 (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /tmp/ghidra_auto/Proj_1787560584 (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/test_O1 (HeadlessAnalyzer)  
+INFO  Using Loader: Executable and Linking Format (ELF) (AutoImporter)  
+INFO  Using Language/Compiler: x86:LE:64:default:gcc (AutoImporter)  
+INFO  Using Library Search Path: [., /bin, /lib, /lib64, /lib/x86_64-linux-gnu, /lib/aarch64-linux-gnu, /usr/bin, /usr/lib, /usr/X11R6/bin, /usr/X11R6/lib, /usr/java/packages/lib, /usr/lib64] (AutoImporter)  
+INFO  Additional info:
+Loading file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/test_O1?MD5=bd9ba97d2ffe7111d298e8f76045ea4c...
+Failed to properly markup GNU Hash table at 00401020: Insufficent memory at address 0040103c (length: 12 bytes)
+Setting block .init_array to read-only
+Setting block .fini_array to read-only
+Setting block .dynamic to read-only
+Failed to markup ELF Note at 00400318: data conflict
+Failed to markup ELF Note at 004012a0: data conflict
+Failed to markup ELF Note at 004012e0: data conflict
+------------------------------------------------
+
+Linking the External Programs of 'test_O1' to imported libraries...
+  [libm.so.6] -> not found in project
+  [libc.so.6] -> not found in project
+------------------------------------------------
+
+Resolving External Symbols of [/test_O1] - 2 unresolved symbols, no external libraries configured - skipping
+ (AutoImporter)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  ANALYZING all memory and code: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/test_O1 (HeadlessAnalyzer)  
+INFO  DWARF external debug information found: ExternalDebugInfo [filename=null, crc=0, hash=7bcaee54c22a912740d11d5e734e51890f675532] (ExternalDebugFileSectionProvider)  
+INFO  Unable to find DWARF information, skipping DWARF analysis (DWARFAnalyzer)  
+INFO  Packed database cache: /var/tmp/pippo-ghidra/packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: generic_clib_64 (ApplyDataArchiveAnalyzer)  
+INFO  -----------------------------------------------------
+    ASCII Strings                              0.264 secs
+    Apply Data Archives                        0.212 secs
+    Call Convention ID                         0.001 secs
+    Call-Fixup Installer                       0.002 secs
+    Create Address Tables                      0.002 secs
+    Create Function                            0.002 secs
+    DWARF                                      0.008 secs
+    Data Reference                             0.003 secs
+    Decompiler Switch Analysis                 0.864 secs
+    Demangler GNU                              0.009 secs
+    Disassemble Entry Points                   0.049 secs
+    ELF Scalar Operand References              0.005 secs
+    Embedded Media                             0.008 secs
+    External Entry References                  0.000 secs
+    Function ID                                0.034 secs
+    Function Start Search                      0.031 secs
+    Function Start Search After Code           0.002 secs
+    Function Start Search After Data           0.001 secs
+    GCC Exception Handlers                     0.034 secs
+    Non-Returning Functions - Discovered       0.001 secs
+    Non-Returning Functions - Known            0.001 secs
+    Reference                                  0.009 secs
+    Shared Return Calls                        0.004 secs
+    Stack                                      0.021 secs
+    Subroutine References                      0.003 secs
+    Subroutine References - One Time           0.000 secs
+    x86 Constant Reference Analyzer            0.047 secs
+-----------------------------------------------------
+     Total Time   1 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/test_O1 (HeadlessAnalyzer)  
+INFO  SCRIPT: /var/home/pippo/Desktop/Universita/Tesi/GhidraMCP-release-1-4/ghidra_mcp_server.py (HeadlessAnalyzer)  
+Server Ghidra MCP attivo sulla porta 8080
+[MCP REQUEST] list_functions {}
+[MCP REQUEST] strings {'offset': ['0'], 'limit': ['2000']}
+[MCP REQUEST] get_function_by_address {'address': ['0x004003f0']}
+[MCP REQUEST] searchFunctions {'offset': ['0'], 'query': ['entry'], 'limit': ['100']}
+[MCP REQUEST] decompile_function {'address': ['0x00400380']}
+[MCP REQUEST] get_function_by_address {'address': ['0x004004ba']}
+[MCP REQUEST] get_function_by_address {'address': ['0x0040048e']}
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400380
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004004ba
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x0040048e
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path ~/D/U/T/P/E/S/E/feistel/feistel_O1_llm.c
+    content: #include <stdio.h>
+#include <stdint.h>
+
+// Function FUN_0040048e corresponds to the core logic of the feistel-like transformation.
+void process_data(uint32_t *p1, uint32_t *p2, int seed) {
+    uint32_t uVar1;
+    uint32_t uVar2;
+    
+    uVar2 = seed + 0x9e3779b9;
+    // The loop runs for 0x9e3779c1 - 0x9e3779b9 = 0x18 (24) iterations.
+    // However, based on the decompiler, it's checking for a specific end value.
+    // Let's keep the logic as decompiled.
+    do {
+        uVar1 = *p1;
+        *p1 = (uVar1 << 5 | uVar1 >> 0x1b) ^ *p2 ^ uVar2;
+        *p2 = uVar1;
+        uVar2 = uVar2 + 1;
+    } while (uVar2 != seed + 0x9e3779c1U);
+}
+
+// Function FUN_004004ba is the main logic.
+int main(void) {
+    uint32_t local_10;
+    uint32_t local_c[3];
+    
+    local_c[0] = 0xdeadbeef;
+    local_10 = 0xcafebabe;
+    printf("Originale: %08X %08X\n", 0xdeadbeef, 0xcafebabe);
+    
+    process_data(local_c, &local_10, 0x12345678);
+    
+    printf("Cifrato:   %08X %08X\n", (unsigned long)local_c[0], (unsigned long)local_10);
+    return 0;
+}
+
+
+Created /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/feistel_O1_llm.c (34 lines)DONE

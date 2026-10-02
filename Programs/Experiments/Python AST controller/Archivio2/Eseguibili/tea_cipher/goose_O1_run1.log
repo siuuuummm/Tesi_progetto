@@ -1,0 +1,768 @@
+
+    __( O)>  ● new session · custom_unsloth empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF
+   \____)    20261001_10 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+FASE 1 — ORIENTAMENTO
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004003b0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003b0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004003c0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003c0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004003b0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400480
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400508
+
+
+
+
+=== NUDGE 1/2 ===
+
+    __( O)>  ● new session · custom_unsloth empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF
+   \____)    20261001_11 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+-32602: Could not interpret tool use parameters for id SA0GIqAglXhDq86OiUyFgm7NN1KDxbRm: EOF while parsing a string at line 1 column 9214A tool call could not be parsed — the response may have been truncated. Try breaking the task into smaller steps or resending your message.
+
+
+=== NUDGE 2/2 ===
+
+    __( O)>  ● new session · custom_unsloth empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF
+   \____)    20261001_12 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus && rg tea_cipher_O1_llm.c
+
+/bin/bash: line 1: rg: command not found
+
+Command exited with code 127
+  ────────────────────────────────────────
+  ▸ tree
+    path: /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher
+    depth: 2
+
+ghidra_O0.log  [122]
+ghidra_O1.log  [125]
+ghidra_O2.log  [144]
+ghidra_O3.log  [115]
+goose_O0_run1.log  [352]
+goose_O1_run1.log  [93]
+goose_O2_run1.log  [174]
+goose_O3_run1.log  [25]
+tea_cipher_O0_llm.c  [284]
+tea_cipher_O1_llm  [0]
+test_O0  [0]
+test_O1  [0]
+test_O2  [0]
+test_O3  [0]
+
+  ────────────────────────────────────────
+  ▸ read_resource extensionmanager
+    uri: ghidra_O1.log
+
+
+  ────────────────────────────────────────
+  ▸ tree
+    path: /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/tea_cipher_O1_llm
+    depth: 5
+
+Path is not a directory: /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/tea_cipher_O1_llm
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus && ls -la ghidra_O1.log
+
+ls: cannot access 'ghidra_O1.log': No such file or directory
+
+Command exited with code 2
+  ────────────────────────────────────────
+  ▸ shell
+    command: find /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus -name "*.log" 2>/dev/null
+
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/secure_db/ghidra_O0.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/secure_db/goose_O0_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/secure_db/ghidra_O1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/secure_db/goose_O1_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/secure_db/ghidra_O2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/secure_db/goose_O2_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/secure_db/ghidra_O3.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/secure_db/goose_O3_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/chain_vault/ghidra_O0.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/chain_vault/goose_O0_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/chain_vault/ghidra_O1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/chain_vault/goose_O1_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/chain_vault/ghidra_O2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/chain_vault/goose_O2_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/chain_vault/ghidra_O3.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/chain_vault/goose_O3_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/obfuscated_vm/ghidra_O0.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/obfuscated_vm/goose_O0_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/obfuscated_vm/ghidra_O1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/obfuscated_vm/goose_O1_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/obfuscated_vm/ghidra_O2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/obfuscated_vm/goose_O2_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/obfuscated_vm/ghidra_O3.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/obfuscated_vm/goose_O3_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/ghidra_O0.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/goose_O0_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/ghidra_O1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/goose_O1_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/ghidra_O2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/goose_O2_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/ghidra_O3.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/goose_O3_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/xor_cipher/ghidra_O0.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/xor_cipher/goose_O0_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/xor_cipher/ghidra_O1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/xor_cipher/goose_O1_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/xor_cipher/ghidra_O2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/xor_cipher/goose_O2_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/xor_cipher/ghidra_O3.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/xor_cipher/goose_O3_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/xor_cipher/goose_O0_run2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/xor_cipher/goose_O1_run2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/xor_cipher/goose_O2_run2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/xor_cipher/goose_O3_run2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/bst/ghidra_O0.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/bst/goose_O0_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/bst/ghidra_O1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/bst/goose_O1_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/bst/ghidra_O2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/bst/goose_O2_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/bst/ghidra_O3.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/bst/goose_O3_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/bst/goose_O0_run2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/bst/goose_O1_run2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/bst/goose_O2_run2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/bst/goose_O3_run2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/linked_list/ghidra_O0.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/linked_list/goose_O0_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/linked_list/ghidra_O1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/linked_list/goose_O1_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/linked_list/ghidra_O2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/linked_list/goose_O2_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/linked_list/ghidra_O3.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/linked_list/goose_O3_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/crc32/ghidra_O0.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/crc32/goose_O0_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/crc32/ghidra_O1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/crc32/goose_O1_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/crc32/ghidra_O2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/crc32/goose_O2_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/crc32/ghidra_O3.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/crc32/goose_O3_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/ghidra_O0.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/goose_O0_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/ghidra_O1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/goose_O1_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/ghidra_O2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/goose_O2_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/ghidra_O3.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/goose_O3_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/ghidra_O0.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/goose_O0_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/ghidra_O1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/goose_O1_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/ghidra_O2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/goose_O2_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/ghidra_O3.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/goose_O3_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/koch/ghidra_O0.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/koch/goose_O0_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/koch/ghidra_O1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/koch/goose_O1_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/koch/ghidra_O2.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/koch/goose_O2_run1.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/koch/ghidra_O3.log
+/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/koch/goose_O3_run1.log
+  ────────────────────────────────────────
+  ▸ read_resource extensionmanager
+    uri: ghidra_O1.log
+    extension_name: ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cat /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/ghidra_O1.log
+
+openjdk version "21.0.10" 2026-01-20
+OpenJDK Runtime Environment (Red_Hat-21.0.10.0.7-2) (build 21.0.10+7)
+OpenJDK 64-Bit Server VM (Red_Hat-21.0.10.0.7-2) (build 21.0.10+7, mixed mode)
+Module manifest file error on line 2 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_NAME=GhidraMCP
+Module manifest file error on line 3 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_DESC=An HTTP server plugin for Ghidra
+Module manifest file error on line 2 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_NAME=GhidraMCP
+Module manifest file error on line 3 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_DESC=An HTTP server plugin for Ghidra
+INFO  Using log config file: jar:file:/var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (758 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (SSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (ApplicationTrustManagerFactory)  
+INFO  Headless startup complete (1767 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 57 extension points (18 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/JVM/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Base/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/BytePatterns/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/Atmel/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/PIC/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Debug/Debugger/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/FunctionID/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/PyGhidra/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/DATA/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/8051/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Decompiler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/FileFormats/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/BSim/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Jython/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/VersionTracking/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/PDB/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: /tmp/ghidra_auto/Proj_1790869989 (HeadlessAnalyzer)  
+INFO  Creating project: /tmp/ghidra_auto/Proj_1790869989 (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /tmp/ghidra_auto/Proj_1790869989 (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/test_O1 (HeadlessAnalyzer)  
+INFO  Using Loader: Executable and Linking Format (ELF) (AutoImporter)  
+INFO  Using Language/Compiler: x86:LE:64:default:gcc (AutoImporter)  
+INFO  Using Library Search Path: [., /bin, /lib, /lib64, /lib/x86_64-linux-gnu, /lib/aarch64-linux-gnu, /usr/bin, /usr/lib, /usr/X11R6/bin, /usr/X11R6/lib, /usr/java/packages/lib, /usr/lib64] (AutoImporter)  
+INFO  Additional info:
+Loading file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/test_O1?MD5=91f976772ec06674e64d762bbf02c0c3...
+Failed to properly markup GNU Hash table at 00401020: Insufficent memory at address 0040103c (length: 12 bytes)
+Setting block .init_array to read-only
+Setting block .fini_array to read-only
+Setting block .dynamic to read-only
+Failed to markup ELF Note at 00400318: data conflict
+Failed to markup ELF Note at 004012d8: data conflict
+Failed to markup ELF Note at 00401318: data conflict
+------------------------------------------------
+
+Linking the External Programs of 'test_O1' to imported libraries...
+  [libm.so.6] -> not found in project
+  [libc.so.6] -> not found in project
+------------------------------------------------
+
+Resolving External Symbols of [/test_O1] - 2 unresolved symbols, no external libraries configured - skipping
+ (AutoImporter)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  ANALYZING all memory and code: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/test_O1 (HeadlessAnalyzer)  
+INFO  DWARF external debug information found: ExternalDebugInfo [filename=null, crc=0, hash=c60dd46e6b55f4743813f7966d9d049abbc229bb] (ExternalDebugFileSectionProvider)  
+INFO  Unable to find DWARF information, skipping DWARF analysis (DWARFAnalyzer)  
+INFO  Packed database cache: /var/tmp/pippo-ghidra/packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: generic_clib_64 (ApplyDataArchiveAnalyzer)  
+INFO  -----------------------------------------------------
+    ASCII Strings                              0.301 secs
+    Apply Data Archives                        0.200 secs
+    Call Convention ID                         0.001 secs
+    Call-Fixup Installer                       0.001 secs
+    Create Address Tables                      0.003 secs
+    Create Function                            0.003 secs
+    DWARF                                      0.007 secs
+    Data Reference                             0.002 secs
+    Decompiler Switch Analysis                 0.812 secs
+    Demangler GNU                              0.014 secs
+    Disassemble Entry Points                   0.051 secs
+    ELF Scalar Operand References              0.008 secs
+    Embedded Media                             0.008 secs
+    External Entry References                  0.001 secs
+    Function ID                                0.014 secs
+    Function Start Search                      0.031 secs
+    Function Start Search After Code           0.002 secs
+    Function Start Search After Data           0.001 secs
+    GCC Exception Handlers                     0.034 secs
+    Non-Returning Functions - Discovered       0.001 secs
+    Non-Returning Functions - Known            0.002 secs
+    Reference                                  0.006 secs
+    Shared Return Calls                        0.004 secs
+    Stack                                      0.034 secs
+    Subroutine References                      0.001 secs
+    Subroutine References - One Time           0.000 secs
+    x86 Constant Reference Analyzer            0.058 secs
+-----------------------------------------------------
+     Total Time   1 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/test_O1 (HeadlessAnalyzer)  
+INFO  SCRIPT: /var/home/pippo/Desktop/Universita/Tesi/GhidraMCP-release-1-4/ghidra_mcp_server.py (HeadlessAnalyzer)  
+Server Ghidra MCP attivo sulla porta 8080
+[MCP REQUEST] strings {'offset': ['0'], 'limit': ['2000']}
+[MCP REQUEST] list_functions {}
+[MCP REQUEST] get_function_by_address {'address': ['0x004003b0']}
+[MCP REQUEST] decompile_function {'address': ['0x004003b0']}
+[MCP REQUEST] get_function_by_address {'address': ['0x004003c0']}
+[MCP REQUEST] decompile_function {'address': ['0x004003c0']}
+[MCP REQUEST] disassemble_function {'address': ['0x004003b0']}
+[MCP REQUEST] decompile_function {'address': ['0x004003f0']}
+[MCP REQUEST] decompile_function {'address': ['0x004003f0']}
+[MCP REQUEST] decompile_function {'address': ['0x00400480']}
+[MCP REQUEST] decompile_function {'address': ['0x00400508']}
+  ────────────────────────────────────────
+  ▸ read_resource extensionmanager
+    uri: ghidra_O1.log
+
+
+  ────────────────────────────────────────
+  ▸ list_resources extensionmanager
+    extension_name: ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cat /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/ghidra_O1.log
+
+openjdk version "21.0.10" 2026-01-20
+OpenJDK Runtime Environment (Red_Hat-21.0.10.0.7-2) (build 21.0.10+7)
+OpenJDK 64-Bit Server VM (Red_Hat-21.0.10.0.7-2) (build 21.0.10+7, mixed mode)
+Module manifest file error on line 2 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_NAME=GhidraMCP
+Module manifest file error on line 3 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_DESC=An HTTP server plugin for Ghidra
+Module manifest file error on line 2 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_NAME=GhidraMCP
+Module manifest file error on line 3 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_DESC=An HTTP server plugin for Ghidra
+INFO  Using log config file: jar:file:/var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (758 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (SSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (ApplicationTrustManagerFactory)  
+INFO  Headless startup complete (1767 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 57 extension points (18 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/JVM/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Base/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/BytePatterns/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/Atmel/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/PIC/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Debug/Debugger/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/FunctionID/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/PyGhidra/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/DATA/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/8051/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Decompiler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/FileFormats/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/BSim/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Jython/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/VersionTracking/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/PDB/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: /tmp/ghidra_auto/Proj_1790869989 (HeadlessAnalyzer)  
+INFO  Creating project: /tmp/ghidra_auto/Proj_1790869989 (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /tmp/ghidra_auto/Proj_1790869989 (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/test_O1 (HeadlessAnalyzer)  
+INFO  Using Loader: Executable and Linking Format (ELF) (AutoImporter)  
+INFO  Using Language/Compiler: x86:LE:64:default:gcc (AutoImporter)  
+INFO  Using Library Search Path: [., /bin, /lib, /lib64, /lib/x86_64-linux-gnu, /lib/aarch64-linux-gnu, /usr/bin, /usr/lib, /usr/X11R6/bin, /usr/X11R6/lib, /usr/java/packages/lib, /usr/lib64] (AutoImporter)  
+INFO  Additional info:
+Loading file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/test_O1?MD5=91f976772ec06674e64d762bbf02c0c3...
+Failed to properly markup GNU Hash table at 00401020: Insufficent memory at address 0040103c (length: 12 bytes)
+Setting block .init_array to read-only
+Setting block .fini_array to read-only
+Setting block .dynamic to read-only
+Failed to markup ELF Note at 00400318: data conflict
+Failed to markup ELF Note at 004012d8: data conflict
+Failed to markup ELF Note at 00401318: data conflict
+------------------------------------------------
+
+Linking the External Programs of 'test_O1' to imported libraries...
+  [libm.so.6] -> not found in project
+  [libc.so.6] -> not found in project
+------------------------------------------------
+
+Resolving External Symbols of [/test_O1] - 2 unresolved symbols, no external libraries configured - skipping
+ (AutoImporter)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  ANALYZING all memory and code: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/test_O1 (HeadlessAnalyzer)  
+INFO  DWARF external debug information found: ExternalDebugInfo [filename=null, crc=0, hash=c60dd46e6b55f4743813f7966d9d049abbc229bb] (ExternalDebugFileSectionProvider)  
+INFO  Unable to find DWARF information, skipping DWARF analysis (DWARFAnalyzer)  
+INFO  Packed database cache: /var/tmp/pippo-ghidra/packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: generic_clib_64 (ApplyDataArchiveAnalyzer)  
+INFO  -----------------------------------------------------
+    ASCII Strings                              0.301 secs
+    Apply Data Archives                        0.200 secs
+    Call Convention ID                         0.001 secs
+    Call-Fixup Installer                       0.001 secs
+    Create Address Tables                      0.003 secs
+    Create Function                            0.003 secs
+    DWARF                                      0.007 secs
+    Data Reference                             0.002 secs
+    Decompiler Switch Analysis                 0.812 secs
+    Demangler GNU                              0.014 secs
+    Disassemble Entry Points                   0.051 secs
+    ELF Scalar Operand References              0.008 secs
+    Embedded Media                             0.008 secs
+    External Entry References                  0.001 secs
+    Function ID                                0.014 secs
+    Function Start Search                      0.031 secs
+    Function Start Search After Code           0.002 secs
+    Function Start Search After Data           0.001 secs
+    GCC Exception Handlers                     0.034 secs
+    Non-Returning Functions - Discovered       0.001 secs
+    Non-Returning Functions - Known            0.002 secs
+    Reference                                  0.006 secs
+    Shared Return Calls                        0.004 secs
+    Stack                                      0.034 secs
+    Subroutine References                      0.001 secs
+    Subroutine References - One Time           0.000 secs
+    x86 Constant Reference Analyzer            0.058 secs
+-----------------------------------------------------
+     Total Time   1 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/test_O1 (HeadlessAnalyzer)  
+INFO  SCRIPT: /var/home/pippo/Desktop/Universita/Tesi/GhidraMCP-release-1-4/ghidra_mcp_server.py (HeadlessAnalyzer)  
+Server Ghidra MCP attivo sulla porta 8080
+[MCP REQUEST] strings {'offset': ['0'], 'limit': ['2000']}
+[MCP REQUEST] list_functions {}
+[MCP REQUEST] get_function_by_address {'address': ['0x004003b0']}
+[MCP REQUEST] decompile_function {'address': ['0x004003b0']}
+[MCP REQUEST] get_function_by_address {'address': ['0x004003c0']}
+[MCP REQUEST] decompile_function {'address': ['0x004003c0']}
+[MCP REQUEST] disassemble_function {'address': ['0x004003b0']}
+[MCP REQUEST] decompile_function {'address': ['0x004003f0']}
+[MCP REQUEST] decompile_function {'address': ['0x004003f0']}
+[MCP REQUEST] decompile_function {'address': ['0x00400480']}
+[MCP REQUEST] decompile_function {'address': ['0x00400508']}
+  ────────────────────────────────────────
+  ▸ read_resource extensionmanager
+    uri: ghidra_O1.log
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cat /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/ghidra_O1.log
+
+openjdk version "21.0.10" 2026-01-20
+OpenJDK Runtime Environment (Red_Hat-21.0.10.0.7-2) (build 21.0.10+7)
+OpenJDK 64-Bit Server VM (Red_Hat-21.0.10.0.7-2) (build 21.0.10+7, mixed mode)
+Module manifest file error on line 2 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_NAME=GhidraMCP
+Module manifest file error on line 3 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_DESC=An HTTP server plugin for Ghidra
+Module manifest file error on line 2 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_NAME=GhidraMCP
+Module manifest file error on line 3 of file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/Extensions/GhidraMCP/Module.manifest
+	-> Invalid line encountered: GHIDRA_MODULE_DESC=An HTTP server plugin for Ghidra
+INFO  Using log config file: jar:file:/var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /var/home/pippo/.config/ghidra/ghidra_11.3.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (758 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (SSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (ApplicationTrustManagerFactory)  
+INFO  Headless startup complete (1767 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 57 extension points (18 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/JVM/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Base/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/BytePatterns/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/Atmel/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/PIC/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Debug/Debugger/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/FunctionID/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/PyGhidra/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/DATA/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Processors/8051/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Decompiler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/FileFormats/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/BSim/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/Jython/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/VersionTracking/ghidra_scripts
+    /var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/Features/PDB/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: /tmp/ghidra_auto/Proj_1790869989 (HeadlessAnalyzer)  
+INFO  Creating project: /tmp/ghidra_auto/Proj_1790869989 (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /tmp/ghidra_auto/Proj_1790869989 (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/test_O1 (HeadlessAnalyzer)  
+INFO  Using Loader: Executable and Linking Format (ELF) (AutoImporter)  
+INFO  Using Language/Compiler: x86:LE:64:default:gcc (AutoImporter)  
+INFO  Using Library Search Path: [., /bin, /lib, /lib64, /lib/x86_64-linux-gnu, /lib/aarch64-linux-gnu, /usr/bin, /usr/lib, /usr/X11R6/bin, /usr/X11R6/lib, /usr/java/packages/lib, /usr/lib64] (AutoImporter)  
+INFO  Additional info:
+Loading file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/test_O1?MD5=91f976772ec06674e64d762bbf02c0c3...
+Failed to properly markup GNU Hash table at 00401020: Insufficent memory at address 0040103c (length: 12 bytes)
+Setting block .init_array to read-only
+Setting block .fini_array to read-only
+Setting block .dynamic to read-only
+Failed to markup ELF Note at 00400318: data conflict
+Failed to markup ELF Note at 004012d8: data conflict
+Failed to markup ELF Note at 00401318: data conflict
+------------------------------------------------
+
+Linking the External Programs of 'test_O1' to imported libraries...
+  [libm.so.6] -> not found in project
+  [libc.so.6] -> not found in project
+------------------------------------------------
+
+Resolving External Symbols of [/test_O1] - 2 unresolved symbols, no external libraries configured - skipping
+ (AutoImporter)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  ANALYZING all memory and code: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/test_O1 (HeadlessAnalyzer)  
+INFO  DWARF external debug information found: ExternalDebugInfo [filename=null, crc=0, hash=c60dd46e6b55f4743813f7966d9d049abbc229bb] (ExternalDebugFileSectionProvider)  
+INFO  Unable to find DWARF information, skipping DWARF analysis (DWARFAnalyzer)  
+INFO  Packed database cache: /var/tmp/pippo-ghidra/packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: generic_clib_64 (ApplyDataArchiveAnalyzer)  
+INFO  -----------------------------------------------------
+    ASCII Strings                              0.301 secs
+    Apply Data Archives                        0.200 secs
+    Call Convention ID                         0.001 secs
+    Call-Fixup Installer                       0.001 secs
+    Create Address Tables                      0.003 secs
+    Create Function                            0.003 secs
+    DWARF                                      0.007 secs
+    Data Reference                             0.002 secs
+    Decompiler Switch Analysis                 0.812 secs
+    Demangler GNU                              0.014 secs
+    Disassemble Entry Points                   0.051 secs
+    ELF Scalar Operand References              0.008 secs
+    Embedded Media                             0.008 secs
+    External Entry References                  0.001 secs
+    Function ID                                0.014 secs
+    Function Start Search                      0.031 secs
+    Function Start Search After Code           0.002 secs
+    Function Start Search After Data           0.001 secs
+    GCC Exception Handlers                     0.034 secs
+    Non-Returning Functions - Discovered       0.001 secs
+    Non-Returning Functions - Known            0.002 secs
+    Reference                                  0.006 secs
+    Shared Return Calls                        0.004 secs
+    Stack                                      0.034 secs
+    Subroutine References                      0.001 secs
+    Subroutine References - One Time           0.000 secs
+    x86 Constant Reference Analyzer            0.058 secs
+-----------------------------------------------------
+     Total Time   1 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/test_O1 (HeadlessAnalyzer)  
+INFO  SCRIPT: /var/home/pippo/Desktop/Universita/Tesi/GhidraMCP-release-1-4/ghidra_mcp_server.py (HeadlessAnalyzer)  
+Server Ghidra MCP attivo sulla porta 8080
+[MCP REQUEST] strings {'offset': ['0'], 'limit': ['2000']}
+[MCP REQUEST] list_functions {}
+[MCP REQUEST] get_function_by_address {'address': ['0x004003b0']}
+[MCP REQUEST] decompile_function {'address': ['0x004003b0']}
+[MCP REQUEST] get_function_by_address {'address': ['0x004003c0']}
+[MCP REQUEST] decompile_function {'address': ['0x004003c0']}
+[MCP REQUEST] disassemble_function {'address': ['0x004003b0']}
+[MCP REQUEST] decompile_function {'address': ['0x004003f0']}
+[MCP REQUEST] decompile_function {'address': ['0x004003f0']}
+[MCP REQUEST] decompile_function {'address': ['0x00400480']}
+[MCP REQUEST] decompile_function {'address': ['0x00400508']}
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003b0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003c0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400480
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400508
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400488
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400488
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400582
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path ~/D/U/T/P/E/S/E/tea_cipher/tea_cipher_O1_llm.c
+    content: #include <stdio.h>
+#include <stdint.h>
+
+/*
+ * TEA Cipher - O1 variant
+ * Decompile recovered from Ghidra
+ */
+
+/* FUN_00400480: Encrypt round */
+void encrypt_round(uint32_t *state, const int32_t *key)
+{
+    uint32_t v0, v1;
+    int32_t k0, k1, k2, k3;
+    int32_t delta = -0x3910c8e0;
+    
+    v0 = state[0];
+    v1 = state[1];
+    k0 = key[0];
+    k1 = key[1];
+    k2 = key[2];
+    k3 = key[3];
+    
+    do {
+        v1 = v1 - (v0 * 0x10 + k2 ^ (v0 >> 5) + k3 ^ v0 + delta);
+        v0 = v0 - (v1 * 0x10 + k0 ^ (v1 >> 5) + k1 ^ v1 + delta);
+        delta = delta + 0x61c88647;
+    } while (delta != 0);
+    
+    state[0] = v0;
+    state[1] = v1;
+}
+
+/* FUN_00400508: Decrypt round */
+void decrypt_round(uint32_t *state, const int32_t *key)
+{
+    uint32_t v0, v1;
+    int32_t k0, k1, k2, k3;
+    int32_t delta = -0x3910c8e0;
+    
+    v0 = state[0];
+    v1 = state[1];
+    k0 = key[0];
+    k1 = key[1];
+    k2 = key[2];
+    k3 = key[3];
+    
+    do {
+        v1 = v1 - (v0 * 0x10 + k2 ^ (v0 >> 5) + k3 ^ v0 + delta);
+        v0 = v0 - (v1 * 0x10 + k0 ^ (v1 >> 5) + k1 ^ v1 + delta);
+        delta = delta + 0x61c88647;
+    } while (delta != 0);
+    
+    state[0] = v0;
+    state[1] = v1;
+}
+
+/* FUN_00400582: Main function with test */
+int main(void)
+{
+    uint32_t state[2];
+    int32_t key[4];
+    
+    state[0] = 0x12345678;
+    state[1] = 0x9abcdef0;
+    
+    key[0] = 0xa56babcd;
+    key[1] = 0;
+    key[2] = 0xffffffff;
+    key[3] = 0xabcd1234;
+    
+    printf("Originale: %08X %08X\n", state[0], state[1]);
+    
+    encrypt_round(state, key);
+    printf("Cifrato:   %08X %08X\n", state[0], state[1]);
+    
+    decrypt_round(state, key);
+    printf("Decifrato: %08X %08X\n", state[0], state[1]);
+    
+    return 0;
+}
+
+
+Created /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/tea_cipher_O1_llm.c (80 lines)DONE

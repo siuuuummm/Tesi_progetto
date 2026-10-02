@@ -1,0 +1,118 @@
+
+    __( O)>  ● new session · custom_unsloth unsloth/gemma-4-12b-it-GGUF
+   \____)    20260824_5 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400420
+
+
+  ────────────────────────────────────────
+  ▸ get_function_xrefs ghidra-mcp
+    name: __libc_start_main
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400420
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400420
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400380
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400430
+
+
+  ────────────────────────────────────────
+  ▸ get_function_xrefs ghidra-mcp
+    name: FUN_00400380
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400408
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400380
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400380
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path ~/D/U/T/P/E/S/E/feistel/feistel_O2_llm.c
+    content: #include <stdio.h>
+#include <stdint.h>
+
+/**
+ * Function: encrypt_feistel_logic
+ * Description: Performs a custom encryption logic based on a loop of XORs and bitwise shifts.
+ * Reconstructed from binary analysis.
+ */
+void encrypt_feistel_logic(void) {
+    uint32_t uVar1;
+    uint64_t uVar2;
+    uint64_t uVar3;
+    uint32_t uVar4;
+    uint64_t uVar5;
+    
+    printf("Originale: %08X %08X\n", 0xdeadbeef, 0xcafebabe);
+    
+    uVar1 = 0xb06bd031;
+    uVar2 = 0xcafebabe;
+    uVar3 = 0xdeadbeef;
+    
+    do {
+        // Perform circular shift and XOR
+        uVar4 = ((uint32_t)uVar3 << 5 | (uint32_t)uVar3 >> (32 - 5)) ^ uVar1;
+        uVar1 = uVar1 + 1;
+        
+        // XOR with uVar2 and update state
+        uVar5 = (uint64_t)(uVar4 ^ (uint32_t)uVar2);
+        uVar2 = uVar3;
+        uVar3 = uVar5;
+    } while (uVar1 != 0xb06bd039);
+    
+    printf("Cifrato:   %08X %08X\n", uVar5);
+}
+
+int main(void) {
+    encrypt_feistel_logic();
+    return 0;
+}
+
+
+Created /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel/feistel_O2_llm.c (39 lines)DONE

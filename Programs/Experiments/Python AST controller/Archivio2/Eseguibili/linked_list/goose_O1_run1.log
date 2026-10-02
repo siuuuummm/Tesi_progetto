@@ -1,0 +1,210 @@
+
+    __( O)>  ● new session · github_copilot gpt-4.1
+   \____)    20260529_45 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    limit: 2000
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004003e0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004003e0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004003f0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400420
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400420
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400420
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004a0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004004a0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004004a0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004c2
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004004c2
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004004c2
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004e3
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004004e3
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004004e3
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400502
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400502
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400502
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_0040051e
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x0040051e
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x0040051e
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: _INIT_0
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path ~/D/U/T/P/E/S/E/linked_list/linked_list_O1_llm.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+
+// Nodo della lista collegata
+struct Node {
+    int value;
+    struct Node* next;
+};
+
+// Crea un nuovo nodo e lo aggiunge in testa
+struct Node* create_node(struct Node* head, int value) {
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    if (!new_node) return NULL;
+    new_node->value = value;
+    new_node->next = head;
+    return new_node;
+}
+
+// Conta i nodi nella lista
+int list_length(struct Node* head) {
+    int count = 0;
+    while (head != NULL) {
+        count++;
+        head = head->next;
+    }
+    return count;
+}
+
+// Somma i valori di tutti i nodi
+int list_sum(struct Node* head) {
+    int sum = 0;
+    while (head != NULL) {
+        sum += head->value;
+        head = head->next;
+    }
+    return sum;
+}
+
+// Libera la memoria della lista
+void free_list(struct Node* head) {
+    struct Node* tmp;
+    while (head != NULL) {
+        tmp = head->next;
+        free(head);
+        head = tmp;
+    }
+}
+
+int main() {
+    struct Node* head = NULL;
+    int value = 10;
+    while (value != 60) {
+        head = create_node(head, value);
+        value += 10;
+    }
+    printf("Lunghezza: %d\n", list_length(head));
+    printf("Somma: %d\n", list_sum(head));
+
+    for (struct Node* curr = head; curr != NULL; curr = curr->next) {
+        printf("%d ", curr->value);
+    }
+    putchar('\n');
+    free_list(head);
+    return 0;
+}
+
+
+Created /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/linked_list/linked_list_O1_llm.c (65 lines)DONE

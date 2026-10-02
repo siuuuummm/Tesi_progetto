@@ -1,0 +1,18 @@
+.aider*
+# Ghidra: si riscarica dalla release ufficiale
+ghidra_11.3.2_PUBLIC/
+
+# binari e log rigenerati dalla pipeline
+Programs/Experiments/Secfocus/Eseguibili/
+*.gpr
+*.rep/
+
+# Python
+__pycache__/
+*.pyc
+mcp-server/
+.venv/
+venv/
+.DS_Store
+.~lock.*#
+.vscode/

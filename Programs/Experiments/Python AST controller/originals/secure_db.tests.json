@@ -1,0 +1,7 @@
+[
+  {"args": []},
+  {"args": ["hello"]},
+  {"args": ["Record123"]},
+  {"args": ["una stringa con spazi e simboli !@#"]},
+  {"args": ["questa stringa supera i trentuno caratteri del campo data"]}
+]

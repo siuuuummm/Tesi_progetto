@@ -1,0 +1,230 @@
+
+    __( O)>  ● new session · github_copilot gemini-2.5-pro
+   \____)    20260529_24 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+ capisco. Inizio subito.
+
+- [ ] FASE 1 — ORIENTAMENTO
+- [ ] FASE 2 — TROVA IL MAIN
+- [ ] FASE 3 — DECOMPILA TUTTO
+- [ ] FASE 4 — SCRIVI IL CODICE C
+- [ ] FASE 5 — SALVA IL FILE
+  ────────────────────────────────────────
+  ▸ todo_write todo
+    content: - [ ] FASE 1 — ORIENTAMENTO
+- [ ] FASE 2 — TROVA IL MAIN
+- [ ] FASE 3 — DECOMPILA TUTTO
+- [ ] FASE 4 — SCRIVI IL CODICE C
+- [ ] FASE 5 — SALVA IL FILE
+
+Fase 1. Chiamo `list_functions` e `list_strings`.
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+L'operazione `decompile_function` per "entry" è fallita. Come da istruzioni, proverò ora a decompilare utilizzando l'indirizzo della funzione e, se necessario, passerò al disassemblaggio. L'indirizzo di `entry` sembra essere `0x004003b0`.
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003b0
+
+La decompilazione di `entry` all'indirizzo `0x004003b0` ha avuto successo. Tuttavia, il codice mostrato sembra essere quello della funzione `main`, non della `entry`. La vera funzione `entry` è un piccolo stub che chiama `__libc_start_main`.
+
+Analizzando la lista di funzioni, vedo che `entry` è a `0x00400920`, non `0x004003b0`. Ghidra ha erroneamente identificato la funzione a `0x004003b0` come `entry` nel primo output, ma il secondo elenco è più preciso. Procedo a decompilare il vero indirizzo di `entry` per trovare `main`.
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400920
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400920
+
+Okay, ho decompilato `FUN_004003b0` e `FUN_00400920`.
+
+Ora decompilo le funzioni chiamate da `FUN_004003b0`:
+- `FUN_00400a00`
+- `FUN_00401360`
+- `FUN_00400b90`
+- `FUN_004010c0`
+- `FUN_00401520`
+
+Inizio con `FUN_00400a00`.
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400a00
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400a00
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00401360
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00401360
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400b90
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400b90
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004010c0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004010c0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00401520
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00401520
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path ~/D/U/T/P/E/S/E/bst/bst_O3_llm.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+
+// Definizione della struttura per un nodo dell'albero binario di ricerca
+struct TreeNode {
+    int data;
+    struct TreeNode* left;
+    struct TreeNode* right;
+};
+
+// Prototipi delle funzioni
+struct TreeNode* insert_node(struct TreeNode* node, int data);
+void inorder_traversal(struct TreeNode* root);
+int calculate_height(struct TreeNode* node);
+int count_nodes(struct TreeNode* node);
+void free_tree(struct TreeNode* node);
+struct TreeNode* create_node(int data);
+
+// Funzione per creare un nuovo nodo
+struct TreeNode* create_node(int data) {
+    struct TreeNode* new_node = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+    if (new_node == NULL) {
+        perror("malloc failed");
+        exit(EXIT_FAILURE);
+    }
+    new_node->data = data;
+    new_node->left = NULL;
+    new_node->right = NULL;
+    return new_node;
+}
+
+// Funzione per inserire un nodo nell'albero
+struct TreeNode* insert_node(struct TreeNode* node, int data) {
+    if (node == NULL) {
+        return create_node(data);
+    }
+
+    if (data < node->data) {
+        node->left = insert_node(node->left, data);
+    } else if (data > node->data) {
+        node->right = insert_node(node->right, data);
+    }
+
+    return node;
+}
+
+// Funzione per la visita inorder dell'albero
+void inorder_traversal(struct TreeNode* root) {
+    if (root != NULL) {
+        inorder_traversal(root->left);
+        printf("%d ", root->data);
+        inorder_traversal(root->right);
+    }
+}
+
+// Funzione per calcolare l'altezza dell'albero
+int calculate_height(struct TreeNode* node) {
+    if (node == NULL) {
+        return -1; // Altezza di un albero vuoto è -1
+    } else {
+        int left_height = calculate_height(node->left);
+        int right_height = calculate_height(node->right);
+
+        if (left_height > right_height) {
+            return left_height + 1;
+        } else {
+            return right_height + 1;
+        }
+    }
+}
+
+// Funzione per contare i nodi dell'albero
+int count_nodes(struct TreeNode* node) {
+    if (node == NULL) {
+        return 0;
+    }
+    return 1 + count_nodes(node->left) + count_nodes(node->right);
+}
+
+// Funzione per liberare la memoria dell'albero
+void free_tree(struct TreeNode* node) {
+    if (node != NULL) {
+        free_tree(node->left);
+        free_tree(node->right);
+        free(node);
+    }
+}
+
+// Funzione principale
+int main() {
+    struct TreeNode* root = create_node(50);
+
+    // Array di valori da inserire nell'albero
+    int values_to_insert[] = {30, 70, 20, 40, 60, 80, 15, 25, 35, 45, 55, 65, 75, 85};
+    int num_values = sizeof(values_to_insert) / sizeof(values_to_insert[0]);
+
+    for (int i = 0; i < num_values; ++i) {
+        insert_node(root, values_to_insert[i]);
+    }
+
+    printf("Visita inorder: ");
+    inorder_traversal(root);
+    printf("\n");
+
+    int height = calculate_height(root);
+    printf("Altezza: %d\n", height);
+
+    int total_nodes = count_nodes(root);
+    printf("Numero nodi: %d\n", total_nodes);
+
+    // Liberare la memoria allocata per l'albero
+    free_tree(root);
+
+    return 0;
+}
+
+
+Created /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/bst/bst_O3_llm.c (115 lines)DONE

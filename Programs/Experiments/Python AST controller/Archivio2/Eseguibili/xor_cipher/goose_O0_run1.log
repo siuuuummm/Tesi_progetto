@@ -1,0 +1,146 @@
+
+    __( O)>  ● new session · github_copilot gpt-4.1
+   \____)    20260529_7 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    limit: 2000
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004003c0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003c0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004003c0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004003d0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003d0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004003d0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400400
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400400
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400400
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400476
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400476
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004c1
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004d9
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400531
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path ~/D/U/T/P/E/S/E/xor_cipher/xor_cipher_O0_llm.c
+    content: #include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+
+// Ruota a sinistra un intero a 32 bit di 'n' posizioni
+uint32_t rol32(uint32_t value, uint8_t n) {
+    return (value << (n & 0x1F)) | (value >> (32 - (n & 0x1F)));
+}
+
+// Calcola un checksum "debole" XOR con rotazione sui byte
+int xor_checksum(const uint8_t *data, int len) {
+    uint32_t checksum = 0;
+    for(int i = 0; i < len; i++) {
+        checksum = rol32(checksum + data[i], 3);
+    }
+    return checksum;
+}
+
+// Applica XOR byte in place con chiave su tutta la stringa
+void xor_cipher(uint8_t *data, int len, uint8_t key) {
+    for(int i = 0; i < len; i++) {
+        data[i] ^= key;
+    }
+}
+
+int main() {
+    char message[17] = "secret message"; // 16+1 char
+    size_t len = strlen(message);
+    uint8_t key = 0x5A;
+    message[len] = key;
+    uint32_t orig = xor_checksum((uint8_t*)message, len);
+    printf("Checksum originale: %u\n", (unsigned long)orig);
+
+    xor_cipher((uint8_t*)message, len, key);
+    uint32_t enc = xor_checksum((uint8_t*)message, (int)len);
+    printf("Checksum cifrato:   %u\n", (unsigned long)enc);
+
+    xor_cipher((uint8_t*)message, len, key); // Decifra
+    printf("Decifrato: %s\n", message);
+    return 0;
+}
+
+
+Created /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/xor_cipher/xor_cipher_O0_llm.c (41 lines)DONE

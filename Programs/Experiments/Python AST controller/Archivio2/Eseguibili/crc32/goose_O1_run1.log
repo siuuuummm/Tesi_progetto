@@ -1,0 +1,121 @@
+
+    __( O)>  ● new session · google gemini-3.1-flash-lite-preview
+   \____)    20260531_2 · /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ todo_write todo
+    content: - [ ] FASE 1 — ORIENTAMENTO
+- [ ] FASE 2 — TROVA IL MAIN
+- [ ] FASE 3 — DECOMPILA TUTTO
+- [ ] FASE 4 — SCRIVI IL CODICE C
+- [ ] FASE 5 — SALVA IL FILE
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ search_functions_by_name ghidra-mcp
+    query: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003a0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400544
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400544
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004a0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004ef
+
+
+  ────────────────────────────────────────
+  ▸ todo_write todo
+    content: - [x] FASE 1 — ORIENTAMENTO
+- [x] FASE 2 — TROVA IL MAIN
+- [x] FASE 3 — DECOMPILA TUTTO
+- [ ] FASE 4 — SCRIVI IL CODICE C
+- [ ] FASE 5 — SALVA IL FILE
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path ~/D/U/T/P/E/S/E/crc32/crc32_O1_llm.c
+    content: #include <stdio.h>
+#include <string.h>
+#include <stdint.h>
+
+/* Global CRC32 table */
+uint32_t crc32_table[256];
+
+/* Initialize the CRC32 table */
+void init_crc32_table() {
+    uint32_t i, j;
+    uint32_t crc;
+
+    for (i = 0; i < 256; i++) {
+        crc = i;
+        for (j = 0; j < 8; j++) {
+            if (crc & 1) {
+                crc = (crc >> 1) ^ 0xedb88320;
+            } else {
+                crc >>= 1;
+            }
+        }
+        crc32_table[i] = crc;
+    }
+}
+
+/* Calculate CRC32 for a given data buffer */
+uint32_t crc32(const uint8_t *data, size_t length) {
+    uint32_t crc = 0xffffffff;
+    size_t i;
+
+    for (i = 0; i < length; i++) {
+        crc = (crc >> 8) ^ crc32_table[(crc ^ data[i]) & 0xff];
+    }
+    return ~crc;
+}
+
+int main() {
+    init_crc32_table();
+    
+    char *test_strings[] = {"", "a", "abc", "Hello, World!"};
+    
+    for (int i = 0; i < 4; i++) {
+        char *s = test_strings[i];
+        uint32_t crc = crc32((const uint8_t *)s, strlen(s));
+        printf("CRC32(\"%s\") = 0x%08X\n", s, crc);
+    }
+    
+    return 0;
+}
+
+
+Created /var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/crc32/crc32_O1_llm.c (49 lines)DONE
