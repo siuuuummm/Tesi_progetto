@@ -41,16 +41,21 @@ from pathlib import Path
 # ===========================================================================
 # CONFIG — modifica questi percorsi per il tuo sistema
 # ===========================================================================
+# Radice della tesi: si imposta con la variabile d'ambiente TESI_ROOT.
+# Se non è impostata, vale il percorso del portatile.
+TESI_ROOT = Path(os.environ.get("TESI_ROOT", "/var/home/pippo/Desktop/Universita/Tesi"))
+_AST = TESI_ROOT / "Programs" / "Experiments" / "Python AST controller"
+
 CONFIG = {
     # Percorsi strumenti
-    "ghidra_path":         "/var/home/pippo/Desktop/Universita/Tesi/ghidra_11.3.2_PUBLIC",
-    "ghidra_mcp_script":   "/var/home/pippo/Desktop/Universita/Tesi/GhidraMCP-release-1-4/ghidra_mcp_server.py",
-    "goose_bin":           "/var/home/pippo/.local/bin/goose",
+    "ghidra_path":         str(TESI_ROOT / "ghidra_11.3.2_PUBLIC"),
+    "ghidra_mcp_script":   str(TESI_ROOT / "GhidraMCP-release-1-4" / "ghidra_mcp_server.py"),
+    "goose_bin":           shutil.which("goose") or str(Path.home() / ".local" / "bin" / "goose"),
 
     # Cartelle di lavoro
-    "experiments_dir":     "/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus",
-    "benchmark_root":      "/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller",
-    "originals_dir":       "/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Python AST controller/originals",  # dentro benchmark_root
+    "experiments_dir":     str(TESI_ROOT / "Programs" / "Experiments" / "Secfocus"),
+    "benchmark_root":      str(_AST),
+    "originals_dir":       str(_AST / "originals"),  # dentro benchmark_root
 
     # Modello corrente (nome della sottocartella nel benchmark_root)
     # Cambia questo quando cambi modello in Goose
