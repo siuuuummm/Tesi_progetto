@@ -1,0 +1,13 @@
+{
+  "source": "cwe119.c",
+  "model": "gemma4-26b-a4b-q4",
+  "level": "O3",
+  "run": 1,
+  "timestamp": "2026-10-04T15:19:51",
+  "duration_s": 1172,
+  "nudges": 0,
+  "goose_session": "re_task_8cm0g4uh",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/goose_O3_run1.log",
+  "sandbox_violations": []
+}

@@ -1,0 +1,13 @@
+{
+  "source": "tea_cipher.c",
+  "model": "mimo-v2.6-flash_ionet_fp8",
+  "level": "O0",
+  "run": 1,
+  "timestamp": "2026-10-04T10:27:19",
+  "duration_s": 210,
+  "nudges": 0,
+  "goose_session": "re_task_owpa_nho",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/goose_O0_run1.log",
+  "sandbox_violations": []
+}
