@@ -1,0 +1,13 @@
+{
+  "source": "feistel_mod.c",
+  "model": "gemma4-12b",
+  "level": "O1",
+  "run": 1,
+  "timestamp": "2026-10-02T13:33:22",
+  "duration_s": 250,
+  "nudges": 0,
+  "goose_session": "re_task_n4ikc3fz",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/feistel_mod/goose_O1_run1.log",
+  "sandbox_violations": []
+}

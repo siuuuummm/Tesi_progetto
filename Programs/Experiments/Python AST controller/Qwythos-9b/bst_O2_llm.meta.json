@@ -1,0 +1,13 @@
+{
+  "source": "bst.c",
+  "model": "Qwythos-9b/",
+  "level": "O2",
+  "run": 1,
+  "timestamp": "2026-10-02T11:00:54",
+  "duration_s": 107,
+  "nudges": 0,
+  "goose_session": "re_task_uteqievt",
+  "prompt_sha256": "55a8eac74ed6",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/bst/goose_O2_run1.log",
+  "sandbox_violations": []
+}

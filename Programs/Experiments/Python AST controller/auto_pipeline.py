@@ -94,18 +94,23 @@ FASE 1 — ORIENTAMENTO
 
 FASE 2 — TROVA IL MAIN
 - Decompila "entry" per trovare l'indirizzo del main (primo argomento di __libc_start_main).
-- Se decompile_function fallisce, usa get_function_by_address con l'indirizzo \
+- Se decompile_function fallisce, usa decompile_function_by_address con l'indirizzo \
 numerico (es. 0x004003f0), poi prova disassemble_function con lo stesso indirizzo.
 - Almeno uno dei tre metodi funziona: provali tutti prima di rinunciare.
 
-FASE 3 — DECOMPILA TUTTO
-- Decompila il main e ogni FUN_... presente nel binario, ricorsivamente.
-- Per ogni funzione: prova decompile_function per nome → per indirizzo → disassemble_function.
-- Non saltare MAI una funzione solo perché un metodo fallisce: prova tutti e tre.
-- Hai tempo e risorse illimitate: procedi con calma ed esaurisci l'intera lista.
-- Prima di passare alla FASE 4, verifica di avere il corpo decompilato di ogni \
-funzione utente (escludi solo i wrapper di libreria: _DT_INIT, _FINI_0, _INIT_0, \
-__libc_start_main, printf e simili).
+FASE 3 — DECOMPILA LE FUNZIONI DEL PROGRAMMA
+- Decompila il main. Poi segui le chiamate: decompila le FUN_... chiamate o \
+referenziate dal main (anche tramite puntatori a funzione), e ricorsivamente \
+quelle chiamate o referenziate da queste.
+- NON decompilare le altre FUN_... dell'elenco: sono codice di avvio e chiusura \
+inserito dal compilatore, non fanno parte del programma.
+- Per ogni funzione usa decompile_function per nome. Solo se fallisce usa \
+decompile_function_by_address; solo se fallisce anche questo usa \
+disassemble_function. Non decompilare mai due volte la stessa funzione.
+- Hai tempo e risorse illimitate: procedi con calma fino a esaurire le funzioni \
+raggiungibili dal main.
+- Prima di passare alla FASE 4, verifica di aver decompilato ogni funzione \
+raggiungibile dal main.
 
 FASE 4 — SCRIVI IL CODICE C
 - Codice C completo, autonomo, compilabile con gcc senza errori.
@@ -158,7 +163,7 @@ che hai già ricostruito dalle decompilazioni effettuate.
 
 Scrivi il codice completo e reale ricavato dai tool: NON uno scheletro, NON un file \
 con TODO o placeholder, NON un main vuoto. Se qualche funzione non è ancora stata \
-decompilata, recuperala ora con decompile_function, get_function_by_address o \
+decompilata, recuperala ora con decompile_function, decompile_function_by_address o \
 disassemble_function, poi scrivi il file.
 
 Non fare domande. Scrivi il file adesso e poi scrivi DONE.

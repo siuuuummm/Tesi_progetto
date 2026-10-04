@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdint.h>
+
+void sub_004003b0(void) {
+}
+
+void sub_004003c0(void) {
+}
+
+void sub_004003f0(void) {
+}
+
+void encrypt_mixer(uint32_t *param_1, int32_t *param_2) {
+    uint32_t uVar1;
+    uint32_t uVar2;
+    int32_t iVar3;
+
+    uVar1 = *param_1;
+    uVar2 = param_1[1];
+    iVar3 = 0;
+    do {
+        iVar3 = iVar3 + -0x61c88647;
+        uVar1 = uVar1 + (uVar2 * 0x10 + *param_2 ^ (uVar2 >> 5) + param_2[1] ^ iVar3 + uVar2);
+        uVar2 = uVar2 + (uVar1 * 0x10 + param_2[2] ^ (uVar1 >> 5) + param_2[3] ^ iVar3 + uVar1);
+    } while (iVar3 != -0x3910c8e0);
+    *param_1 = uVar1;
+    param_1[1] = uVar2;
+}
+
+void decrypt_mixer(uint32_t *param_1, int32_t *param_2) {
+    uint32_t uVar1;
+    uint32_t uVar2;
+    int32_t iVar3;
+
+    uVar1 = *param_1;
+    uVar2 = param_1[1];
+    iVar3 = -0x3910c8e0;
+    do {
+        uVar2 = uVar2 - (uVar1 * 0x10 + param_2[2] ^ (uVar1 >> 5) + param_2[3] ^ uVar1 + iVar3);
+        uVar1 = uVar1 - (uVar2 * 0x10 + *param_2 ^ (uVar2 >> 5) + param_2[1] ^ uVar2 + iVar3);
+        iVar3 = iVar3 + 0x61c88647;
+    } while (iVar3 != 0);
+    *param_1 = uVar1;
+    param_1[1] = uVar2;
+}
+
+int main(void) {
+    uint32_t local_20;
+    uint32_t local_1c;
+    uint32_t local_38;
+    uint32_t local_34;
+    uint32_t local_30;
+    uint32_t local_2c;
+
+    local_38 = 0xa56babcd;
+    local_34 = 0;
+    local_30 = 0xffffffff;
+    local_2c = 0xabcd1234;
+    local_20 = 0x12345678;
+    local_1c = 0x9abcdef0;
+
+    printf("Originale: %08X %08X\n", local_20, local_1c);
+    encrypt_mixer(&local_20, &local_38);
+    printf("Cifrato:   %08X %08X\n", (uint64_t)local_20, (uint64_t)local_1c);
+    decrypt_mixer(&local_20, &local_38);
+    printf("Decifrato: %08X %08X\n", (uint64_t)local_20, (uint64_t)local_1c);
+    return 0;
+}

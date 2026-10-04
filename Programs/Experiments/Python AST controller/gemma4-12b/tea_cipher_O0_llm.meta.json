@@ -1,0 +1,13 @@
+{
+  "source": "tea_cipher.c",
+  "model": "gemma4-12b",
+  "level": "O0",
+  "run": 1,
+  "timestamp": "2026-10-02T11:50:20",
+  "duration_s": 277,
+  "nudges": 0,
+  "goose_session": "re_task_w0u7gn25",
+  "prompt_sha256": "55a8eac74ed6",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/tea_cipher/goose_O0_run1.log",
+  "sandbox_violations": []
+}
