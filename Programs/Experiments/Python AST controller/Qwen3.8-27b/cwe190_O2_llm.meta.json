@@ -1,0 +1,13 @@
+{
+  "source": "cwe190.c",
+  "model": "Qwen3.8-27b",
+  "level": "O2",
+  "run": 1,
+  "timestamp": "2026-10-05T16:34:31",
+  "duration_s": 598,
+  "nudges": 1,
+  "goose_session": "re_task_hv8dyic7",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe190/goose_O2_run1.log",
+  "sandbox_violations": []
+}

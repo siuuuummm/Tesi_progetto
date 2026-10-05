@@ -8,14 +8,9 @@ import traceback
 from ghidra.app.decompiler import DecompInterface
 from ghidra.util.task import ConsoleTaskMonitor
 # ... (altri import)
-import time
 
 class GhidraHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        # LIMITATORE RPM: Forza un'attesa di 4.5 secondi per richiesta
-        # Questo evita il blocco di Google AI Studio (15 RPM)
-        time.sleep(4.5) 
-        
         try:
             parsed_path = urlparse.urlparse(self.path)
             params = urlparse.parse_qs(parsed_path.query)

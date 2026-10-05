@@ -475,9 +475,11 @@ def process_one(source: Path, level: str, run_index: int, cfg: dict,
 
     separator(f"{func_name}  {level}  run#{run_index}")
 
-    # I log restano in work_dir, fuori dalla sandbox in cui lavora Goose
-    ghidra_log = work_dir / f"ghidra_{level}.log"
-    goose_log  = work_dir / f"goose_{level}_run{run_index}.log"
+    # I log restano in work_dir, fuori dalla sandbox in cui lavora Goose.
+    # Il nome contiene il modello: senza, ogni modello sovrascriveva i log del precedente.
+    model_tag  = re.sub(r"[^\w.-]+", "_", cfg["current_model"]).strip("_")
+    ghidra_log = work_dir / f"ghidra_{model_tag}_{level}_run{run_index}.log"
+    goose_log  = work_dir / f"goose_{model_tag}_{level}_run{run_index}.log"
 
     if dry_run:
         log(f"[DRY RUN] Compilerei: gcc -{level} {source.name} → <sandbox>/test_{level}")
