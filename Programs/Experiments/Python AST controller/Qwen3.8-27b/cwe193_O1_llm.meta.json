@@ -1,0 +1,13 @@
+{
+  "source": "cwe193.c",
+  "model": "Qwen3.8-27b",
+  "level": "O1",
+  "run": 1,
+  "timestamp": "2026-10-05T21:18:50",
+  "duration_s": 368,
+  "nudges": 0,
+  "goose_session": "re_task_gzdcedio",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe193/goose_Qwen3.8-27b_O1_run1.log",
+  "sandbox_violations": []
+}

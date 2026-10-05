@@ -37,6 +37,8 @@ cwe134,mimo-v2.6-flash_ionet_fp8,O3,cwe134_O3_llm,1,1,100.00,,0,none,none,1,14,1
 cwe190,Qwen3.8-27b,O0,cwe190_O0_llm,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,24,37,1,1,20.12,57.81,56.31,98.56,10,19,9,0,36,26,13,0,0,0
 cwe190,Qwen3.8-27b,O1,cwe190_O1_llm,0,0,0.00,declaration,1,,,,24,34,1,1,13.35,67.68,63.70,98.78,10,16,6,1,17,14,12,3,0,1
 cwe190,Qwen3.8-27b,O2,cwe190_O2_llm,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,24,35,1,1,16.17,64.91,65.28,98.99,10,17,7,1,26,15,10,2,0,0
+cwe190,Qwen3.8-27b,O3,cwe190_O3_llm_2,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,24,84,1,1,10.60,23.94,33.79,98.41,10,14,4,6,100,98,147,4,0,0
+cwe190,Qwen3.8-27b,O3,cwe190_O3_llm,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,24,98,1,1,14.94,20.77,30.78,98.88,10,14,4,6,125,112,181,5,0,0
 cwe190,gemma4-26b-a4b-q4,O0,cwe190_O0_llm,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,24,34,1,1,24.78,60.33,61.13,98.50,10,19,9,0,32,24,11,0,0,0
 cwe190,gemma4-26b-a4b-q4,O1,cwe190_O1_llm,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,24,32,1,1,20.54,67.27,65.25,98.63,10,15,5,1,18,15,12,2,0,0
 cwe190,gemma4-26b-a4b-q4,O2,cwe190_O2_llm,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,24,39,1,1,26.33,60.11,59.00,98.65,10,15,5,1,23,22,19,1,0,0
@@ -45,6 +47,10 @@ cwe190,mimo-v2.6-flash_ionet_fp8,O0,cwe190_O0_llm,1,1,100.00,,0,heap-buffer-over
 cwe190,mimo-v2.6-flash_ionet_fp8,O1,cwe190_O1_llm,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,24,41,1,1,13.67,60.44,57.53,98.65,10,15,5,1,21,22,20,1,0,0
 cwe190,mimo-v2.6-flash_ionet_fp8,O2,cwe190_O2_llm,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,24,44,,,17.75,,,,0,0,0,,,,,,1,0
 cwe190,mimo-v2.6-flash_ionet_fp8,O3,cwe190_O3_llm,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,24,110,1,1,11.73,22.33,29.91,98.71,10,14,4,6,92,108,187,4,0,0
+cwe193,Qwen3.8-27b,O0,cwe193_O0_llm,0,0,0.00,declaration,2,,,,25,38,2,2,22.45,59.78,65.33,99.15,13,18,5,-1,35,22,11,1,0,0
+cwe193,Qwen3.8-27b,O1,cwe193_O1_llm,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,25,39,2,2,28.27,72.08,71.11,98.64,13,13,0,0,15,11,11,1,0,0
+cwe193,Qwen3.8-27b,O2,cwe193_O2_llm,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,25,60,2,1,9.62,29.94,39.11,98.37,13,22,9,7,73,74,59,6,0,0
+cwe193,Qwen3.8-27b,O3,cwe193_O3_llm,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,25,32,2,2,10.26,76.92,76.06,99.31,13,12,-1,0,15,5,6,1,0,0
 cwe193,gemma4-26b-a4b-q4,O0,cwe193_O0_llm,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,25,34,2,2,19.09,70.25,71.17,99.38,13,12,-1,-1,19,12,11,1,0,0
 cwe193,gemma4-26b-a4b-q4,O1,cwe193_O1_llm,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,25,39,2,2,32.43,53.66,59.50,98.36,13,15,2,0,49,25,14,1,0,0
 cwe193,gemma4-26b-a4b-q4,O2,cwe193_O2_llm,0,0,0.00,declaration,1,,,,25,56,2,1,16.77,30.25,40.00,98.73,13,24,11,8,77,65,51,8,0,0
