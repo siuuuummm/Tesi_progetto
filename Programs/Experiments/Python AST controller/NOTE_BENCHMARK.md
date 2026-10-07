@@ -3,7 +3,7 @@
 Questo documento riassume le modifiche fatte alla pipeline di benchmark e il motivo di ciascuna.
 Copre la revisione degli script, il confronto con i paper di riferimento e le verifiche aggiunte.
 
-Ultimo aggiornamento: 5 ottobre 2026.
+Ultimo aggiornamento: 6 ottobre 2026.
 
 ---
 
@@ -89,7 +89,37 @@ Prima di modificare qualcosa ho riletto gli script e i log di Goose. Questi eran
 | L'esempio *"Se il decompilato mostra 0x9e3779b9…"* è diventato `0x1a2b3c4d` | `0x9E3779B9` è proprio il delta di TEA e la costante di feistel: su quei programmi il prompt suggeriva la risposta. `0x1a2b3c4d` non compare in nessun sorgente |
 | Nuovo divieto: *"VIETATO correggere bug, overflow, chiamate insicure (strcpy, gets, sprintf, printf con formato non costante...) o controlli mancanti, anche se evidenti…"* | Ricostruire un binario serve anche a trovarne le vulnerabilità: una ricostruzione che corregge il bug la nasconde. I modelli sono addestrati a essere utili e tendono a "sistemare" il codice da soli, quindi va chiesto in modo esplicito (vedi §6) |
 
-Hash del prompt attuale (`prompt_sha256` nei `.meta.json`): **`55a8eac74ed6`**. Usalo nella tesi per indicare la versione del prompt.
+Versioni del prompt (`prompt_sha256` nei `.meta.json`):
+- `55a8eac74ed6`: versione fino al 2 ottobre, usata da Qwythos-9b e da parte di gemma4-12b. Superata.
+- **`0f327dfcc92e`**: versione standard dal 2 ottobre. La Fase 3 decompila solo le funzioni raggiungibili dal `main`, salta il codice di avvio del compilatore e usa `decompile_function_by_address` come secondo tentativo.
+- **`c06a2621c537`**: variante di controllo (`--senza-divieto`), identica alla standard ma senza la riga "VIETATO correggere bug…" (vedi §3.5).
+
+### 3.5 Condizione di controllo senza divieto (5 ottobre 2026)
+
+**Cosa.** `--senza-divieto` toglie dal prompt solo la riga che vieta di correggere bug e vulnerabilità. I risultati vanno in `<modello>__senza_divieto/`, i log hanno lo stesso suffisso e il `.meta.json` registra `prompt_variant`.
+
+**Perché.** Con il divieto i modelli conservano quasi sempre la vulnerabilità, ma non si può dire se per fedeltà o per obbedienza. Confrontando le due condizioni, ogni differenza dipende solo da quella riga.
+
+**Uso.** `python auto_pipeline.py --source originals/cwe119.c --model <modello> --senza-divieto --out Test_v3.csv`
+
+### 3.6 Configurazione congelata per l'esperimento finale (6 ottobre 2026)
+
+Prima di rifare tutte le sessioni (2 modelli × 2 condizioni × 5 programmi × O0–O3) sono stati applicati tutti i cambi in sospeso, così che entrambe le condizioni girino con la stessa versione della pipeline.
+
+- **Estensioni di Goose esplicite.** `run_goose` lancia Goose con `--no-profile --with-builtin developer --with-extension <GhidraMCP>/ghidra-mcp`: le estensioni attive nella configurazione globale (`todo`, `summon`, `analyze`, `apps`, `tom`, `extensionmanager`) non vengono più caricate. Lo script `ghidra-mcp` avvia `bridge_mcp_ghidra.py`; il nome del file è il nome dell'estensione in Goose, lo stesso citato nel prompt. Il `.meta.json` registra `goose_extensions`.
+- **Server headless (`ghidra_mcp_server.py`).**
+  - `decompile_function` per nome funziona: il bridge usa POST `/decompile`, ora gestito da `do_POST`.
+  - `get_xrefs_to` funziona: il bridge chiama `/xrefs_to`, che mancava (il server aveva solo `get_xrefs_to`/`function_xrefs`). Aggiunto anche `/xrefs_from`.
+  - `disassemble_function` restituisce tutta la funzione; prima si fermava alle prime 30 istruzioni.
+  - Le operazioni non implementate (rinomine, commenti, tipi, `list_data_items`, `list_exports`…) rispondono con un errore esplicito (404) invece di una risposta vuota, che il modello leggeva come "nessun dato".
+  - Verificato su `cwe119` compilato a O0 nel container `ghidra-dev`.
+- **Temperatura.** Goose 1.29.1 non inoltra `GOOSE_TEMPERATURE` al modello principale (solo al modello secondario che dà il nome alla sessione, verificato nei log `~/.local/state/goose/logs/llm_request.*.jsonl`). Si usa quindi la temperatura predefinita del fornitore, come DecLLM che non modifica gli iperparametri; il `.meta.json` registra `temperature: null`.
+- **Benchmark.** `originals/` contiene solo i cinque programmi CWE. Gli altri programmi, le cartelle dei modelli precedenti e `Test_v2.csv`/`Test_v3.csv` sono in `Archivio3/`. Le nuove sessioni vanno in un CSV nuovo.
+- **Run falliti nel CSV.** Se dopo i solleciti il file non c'è, `auto_pipeline.py` scrive comunque `{func}_{level}_llm[_n].meta.json` (senza `.c`) con `esito` = motivo dell'ultimo tentativo. `run_benchmark.py` trasforma questi metadati in righe con le sole colonne identificative, `esito` e `sandbox_violations`. Così il CSV conta anche le sessioni in cui il modello non riesce a ricostruire il programma.
+- **`--solo-mancanti`.** Per ogni livello salta il run `--run` se esiste già: c'è il `.c`, oppure il modello ha fallito da solo (`nessun_output`, `timeout`), che è un risultato. Rifà invece i run mancanti e quelli falliti per cause esterne (`errore_fornitore`, `errore_goose`, `errore_pipeline`), sostituendone i metadati. Così si rilancia sempre lo stesso comando, per esempio `for r in 1 2 3; do python auto_pipeline.py --source originals/cwe119.c --model <modello> --run $r --solo-mancanti --out risultati_finali.csv; done`. Senza l'opzione la pipeline rifà tutti i livelli e salva con il suffisso successivo libero.
+- **Errori del fornitore (6 ottobre).** io.net, il fornitore di MiMo, ha un uptime intorno al 96 %; Goose non ritenta e chiude la sessione al primo "Provider returned error". Le 18 sessioni fallite così sono in `Archivio3/errori_fornitore_2026-10-06/` e sono state tolte dal CSV. 11 delle 18 sessioni riuscite hanno incontrato almeno un errore del fornitore e sono state completate dai solleciti.
+- **Fornitori.** Qwen3.8-27b su OpenRouter fissato su Phala (precisione non dichiarata); MiMo-v2.6-flash su io.net in fp8.
+- **Da fare sull'altro computer:** `git pull`, controllare `gcc --version` (qui: GCC 15.2.1 20260123, Red Hat 15.2.1-7) e che `ghidra-mcp` sia eseguibile.
 
 ---
 
@@ -206,6 +236,7 @@ python run_benchmark.py --root . --out Test_v2.csv
 
 | Colonna | Significato |
 |---|---|
+| `esito` | `ok` se il modello ha scritto la ricostruzione; altrimenti `nessun_output` (si è fermato), `timeout`, `errore_fornitore` (messaggio "Ran into this error" nel log dell'ultimo tentativo, es. "Provider returned error"), `errore_goose` (Goose uscito con errore) o `errore_pipeline`. Le righe non `ok` hanno le metriche vuote |
 | `re_executability` | **Solo compilazione** (`gcc -c`). Nella tesi conviene chiamarla "compilabilità" |
 | `functional_match`, `functional_pass_rate` | Supera tutti i test / % di test superati. È la *re-executability* dei paper |
 | `compile_error_type`, `compile_error_count` | Categoria più frequente e numero di errori gcc/ld |
@@ -228,7 +259,7 @@ python run_benchmark.py --root . --out Test_v2.csv
 
 **Rigore sperimentale.**
 - Servono 3–5 run per configurazione, riportando media ± deviazione standard oppure pass@k (DecLLM: successo se almeno un run passa su 3).
-- La temperatura non viene ancora registrata. LLM4Decompile usa decodifica greedy.
+- La temperatura non è impostabile con Goose 1.29.1 (§3.6): si usa quella predefinita del fornitore. LLM4Decompile usa decodifica greedy.
 
 **Esperimenti futuri, in ordine di valore.**
 1. **Ciclo di feedback** come in DecLLM: errori di gcc e output atteso passati al modello riprendendo la sessione. Si misura il successo in funzione del numero di iterazioni.

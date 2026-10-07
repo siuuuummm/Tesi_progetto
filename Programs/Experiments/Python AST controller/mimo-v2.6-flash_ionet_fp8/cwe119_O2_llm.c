@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdint.h>
 
-void copy_and_print(char *param_1)
+void vulnerable_buffer_copy(char *param_1)
 {
     char acStack_48[72];
 
@@ -12,6 +13,7 @@ void copy_and_print(char *param_1)
 
 int main(void)
 {
-    copy_and_print("This is a very long input string that will overflow the buffer and cause undefined behavior.");
+    vulnerable_buffer_copy(
+        "This is a very long input string that will overflow the buffer and cause undefined behavior.");
     return 0;
 }

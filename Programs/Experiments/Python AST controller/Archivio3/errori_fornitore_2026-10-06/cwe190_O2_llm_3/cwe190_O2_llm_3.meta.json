@@ -1,0 +1,20 @@
+{
+  "esito": "errore_fornitore",
+  "source": "cwe190.c",
+  "model": "mimo-v2.6-flash_ionet_fp8",
+  "prompt_variant": "standard",
+  "level": "O2",
+  "run": 3,
+  "timestamp": "2026-10-06T13:51:03",
+  "duration_s": 57,
+  "nudges": 2,
+  "goose_session": "re_task_vecka18i",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe190/goose_mimo-v2.6-flash_ionet_fp8_O2_run3.log",
+  "temperature": null,
+  "goose_extensions": [
+    "developer",
+    "ghidra-mcp"
+  ],
+  "sandbox_violations": []
+}

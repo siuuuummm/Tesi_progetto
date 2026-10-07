@@ -50,6 +50,7 @@ CONFIG = {
     # Percorsi strumenti
     "ghidra_path":         str(TESI_ROOT / "ghidra_11.3.2_PUBLIC"),
     "ghidra_mcp_script":   str(TESI_ROOT / "GhidraMCP-release-1-4" / "ghidra_mcp_server.py"),
+    "ghidra_mcp_bridge":   str(TESI_ROOT / "GhidraMCP-release-1-4" / "ghidra-mcp"),  # avvia bridge_mcp_ghidra.py
     "goose_bin":           shutil.which("goose") or str(Path.home() / ".local" / "bin" / "goose"),
 
     # Cartelle di lavoro
@@ -74,6 +75,10 @@ CONFIG = {
     # Porta MCP server Ghidra
     "mcp_port":            8080,
 }
+
+# Estensioni di Goose: solo quelle dichiarate qui (--no-profile ignora le
+# estensioni attive nella configurazione globale, es. todo/summon/analyze).
+GOOSE_BUILTINS = ["developer"]
 
 # Prompt base e nudge — {llm_output} viene sostituito a runtime
 GOOSE_PROMPT = """\
@@ -168,6 +173,22 @@ disassemble_function, poi scrivi il file.
 
 Non fare domande. Scrivi il file adesso e poi scrivi DONE.
 """
+
+# Condizione di controllo (--senza-divieto): si toglie SOLO la riga che vieta di
+# correggere le vulnerabilità; tutto il resto del prompt resta identico, così
+# ogni differenza tra le due condizioni dipende da quella riga.
+_DIVIETO_INIZIO = "- VIETATO correggere bug"
+assert GOOSE_PROMPT.count(_DIVIETO_INIZIO) == 1, "riga del divieto non trovata nel prompt"
+
+
+def build_prompt(senza_divieto: bool) -> str:
+    """Restituisce il prompt standard o quello senza il divieto di correggere."""
+    if not senza_divieto:
+        return GOOSE_PROMPT
+    start = GOOSE_PROMPT.index(_DIVIETO_INIZIO)
+    end = GOOSE_PROMPT.index("\n", start) + 1
+    return GOOSE_PROMPT[:start] + GOOSE_PROMPT[end:]
+
 
 # ===========================================================================
 # Utilità
@@ -266,8 +287,10 @@ def start_ghidra(binary: Path, cfg: dict, log_file: Path) -> subprocess.Popen:
 # ===========================================================================
 
 def _goose_run(prompt: str, cmd_base: list, log_file: Path,
-               timeout: int, cwd: Path, append: bool = False) -> bool:
-    """Esegue un singolo invocazione di Goose, loggando l'output."""
+               timeout: int, cwd: Path, append: bool = False) -> str:
+    """Esegue una singola invocazione di Goose, loggando l'output.
+    Restituisce "ok", "timeout" oppure "errore_goose" (uscita con errore,
+    es. un errore del fornitore del modello)."""
     cmd = cmd_base + ["--text", prompt]
     mode = "a" if append else "w"
     try:
@@ -279,11 +302,19 @@ def _goose_run(prompt: str, cmd_base: list, log_file: Path,
                 timeout=timeout,
                 cwd=cwd,
             )
-        return True
+        return "ok"
     except subprocess.TimeoutExpired:
-        return False
+        return "timeout"
     except subprocess.CalledProcessError:
-        return False
+        return "errore_goose"
+
+
+def goose_extension_args(cfg: dict) -> list:
+    """Estensioni esplicite: developer + bridge GhidraMCP, nient'altro."""
+    bridge = cfg["ghidra_mcp_bridge"]
+    assert " " not in bridge, "il percorso del bridge non deve contenere spazi"
+    return (["--no-profile", "--with-builtin", ",".join(GOOSE_BUILTINS),
+             "--with-extension", bridge])
 
 
 def _file_ok(path: Path) -> bool:
@@ -292,17 +323,20 @@ def _file_ok(path: Path) -> bool:
 
 
 def run_goose(llm_output: Path, cfg: dict, log_file: Path,
-              sandbox: Path) -> tuple[bool, int]:
+              sandbox: Path) -> tuple[bool, int, str]:
     """
     Lancia Goose con il prompt principale. Se il file non viene prodotto
     (es. Goose si ferma a chiedere conferma), invia automaticamente fino a
     `max_nudges` solleciti per forzare la scrittura. I solleciti riprendono
     la stessa sessione (--name + --resume), quindi il modello ha ancora in
     contesto le decompilazioni già fatte.
-    Restituisce (file prodotto, numero di nudge usati).
+    Restituisce (file prodotto, numero di nudge usati, esito). L'esito è "ok"
+    oppure, se il file non è stato scritto, il motivo dell'ultimo tentativo:
+    "timeout", "errore_fornitore" (es. "Provider returned error"),
+    "errore_goose" (uscita con errore) o "nessun_output" (il modello si è fermato).
     """
     # Nome sessione = nome casuale della sandbox: unico e senza info sul programma
-    cmd_base   = [cfg["goose_bin"], "run", "--name", sandbox.name]
+    cmd_base   = [cfg["goose_bin"], "run", "--name", sandbox.name] + goose_extension_args(cfg)
     timeout    = cfg["goose_timeout"]
     max_nudges = cfg.get("max_nudges", 2)
 
@@ -310,12 +344,12 @@ def run_goose(llm_output: Path, cfg: dict, log_file: Path,
     log(f"Goose tentativo 1/{total_attempts}  →  {llm_output.name}")
     log(f"  log: {log_file.name}")
 
-    prompt1 = GOOSE_PROMPT.format(llm_output=str(llm_output))
-    _goose_run(prompt1, cmd_base, log_file, timeout, sandbox, append=False)
+    prompt1 = cfg.get("goose_prompt", GOOSE_PROMPT).format(llm_output=str(llm_output))
+    stato = _goose_run(prompt1, cmd_base, log_file, timeout, sandbox, append=False)
 
     if _file_ok(llm_output):
         log(f"File prodotto al primo tentativo: {llm_output.stat().st_size} bytes", "OK")
-        return True, 0
+        return True, 0, "ok"
 
     # Loop di nudge
     nudge_prompt = GOOSE_NUDGE.format(llm_output=str(llm_output))
@@ -324,15 +358,21 @@ def run_goose(llm_output: Path, cfg: dict, log_file: Path,
         with open(log_file, "a") as lf:
             lf.write(f"\n\n=== NUDGE {n}/{max_nudges} ===\n")
 
-        _goose_run(nudge_prompt, cmd_base + ["--resume"], log_file, timeout,
-                   sandbox, append=True)
+        stato = _goose_run(nudge_prompt, cmd_base + ["--resume"], log_file, timeout,
+                           sandbox, append=True)
 
         if _file_ok(llm_output):
             log(f"File prodotto dopo nudge {n}: {llm_output.stat().st_size} bytes", "OK")
-            return True, n
+            return True, n, "ok"
 
-    log(f"Goose non ha scritto il file dopo {max_nudges} nudge", "ERR")
-    return False, max_nudges
+    esito = "nessun_output" if stato == "ok" else stato
+    # Goose può uscire senza codice d'errore anche quando il fornitore fallisce:
+    # lo si riconosce dal messaggio nel log dell'ultimo tentativo.
+    ultimo = log_file.read_text(errors="replace").rsplit("=== NUDGE", 1)[-1]
+    if stato != "timeout" and "Ran into this error" in ultimo:
+        esito = "errore_fornitore"
+    log(f"Goose non ha scritto il file dopo {max_nudges} nudge ({esito})", "ERR")
+    return False, max_nudges, esito
 
 
 # ===========================================================================
@@ -394,25 +434,62 @@ def write_run_metadata(dest: Path, meta: dict):
 # Step 5 — Sposta e rinomina il file prodotto
 # ===========================================================================
 
+def next_dest(func_name: str, level: str, run_index: int, model: str,
+              cfg: dict) -> Path:
+    """
+    Percorso del .c per questo run nella cartella del modello:
+    {func}_{level}_llm.c  oppure  {func}_{level}_llm_{n}.c se run_index > 1.
+    Se il nome è già occupato (da un .c o dai metadati di un run fallito),
+    incrementa il suffisso.
+    """
+    model_dir = Path(cfg["benchmark_root"]) / model
+    model_dir.mkdir(exist_ok=True)
+
+    dest = model_dir / f"{run_stem(func_name, level, run_index)}.c"
+    counter = run_index
+    while stato_run(dest) != "mancante":
+        if stato_run(dest) == "da_rifare":
+            break          # run fallito per cause esterne: lo si sostituisce
+        counter += 1
+        dest = model_dir / f"{func_name}_{level}_llm_{counter}.c"
+    return dest
+
+
+def run_stem(func_name: str, level: str, run_index: int) -> str:
+    """Nome del run senza estensione: cwe119_O0_llm, cwe119_O0_llm_2, ..."""
+    return f"{func_name}_{level}_llm" + ("" if run_index == 1 else f"_{run_index}")
+
+
+# Esiti dovuti a cause esterne al modello: il run va rifatto, non contato.
+ESITI_DA_RIFARE = {"errore_fornitore", "errore_goose", "errore_pipeline"}
+
+
+def stato_run(dest: Path) -> str:
+    """
+    "fatto"     : c'è la ricostruzione, oppure il modello ha fallito da solo
+                  (nessun_output, timeout): è un risultato e resta.
+    "da_rifare" : solo metadati di un run fallito per cause esterne.
+    "mancante"  : nessuna traccia del run.
+    """
+    meta = dest.with_suffix(".meta.json")
+    if dest.exists():
+        return "fatto"
+    if not meta.exists():
+        return "mancante"
+    try:
+        esito = json.loads(meta.read_text(encoding="utf-8")).get("esito")
+    except (json.JSONDecodeError, OSError):
+        esito = None
+    return "da_rifare" if esito in ESITI_DA_RIFARE else "fatto"
+
+
 def move_output(llm_output: Path, func_name: str, level: str,
                 run_index: int, model: str, cfg: dict) -> Path:
     """
     Sposta llm_output nella cartella del modello corrente nel benchmark_root.
     Naming: {func}_{level}_llm.c  oppure  {func}_{level}_llm_{n}.c se run_index > 1
     """
-    model_dir = Path(cfg["benchmark_root"]) / model
-    model_dir.mkdir(exist_ok=True)
-
-    suffix = "" if run_index == 1 else f"_{run_index}"
-    dest_name = f"{func_name}_{level}_llm{suffix}.c"
-    dest = model_dir / dest_name
-
-    # Se esiste già, incrementa il suffisso automaticamente
-    counter = run_index
-    while dest.exists():
-        counter += 1
-        dest = model_dir / f"{func_name}_{level}_llm_{counter}.c"
-
+    dest = next_dest(func_name, level, run_index, model, cfg)
     shutil.copy2(str(llm_output), str(dest))
     log(f"Spostato  →  {dest.relative_to(Path(cfg['benchmark_root']).parent)}", "OK")
     return dest
@@ -510,11 +587,11 @@ def process_one(source: Path, level: str, run_index: int, cfg: dict,
         kill_port(cfg["mcp_port"])
         ghidra_proc = start_ghidra(binary, cfg, ghidra_log)
 
-        success, nudges = False, 0
+        success, nudges, esito = False, 0, "errore_pipeline"
         started = time.time()
         try:
             # 4. Goose
-            success, nudges = run_goose(llm_out, cfg, goose_log, sandbox)
+            success, nudges, esito = run_goose(llm_out, cfg, goose_log, sandbox)
         finally:
             ghidra_proc.terminate()
             kill_port(cfg["mcp_port"])
@@ -525,28 +602,37 @@ def process_one(source: Path, level: str, run_index: int, cfg: dict,
             for v in violations[:5]:
                 log(f"  {v[:120]}", "WARN")
 
+        # 5. Sposta il file prodotto; se non c'è, registra comunque il run
+        #    (solo .meta.json, con l'esito) perché finisca nel CSV.
         if success:
-            # 5. Sposta
             dest = move_output(llm_out, func_name, level, run_index,
                                cfg["current_model"], cfg)
-            prompt = GOOSE_PROMPT.format(llm_output=str(llm_out))
-            write_run_metadata(dest, {
-                "source": source.name,
-                "model": cfg["current_model"],
-                "level": level,
-                "run": run_index,
-                "timestamp": datetime.now().isoformat(timespec="seconds"),
-                "duration_s": round(time.time() - started),
-                "nudges": nudges,
-                "goose_session": sandbox.name,
-                # sandbox in /tmp ha nome casuale: lo normalizziamo per un hash stabile
-                "prompt_sha256": hashlib.sha256(
-                    prompt.replace(str(llm_out), "<OUT>").encode()).hexdigest()[:12],
-                "goose_log": str(goose_log),
-                "sandbox_violations": violations,
-            })
         else:
+            dest = next_dest(func_name, level, run_index, cfg["current_model"], cfg)
+            log(f"Run fallito ({esito}): registrato in {dest.with_suffix('.meta.json').name}", "WARN")
             log(f"Controlla i log in: {work_dir}", "WARN")
+        prompt = cfg.get("goose_prompt", GOOSE_PROMPT).format(llm_output=str(llm_out))
+        write_run_metadata(dest, {
+            "esito": esito,
+            "source": source.name,
+            "model": cfg["current_model"],
+            "prompt_variant": cfg.get("prompt_variant", "standard"),
+            "level": level,
+            "run": run_index,
+            "timestamp": datetime.now().isoformat(timespec="seconds"),
+            "duration_s": round(time.time() - started),
+            "nudges": nudges,
+            "goose_session": sandbox.name,
+            # sandbox in /tmp ha nome casuale: lo normalizziamo per un hash stabile
+            "prompt_sha256": hashlib.sha256(
+                prompt.replace(str(llm_out), "<OUT>").encode()).hexdigest()[:12],
+            "goose_log": str(goose_log),
+            # Goose 1.29.1 non inoltra GOOSE_TEMPERATURE al modello principale:
+            # si usa la temperatura predefinita del fornitore.
+            "temperature": None,
+            "goose_extensions": GOOSE_BUILTINS + ["ghidra-mcp"],
+            "sandbox_violations": violations,
+        })
 
         return success
 
@@ -590,6 +676,17 @@ def main():
         help="Salta il benchmark finale (solo genera i file)",
     )
     parser.add_argument(
+        "--senza-divieto", action="store_true",
+        help="Condizione di controllo: toglie dal prompt il divieto di correggere "
+             "bug e vulnerabilità. I risultati vanno in <modello>__senza_divieto/",
+    )
+    parser.add_argument(
+        "--solo-mancanti", action="store_true",
+        help="Salta i livelli per cui il run --run esiste già (ricostruzione o "
+             "fallimento del modello); rifà quelli mancanti o falliti per errori "
+             "del fornitore/di Goose",
+    )
+    parser.add_argument(
         "--dry-run", action="store_true",
         help="Mostra cosa farebbe senza eseguire nulla",
     )
@@ -598,6 +695,11 @@ def main():
     cfg = CONFIG.copy()
     if args.model:
         cfg["current_model"] = args.model
+    cfg["goose_prompt"] = build_prompt(args.senza_divieto)
+    cfg["prompt_variant"] = "senza_divieto" if args.senza_divieto else "standard"
+    if args.senza_divieto:
+        # cartella dei risultati e nomi dei log separati dalla condizione standard
+        cfg["current_model"] += "__senza_divieto"
 
     source = Path(args.source).resolve()
     if not source.exists():
@@ -612,6 +714,7 @@ def main():
   ║  Livelli  : {', '.join(args.levels):<50}║
   ║  Run #    : {args.run:<50}║
   ║  Modello  : {cfg['current_model']:<50}║
+  ║  Prompt   : {cfg['prompt_variant']:<50}║
   ║  Output   : {args.out:<50}║
   ╚══════════════════════════════════════════════════════════════╝
 """)
@@ -621,7 +724,13 @@ def main():
         ensure_original(source, cfg)
 
     results = {}
+    model_dir = Path(cfg["benchmark_root"]) / cfg["current_model"]
     for level in args.levels:
+        if args.solo_mancanti:
+            dest = model_dir / f"{run_stem(source.stem, level, args.run)}.c"
+            if stato_run(dest) == "fatto":
+                results[level] = "– già fatto"
+                continue
         ok = process_one(source, level, args.run, cfg, args.out, args.dry_run)
         results[level] = "✔ OK" if ok else "✘ FALLITO"
 

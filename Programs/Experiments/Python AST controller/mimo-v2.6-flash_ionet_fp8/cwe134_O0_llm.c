@@ -1,23 +1,22 @@
 #include <stdio.h>
 #include <stdint.h>
-#include <string.h>
-#include <stdlib.h>
+#include <stdbool.h>
 
-void log_message(char *msg)
+void log_message(char *param_1)
 {
-    printf(msg);
+    printf(param_1);
     putchar(10);
     return;
 }
 
-int main(int argc, char **argv)
+bool main(int param_1, long param_2)
 {
-    if (argc < 2) {
+    if (param_1 < 2) {
         printf("Uso: %s <messaggio>\n", "logger");
     }
     else {
         printf("[log] ");
-        log_message(*(char **)((char *)argv + 8));
+        log_message(*(char **)(param_2 + 8));
     }
-    return argc < 2;
+    return param_1 < 2;
 }

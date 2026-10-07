@@ -1,8 +1,9 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
 
-void copy_string_to_buffer(char *param_1)
+void vulnerable_buffer_copy(char *param_1)
 {
     char local_48[64];
 
@@ -13,7 +14,7 @@ void copy_string_to_buffer(char *param_1)
 
 int main(void)
 {
-    copy_string_to_buffer(
+    vulnerable_buffer_copy(
         "This is a very long input string that will overflow the buffer and cause undefined behavior."
     );
     return 0;

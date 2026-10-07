@@ -40,6 +40,7 @@ CSV_COLUMNS = [
     "modello",
     "livello",
     "variante",          # nome file senza estensione, es. koch_O0_llm_2
+    "esito",             # ok | nessun_output | timeout | errore_fornitore | errore_goose | errore_pipeline
     "re_executability",
     "functional_match",      # 1 se stdout+exit code coincidono su tutti i casi di test
     "functional_pass_rate",  # % di casi di test superati
@@ -83,7 +84,7 @@ def discover_models(root: Path) -> list[str]:
         d.name
         for d in root.iterdir()
         if d.is_dir() and d.name != ORIGINALS_DIR
-        and not d.name.startswith((".", "Archivio"))
+        and not d.name.startswith((".", "_", "Archivio"))
     )
 
 
@@ -119,6 +120,35 @@ def find_decompiled(root: Path, model: str, func: str) -> list[tuple[str, str, P
             variante = path.stem   # nome file senza .c
             results.append((level, variante, path))
     return results
+
+
+def find_failed(root: Path, model: str, func: str) -> list[tuple[str, str, str]]:
+    """
+    Run falliti: .meta.json senza il .c corrispondente (auto_pipeline li
+    registra quando il modello non scrive il file).
+    Ritorna [(livello, variante, esito), ...].
+    """
+    model_dir = root / model
+    results = []
+    for level in sorted(LEVELS):
+        for meta in sorted(model_dir.glob(f"{func}_{level}*.meta.json")):
+            variante = meta.name[: -len(".meta.json")]
+            if (model_dir / f"{variante}.c").exists():
+                continue
+            try:
+                esito = json.loads(meta.read_text(encoding="utf-8")).get("esito", "")
+            except (json.JSONDecodeError, OSError):
+                esito = ""
+            results.append((level, variante, esito or "nessun_output"))
+    return results
+
+
+def failed_row(func: str, model: str, level: str, variante: str, esito: str) -> dict:
+    """Riga CSV di un run senza ricostruzione: solo identificativi ed esito."""
+    row = {c: "" for c in CSV_COLUMNS}
+    row.update({"funzione": func, "modello": model, "livello": level,
+                "variante": variante, "esito": esito})
+    return row
 
 
 def run_analyzer(original: Path, decompiled: Path, no_ted: bool,
@@ -163,6 +193,7 @@ def extract_row(func: str, model: str, level: str, variante: str, data: dict) ->
         "modello":  model,
         "livello":  level,
         "variante": variante,
+        "esito":    "ok",
     }
 
     if "_error" in data:
@@ -359,6 +390,10 @@ def main():
                     del seen[key]
 
         existing_rows = list(seen.values())
+        # Run falliti per cause esterne: possono essere stati rifatti con
+        # --solo-mancanti, quindi si ricalcolano dai file attuali.
+        existing_rows = [r for r in existing_rows
+                         if r.get("esito", "") not in ("errore_fornitore", "errore_goose", "errore_pipeline")]
         for row in existing_rows:
             existing_keys.add((row["funzione"], row["modello"], row["livello"], row.get("variante", "").strip()))
         print(f"  Righe esistenti: {len(existing_rows)} (usa --force per ricalcolare)")
@@ -373,7 +408,19 @@ def main():
         if (func, model, level, variante) not in existing_keys
     ]
 
-    if not jobs:
+    # Run falliti: nessuna analisi, solo una riga con l'esito
+    failed_rows = [
+        dict(failed_row(func, model, level, variante, esito),
+             sandbox_violations=read_sandbox_violations(root / model / f"{variante}.c"))
+        for func, _ in functions
+        for model in models
+        for level, variante, esito in find_failed(root, model, func)
+        if (func, model, level, variante) not in existing_keys
+    ]
+    if failed_rows:
+        print(f"  Run falliti da registrare: {len(failed_rows)}")
+
+    if not jobs and not failed_rows:
         print("  Nessun nuovo job da eseguire. CSV già aggiornato.")
         return
 
@@ -399,7 +446,7 @@ def main():
     print()
 
     # Scrivi CSV (righe esistenti + nuove, ordinate)
-    all_rows = existing_rows + new_rows
+    all_rows = existing_rows + new_rows + failed_rows
     all_rows.sort(key=lambda r: (r["funzione"], r["modello"], r["livello"]))
 
     with open(out_path, "w", newline="", encoding="utf-8") as f:

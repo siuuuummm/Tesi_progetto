@@ -1,13 +1,19 @@
 {
   "source": "cwe119.c",
   "model": "mimo-v2.6-flash_ionet_fp8",
+  "prompt_variant": "standard",
   "level": "O1",
   "run": 1,
-  "timestamp": "2026-10-04T10:54:14",
-  "duration_s": 117,
+  "timestamp": "2026-10-06T11:59:09",
+  "duration_s": 35,
   "nudges": 0,
-  "goose_session": "re_task_ncrg4gc2",
+  "goose_session": "re_task_75575u6t",
   "prompt_sha256": "0f327dfcc92e",
-  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/goose_O1_run1.log",
+  "goose_log": "/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/goose_mimo-v2.6-flash_ionet_fp8_O1_run1.log",
+  "temperature": null,
+  "goose_extensions": [
+    "developer",
+    "ghidra-mcp"
+  ],
   "sandbox_violations": []
 }

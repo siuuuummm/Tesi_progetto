@@ -1,14 +1,20 @@
 #include <stdio.h>
+#include <stdint.h>
 
-int main(int argc, char *argv[])
+void print_line(char *msg)
+{
+    printf(msg);
+    putchar(10);
+}
+
+int main(int argc, char **argv)
 {
     if (argc < 2) {
         printf("Uso: %s <messaggio>\n", "logger");
+        return 1;
     }
-    else {
-        printf("[log] ");
-        printf(argv[1]);
-        putchar(10);
-    }
-    return argc < 2;
+    printf("[log] ");
+    printf(argv[1]);
+    putchar('\n');
+    return 0;
 }

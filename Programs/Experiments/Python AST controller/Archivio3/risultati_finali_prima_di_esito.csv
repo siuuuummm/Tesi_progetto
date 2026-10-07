@@ -1,0 +1,4 @@
+funzione,modello,livello,variante,re_executability,functional_match,functional_pass_rate,compile_error_type,compile_error_count,asan_orig,asan_dec,asan_match,loc_orig,loc_dec,funcs_orig,funcs_dec,edit_similarity,ast_node_similarity,tree_edit_distance,fanout_similarity,ast_depth_orig,ast_depth_dec,ast_depth_delta,cf_delta,decl_delta,expr_delta,lit_delta,stmt_delta,parse_error,sandbox_violations
+cwe119,mimo-v2.6-flash_ionet_fp8,O0,cwe119_O0_llm,1,1,100.00,,0,stack-buffer-overflow,stack-buffer-overflow,1,11,18,2,2,71.98,97.73,98.85,97.68,9,9,0,0,0,0,0,1,0,0
+cwe119,mimo-v2.6-flash_ionet_fp8,O1,cwe119_O1_llm,1,1,100.00,,0,stack-buffer-overflow,stack-buffer-overflow,1,11,16,2,2,70.00,97.73,98.85,97.68,9,9,0,0,0,0,0,1,0,0
+cwe119,mimo-v2.6-flash_ionet_fp8,O2,cwe119_O2_llm,1,1,100.00,,0,stack-buffer-overflow,stack-buffer-overflow,1,11,16,2,2,70.29,97.73,98.85,97.68,9,9,0,0,0,0,0,1,0,0

@@ -1,0 +1,4 @@
+#!/bin/sh
+# Avvia il bridge GhidraMCP. Il nome del file diventa il nome dell'estensione
+# in Goose ("ghidra-mcp"), lo stesso citato nel prompt della pipeline.
+exec python3 "$(dirname "$0")/bridge_mcp_ghidra.py" --transport stdio "$@"

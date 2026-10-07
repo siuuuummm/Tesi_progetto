@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <string.h>
 
-void copy_and_print(char *param_1)
+void copy_input_to_buffer(char *param_1)
 {
-    char buffer[64];
+    char acStack_48[64];
 
-    strcpy(buffer, param_1);
-    printf("Buffer content: %s\n", buffer);
+    strcpy(acStack_48, param_1);
+    printf("Buffer content: %s\n", acStack_48);
     return;
 }
 
 int main(void)
 {
-    copy_and_print(
+    copy_input_to_buffer(
         "This is a very long input string that will overflow the buffer and cause undefined behavior."
     );
     return 0;
