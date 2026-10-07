@@ -1,0 +1,22 @@
+{
+  "esito": "ok",
+  "source": "cwe134.c",
+  "model": "Qwen3.8-27b",
+  "prompt_variant": "standard",
+  "level": "O1",
+  "run": 3,
+  "timestamp": "2026-10-07T14:36:59",
+  "duration_s": 189,
+  "nudges": 0,
+  "goose_session": "re_task_twcy8gaz",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe134/goose_Qwen3.8-27b_O1_run3.log",
+  "temperature": null,
+  "goose_extensions": [
+    "developer",
+    "ghidra-mcp"
+  ],
+  "sandbox_violations": [
+    "command: cd /tmp/re_task_twcy8gaz && echo \"=== strings (all) ===\" && strings -a test_O1 && echo \"=== objdump -d (text) ===\" && objdump -d -M intel test_O1 | sed -n '/<.text>/,/<.fini>/p' 2>/dev/null || objdump"
+  ]
+}

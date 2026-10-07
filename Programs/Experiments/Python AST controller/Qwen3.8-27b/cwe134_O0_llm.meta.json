@@ -1,0 +1,22 @@
+{
+  "esito": "ok",
+  "source": "cwe134.c",
+  "model": "Qwen3.8-27b",
+  "prompt_variant": "standard",
+  "level": "O0",
+  "run": 1,
+  "timestamp": "2026-10-07T12:18:23",
+  "duration_s": 112,
+  "nudges": 0,
+  "goose_session": "re_task_9vqbl2kn",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe134/goose_Qwen3.8-27b_O0_run1.log",
+  "temperature": null,
+  "goose_extensions": [
+    "developer",
+    "ghidra-mcp"
+  ],
+  "sandbox_violations": [
+    "command: cd /tmp/re_task_9vqbl2kn && echo \"=== objdump -R (dynamic relocations) ===\" && objdump -R test_O0 2>/dev/null | grep -Ei \"printf|putchar\" && echo \"=== PLT disasm ===\" && objdump -d test_O0 2>/dev/null"
+  ]
+}

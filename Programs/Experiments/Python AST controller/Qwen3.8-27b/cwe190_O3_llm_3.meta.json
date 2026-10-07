@@ -1,0 +1,22 @@
+{
+  "esito": "ok",
+  "source": "cwe190.c",
+  "model": "Qwen3.8-27b",
+  "prompt_variant": "standard",
+  "level": "O3",
+  "run": 3,
+  "timestamp": "2026-10-07T17:31:49",
+  "duration_s": 1300,
+  "nudges": 0,
+  "goose_session": "re_task_mgp_rv7d",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe190/goose_Qwen3.8-27b_O3_run3.log",
+  "temperature": null,
+  "goose_extensions": [
+    "developer",
+    "ghidra-mcp"
+  ],
+  "sandbox_violations": [
+    "command: cd /tmp/re_task_mgp_rv7d && gcc -O3 -S out.c -o /tmp/o3.s && sed -n '/<main>:/,$p' /tmp/o3.s | sed -n '1,120p'"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "esito": "ok",
+  "source": "cwe190.c",
+  "model": "Qwen3.8-27b",
+  "prompt_variant": "standard",
+  "level": "O3",
+  "run": 1,
+  "timestamp": "2026-10-07T16:07:07",
+  "duration_s": 273,
+  "nudges": 0,
+  "goose_session": "re_task_yxupdf4l",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe190/goose_Qwen3.8-27b_O3_run1.log",
+  "temperature": null,
+  "goose_extensions": [
+    "developer",
+    "ghidra-mcp"
+  ],
+  "sandbox_violations": [
+    "command: cd /tmp/re_task_yxupdf4l && objdump -d -M intel test_O3 2>/dev/null | sed -n '/<.text>:/,/<.fini>/p' | sed -n '1,200p'"
+  ]
+}

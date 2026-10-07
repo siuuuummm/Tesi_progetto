@@ -1,0 +1,22 @@
+{
+  "esito": "ok",
+  "source": "cwe134.c",
+  "model": "Qwen3.8-27b",
+  "prompt_variant": "standard",
+  "level": "O1",
+  "run": 2,
+  "timestamp": "2026-10-07T12:34:34",
+  "duration_s": 236,
+  "nudges": 0,
+  "goose_session": "re_task_ajcabggv",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe134/goose_Qwen3.8-27b_O1_run2.log",
+  "temperature": null,
+  "goose_extensions": [
+    "developer",
+    "ghidra-mcp"
+  ],
+  "sandbox_violations": [
+    "command: cd /tmp/re_task_ajcabggv && echo \"=== strings -a ===\" && strings -a test_O1 && echo \"=== objdump .rodata ===\" && objdump -s -j .rodata test_O1 && echo \"=== disasm main region ===\" && objdump -d test_O"
+  ]
+}
