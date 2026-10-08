@@ -1,0 +1,20 @@
+{
+  "esito": "ok",
+  "source": "cwe190.c",
+  "model": "Qwen3.8-27b__senza_divieto",
+  "prompt_variant": "senza_divieto",
+  "level": "O2",
+  "run": 3,
+  "timestamp": "2026-10-08T10:39:54",
+  "duration_s": 300,
+  "nudges": 0,
+  "goose_session": "re_task_hi69djir",
+  "prompt_sha256": "c06a2621c537",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe190/goose_Qwen3.8-27b__senza_divieto_O2_run3.log",
+  "temperature": null,
+  "goose_extensions": [
+    "developer",
+    "ghidra-mcp"
+  ],
+  "sandbox_violations": []
+}

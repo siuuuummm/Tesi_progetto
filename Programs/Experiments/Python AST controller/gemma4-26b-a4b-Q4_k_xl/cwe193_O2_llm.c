@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+
+int main(int argc, char **argv) {
+    setvbuf(stdout, NULL, 2, 0);
+    if (argc > 1) {
+        char **puVar6 = argv + 1;
+        char **puVar1 = (char **)((uintptr_t)argv + 0x10 + (uintptr_t)(argc - 2) * 8);
+        size_t sVar3;
+
+        do {
+            while (1) {
+                char *s = *puVar6;
+                sVar3 = strlen(s);
+                if (sVar3 > 16) {
+                    break;
+                }
+                char *ptr = (char *)malloc(16);
+                uint32_t uVar5 = (uint32_t)(sVar3 + 1);
+                uint32_t uVar2 = uVar5;
+
+                if (uVar2 < 8) {
+                    if ((uVar5 & 4) == 0) {
+                        if (uVar2 != 0) {
+                            *ptr = *s;
+                            if ((uVar5 & 2) != 0) {
+                                *(uint16_t *)(ptr + (uVar5 - 2)) = *(uint16_t *)(s + (uVar5 - 2));
+                            }
+                        }
+                    } else {
+                        *(uint32_t *)ptr = *(uint32_t *)s;
+                        *(uint32_t *)(ptr + (uVar5 - 4)) = *(uint32_t *)(s + (uVar5 - 4));
+                    }
+                } else {
+                    *(uint64_t *)(ptr + (uVar5 - 8)) = *(uint64_t *)(s + (uVar5 - 8));
+                    if (uVar2 - 1 > 7) {
+                        uint32_t uVar5_inner = 0;
+                        uint32_t uVar4;
+                        do {
+                            uVar4 = uVar5_inner + 8;
+                            *(uint64_t *)(ptr + uVar5_inner) = *(uint64_t *)(s + uVar5_inner);
+                            uVar5_inner = uVar4;
+                        } while (uVar4 < (uVar2 - 1 & 0xfffffff8));
+                    }
+                }
+
+                printf("Registrato: %s (%zu caratteri)\n", ptr, sVar3);
+                free(ptr);
+                if (puVar6 == puVar1) {
+                    return 0;
+                }
+            }
+            puVar6++;
+            printf("Nome troppo lungo: %zu caratteri\n", sVar3);
+        } while (puVar6 != puVar1);
+    }
+    return 0;
+}
