@@ -123,3 +123,11 @@ cwe193,gemma4-26b-a4b-Q4_k_xl__senza_divieto,O2,cwe193_O2_llm_3,ok,0,0,0.00,decl
 cwe193,gemma4-26b-a4b-Q4_k_xl__senza_divieto,O3,cwe193_O3_llm_2,ok,0,0,0.00,declaration,3,,,,25,82,2,2,13.20,19.71,30.57,98.70,13,22,9,13,159,133,110,17,0,0
 cwe193,gemma4-26b-a4b-Q4_k_xl__senza_divieto,O3,cwe193_O3_llm,ok,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,25,63,2,1,16.58,30.18,39.86,98.44,13,22,9,7,62,75,62,7,0,0
 cwe193,gemma4-26b-a4b-Q4_k_xl__senza_divieto,O3,cwe193_O3_llm_3,ok,0,0,0.00,declaration,2,,,,25,55,2,1,16.63,30.53,40.73,98.46,13,24,11,8,77,63,50,8,0,0
+cwe193,mimo-v2.6-flash_ionet_fp8,O0,cwe193_O0_llm,ok,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,25,38,2,2,26.21,60.44,64.77,99.22,13,18,5,-1,33,22,11,1,0,0
+cwe193,mimo-v2.6-flash_ionet_fp8,O1,cwe193_O1_llm,ok,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,25,42,2,2,25.27,56.19,61.29,98.68,13,14,1,0,37,24,16,1,0,0
+cwe193,mimo-v2.6-flash_ionet_fp8,O2,cwe193_O2_llm,ok,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,25,64,2,1,14.53,27.89,37.15,98.42,13,22,9,7,74,84,69,6,0,0
+cwe193,mimo-v2.6-flash_ionet_fp8,O3,cwe193_O3_llm,ok,1,1,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,25,106,2,2,12.08,17.91,27.54,98.45,13,22,9,13,154,163,141,16,0,0
+cwe416,gemma4-26b-a4b-Q4_k_xl,O0,cwe416_O0_llm,ok,1,1,100.00,,0,heap-use-after-free;none,heap-use-after-free;none,1,41,47,1,1,26.83,73.19,63.92,99.27,10,12,2,1,-10,13,13,6,0,0
+cwe416,gemma4-26b-a4b-Q4_k_xl,O1,cwe416_O1_llm,ok,1,0,50.00,,0,heap-use-after-free;none,heap-use-after-free;none,1,41,46,1,1,26.77,73.83,60.61,98.32,10,15,5,2,-15,7,-1,5,0,0
+cwe416,gemma4-26b-a4b-Q4_k_xl,O2,cwe416_O2_llm,ok,1,0,50.00,,0,heap-use-after-free;none,heap-use-after-free;none,1,41,37,1,1,27.40,61.68,60.80,98.98,10,11,1,2,-29,-10,-21,7,0,0
+cwe416,gemma4-26b-a4b-Q4_k_xl,O3,cwe416_O3_llm,ok,1,0,50.00,,0,heap-use-after-free;none,heap-use-after-free;none,1,41,34,1,1,14.83,64.02,59.42,99.29,10,11,1,1,-17,-9,-24,5,0,0
