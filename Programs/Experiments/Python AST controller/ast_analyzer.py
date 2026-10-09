@@ -288,14 +288,20 @@ def classify_compiler_errors(stderr: str) -> dict[str, int]:
 # gira con filesystem in sola lettura, /tmp privato e senza rete; altrimenti
 # solo con timeout dentro una cartella temporanea.
 BWRAP = shutil.which("bwrap")
+# stdout senza buffer anche per i programmi che non lo disattivano da soli
+# (es. cwe119): senza, l'output stampato prima di un crash va perso e il test
+# confronta solo il codice di uscita. Non si usa con ASan, che vuole essere
+# la prima libreria caricata (stdbuf usa LD_PRELOAD).
+STDBUF = shutil.which("stdbuf")
 RUN_TIMEOUT = 5
-DEFAULT_TEST_CASES = [{"args": [], "stdin": ""}]
+DEFAULT_TEST_CASES = [{"args": [], "stdin": "", "trigger": False}]
 
 
 def load_test_cases(original_path: str, tests_path: str | None = None) -> list[dict]:
     """
     Legge i casi di test da <originale>.tests.json (o dal path indicato).
-    Formato: [{"args": ["foo"], "stdin": "..."}, ...]
+    Formato: [{"args": ["foo"], "stdin": "...", "trigger": true}, ...]
+    "trigger" marca i casi che attivano la vulnerabilità; gli altri sono innocui.
     Senza file di test si usa un solo caso: nessun argomento, stdin vuoto.
     """
     path = tests_path or os.path.splitext(original_path)[0] + ".tests.json"
@@ -303,7 +309,8 @@ def load_test_cases(original_path: str, tests_path: str | None = None) -> list[d
         return DEFAULT_TEST_CASES
     with open(path, encoding="utf-8") as f:
         cases = json.load(f)
-    return [{"args": c.get("args", []), "stdin": c.get("stdin", "")} for c in cases]
+    return [{"args": c.get("args", []), "stdin": c.get("stdin", ""),
+             "trigger": bool(c.get("trigger", False))} for c in cases]
 
 
 def _build_executable(src: str, exe: str, extra_flags: tuple = ()) -> tuple[bool, str]:
@@ -320,22 +327,24 @@ def _build_executable(src: str, exe: str, extra_flags: tuple = ()) -> tuple[bool
         return False, "Timeout durante la compilazione"
 
 
-def _run_case(exe_dir: str, case: dict,
-              env: dict | None = None) -> tuple[int | str, bytes, bytes]:
+def _run_case(exe_dir: str, case: dict, env: dict | None = None,
+              unbuffered: bool = False) -> tuple[int | str, bytes, bytes]:
     """
     Esegue <exe_dir>/prog sul caso di test. Ritorna (exit code, stdout, stderr);
     l'exit code è "timeout" se il programma non termina in RUN_TIMEOUT secondi.
     argv[0] è uguale per originale e decompilato, così l'output è confrontabile.
+    Con unbuffered=True il programma gira sotto `stdbuf -o0`.
     """
+    prefix = [STDBUF, "-o0"] if unbuffered and STDBUF else []
     if BWRAP:
         cmd = [
             BWRAP, "--ro-bind", "/", "/", "--dev", "/dev", "--proc", "/proc",
             "--tmpfs", "/tmp", "--ro-bind", os.path.join(exe_dir, "prog"), "/tmp/prog",
             "--unshare-all", "--die-with-parent", "--chdir", "/tmp",
-            "./prog", *case["args"],
+            *prefix, "./prog", *case["args"],
         ]
     else:
-        cmd = ["./prog", *case["args"]]
+        cmd = [*prefix, "./prog", *case["args"]]
     try:
         result = subprocess.run(
             cmd, cwd=exe_dir, input=case["stdin"].encode(),
@@ -373,6 +382,10 @@ def functional_test(original_path: str, decompiled_path: str, cases: list[dict])
         "error": None,
         "build_stderr": None,
         "failures": [],
+        "per_case": [],          # True/False per caso, nello stesso ordine
+        "trigger": [c.get("trigger", False) for c in cases],
+        "pass_rate_innocui": None,
+        "pass_rate_attivazione": None,
     }
 
     with tempfile.TemporaryDirectory() as tmp:
@@ -393,12 +406,14 @@ def functional_test(original_path: str, decompiled_path: str, cases: list[dict])
             result["build_stderr"] = err[:4000]
             result["pass_rate"] = 0.0
             result["match"] = False
+            result["per_case"] = [False] * len(cases)
+            _group_rates(result)
             return result
         result["decompiled_built"] = True
 
         for case in cases:
-            exp_rc, exp_out, _ = _run_case(orig_dir, case)
-            got_rc, got_out, _ = _run_case(dec_dir, case)
+            exp_rc, exp_out, _ = _run_case(orig_dir, case, unbuffered=True)
+            got_rc, got_out, _ = _run_case(dec_dir, case, unbuffered=True)
             reasons = []
             if exp_rc != got_rc:
                 reasons.append(f"exit {exp_rc} vs {got_rc}")
@@ -408,11 +423,20 @@ def functional_test(original_path: str, decompiled_path: str, cases: list[dict])
                 result["failures"].append({"args": case["args"], "reason": ", ".join(reasons)})
             else:
                 result["passed"] += 1
+            result["per_case"].append(not reasons)
 
     total = result["total"]
     result["pass_rate"] = result["passed"] / total * 100.0 if total else 0.0
     result["match"] = result["passed"] == total
+    _group_rates(result)
     return result
+
+
+def _group_rates(result: dict) -> None:
+    """% di casi superati separatamente tra innocui e di attivazione (None se il gruppo è vuoto)."""
+    for key, want in (("pass_rate_innocui", False), ("pass_rate_attivazione", True)):
+        esiti = [ok for ok, trig in zip(result["per_case"], result["trigger"]) if trig == want]
+        result[key] = sum(esiti) / len(esiti) * 100.0 if esiti else None
 
 
 # ---------------------------------------------------------------------------
@@ -448,7 +472,8 @@ def asan_test(original_path: str, decompiled_path: str, cases: list[dict]) -> di
     if not asan_available():
         return None
 
-    result = {"orig": [], "dec": [], "match": None, "error": None}
+    result = {"orig": [], "dec": [], "match": None, "error": None,
+              "trigger": [c.get("trigger", False) for c in cases]}
     env = dict(os.environ, **ASAN_ENV)
 
     with tempfile.TemporaryDirectory() as tmp:

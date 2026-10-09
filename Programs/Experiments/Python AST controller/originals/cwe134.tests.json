@@ -1,6 +1,6 @@
 [
   {"args": []},
   {"args": ["avvio completato"]},
-  {"args": ["100%% sicuro"]},
-  {"args": ["%%%%"]}
+  {"args": ["100%% sicuro"], "trigger": true},
+  {"args": ["%%%%"], "trigger": true}
 ]

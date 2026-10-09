@@ -44,11 +44,15 @@ CSV_COLUMNS = [
     "re_executability",
     "functional_match",      # 1 se stdout+exit code coincidono su tutti i casi di test
     "functional_pass_rate",  # % di casi di test superati
+    "pass_innocui",          # % superati tra i casi innocui (vuoto se non ce ne sono)
+    "pass_attivazione",      # % superati tra i casi che attivano la vulnerabilità
     "compile_error_type",    # categoria più frequente tra gli errori gcc/ld
     "compile_error_count",   # numero di errori gcc/ld
     "asan_orig",             # errori ASan dell'originale (es. stack-buffer-overflow, none)
     "asan_dec",              # errori ASan del decompilato
     "asan_match",            # 1 se stessi errori ASan caso per caso (vuoto = N/A)
+    "vuln_conservata",       # 1 se la vulnerabilità è conservata sui casi di attivazione (vuoto = non valutabile)
+    "errore_aggiunto",       # 1 se la ricostruzione ha un errore ASan su un caso innocuo che l'originale non ha
     "loc_orig",              # righe di codice (senza commenti/righe vuote)
     "loc_dec",
     "funcs_orig",            # numero di funzioni definite
@@ -211,6 +215,8 @@ def extract_row(func: str, model: str, level: str, variante: str, data: dict) ->
     match = fun.get("match")
     row["functional_match"] = "" if match is None else int(match)
     row["functional_pass_rate"] = _fmt(fun.get("pass_rate"))
+    row["pass_innocui"] = _fmt(fun.get("pass_rate_innocui"))
+    row["pass_attivazione"] = _fmt(fun.get("pass_rate_attivazione"))
 
     # Errori di build per categoria
     cats = rex.get("error_categories") or {}
@@ -223,6 +229,8 @@ def extract_row(func: str, model: str, level: str, variante: str, data: dict) ->
         row["asan_orig"]  = _asan_types(asan["orig"])
         row["asan_dec"]   = _asan_types(asan["dec"])
         row["asan_match"] = int(asan["match"])
+        if rex.get("success"):
+            row["vuln_conservata"], row["errore_aggiunto"] = vulnerabilita(asan, fun)
 
     # Dimensione
     size = data.get("size", {})
@@ -253,6 +261,30 @@ def extract_row(func: str, model: str, level: str, variante: str, data: dict) ->
     row["parse_error"] = 1 if data.get("ast_error") else 0
 
     return row
+
+
+def vulnerabilita(asan: dict, fun: dict) -> tuple[int | str, int]:
+    """
+    (vuln_conservata, errore_aggiunto) dai risultati caso per caso.
+    - Se l'originale ha un errore ASan su qualche caso, la vulnerabilità è
+      conservata quando gli esiti ASan coincidono su tutti i casi di attivazione.
+    - Altrimenti (es. cwe134, invisibile ad ASan) è conservata quando la
+      ricostruzione supera il test funzionale su tutti i casi di attivazione.
+    Senza casi marcati "trigger" si usano tutti i casi.
+    errore_aggiunto = 1 se su un caso innocuo la ricostruzione ha un errore
+    ASan che l'originale non ha: la vulnerabilità può essere conservata lo stesso.
+    """
+    orig, dec = asan["orig"], asan["dec"]
+    trig = asan.get("trigger") or [False] * len(orig)
+    idx = [i for i, t in enumerate(trig) if t] or list(range(len(orig)))
+    if any(orig):
+        conservata: int | str = int(all(orig[i] == dec[i] for i in idx))
+    else:
+        per_case = fun.get("per_case") or []
+        conservata = int(all(per_case[i] for i in idx)) if len(per_case) == len(orig) else ""
+    aggiunto = int(any(not t and o is None and d is not None
+                       for t, o, d in zip(trig, orig, dec)))
+    return conservata, aggiunto
 
 
 def read_sandbox_violations(decompiled: Path) -> int | str:

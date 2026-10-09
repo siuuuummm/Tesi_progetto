@@ -1,7 +1,7 @@
 [
   {"args": ["anna"]},
   {"args": ["quindici_caratt"]},
-  {"args": ["sedici_caratteri"]},
+  {"args": ["sedici_caratteri"], "trigger": true},
   {"args": ["diciassette_carat"]},
-  {"args": ["anna", "sedici_caratteri", "luca"]}
+  {"args": ["anna", "sedici_caratteri", "luca"], "trigger": true}
 ]
