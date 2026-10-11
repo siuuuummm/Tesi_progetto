@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+
+typedef struct {
+    uint8_t data[16];
+} Result;
+
+Result program_main(int argc, char **argv, uint64_t param_3, uint64_t param_4) {
+    Result res;
+    memset(res.data, 0, 16);
+
+    if (argc < 3) {
+        res.data[0] = 1;
+        memcpy(&res.data[8], &param_3, 8);
+        return res;
+    }
+
+    setvbuf(stdout, NULL, 2, 0);
+
+    char *dest = (char *)calloc(0x20, 1);
+    if (dest == NULL) {
+        return res;
+    }
+
+    if (argc > 1) {
+        strncpy(dest, argv[1], 0x17);
+    }
+
+    dest[0x1c] = (uint8_t)-0x18;
+    dest[0x1d] = 0x03;
+    dest[0x1e] = 0x00;
+    dest[0x1f] = 0x00;
+
+    printf("Sessione %d aperta per %s\n", 1000, dest);
+
+    int iVar2 = 0;
+    if (argc > 2) {
+        iVar2 = strcmp(argv[2], "logout");
+    }
+
+    if (iVar2 == 0) {
+        free(dest);
+        puts("Logout eseguito");
+    }
+
+    if (argc != 3) {
+        if (argc > 3) {
+            strtol(argv[3], NULL, 10);
+        }
+    }
+
+    if (*(int *)(dest + 0x18) == 0) {
+        printf("Accesso utente per %s\n", dest);
+    } else {
+        printf("Accesso amministratore per %s\n", dest);
+    }
+
+    if (iVar2 != 0) {
+        free(dest);
+    }
+
+    res.data[8] = 0;
+    res.data[0] = (uint8_t)param_4;
+
+    return res;
+}
+
+int main(int argc, char **argv) {
+    program_main(argc, argv, 0, 0);
+    return 0;
+}

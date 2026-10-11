@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+
+// 128-bit integer type to faithfully represent the 16-byte return values observed in the binary.
+typedef __int128 int128;
+
+/**
+ * Reconstructed from FUN_004003f0.
+ * This function represents the core logic of the program.
+ *
+ * @param argc The number of command-line arguments.
+ * @param argv The array of command-line argument strings.
+ * @param envp The environment variable array.
+ * @param param_4 A 64-bit parameter passed during execution.
+ * @return A 128-bit integer as observed in the decompiled code.
+ */
+int128 session_logic(int argc, char **argv, char **envp, uint64_t param_4) {
+    int128 res;
+
+    // If there are fewer than 3 arguments, return a 128-bit value
+    // where the low 8 bytes are 1 and the high 8 bytes are the envp pointer.
+    if (argc < 3) {
+        union {
+            int128 val;
+            struct {
+                uint64_t low;
+                uint64_t high;
+            } parts;
+        } u;
+        u.parts.low = 1;
+        u.parts.high = (uint64_t)envp;
+        return u.val;
+    }
+
+    // setvbuf(stdout, NULL, 2, 0) -> 2 is _IOFBF (full buffering)
+    setvbuf(stdout, NULL, 2, 0);
+
+    // Allocate 32 bytes (0x20)
+    char *session_name = (char *)calloc(0x20, 1);
+    if (session_name == NULL) {
+        return 0;
+    }
+
+    // Copy argv[1] into session_name with a maximum of 23 (0x17) characters.
+    strncpy(session_name, argv[1], 0x17);
+
+    // Manually set specific bytes at the end of the buffer.
+    session_name[0x1c] = (uint8_t)-0x18;
+    session_name[0x1d] = 0x03;
+    session_name[0x1e] = 0x00;
+    session_name[0x1f] = 0x00;
+
+    printf("Sessione %d aperta per %s\n", 1000, session_name);
+
+    // Compare argv[2] with "logout"
+    int is_logout = strcmp(argv[2], "logout");
+    if (is_logout == 0) {
+        free(session_name);
+        puts("Logout eseguito");
+    }
+
+    // If argc is not 3, try to parse the string at argv[3] as a long.
+    if (argc != 3) {
+        strtol(argv[3], NULL, 10);
+    }
+
+    // Check the value at offset 0x18 (24) in the session_name buffer.
+    // This checks if the 4-byte integer starting at offset 24 is 0.
+    if (*(int32_t *)(session_name + 0x18) == 0) {
+        printf("Accesso utente per %s\n", session_name);
+    } else {
+        printf("Accesso amministratore per %s\n", session_name);
+    }
+
+    // If it wasn't a logout, free the allocated memory.
+    if (is_logout != 0) {
+        free(session_name);
+    }
+
+    // The return value is calculated by taking a 128-bit value
+    // where low=param_4 and high=0, and then shifting it left by 64 bits.
+    // This results in a 128-bit value where high=param_4 and low=0.
+    union {
+        int128 val;
+        struct {
+            uint64_t low;
+            uint64_t high;
+        } parts;
+    } u;
+    u.parts.low = param_4;
+    u.parts.high = 0;
+    u.val = u.val << 64;
+    return u.val;
+}
+
+int main(int argc, char **argv) {
+    // Reconstructing the entry point calls the session_logic.
+    // Since param_4 and envp are not provided by the standard main, 
+    // we use 0 and NULL respectively.
+    int128 result = session_logic(argc, argv, NULL, 0);
+    
+    // Return the lower 32 bits of the 128-bit result as a standard int.
+    return (int)result;
+}

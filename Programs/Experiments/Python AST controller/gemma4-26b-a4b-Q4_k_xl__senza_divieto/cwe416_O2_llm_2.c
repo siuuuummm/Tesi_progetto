@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+
+typedef __uint128_t uint128_t;
+
+/**
+ * session_manager - Reconstructed from FUN_004003f0
+ * 
+ * This function manages user sessions based on command line arguments.
+ * It handles session opening, user/admin access differentiation, and logout.
+ * 
+ * @param argc Number of command line arguments
+ * @param argv Array of command line arguments
+ * @param param_3 Extra parameter passed by the startup code
+ * @param param_4 Extra parameter passed by the startup code
+ * 
+ * @return A 128-bit value as observed in the binary.
+ */
+uint128_t session_manager(int argc, char **argv, uint64_t param_3, uint64_t param_4) {
+    if (argc < 3) {
+        union {
+            uint128_t val;
+            struct {
+                uint64_t low;
+                uint64_t high;
+            } parts;
+        } res;
+        res.parts.low = 1;
+        res.parts.high = param_3;
+        return res.val;
+    }
+
+    // setvbuf(stdout, NULL, _IONBF, 0);
+    setvbuf(stdout, NULL, 2, 0);
+
+    char *dest = (char *)calloc(0x20, 1);
+    if (dest == NULL) {
+        return 0;
+    }
+
+    // strncpy(__dest, argv[1], 0x17);
+    strncpy(dest, argv[1], 0x17);
+
+    dest[0x1c] = (char)-0x18;
+    dest[0x1d] = 0x03;
+    dest[0x1e] = 0x00;
+    dest[0x1f] = 0x00;
+
+    printf("Sessione %d aperta per %s\n", 1000, dest);
+
+    int is_logout = strcmp(argv[2], "logout");
+
+    if (is_logout == 0) {
+        free(dest);
+        puts("Logout eseguito");
+    }
+
+    if (argc != 3) {
+        // __isoc23_strtol(*(undefined8 *)(param_2 + 0x18), 0, 10);
+        strtol(argv[3], NULL, 10);
+    }
+
+    if (*(int *)(dest + 0x18) == 0) {
+        printf("Accesso utente per %s\n", dest);
+    } else {
+        printf("Accesso amministratore per %s\n", dest);
+    }
+
+    if (is_logout != 0) {
+        free(dest);
+    }
+
+    union {
+        uint128_t val;
+        struct {
+            uint64_t low;
+            uint64_t high;
+        } parts;
+    } res;
+    res.parts.low = 0;
+    res.parts.high = param_4;
+    // return auVar1 << 0x40;
+    return res.val << 64;
+}
+
+int main(int argc, char **argv) {
+    // Standard main wrapper to call the reconstructed session_manager logic.
+    // The extra parameters are passed as 0 as they are internal to the binary.
+    session_manager(argc, argv, 0, 0);
+    return 0;
+}
