@@ -1,0 +1,22 @@
+{
+  "esito": "ok",
+  "source": "cwe416.c",
+  "model": "Qwen3.8-27b",
+  "prompt_variant": "standard",
+  "level": "O1",
+  "run": 1,
+  "timestamp": "2026-10-11T12:23:40",
+  "duration_s": 681,
+  "nudges": 0,
+  "goose_session": "re_task_fixuf8ai",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/var/home/pippo/Desktop/Universita/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe416/goose_Qwen3.8-27b_O1_run1.log",
+  "temperature": null,
+  "goose_extensions": [
+    "developer",
+    "ghidra-mcp"
+  ],
+  "sandbox_violations": [
+    "command: cd /tmp/re_task_fixuf8ai && objdump -d -M intel test_O1 2>/dev/null | sed -n '/<.text>/,/<.data>/p' | head -300"
+  ]
+}
