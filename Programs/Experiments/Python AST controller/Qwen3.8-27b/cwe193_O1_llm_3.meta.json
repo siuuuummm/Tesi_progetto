@@ -1,0 +1,22 @@
+{
+  "esito": "ok",
+  "source": "cwe193.c",
+  "model": "Qwen3.8-27b",
+  "prompt_variant": "standard",
+  "level": "O1",
+  "run": 3,
+  "timestamp": "2026-10-12T13:57:37",
+  "duration_s": 179,
+  "nudges": 0,
+  "goose_session": "re_task_06_aak91",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe193/goose_Qwen3.8-27b_O1_run3.log",
+  "temperature": null,
+  "goose_extensions": [
+    "developer",
+    "ghidra-mcp"
+  ],
+  "sandbox_violations": [
+    "command: cd /tmp/re_task_06_aak91 && objdump -s -j .init_array -s -j .fini_array test_O1; objdump -d test_O1 | sed -n '/<.init>:/,/^$/p;/<.fini>:/,/^$/p'"
+  ]
+}

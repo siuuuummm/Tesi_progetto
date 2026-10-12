@@ -1,0 +1,20 @@
+{
+  "esito": "ok",
+  "source": "cwe416.c",
+  "model": "Qwen3.8-27b",
+  "prompt_variant": "standard",
+  "level": "O2",
+  "run": 3,
+  "timestamp": "2026-10-12T13:21:59",
+  "duration_s": 119,
+  "nudges": 0,
+  "goose_session": "re_task_8npfcgaz",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe416/goose_Qwen3.8-27b_O2_run3.log",
+  "temperature": null,
+  "goose_extensions": [
+    "developer",
+    "ghidra-mcp"
+  ],
+  "sandbox_violations": []
+}
