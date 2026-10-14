@@ -1,0 +1,20 @@
+{
+  "esito": "ok",
+  "source": "cwe119.c",
+  "model": "gemma4-26b-a4b-Q4_k_xl",
+  "prompt_variant": "standard",
+  "level": "O1",
+  "run": 2,
+  "timestamp": "2026-10-14T11:20:50",
+  "duration_s": 116,
+  "nudges": 0,
+  "goose_session": "re_task_482y4ksa",
+  "prompt_sha256": "0f327dfcc92e",
+  "goose_log": "/home/fotoppo/Tesi/Programs/Experiments/Secfocus/Eseguibili/cwe119/goose_gemma4-26b-a4b-Q4_k_xl_O1_run2.log",
+  "temperature": null,
+  "goose_extensions": [
+    "developer",
+    "ghidra-mcp"
+  ],
+  "sandbox_violations": []
+}
