@@ -228,6 +228,8 @@ cwe193,Qwen3.8-27b,O2,cwe193_O2_llm_3,ok,1,1,100.00,100.00,100.00,,0,heap-buffer
 cwe193,Qwen3.8-27b,O3,cwe193_O3_llm,ok,1,1,100.00,100.00,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,1,0,25,35,2,2,18.12,76.03,74.81,98.70,13,12,-1,1,10,9,10,0,0,1
 cwe193,Qwen3.8-27b,O3,cwe193_O3_llm_2,ok,1,1,100.00,100.00,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,1,0,25,30,2,1,22.55,71.53,56.92,98.50,13,15,2,0,15,5,2,0,0,0
 cwe193,Qwen3.8-27b,O3,cwe193_O3_llm_3,ok,1,1,100.00,100.00,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,1,0,25,34,2,1,18.18,63.69,53.48,98.45,13,15,2,2,17,14,11,-2,0,0
+cwe193,Qwen3.8-27b__senza_divieto,O0,cwe193_O0_llm,ok,1,1,100.00,100.00,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,1,0,25,37,2,2,21.70,70.25,71.17,99.38,13,12,-1,-1,19,12,11,1,0,1
+cwe193,Qwen3.8-27b__senza_divieto,O1,cwe193_O1_llm,ok,1,1,100.00,100.00,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,1,0,25,36,2,2,24.95,58.60,65.23,99.27,13,14,1,0,43,17,9,1,0,0
 cwe193,gemma4-26b-a4b-Q4_k_xl,O0,cwe193_O0_llm_2,ok,1,1,100.00,100.00,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,1,0,25,34,2,2,29.09,70.25,71.17,99.38,13,12,-1,-1,19,12,11,1,0,0
 cwe193,gemma4-26b-a4b-Q4_k_xl,O0,cwe193_O0_llm,ok,1,1,100.00,100.00,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,1,0,25,33,2,2,32.94,78.32,77.22,99.07,13,12,-1,-1,11,8,8,1,0,0
 cwe193,gemma4-26b-a4b-Q4_k_xl,O0,cwe193_O0_llm_3,ok,1,1,100.00,100.00,100.00,,0,heap-buffer-overflow;none,heap-buffer-overflow;none,1,1,0,25,35,2,2,44.19,73.20,73.98,99.09,13,12,-1,0,15,10,10,2,0,0
