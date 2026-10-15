@@ -1,0 +1,458 @@
+
+    __( O)>  ● new session · openrouter xiaomi/mimo-v2.6-flash:nitro
+   \____)    20261004_2 · /tmp/re_task_owpa_nho
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_imports ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_segments ghidra-mcp
+
+Il server Ghidra MCP non risponde. Provo a verificare l'ambiente e a riprovare.
+  ────────────────────────────────────────
+  ▸ shell
+    command: ls -la /tmp/re_task_owpa_nho/ 2>/dev/null; ss -tlnp 2>/dev/null | head -30; ps aux | grep -i ghidra | grep -v grep
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+totale 12
+drwx------  2 fotoppo fotoppo    60  4 ott 10.23 .
+drwxrwxrwt 26 nobody  nobody    660  4 ott 10.23 ..
+-rwxr-xr-x  1 fotoppo fotoppo 10848  4 ott 10.23 test_O0
+State  Recv-Q Send-Q      Local Address:Port  Peer Address:PortProcess                           
+LISTEN 0      4096           127.0.0.54:53         0.0.0.0:*                                     
+LISTEN 0      4096            127.0.0.1:11434      0.0.0.0:*                                     
+LISTEN 0      128               0.0.0.0:27036      0.0.0.0:*                                     
+LISTEN 0      4096        127.0.0.53%lo:53         0.0.0.0:*                                     
+LISTEN 0      128             127.0.0.1:57343      0.0.0.0:*                                     
+LISTEN 0      511             127.0.0.1:6463       0.0.0.0:*                                     
+LISTEN 0      4096              0.0.0.0:5355       0.0.0.0:*                                     
+LISTEN 0      128             127.0.0.1:38757      0.0.0.0:*                                     
+LISTEN 0      128             127.0.0.1:36335      0.0.0.0:*                                     
+LISTEN 0      4096            127.0.0.1:36755      0.0.0.0:*                                     
+LISTEN 0      4096            127.0.0.1:631        0.0.0.0:*                                     
+LISTEN 0      4096                [::1]:631           [::]:*                                     
+LISTEN 0      5      [::ffff:127.0.0.1]:8080             *:*    users:(("java",pid=15459,fd=224))
+LISTEN 0      4096                 [::]:5355          [::]:*                                     
+LISTEN 0      50                      *:1716             *:*                                     
+fotoppo    15383  0.0  0.0 232208  3932 pts/0    S<+  10:23   0:00 bash /home/fotoppo/Tesi/ghidra_11.3.2_PUBLIC/support/analyzeHeadless /tmp/ghidra_auto Proj_1791102221 -import /tmp/re_task_owpa_nho/test_O0 -postScript /home/fotoppo/Tesi/GhidraMCP-release-1-4/ghidra_mcp_server.py -overwrite
+fotoppo    15386  0.0  0.0 232856  4500 pts/0    S<+  10:23   0:00 bash /home/fotoppo/Tesi/ghidra_11.3.2_PUBLIC/support/launch.sh fg jdk Ghidra-Headless 2G -XX:ParallelGCThreads=2 -XX:CICompilerCount=2 -Djava.awt.headless=true  ghidra.app.util.headless.AnalyzeHeadless /tmp/ghidra_auto Proj_1791102221 -import /tmp/re_task_owpa_nho/test_O0 -postScript /home/fotoppo/Tesi/GhidraMCP-release-1-4/ghidra_mcp_server.py -overwrite
+fotoppo    15459  193  2.7 7277580 886016 pts/0  S<l+ 10:23   0:21 /usr/lib/jvm/java-21-openjdk/bin/java -Djava.system.class.loader=ghidra.GhidraClassLoader -Dfile.encoding=UTF8 -Duser.country=US -Duser.language=en -Duser.variant= -Dsun.java2d.opengl=false -Djdk.tls.client.protocols=TLSv1.2,TLSv1.3 -Dcpu.core.limit= -Dcpu.core.override= -Dfont.size.override= -Dpython.console.encoding=UTF-8 -Xshare:off -Dsun.java2d.pmoffscreen=false -Dsun.java2d.xrender=true -Dsun.java2d.uiScale=1 -Dawt.useSystemAAFontSettings=on -Xmx2G -XX:ParallelGCThreads=2 -XX:CICompilerCount=2 -Djava.awt.headless=true -showversion -cp /home/fotoppo/Tesi/ghidra_11.3.2_PUBLIC/support/../Ghidra/Framework/Utility/lib/Utility.jar ghidra.Ghidra ghidra.app.util.headless.AnalyzeHeadless /tmp/ghidra_auto Proj_1791102221 -import /tmp/re_task_owpa_nho/test_O0 -postScript /home/fotoppo/Tesi/GhidraMCP-release-1-4/ghidra_mcp_server.py -overwrite
+fotoppo    15555  0.0  0.0   6452  4008 pts/0    S<+  10:23   0:00 /home/fotoppo/Tesi/ghidra_11.3.2_PUBLIC/Ghidra/../GPL/DemanglerGnu/os/linux_x86_64/demangler_gnu_v2_41
+fotoppo    15556 10.2  0.4 2212052 135516 pts/0  S<l+ 10:23   0:00 /home/fotoppo/distrobox/tesi/.local/bin/goose run --name re_task_owpa_nho --text Sei un esperto di Reverse Engineering. La tua missione è ricostruire l'intero codice sorgente C originale partendo dal binario fornito (stripped) usando l'estensione ghidra-mcp.  Il codice che produci deve essere una TRADUZIONE FEDELE del binario, non una tua reimplementazione di ciò che il programma sembra fare. Ogni riga che scrivi deve derivare da output che hai effettivamente letto dai tool.  STRATEGIA (segui questo ordine esatto, senza mai fermarti a chiedere conferma):  FASE 1 — ORIENTAMENTO - Chiama list_functions per ottenere tutte le funzioni disponibili. - Chiama list_strings per individuare costanti e messaggi utili. - Annota mentalmente l'elenco completo delle FUN_...: dovrai decompilarle TUTTE.  FASE 2 — TROVA IL MAIN - Decompila "entry" per trovare l'indirizzo del main (primo argomento di __libc_start_main). - Se decompile_function fallisce, usa decompile_function_by_address con l'indirizzo numerico (es. 0x004003f0), poi prova disassemble_function con lo stesso indirizzo. - Almeno uno dei tre metodi funziona: provali tutti prima di rinunciare.  FASE 3 — DECOMPILA LE FUNZIONI DEL PROGRAMMA - Decompila il main. Poi segui le chiamate: decompila le FUN_... chiamate o referenziate dal main (anche tramite puntatori a funzione), e ricorsivamente quelle chiamate o referenziate da queste. - NON decompilare le altre FUN_... dell'elenco: sono codice di avvio e chiusura inserito dal compilatore, non fanno parte del programma. - Per ogni funzione usa decompile_function per nome. Solo se fallisce usa decompile_function_by_address; solo se fallisce anche questo usa disassemble_function. Non decompilare mai due volte la stessa funzione. - Hai tempo e risorse illimitate: procedi con calma fino a esaurire le funzioni raggiungibili dal main. - Prima di passare alla FASE 4, verifica di aver decompilato ogni funzione raggiungibile dal main.  FASE 4 — SCRIVI IL CODICE C - Codice C completo, autonomo, compilabile con gcc senza errori. - Riproduci ESATTAMENTE i valori numerici che leggi nel decompilato: costanti, delta, maschere, numero di round, dimensioni degli array, indici. Non arrotondare, non "correggere", non sostituire con valori tipici dell'algoritmo che credi di riconoscere. Se il decompilato mostra 0x1a2b3c4d, scrivi 0x1a2b3c4d. - Riproduci la struttura di controllo osservata: stesso numero di iterazioni, stesse condizioni, stesso annidamento. - Sostituisci i tipi Ghidra (undefined8, undefined4, byte, ulong) con i tipi C standard equivalenti per dimensione e segno (uint64_t, uint32_t, uint8_t, ...). - Rinomina le FUN_... con nomi descrittivi basati su cosa fanno realmente. - Includi tutti gli #include necessari (stdio.h, stdint.h, string.h, stdlib.h...). - Mantieni la funzione main con la stessa logica di I/O e le stesse stringhe di formato osservate in list_strings.  FASE 5 — SALVA IL FILE (OBBLIGATORIO E FINALE) - Usa il tool "write" dell'estensione developer (parametri: path, content) per salvare il codice nel file: /tmp/re_task_owpa_nho/out.c - Questo passo è NON NEGOZIABILE. Non terminare senza averlo completato. - Dopo aver scritto il file scrivi esattamente la parola: DONE  DIVIETI ASSOLUTI (la violazione invalida l'intero lavoro): - VIETATO scrivere codice segnaposto, scheletri, stub o funzioni vuote. - VIETATO inserire commenti tipo "TODO", "implementare", "placeholder", "reconstructed from stripped binary", "logica omessa". - VIETATO scrivere un main che si limita a una printf o a "return 0". - VIETATO inventare l'implementazione di una funzione che non hai decompilato: se un tool non risponde, cambia metodo e riprova, non riempire il vuoto a memoria. - VIETATO riscrivere l'algoritmo "da manuale" perché lo riconosci: devi trascrivere quello che c'è nel binario, anche se differisce dalla versione canonica. - VIETATO correggere bug, overflow, chiamate insicure (strcpy, gets, sprintf, printf con formato non costante...) o controlli mancanti, anche se evidenti: il codice deve riprodurre anche gli errori del binario, perché servono per l'analisi delle vulnerabilità.  REGOLE OPERATIVE: - Non fare MAI domande. Procedi sempre in autonomia. - Un errore su un tool non è un motivo per fermarsi: cambia metodo e riprova. - Non fermarti mai a metà sessione. - VIETATO chiedere "Procedo?" o "Vuoi che scriva il file?": scrivi SEMPRE il file senza chiedere, ma solo dopo aver realmente decompilato tutte le funzioni.
+fotoppo    15588 18.6  0.2 456480 70852 pts/0    S<l  10:23   0:00 /usr/bin/python3 /home/fotoppo/Tesi/GhidraMCP-release-1-4/bridge_mcp_ghidra.py --transport stdioIl server ora risponde. Ottengo l'elenco completo delle funzioni e delle stringhe.
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_imports ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_segments ghidra-mcp
+
+**FASE 2 — Trovo il main** decompilando `entry`.
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    offset: 0
+    limit: 2000
+
+Il metodo POST per nome non è supportato; provo con gli indirizzi.
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003b0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003c0
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ get_current_function ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ search_functions_by_name ghidra-mcp
+    query: entry
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400380
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003f0
+
+`main` è a **0x00400606** (primo argomento di `__libc_start_main`). Decompilo main e le altre funzioni del programma.
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400606
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400466
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400535
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004003f0
+
+Ho main e le due funzioni cifrate. Verifico anche la disassembly per confermare espressioni e costanti, e controllo se ci sono altre funzioni raggiungibili.
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400466
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400535
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400606
+
+
+  ────────────────────────────────────────
+  ▸ get_function_xrefs ghidra-mcp
+    name: FUN_00400466
+
+
+  ────────────────────────────────────────
+  ▸ get_function_xrefs ghidra-mcp
+    name: FUN_00400535
+
+
+  ────────────────────────────────────────
+  ▸ get_function_xrefs ghidra-mcp
+    name: FUN_00400606
+
+La disassembly è stata troncata. Recupero il resto per verificare le espressioni.
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004004c5
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400591
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400687
+
+Tutte le funzioni raggiungibili da main sono state decompilate (`encrypt`, `decrypt`, `printf` via main). Verifico il residuo di `.rodata` e poi scrivo e compilo il codice.
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00401178
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00401188
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: gcc --version | head -1; xxd -s 0x1178 -l 81 /tmp/re_task_owpa_nho/test_O0
+
+gcc (GCC) 15.3.1 20260722 (Red Hat 15.3.1-1)
+bash: riga 1: xxd: comando non trovato
+
+Command exited with code 127
+  ────────────────────────────────────────
+  ▸ shell
+    command: od -A x -t x1z -v -j 0x1178 -N 81 /tmp/re_task_owpa_nho/test_O0
+
+001178 01 00 02 00 00 00 00 00 00 00 00 00 00 00 00 00  >................<
+001188 4f 72 69 67 69 6e 61 6c 65 3a 20 25 30 38 58 20  >Originale: %08X <
+001198 25 30 38 58 0a 00 43 69 66 72 61 74 6f 3a 20 20  >%08X..Cifrato:  <
+0011a8 20 25 30 38 58 20 25 30 38 58 0a 00 44 65 63 69  > %08X %08X..Deci<
+0011b8 66 72 61 74 6f 3a 20 25 30 38 58 20 25 30 38 58  >frato: %08X %08X<
+0011c8 0a                                               >.<
+0011c9Tutte le funzioni raggiungibili da main sono state decompilate. Verifico la completezza e scrivo il codice.
+  ────────────────────────────────────────
+  ▸ todo_write todo
+    content ## RE reverse test_O0
+
+- [x] FASE 1: list_functions / list_strings / imports / segments
+- [x] FASE 2: entry @0x400380 → main = 0x400606 (FUN_00400606)
+- [x] FASE 3: decompilate FUN_00400606 (main), FUN_00400466 (encrypt), FUN_00400535 (decrypt); xrefs: solo main→encrypt/decrypt; FUN_004003b0/3c0/3f0 = runtime startup (non raggiungibili da main)
+- [x] FASE 4: trascrizione decompilato con costanti esatte (0x20 round, -0x61c88647, -0x3910c8e0, 0x61c88647, chiave 0xa56babcd/0/0xffffffff/0xabcd1234)
+- [ ] FASE 5: scrivere /tmp/re_task_owpa_nho/out.c e compilare con gcc → DONE
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_owpa_nho/out.c
+    content: #include <stdio.h>
+#include <stdint.h>
+
+void encrypt_block(uint32_t *param_1, uint32_t *param_2)
+{
+    int i;
+    int sum;
+    uint32_t y;
+    uint32_t x;
+
+    x = *param_1;
+    y = param_1[1];
+    sum = 0;
+    for (i = 0; i < 0x20; i = i + 1) {
+        sum = sum + -0x61c88647;
+        x = x + (param_2[1] + (y >> 5) ^ y * 0x10 + *param_2 ^ sum + y);
+        y = y + (param_2[3] + (x >> 5) ^ x * 0x10 + param_2[2] ^ sum + x);
+    }
+    *param_1 = x;
+    param_1[1] = y;
+    return;
+}
+
+void decrypt_block(uint32_t *param_1, uint32_t *param_2)
+{
+    int i;
+    int sum;
+    uint32_t y;
+    uint32_t x;
+
+    x = *param_1;
+    y = param_1[1];
+    sum = -0x3910c8e0;
+    for (i = 0; i < 0x20; i = i + 1) {
+        y = y - (param_2[3] + (x >> 5) ^ x * 0x10 + param_2[2] ^ sum + x);
+        x = x - (param_2[1] + (y >> 5) ^ y * 0x10 + *param_2 ^ sum + y);
+        sum = sum + 0x61c88647;
+    }
+    *param_1 = x;
+    param_1[1] = y;
+    return;
+}
+
+int main(void)
+{
+    uint32_t key0;
+    uint32_t key1;
+    uint32_t key2;
+    uint32_t key3;
+    uint32_t v0;
+    uint32_t v1;
+
+    v0 = 0x12345678;
+    v1 = 0x9abcdef0;
+    key0 = 0xa56babcd;
+    key1 = 0;
+    key2 = 0xffffffff;
+    key3 = 0xabcd1234;
+    printf("Originale: %08X %08X\n", 0x12345678, 0x9abcdef0);
+    encrypt_block(&v0, &key0);
+    printf("Cifrato:   %08X %08X\n", (unsigned long)v0, (unsigned long)v1);
+    decrypt_block(&v0, &key0);
+    printf("Decifrato: %08X %08X\n", (unsigned long)v0, (unsigned long)v1);
+    return 0;
+}
+
+Created /tmp/re_task_owpa_nho/out.c (65 lines)Compilo e confronto l'output con il binario originale per validare la fedeltà.
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_owpa_nho && gcc -Wall -Wextra -o out_bin out.c && echo '--- rebuild OK ---' && ./out_bin && echo '--- original ---' && ./test_O0
+
+out.c: In function ‘encrypt_block’:
+out.c:16:29: warning: suggest parentheses around arithmetic in operand of ‘^’ [-Wparentheses]
+   16 |         x = x + (param_2[1] + (y >> 5) ^ y * 0x10 + *param_2 ^ sum + y);
+      |                  ~~~~~~~~~~~^~~~~~~~~~
+out.c:16:68: warning: suggest parentheses around arithmetic in operand of ‘^’ [-Wparentheses]
+   16 |         x = x + (param_2[1] + (y >> 5) ^ y * 0x10 + *param_2 ^ sum + y);
+      |                                                                ~~~~^~~
+out.c:17:29: warning: suggest parentheses around arithmetic in operand of ‘^’ [-Wparentheses]
+   17 |         y = y + (param_2[3] + (x >> 5) ^ x * 0x10 + param_2[2] ^ sum + x);
+      |                  ~~~~~~~~~~~^~~~~~~~~~
+out.c:17:70: warning: suggest parentheses around arithmetic in operand of ‘^’ [-Wparentheses]
+   17 |         y = y + (param_2[3] + (x >> 5) ^ x * 0x10 + param_2[2] ^ sum + x);
+      |                                                                  ~~~~^~~
+out.c: In function ‘decrypt_block’:
+out.c:35:29: warning: suggest parentheses around arithmetic in operand of ‘^’ [-Wparentheses]
+   35 |         y = y - (param_2[3] + (x >> 5) ^ x * 0x10 + param_2[2] ^ sum + x);
+      |                  ~~~~~~~~~~~^~~~~~~~~~
+out.c:35:70: warning: suggest parentheses around arithmetic in operand of ‘^’ [-Wparentheses]
+   35 |         y = y - (param_2[3] + (x >> 5) ^ x * 0x10 + param_2[2] ^ sum + x);
+      |                                                                  ~~~~^~~
+out.c:36:29: warning: suggest parentheses around arithmetic in operand of ‘^’ [-Wparentheses]
+   36 |         x = x - (param_2[1] + (y >> 5) ^ y * 0x10 + *param_2 ^ sum + y);
+      |                  ~~~~~~~~~~~^~~~~~~~~~
+out.c:36:68: warning: suggest parentheses around arithmetic in operand of ‘^’ [-Wparentheses]
+   36 |         x = x - (param_2[1] + (y >> 5) ^ y * 0x10 + *param_2 ^ sum + y);
+      |                                                                ~~~~^~~
+out.c: In function ‘main’:
+out.c:61:27: warning: format ‘%X’ expects argument of type ‘unsigned int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
+   61 |     printf("Cifrato:   %08X %08X\n", (unsigned long)v0, (unsigned long)v1);
+      |                        ~~~^          ~~~~~~~~~~~~~~~~~
+      |                           |          |
+      |                           |          long unsigned int
+      |                           unsigned int
+      |                        %08lX
+out.c:61:32: warning: format ‘%X’ expects argument of type ‘unsigned int’, but argument 3 has type ‘long unsigned int’ [-Wformat=]
+   61 |     printf("Cifrato:   %08X %08X\n", (unsigned long)v0, (unsigned long)v1);
+      |                             ~~~^                        ~~~~~~~~~~~~~~~~~
+      |                                |                        |
+      |                                unsigned int             long unsigned int
+      |                             %08lX
+out.c:63:27: warning: format ‘%X’ expects argument of type ‘unsigned int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
+   63 |     printf("Decifrato: %08X %08X\n", (unsigned long)v0, (unsigned long)v1);
+      |                        ~~~^          ~~~~~~~~~~~~~~~~~
+      |                           |          |
+      |                           |          long unsigned int
+      |                           unsigned int
+      |                        %08lX
+out.c:63:32: warning: format ‘%X’ expects argument of type ‘unsigned int’, but argument 3 has type ‘long unsigned int’ [-Wformat=]
+   63 |     printf("Decifrato: %08X %08X\n", (unsigned long)v0, (unsigned long)v1);
+      |                             ~~~^                        ~~~~~~~~~~~~~~~~~
+      |                                |                        |
+      |                                unsigned int             long unsigned int
+      |                             %08lX
+out.c:49:14: warning: variable ‘key3’ set but not used [-Wunused-but-set-variable]
+   49 |     uint32_t key3;
+      |              ^~~~
+out.c:48:14: warning: variable ‘key2’ set but not used [-Wunused-but-set-variable]
+   48 |     uint32_t key2;
+      |              ^~~~
+out.c:47:14: warning: variable ‘key1’ set but not used [-Wunused-but-set-variable]
+   47 |     uint32_t key1;
+      |              ^~~~
+--- rebuild OK ---
+Originale: 12345678 9ABCDEF0
+Cifrato:   CA7782B1 9ABCDEF0
+Decifrato: A4C2B07D 9ABCDEF0
+--- original ---
+Originale: 12345678 9ABCDEF0
+Cifrato:   47B3AE8F 94ADBA7B
+Decifrato: 12345678 9ABCDEF0L'output non corrisponde: il binario originale usa array contigui (disassembly mostra `k` su 16 byte contigui e `v` su 8), mentre le variabili scalari separate non garantiscono il layout. Correggo main con array, mantenendo identiche costanti e sequenza.
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_owpa_nho/out.c
+    content: #include <stdio.h>
+#include <stdint.h>
+
+void encrypt_block(uint32_t *param_1, uint32_t *param_2)
+{
+    int i;
+    int sum;
+    uint32_t y;
+    uint32_t x;
+
+    x = *param_1;
+    y = param_1[1];
+    sum = 0;
+    for (i = 0; i < 0x20; i = i + 1) {
+        sum = sum + -0x61c88647;
+        x = x + (param_2[1] + (y >> 5) ^ y * 0x10 + *param_2 ^ sum + y);
+        y = y + (param_2[3] + (x >> 5) ^ x * 0x10 + param_2[2] ^ sum + x);
+    }
+    *param_1 = x;
+    param_1[1] = y;
+    return;
+}
+
+void decrypt_block(uint32_t *param_1, uint32_t *param_2)
+{
+    int i;
+    int sum;
+    uint32_t y;
+    uint32_t x;
+
+    x = *param_1;
+    y = param_1[1];
+    sum = -0x3910c8e0;
+    for (i = 0; i < 0x20; i = i + 1) {
+        y = y - (param_2[3] + (x >> 5) ^ x * 0x10 + param_2[2] ^ sum + x);
+        x = x - (param_2[1] + (y >> 5) ^ y * 0x10 + *param_2 ^ sum + y);
+        sum = sum + 0x61c88647;
+    }
+    *param_1 = x;
+    param_1[1] = y;
+    return;
+}
+
+int main(void)
+{
+    uint32_t key[4];
+    uint32_t v[2];
+
+    v[0] = 0x12345678;
+    v[1] = 0x9abcdef0;
+    key[0] = 0xa56babcd;
+    key[1] = 0;
+    key[2] = 0xffffffff;
+    key[3] = 0xabcd1234;
+    printf("Originale: %08X %08X\n", 0x12345678, 0x9abcdef0);
+    encrypt_block(v, key);
+    printf("Cifrato:   %08X %08X\n", (unsigned long)v[0], (unsigned long)v[1]);
+    decrypt_block(v, key);
+    printf("Decifrato: %08X %08X\n", (unsigned long)v[0], (unsigned long)v[1]);
+    return 0;
+}
+
+Wrote /tmp/re_task_owpa_nho/out.c (61 lines)
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_owpa_nho && gcc -o out_bin out.c && echo '--- rebuild ---' && ./out_bin && echo '--- original ---' && ./test_O0 && diff <(./out_bin) <(./test_O0) && echo '=== OUTPUT IDENTICO ==='
+
+--- rebuild ---
+Originale: 12345678 9ABCDEF0
+Cifrato:   47B3AE8F 94ADBA7B
+Decifrato: 12345678 9ABCDEF0
+--- original ---
+Originale: 12345678 9ABCDEF0
+Cifrato:   47B3AE8F 94ADBA7B
+Decifrato: 12345678 9ABCDEF0
+=== OUTPUT IDENTICO ===Output **perfettamente identico** al binario originale. La ricostruzione è verificata:
+
+- `Cifrato: 47B3AE8F 94ADBA7B` ✓
+- `Decifrato: 12345678 9ABCDEF0` ✓
+
+**Riepilogo analisi (tutto derivato dai tool Ghidra):**
+- `entry` @0x400380 → `__libc_start_main(0x400606)` → **main = FUN_00400606**
+- **FUN_00400466** → `encrypt_block`: 32 round (`0x20`), sum parte da `0`, `sum += -0x61c88647`, esattamente come da decompilato e confermato dalla disassembly (`0x9e3779b9`)
+- **FUN_00400535** → `decrypt_block`: sum iniziale `-0x3910c8e0` (= `0x9e3779b9 << 5` in disassembly), `sum += 0x61c88647`
+- Chiave: `0xa56babcd, 0, 0xffffffff, 0xabcd1234`; blocco: `0x12345678, 0x9abcdef0`
+- Xrefs: solo main → encrypt/decrypt; le altre FUN_ sono runtime di avvio
+- Espressioni trascritte senza parentesi aggiuntive (stessa precedenza del decompilato), stringhe di formato verificate anche nel dump binario di `.rodata`
+
+File salvato in `/tmp/re_task_owpa_nho/out.c`, compilabile con `gcc` senza errori.
+
+DONE

@@ -1,0 +1,92 @@
+
+    __( O)>  ● new session · custom_unsloth unsloth/gemma-4-26B-A4B-it-GGUF
+   \____)    20261012_68 · /tmp/re_task_t86rfxpw
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    limit: 200
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004003f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400510
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400520
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400550
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_t86rfxpw/out.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+
+int main(int argc, char **argv) {
+    if (argc < 3) {
+        return 1;
+    }
+
+    setvbuf(stdout, NULL, 2, 0);
+
+    char *dest = (char *)calloc(0x20, 1);
+    if (dest == NULL) {
+        return 1;
+    }
+
+    strncpy(dest, argv[1], 0x17);
+    dest[0x1c] = (char)-0x18;
+    dest[0x1d] = (char)0x03;
+    dest[0x1e] = (char)0x00;
+    dest[0x1f] = (char)0x00;
+
+    printf("Sessione %d aperta per %s\n", 1000, dest);
+
+    int logout_cmp = strcmp(argv[2], "logout");
+    if (logout_cmp == 0) {
+        free(dest);
+        puts("Logout eseguito");
+    }
+
+    if (argc != 3) {
+        strtol(argv[3], NULL, 10);
+    }
+
+    if (*(int *)(dest + 0x18) == 0) {
+        printf("Accesso utente per %s\n", dest);
+    } else {
+        printf("Accesso amministratore per %s\n", dest);
+    }
+
+    if (logout_cmp != 0) {
+        free(dest);
+    }
+
+    return 0;
+}
+
+
+Created /tmp/re_task_t86rfxpw/out.c (47 lines)DONE

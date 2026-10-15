@@ -1,0 +1,1540 @@
+
+    __( O)>  ● new session · openrouter xiaomi/mimo-v2.6-flash
+   \____)    20261012_17 · /tmp/re_task_n4onu8on
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400390
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400430
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400460
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004e0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400360
+
+
+  ────────────────────────────────────────
+  ▸ get_function_xrefs ghidra-mcp
+    name: FUN_004004e0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_xrefs ghidra-mcp
+    name: FUN_00400390
+
+
+  ────────────────────────────────────────
+  ▸ get_function_xrefs ghidra-mcp
+    name: FUN_00400430
+
+
+  ────────────────────────────────────────
+  ▸ get_function_xrefs ghidra-mcp
+    name: FUN_00400460
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_segments ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    limit: 50
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400390
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004004e0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: _INIT_0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: _FINI_0
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x004004e0
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_from ghidra-mcp
+    address: 0x00400390
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x004011dc
+
+
+  ────────────────────────────────────────
+  ▸ list_exports ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_imports ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ search_functions_by_name ghidra-mcp
+    query: FUN
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: ls -la /tmp/re_task_n4onu8on/
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400420
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004003e6
+
+
+  ────────────────────────────────────────
+  ▸ list_methods ghidra-mcp
+
+totale 12
+drwx------  2 fotoppo fotoppo    60 12 ott 10.53 .
+drwxrwxrwt 26 nobody  nobody    780 12 ott 10.53 ..
+-rwxr-xr-x  1 fotoppo fotoppo 10856 12 ott 10.53 test_O3
+  ────────────────────────────────────────
+  ▸ shell
+    command: objdump -d /tmp/re_task_n4onu8on/test_O3
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: objdump -s -j .rodata /tmp/re_task_n4onu8on/test_O3; readelf -x .rodata /tmp/re_task_n4onu8on/test_O3 2>/dev/null
+
+
+/tmp/re_task_n4onu8on/test_O3:     formato del file elf64-x86-64
+
+
+Disassemblamento della sezione .init:
+
+000000000040033c <.init>:
+  40033c:	f3 0f 1e fa          	endbr64
+  400340:	48 83 ec 08          	sub    $0x8,%rsp
+  400344:	48 8b 05 95 2c 00 00 	mov    0x2c95(%rip),%rax        # 402fe0 <printf@plt+0x2c60>
+  40034b:	48 85 c0             	test   %rax,%rax
+  40034e:	74 02                	je     400352 <putchar@plt-0x1e>
+  400350:	ff d0                	call   *%rax
+  400352:	48 83 c4 08          	add    $0x8,%rsp
+  400356:	c3                   	ret
+
+Disassemblamento della sezione .plt:
+
+0000000000400360 <putchar@plt-0x10>:
+  400360:	ff 35 8a 2c 00 00    	push   0x2c8a(%rip)        # 402ff0 <printf@plt+0x2c70>
+  400366:	ff 25 8c 2c 00 00    	jmp    *0x2c8c(%rip)        # 402ff8 <printf@plt+0x2c78>
+  40036c:	0f 1f 40 00          	nopl   0x0(%rax)
+
+0000000000400370 <putchar@plt>:
+  400370:	ff 25 8a 2c 00 00    	jmp    *0x2c8a(%rip)        # 403000 <printf@plt+0x2c80>
+  400376:	68 00 00 00 00       	push   $0x0
+  40037b:	e9 e0 ff ff ff       	jmp    400360 <putchar@plt-0x10>
+
+0000000000400380 <printf@plt>:
+  400380:	ff 25 82 2c 00 00    	jmp    *0x2c82(%rip)        # 403008 <printf@plt+0x2c88>
+  400386:	68 01 00 00 00       	push   $0x1
+  40038b:	e9 d0 ff ff ff       	jmp    400360 <putchar@plt-0x10>
+
+Disassemblamento della sezione .text:
+
+0000000000400390 <.text>:
+  400390:	48 83 ec 18          	sub    $0x18,%rsp
+  400394:	83 ff 01             	cmp    $0x1,%edi
+  400397:	7e 32                	jle    4003cb <printf@plt+0x4b>
+  400399:	bf dc 11 40 00       	mov    $0x4011dc,%edi
+  40039e:	31 c0                	xor    %eax,%eax
+  4003a0:	48 89 74 24 08       	mov    %rsi,0x8(%rsp)
+  4003a5:	e8 d6 ff ff ff       	call   400380 <printf@plt>
+  4003aa:	48 8b 74 24 08       	mov    0x8(%rsp),%rsi
+  4003af:	31 c0                	xor    %eax,%eax
+  4003b1:	48 8b 7e 08          	mov    0x8(%rsi),%rdi
+  4003b5:	e8 c6 ff ff ff       	call   400380 <printf@plt>
+  4003ba:	bf 0a 00 00 00       	mov    $0xa,%edi
+  4003bf:	e8 ac ff ff ff       	call   400370 <putchar@plt>
+  4003c4:	31 c0                	xor    %eax,%eax
+  4003c6:	48 83 c4 18          	add    $0x18,%rsp
+  4003ca:	c3                   	ret
+  4003cb:	be c0 11 40 00       	mov    $0x4011c0,%esi
+  4003d0:	bf c7 11 40 00       	mov    $0x4011c7,%edi
+  4003d5:	31 c0                	xor    %eax,%eax
+  4003d7:	e8 a4 ff ff ff       	call   400380 <printf@plt>
+  4003dc:	b8 01 00 00 00       	mov    $0x1,%eax
+  4003e1:	eb e3                	jmp    4003c6 <printf@plt+0x46>
+  4003e3:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  4003ea:	00 00 00 
+  4003ed:	0f 1f 00             	nopl   (%rax)
+  4003f0:	f3 0f 1e fa          	endbr64
+  4003f4:	31 ed                	xor    %ebp,%ebp
+  4003f6:	49 89 d1             	mov    %rdx,%r9
+  4003f9:	5e                   	pop    %rsi
+  4003fa:	48 89 e2             	mov    %rsp,%rdx
+  4003fd:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+  400401:	50                   	push   %rax
+  400402:	54                   	push   %rsp
+  400403:	45 31 c0             	xor    %r8d,%r8d
+  400406:	31 c9                	xor    %ecx,%ecx
+  400408:	48 c7 c7 90 03 40 00 	mov    $0x400390,%rdi
+  40040f:	ff 15 c3 2b 00 00    	call   *0x2bc3(%rip)        # 402fd8 <printf@plt+0x2c58>
+  400415:	f4                   	hlt
+  400416:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  40041d:	00 00 00 
+  400420:	f3 0f 1e fa          	endbr64
+  400424:	c3                   	ret
+  400425:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  40042c:	00 00 00 
+  40042f:	90                   	nop
+  400430:	b8 18 30 40 00       	mov    $0x403018,%eax
+  400435:	48 3d 18 30 40 00    	cmp    $0x403018,%rax
+  40043b:	74 13                	je     400450 <printf@plt+0xd0>
+  40043d:	b8 00 00 00 00       	mov    $0x0,%eax
+  400442:	48 85 c0             	test   %rax,%rax
+  400445:	74 09                	je     400450 <printf@plt+0xd0>
+  400447:	bf 18 30 40 00       	mov    $0x403018,%edi
+  40044c:	ff e0                	jmp    *%rax
+  40044e:	66 90                	xchg   %ax,%ax
+  400450:	c3                   	ret
+  400451:	0f 1f 40 00          	nopl   0x0(%rax)
+  400455:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  40045c:	00 00 00 00 
+  400460:	be 18 30 40 00       	mov    $0x403018,%esi
+  400465:	48 81 ee 18 30 40 00 	sub    $0x403018,%rsi
+  40046c:	48 89 f0             	mov    %rsi,%rax
+  40046f:	48 c1 ee 3f          	shr    $0x3f,%rsi
+  400473:	48 c1 f8 03          	sar    $0x3,%rax
+  400477:	48 01 c6             	add    %rax,%rsi
+  40047a:	48 d1 fe             	sar    $1,%rsi
+  40047d:	74 11                	je     400490 <printf@plt+0x110>
+  40047f:	b8 00 00 00 00       	mov    $0x0,%eax
+  400484:	48 85 c0             	test   %rax,%rax
+  400487:	74 07                	je     400490 <printf@plt+0x110>
+  400489:	bf 18 30 40 00       	mov    $0x403018,%edi
+  40048e:	ff e0                	jmp    *%rax
+  400490:	c3                   	ret
+  400491:	0f 1f 40 00          	nopl   0x0(%rax)
+  400495:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  40049c:	00 00 00 00 
+  4004a0:	f3 0f 1e fa          	endbr64
+  4004a4:	80 3d 69 2b 00 00 00 	cmpb   $0x0,0x2b69(%rip)        # 403014 <printf@plt+0x2c94>
+  4004ab:	75 13                	jne    4004c0 <printf@plt+0x140>
+  4004ad:	55                   	push   %rbp
+  4004ae:	48 89 e5             	mov    %rsp,%rbp
+  4004b1:	e8 7a ff ff ff       	call   400430 <printf@plt+0xb0>
+  4004b6:	c6 05 57 2b 00 00 01 	movb   $0x1,0x2b57(%rip)        # 403014 <printf@plt+0x2c94>
+  4004bd:	5d                   	pop    %rbp
+  4004be:	c3                   	ret
+  4004bf:	90                   	nop
+  4004c0:	c3                   	ret
+  4004c1:	0f 1f 40 00          	nopl   0x0(%rax)
+  4004c5:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  4004cc:	00 00 00 00 
+  4004d0:	f3 0f 1e fa          	endbr64
+  4004d4:	eb 8a                	jmp    400460 <printf@plt+0xe0>
+  4004d6:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  4004dd:	00 00 00 
+  4004e0:	48 83 ec 08          	sub    $0x8,%rsp
+  4004e4:	31 c0                	xor    %eax,%eax
+  4004e6:	e8 95 fe ff ff       	call   400380 <printf@plt>
+  4004eb:	bf 0a 00 00 00       	mov    $0xa,%edi
+  4004f0:	48 83 c4 08          	add    $0x8,%rsp
+  4004f4:	e9 77 fe ff ff       	jmp    400370 <putchar@plt>
+
+Disassemblamento della sezione .fini:
+
+00000000004004fc <.fini>:
+  4004fc:	f3 0f 1e fa          	endbr64
+  400500:	48 83 ec 08          	sub    $0x8,%rsp
+  400504:	48 83 c4 08          	add    $0x8,%rsp
+  400508:	c3                   	ret
+/tmp/re_task_n4onu8on/test_O3:     formato del file elf64-x86-64
+
+Contenuto della sezione .rodata:
+ 4011b0 01000200 00000000 00000000 00000000  ................
+ 4011c0 6c6f6767 65720055 736f3a20 2573203c  logger.Uso: %s <
+ 4011d0 6d657373 61676769 6f3e0a00 5b6c6f67  messaggio>..[log
+ 4011e0 5d2000                               ] .             
+
+Dump esadecimale della sezione ".rodata":
+  0x004011b0 01000200 00000000 00000000 00000000 ................
+  0x004011c0 6c6f6767 65720055 736f3a20 2573203c logger.Uso: %s <
+  0x004011d0 6d657373 61676769 6f3e0a00 5b6c6f67 messaggio>..[log
+  0x004011e0 5d2000                              ] .
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: readelf -h /tmp/re_task_n4onu8on/test_O3 | grep -i entry; readelf -x .init_array /tmp/re_task_n4onu8on/test_O3; readelf -x .fini_array /tmp/re_task_n4onu8on/test_O3; readelf -r /tmp/re_task_n4onu8on/test_O3
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400420
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400390
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: objdump -s -j .comment /tmp/re_task_n4onu8on/test_O3; nm -D /tmp/re_task_n4onu8on/test_O3
+
+
+Dump esadecimale della sezione ".init_array":
+  0x00402de8 d0044000 00000000                   ..@.....
+
+
+Dump esadecimale della sezione ".fini_array":
+  0x00402df0 a0044000 00000000                   ..@.....
+
+
+La sezione di rilocazione '.rela.dyn' at offset 0x1150 contains 2 entries:
+  Offset          Info           Tipo           Valore sim     Nome sim + Addendo
+000000402fd8  000200000006 R_X86_64_GLOB_DAT 0000000000000000 __libc_start_main@GLIBC_2.34 + 0
+000000402fe0  000400000006 R_X86_64_GLOB_DAT 0000000000000000 __gmon_start__ + 0
+
+La sezione di rilocazione '.rela.plt' at offset 0x1180 contains 2 entries:
+  Offset          Info           Tipo           Valore sim     Nome sim + Addendo
+000000403000  000100000007 R_X86_64_JUMP_SLO 0000000000000000 putchar@GLIBC_2.2.5 + 0
+000000403008  000300000007 R_X86_64_JUMP_SLO 0000000000000000 printf@GLIBC_2.2.5 + 0
+/tmp/re_task_n4onu8on/test_O3:     formato del file elf64-x86-64
+
+Contenuto della sezione .comment:
+ 0000 4743433a 2028474e 55292031 352e332e  GCC: (GNU) 15.3.
+ 0010 31203230 32363037 32322028 52656420  1 20260722 (Red 
+ 0020 48617420 31352e33 2e312d31 2900      Hat 15.3.1-1).  
+                 w __gmon_start__
+                 U __libc_start_main@GLIBC_2.34
+                 U printf@GLIBC_2.2.5
+                 U putchar@GLIBC_2.2.5
+  ────────────────────────────────────────
+  ▸ shell
+    command: gcc --version | head -1; mkdir -p /tmp/probe && cd /tmp/probe && printf '#include <stdio.h>\nvoid log_fn(const char *m){printf(m);putchar(10);}\nint main(int c,char**v){if(c<2){printf("Uso: %%s <messaggio>\\n","logger");return 1;}printf("[log] ");log_fn(v[1]);return 0;}\n' > t.c && gcc -O3 -o t t.c 2>&1; objdump -d t | sed -n '/<.text>/,$p' | head -80
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: readelf --debug-dump=frames /tmp/re_task_n4onu8on/test_O3 2>/dev/null | sed -n '1,200p'
+
+gcc (GCC) 15.3.1 20260722 (Red Hat 15.3.1-1)Contenuto della sezione .eh_frame_hdr:
+
+  Version:                 1
+  Pointer Encoding Format: 0x1b (sdata4, pcrel)
+  Count Encoding Format:   0x3 (udata4, absolute)
+  Table Encoding Format:   0x3b (sdata4, datarel)
+  Start of frame section:  0x30 (offset: 0x401218)
+  Entries in search table: 0x5
+  0xfffffffffffff17c (offset: 0x400360) -> 0x74 fde=[    40]
+  0xfffffffffffff1ac (offset: 0x400390) -> 0xb4 fde=[    80]
+  0xfffffffffffff20c (offset: 0x4003f0) -> 0x4c fde=[    18]
+  0xfffffffffffff23c (offset: 0x400420) -> 0x60 fde=[    2c]
+  0xfffffffffffff2fc (offset: 0x4004e0) -> 0x9c fde=[    68]
+
+Contenuto della sezione .eh_frame:
+
+
+00000000 0000000000000014 00000000 CIE
+  Version:               1
+  Augmentation:          "zR"
+  Code alignment factor: 1
+  Data alignment factor: -8
+  Return address column: 16
+  Augmentation data:     1b
+  DW_CFA_def_cfa: r7 (rsp) ofs 8
+  DW_CFA_offset: r16 (rip) at cfa-8
+  DW_CFA_nop
+  DW_CFA_nop
+
+00000018 0000000000000010 0000001c FDE cie=00000000 pc=00000000004003f0..0000000000400416
+  DW_CFA_advance_loc: 4 to 00000000004003f4
+  DW_CFA_undefined: r16 (rip)
+
+0000002c 0000000000000010 00000030 FDE cie=00000000 pc=0000000000400420..0000000000400425
+  DW_CFA_nop
+  DW_CFA_nop
+  DW_CFA_nop
+
+00000040 0000000000000024 00000044 FDE cie=00000000 pc=0000000000400360..0000000000400390
+  DW_CFA_def_cfa_offset: 16
+  DW_CFA_advance_loc: 6 to 0000000000400366
+  DW_CFA_def_cfa_offset: 24
+  DW_CFA_advance_loc: 10 to 0000000000400370
+  DW_CFA_def_cfa_expression (DW_OP_breg7 (rsp): 8; DW_OP_breg16 (rip): 0; DW_OP_lit15; DW_OP_and; DW_OP_lit11; DW_OP_ge; DW_OP_lit3; DW_OP_shl; DW_OP_plus)
+  DW_CFA_nop
+  DW_CFA_nop
+  DW_CFA_nop
+  DW_CFA_nop
+
+00000068 0000000000000014 0000006c FDE cie=00000000 pc=00000000004004e0..00000000004004f9
+  DW_CFA_advance_loc: 4 to 00000000004004e4
+  DW_CFA_def_cfa_offset: 16
+  DW_CFA_advance_loc: 16 to 00000000004004f4
+  DW_CFA_def_cfa_offset: 8
+  DW_CFA_nop
+
+00000080 0000000000000018 00000084 FDE cie=00000000 pc=0000000000400390..00000000004003e3
+  DW_CFA_advance_loc: 4 to 0000000000400394
+  DW_CFA_def_cfa_offset: 32
+  DW_CFA_advance_loc: 54 to 00000000004003ca
+  DW_CFA_remember_state
+  DW_CFA_def_cfa_offset: 8
+  DW_CFA_advance_loc: 1 to 00000000004003cb
+  DW_CFA_restore_state
+  DW_CFA_nop
+  DW_CFA_nop
+
+0000009c ZERO terminator
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/probe && ls -la && cat t.c && gcc -O3 -o t t.c && objdump -d t | sed -n '/Disassembly of section .text/,/Disassembly of section .fini/p'
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: ldd --version | head -1; rpm -q glibc 2>/dev/null; ls /usr/lib64/crt*.o /usr/lib/gcc/*/*/crt*.o 2>/dev/null
+
+totale 20
+drwxr-xr-x  2 fotoppo fotoppo    80 12 ott 10.55 .
+drwxrwxrwt 27 nobody  nobody    800 12 ott 10.55 ..
+-rwxr-xr-x  1 fotoppo fotoppo 12640 12 ott 10.55 t
+-rw-r--r--  1 fotoppo fotoppo   194 12 ott 10.55 t.c
+#include <stdio.h>
+void log_fn(const char *m){printf(m);putchar(10);}
+int main(int c,char**v){if(c<2){printf("Uso: %s <messaggio>\n","logger");return 1;}printf("[log] ");log_fn(v[1]);return 0;}ldd (GNU libc) 2.42
+glibc-2.42-16.fc43.x86_64
+/usr/lib64/crt1.o
+/usr/lib64/crti.o
+/usr/lib64/crtn.o
+/usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o
+/usr/lib/gcc/x86_64-redhat-linux/15/crtbeginS.o
+/usr/lib/gcc/x86_64-redhat-linux/15/crtbeginT.o
+/usr/lib/gcc/x86_64-redhat-linux/15/crtend.o
+/usr/lib/gcc/x86_64-redhat-linux/15/crtendS.o
+/usr/lib/gcc/x86_64-redhat-linux/15/crtfastmath.o
+/usr/lib/gcc/x86_64-redhat-linux/15/crtoffloadbegin.o
+/usr/lib/gcc/x86_64-redhat-linux/15/crtoffloadend.o
+/usr/lib/gcc/x86_64-redhat-linux/15/crtoffloadtable.o
+/usr/lib/gcc/x86_64-redhat-linux/15/crtoffloadtableS.o
+/usr/lib/gcc/x86_64-redhat-linux/15/crtprec32.o
+/usr/lib/gcc/x86_64-redhat-linux/15/crtprec64.o
+/usr/lib/gcc/x86_64-redhat-linux/15/crtprec80.o
+  ────────────────────────────────────────
+  ▸ shell
+    command: objdump -d /tmp/probe/t | awk '/Disassembly of section \.text/,/Disassembly of section \.fini/'
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: objdump -d /usr/lib64/crt1.o; echo ===CRTBEGIN===; objdump -d /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o
+
+(no output)
+/usr/lib64/crt1.o:     formato del file elf64-x86-64
+
+
+Disassemblamento della sezione .text:
+
+0000000000000000 <_start>:
+   0:	f3 0f 1e fa          	endbr64
+   4:	31 ed                	xor    %ebp,%ebp
+   6:	49 89 d1             	mov    %rdx,%r9
+   9:	5e                   	pop    %rsi
+   a:	48 89 e2             	mov    %rsp,%rdx
+   d:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+  11:	50                   	push   %rax
+  12:	54                   	push   %rsp
+  13:	45 31 c0             	xor    %r8d,%r8d
+  16:	31 c9                	xor    %ecx,%ecx
+  18:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # 1f <_start+0x1f>
+  1f:	ff 15 00 00 00 00    	call   *0x0(%rip)        # 25 <_start+0x25>
+  25:	f4                   	hlt
+  26:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  2d:	00 00 00 
+
+0000000000000030 <_dl_relocate_static_pie>:
+  30:	f3 0f 1e fa          	endbr64
+  34:	c3                   	ret
+===CRTBEGIN===
+
+/usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:     formato del file elf64-x86-64
+
+
+Disassemblamento della sezione .text:
+
+0000000000000000 <deregister_tm_clones>:
+   0:	b8 00 00 00 00       	mov    $0x0,%eax
+   5:	48 3d 00 00 00 00    	cmp    $0x0,%rax
+   b:	74 13                	je     20 <deregister_tm_clones+0x20>
+   d:	b8 00 00 00 00       	mov    $0x0,%eax
+  12:	48 85 c0             	test   %rax,%rax
+  15:	74 09                	je     20 <deregister_tm_clones+0x20>
+  17:	bf 00 00 00 00       	mov    $0x0,%edi
+  1c:	ff e0                	jmp    *%rax
+  1e:	66 90                	xchg   %ax,%ax
+  20:	c3                   	ret
+  21:	0f 1f 40 00          	nopl   0x0(%rax)
+  25:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  2c:	00 00 00 00 
+
+0000000000000030 <register_tm_clones>:
+  30:	be 00 00 00 00       	mov    $0x0,%esi
+  35:	48 81 ee 00 00 00 00 	sub    $0x0,%rsi
+  3c:	48 89 f0             	mov    %rsi,%rax
+  3f:	48 c1 ee 3f          	shr    $0x3f,%rsi
+  43:	48 c1 f8 03          	sar    $0x3,%rax
+  47:	48 01 c6             	add    %rax,%rsi
+  4a:	48 d1 fe             	sar    $1,%rsi
+  4d:	74 11                	je     60 <register_tm_clones+0x30>
+  4f:	b8 00 00 00 00       	mov    $0x0,%eax
+  54:	48 85 c0             	test   %rax,%rax
+  57:	74 07                	je     60 <register_tm_clones+0x30>
+  59:	bf 00 00 00 00       	mov    $0x0,%edi
+  5e:	ff e0                	jmp    *%rax
+  60:	c3                   	ret
+  61:	0f 1f 40 00          	nopl   0x0(%rax)
+  65:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  6c:	00 00 00 00 
+
+0000000000000070 <__do_global_dtors_aux>:
+  70:	f3 0f 1e fa          	endbr64
+  74:	80 3d 00 00 00 00 00 	cmpb   $0x0,0x0(%rip)        # 7b <__do_global_dtors_aux+0xb>
+  7b:	75 13                	jne    90 <__do_global_dtors_aux+0x20>
+  7d:	55                   	push   %rbp
+  7e:	48 89 e5             	mov    %rsp,%rbp
+  81:	e8 7a ff ff ff       	call   0 <deregister_tm_clones>
+  86:	c6 05 00 00 00 00 01 	movb   $0x1,0x0(%rip)        # 8d <__do_global_dtors_aux+0x1d>
+  8d:	5d                   	pop    %rbp
+  8e:	c3                   	ret
+  8f:	90                   	nop
+  90:	c3                   	ret
+  91:	0f 1f 40 00          	nopl   0x0(%rax)
+  95:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  9c:	00 00 00 00 
+
+00000000000000a0 <frame_dummy>:
+  a0:	f3 0f 1e fa          	endbr64
+  a4:	eb 8a                	jmp    30 <register_tm_clones>
+  ────────────────────────────────────────
+  ▸ shell
+    command: LC_ALL=C objdump -d /tmp/probe/t | awk '/Disassembly of section \.text/,/Disassembly of section \.fini/'
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/probe && printf 'void log_fn(const char *m){printf(m);putchar(10);}\n' > b.c 2>/dev/null; printf '#include <stdio.h>\nvoid log_fn(const char *m){printf(m);putchar(10);}\n' > b.c && printf 'int main(int c,char**v){if(c<2){printf("Uso: %%s <messaggio>\\n","logger");return 1;}printf("[log] ");log_fn(v[1]);return 0;}\n' > a.c && gcc -O3 -o ab a.c b.c && LC_ALL=C objdump -d ab | awk '/Disassembly of section \.text/,/Disassembly of section \.fini/'
+
+Disassembly of section .text:
+
+0000000000400390 <main>:
+  400390:	48 83 ec 18          	sub    $0x18,%rsp
+  400394:	83 ff 01             	cmp    $0x1,%edi
+  400397:	7e 39                	jle    4003d2 <main+0x42>
+  400399:	bf 14 12 40 00       	mov    $0x401214,%edi
+  40039e:	31 c0                	xor    %eax,%eax
+  4003a0:	48 89 74 24 08       	mov    %rsi,0x8(%rsp)
+  4003a5:	e8 c6 ff ff ff       	call   400370 <printf@plt>
+  4003aa:	48 8b 74 24 08       	mov    0x8(%rsp),%rsi
+  4003af:	31 c0                	xor    %eax,%eax
+  4003b1:	48 8b 7e 08          	mov    0x8(%rsi),%rdi
+  4003b5:	e8 b6 ff ff ff       	call   400370 <printf@plt>
+  4003ba:	48 8b 35 57 2c 00 00 	mov    0x2c57(%rip),%rsi        # 403018 <stdout@GLIBC_2.2.5>
+  4003c1:	bf 0a 00 00 00       	mov    $0xa,%edi
+  4003c6:	e8 b5 ff ff ff       	call   400380 <putc@plt>
+  4003cb:	31 c0                	xor    %eax,%eax
+  4003cd:	48 83 c4 18          	add    $0x18,%rsp
+  4003d1:	c3                   	ret
+  4003d2:	be f8 11 40 00       	mov    $0x4011f8,%esi
+  4003d7:	bf ff 11 40 00       	mov    $0x4011ff,%edi
+  4003dc:	31 c0                	xor    %eax,%eax
+  4003de:	e8 8d ff ff ff       	call   400370 <printf@plt>
+  4003e3:	b8 01 00 00 00       	mov    $0x1,%eax
+  4003e8:	eb e3                	jmp    4003cd <main+0x3d>
+  4003ea:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+00000000004003f0 <_start>:
+  4003f0:	f3 0f 1e fa          	endbr64
+  4003f4:	31 ed                	xor    %ebp,%ebp
+  4003f6:	49 89 d1             	mov    %rdx,%r9
+  4003f9:	5e                   	pop    %rsi
+  4003fa:	48 89 e2             	mov    %rsp,%rdx
+  4003fd:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+  400401:	50                   	push   %rax
+  400402:	54                   	push   %rsp
+  400403:	45 31 c0             	xor    %r8d,%r8d
+  400406:	31 c9                	xor    %ecx,%ecx
+  400408:	48 c7 c7 90 03 40 00 	mov    $0x400390,%rdi
+  40040f:	ff 15 c3 2b 00 00    	call   *0x2bc3(%rip)        # 402fd8 <__libc_start_main@GLIBC_2.34>
+  400415:	f4                   	hlt
+  400416:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  40041d:	00 00 00 
+
+0000000000400420 <_dl_relocate_static_pie>:
+  400420:	f3 0f 1e fa          	endbr64
+  400424:	c3                   	ret
+  400425:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  40042c:	00 00 00 
+  40042f:	90                   	nop
+
+0000000000400430 <deregister_tm_clones>:
+  400430:	b8 18 30 40 00       	mov    $0x403018,%eax
+  400435:	48 3d 18 30 40 00    	cmp    $0x403018,%rax
+  40043b:	74 13                	je     400450 <deregister_tm_clones+0x20>
+  40043d:	b8 00 00 00 00       	mov    $0x0,%eax
+  400442:	48 85 c0             	test   %rax,%rax
+  400445:	74 09                	je     400450 <deregister_tm_clones+0x20>
+  400447:	bf 18 30 40 00       	mov    $0x403018,%edi
+  40044c:	ff e0                	jmp    *%rax
+  40044e:	66 90                	xchg   %ax,%ax
+  400450:	c3                   	ret
+  400451:	0f 1f 40 00          	nopl   0x0(%rax)
+  400455:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  40045c:	00 00 00 00 
+
+0000000000400460 <register_tm_clones>:
+  400460:	be 18 30 40 00       	mov    $0x403018,%esi
+  400465:	48 81 ee 18 30 40 00 	sub    $0x403018,%rsi
+  40046c:	48 89 f0             	mov    %rsi,%rax
+  40046f:	48 c1 ee 3f          	shr    $0x3f,%rsi
+  400473:	48 c1 f8 03          	sar    $0x3,%rax
+  400477:	48 01 c6             	add    %rax,%rsi
+  40047a:	48 d1 fe             	sar    $1,%rsi
+  40047d:	74 11                	je     400490 <register_tm_clones+0x30>
+  40047f:	b8 00 00 00 00       	mov    $0x0,%eax
+  400484:	48 85 c0             	test   %rax,%rax
+  400487:	74 07                	je     400490 <register_tm_clones+0x30>
+  400489:	bf 18 30 40 00       	mov    $0x403018,%edi
+  40048e:	ff e0                	jmp    *%rax
+  400490:	c3                   	ret
+  400491:	0f 1f 40 00          	nopl   0x0(%rax)
+  400495:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  40049c:	00 00 00 00 
+
+00000000004004a0 <__do_global_dtors_aux>:
+  4004a0:	f3 0f 1e fa          	endbr64
+  4004a4:	80 3d 75 2b 00 00 00 	cmpb   $0x0,0x2b75(%rip)        # 403020 <completed.0>
+  4004ab:	75 13                	jne    4004c0 <__do_global_dtors_aux+0x20>
+  4004ad:	55                   	push   %rbp
+  4004ae:	48 89 e5             	mov    %rsp,%rbp
+  4004b1:	e8 7a ff ff ff       	call   400430 <deregister_tm_clones>
+  4004b6:	c6 05 63 2b 00 00 01 	movb   $0x1,0x2b63(%rip)        # 403020 <completed.0>
+  4004bd:	5d                   	pop    %rbp
+  4004be:	c3                   	ret
+  4004bf:	90                   	nop
+  4004c0:	c3                   	ret
+  4004c1:	0f 1f 40 00          	nopl   0x0(%rax)
+  4004c5:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  4004cc:	00 00 00 00 
+
+00000000004004d0 <frame_dummy>:
+  4004d0:	f3 0f 1e fa          	endbr64
+  4004d4:	eb 8a                	jmp    400460 <register_tm_clones>
+  4004d6:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  4004dd:	00 00 00 
+
+00000000004004e0 <log_fn>:
+  4004e0:	48 83 ec 08          	sub    $0x8,%rsp
+  4004e4:	31 c0                	xor    %eax,%eax
+  4004e6:	e8 85 fe ff ff       	call   400370 <printf@plt>
+  4004eb:	48 8b 35 26 2b 00 00 	mov    0x2b26(%rip),%rsi        # 403018 <stdout@GLIBC_2.2.5>
+  4004f2:	bf 0a 00 00 00       	mov    $0xa,%edi
+  4004f7:	48 83 c4 08          	add    $0x8,%rsp
+  4004fb:	e9 80 fe ff ff       	jmp    400380 <putc@plt>
+
+Disassembly of section .fini:a.c: In function ‘main’:
+a.c:1:33: error: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+    1 | int main(int c,char**v){if(c<2){printf("Uso: %s <messaggio>\n","logger");return 1;}printf("[log] ");log_fn(v[1]);return 0;}
+      |                                 ^~~~~~
+a.c:1:1: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+  +++ |+#include <stdio.h>
+    1 | int main(int c,char**v){if(c<2){printf("Uso: %s <messaggio>\n","logger");return 1;}printf("[log] ");log_fn(v[1]);return 0;}
+a.c:1:33: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+    1 | int main(int c,char**v){if(c<2){printf("Uso: %s <messaggio>\n","logger");return 1;}printf("[log] ");log_fn(v[1]);return 0;}
+      |                                 ^~~~~~
+a.c:1:33: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+a.c:1:84: warning: incompatible implicit declaration of built-in function ‘printf’ [-Wbuiltin-declaration-mismatch]
+    1 | int main(int c,char**v){if(c<2){printf("Uso: %s <messaggio>\n","logger");return 1;}printf("[log] ");log_fn(v[1]);return 0;}
+      |                                                                                    ^~~~~~
+a.c:1:84: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+a.c:1:101: error: implicit declaration of function ‘log_fn’ [-Wimplicit-function-declaration]
+    1 | int main(int c,char**v){if(c<2){printf("Uso: %s <messaggio>\n","logger");return 1;}printf("[log] ");log_fn(v[1]);return 0;}
+      |                                                                                                     ^~~~~~
+
+Command exited with code 1
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/probe && for O in 0 1 2 3 s; do gcc -O$O -o t_O$O t.c 2>/dev/null; echo "=== -O$O ==="; LC_ALL=C objdump -d t_O$O | grep -E 'putchar@plt|putc@plt' | head -5; done
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/probe && for O in 1 2 3; do gcc -O$O -o t2_O$O t.c 2>/dev/null; echo "=== -O$O main+logfn ==="; LC_ALL=C objdump -d t2_O$O | awk '/<main>:/,/Disassembly of section .fini/' | head -40; done
+
+=== -O0 ===
+0000000000400360 <putchar@plt-0x10>:
+0000000000400370 <putchar@plt>:
+  400498:	e8 d3 fe ff ff       	call   400370 <putchar@plt>
+=== -O1 ===
+0000000000400380 <putc@plt>:
+  400490:	e8 eb fe ff ff       	call   400380 <putc@plt>
+=== -O2 ===
+0000000000400380 <putc@plt>:
+  4004eb:	e9 90 fe ff ff       	jmp    400380 <putc@plt>
+=== -O3 ===
+0000000000400380 <putc@plt>:
+  4003c6:	e8 b5 ff ff ff       	call   400380 <putc@plt>
+  4004fb:	e9 80 fe ff ff       	jmp    400380 <putc@plt>
+=== -Os ===
+0000000000400360 <putchar@plt-0x10>:
+0000000000400370 <putchar@plt>:
+  4004c4:	e9 a7 fe ff ff       	jmp    400370 <putchar@plt>=== -O1 main+logfn ===
+000000000040049a <main>:
+  40049a:	53                   	push   %rbx
+  40049b:	83 ff 01             	cmp    $0x1,%edi
+  40049e:	7e 22                	jle    4004c2 <main+0x28>
+  4004a0:	48 89 f3             	mov    %rsi,%rbx
+  4004a3:	bf 14 12 40 00       	mov    $0x401214,%edi
+  4004a8:	b8 00 00 00 00       	mov    $0x0,%eax
+  4004ad:	e8 be fe ff ff       	call   400370 <printf@plt>
+  4004b2:	48 8b 7b 08          	mov    0x8(%rbx),%rdi
+  4004b6:	e8 bb ff ff ff       	call   400476 <log_fn>
+  4004bb:	b8 00 00 00 00       	mov    $0x0,%eax
+  4004c0:	5b                   	pop    %rbx
+  4004c1:	c3                   	ret
+  4004c2:	be f8 11 40 00       	mov    $0x4011f8,%esi
+  4004c7:	bf ff 11 40 00       	mov    $0x4011ff,%edi
+  4004cc:	b8 00 00 00 00       	mov    $0x0,%eax
+  4004d1:	e8 9a fe ff ff       	call   400370 <printf@plt>
+  4004d6:	b8 01 00 00 00       	mov    $0x1,%eax
+  4004db:	eb e3                	jmp    4004c0 <main+0x26>
+
+Disassembly of section .fini:
+=== -O2 main+logfn ===
+0000000000400390 <main>:
+  400390:	48 83 ec 18          	sub    $0x18,%rsp
+  400394:	83 ff 01             	cmp    $0x1,%edi
+  400397:	7e 26                	jle    4003bf <main+0x2f>
+  400399:	bf 14 12 40 00       	mov    $0x401214,%edi
+  40039e:	31 c0                	xor    %eax,%eax
+  4003a0:	48 89 74 24 08       	mov    %rsi,0x8(%rsp)
+  4003a5:	e8 c6 ff ff ff       	call   400370 <printf@plt>
+  4003aa:	48 8b 74 24 08       	mov    0x8(%rsp),%rsi
+  4003af:	48 8b 7e 08          	mov    0x8(%rsi),%rdi
+  4003b3:	e8 18 01 00 00       	call   4004d0 <log_fn>
+  4003b8:	31 c0                	xor    %eax,%eax
+  4003ba:	48 83 c4 18          	add    $0x18,%rsp
+  4003be:	c3                   	ret
+  4003bf:	be f8 11 40 00       	mov    $0x4011f8,%esi
+  4003c4:	bf ff 11 40 00       	mov    $0x4011ff,%edi
+  4003c9:	31 c0                	xor    %eax,%eax
+  4003cb:	e8 a0 ff ff ff       	call   400370 <printf@plt>
+  4003d0:	b8 01 00 00 00       	mov    $0x1,%eax
+  4003d5:	eb e3                	jmp    4003ba <main+0x2a>
+  4003d7:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+  4003de:	00 00 
+
+00000000004003e0 <_start>:
+  4003e0:	f3 0f 1e fa          	endbr64
+  4003e4:	31 ed                	xor    %ebp,%ebp
+  4003e6:	49 89 d1             	mov    %rdx,%r9
+  4003e9:	5e                   	pop    %rsi
+  4003ea:	48 89 e2             	mov    %rsp,%rdx
+  4003ed:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+  4003f1:	50                   	push   %rax
+  4003f2:	54                   	push   %rsp
+  4003f3:	45 31 c0             	xor    %r8d,%r8d
+  4003f6:	31 c9                	xor    %ecx,%ecx
+  4003f8:	48 c7 c7 90 03 40 00 	mov    $0x400390,%rdi
+  4003ff:	ff 15 d3 2b 00 00    	call   *0x2bd3(%rip)        # 402fd8 <__libc_start_main@GLIBC_2.34>
+  400405:	f4                   	hlt
+  400406:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  40040d:	00 00 00 
+
+=== -O3 main+logfn ===
+0000000000400390 <main>:
+  400390:	48 83 ec 18          	sub    $0x18,%rsp
+  400394:	83 ff 01             	cmp    $0x1,%edi
+  400397:	7e 39                	jle    4003d2 <main+0x42>
+  400399:	bf 14 12 40 00       	mov    $0x401214,%edi
+  40039e:	31 c0                	xor    %eax,%eax
+  4003a0:	48 89 74 24 08       	mov    %rsi,0x8(%rsp)
+  4003a5:	e8 c6 ff ff ff       	call   400370 <printf@plt>
+  4003aa:	48 8b 74 24 08       	mov    0x8(%rsp),%rsi
+  4003af:	31 c0                	xor    %eax,%eax
+  4003b1:	48 8b 7e 08          	mov    0x8(%rsi),%rdi
+  4003b5:	e8 b6 ff ff ff       	call   400370 <printf@plt>
+  4003ba:	48 8b 35 57 2c 00 00 	mov    0x2c57(%rip),%rsi        # 403018 <stdout@GLIBC_2.2.5>
+  4003c1:	bf 0a 00 00 00       	mov    $0xa,%edi
+  4003c6:	e8 b5 ff ff ff       	call   400380 <putc@plt>
+  4003cb:	31 c0                	xor    %eax,%eax
+  4003cd:	48 83 c4 18          	add    $0x18,%rsp
+  4003d1:	c3                   	ret
+  4003d2:	be f8 11 40 00       	mov    $0x4011f8,%esi
+  4003d7:	bf ff 11 40 00       	mov    $0x4011ff,%edi
+  4003dc:	31 c0                	xor    %eax,%eax
+  4003de:	e8 8d ff ff ff       	call   400370 <printf@plt>
+  4003e3:	b8 01 00 00 00       	mov    $0x1,%eax
+  4003e8:	eb e3                	jmp    4003cd <main+0x3d>
+  4003ea:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+00000000004003f0 <_start>:
+  4003f0:	f3 0f 1e fa          	endbr64
+  4003f4:	31 ed                	xor    %ebp,%ebp
+  4003f6:	49 89 d1             	mov    %rdx,%r9
+  4003f9:	5e                   	pop    %rsi
+  4003fa:	48 89 e2             	mov    %rsp,%rdx
+  4003fd:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+  400401:	50                   	push   %rax
+  400402:	54                   	push   %rsp
+  400403:	45 31 c0             	xor    %r8d,%r8d
+  400406:	31 c9                	xor    %ecx,%ecx
+  400408:	48 c7 c7 90 03 40 00 	mov    $0x400390,%rdi
+  40040f:	ff 15 c3 2b 00 00    	call   *0x2bc3(%rip)        # 402fd8 <__libc_start_main@GLIBC_2.34>
+  400415:	f4                   	hlt
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/probe && LC_ALL=C objdump -d t_Os | awk '/Disassembly of section \.text/,/Disassembly of section \.fini/'
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/probe && readelf -x .rodata t_Os; echo ====; LC_ALL=C objdump -d t_O3 | awk '/<log_fn>/,/^$/' 
+
+Disassembly of section .text:
+
+0000000000400390 <main>:
+  400390:	ff cf                	dec    %edi
+  400392:	53                   	push   %rbx
+  400393:	7f 18                	jg     4003ad <main+0x1d>
+  400395:	be b8 11 40 00       	mov    $0x4011b8,%esi
+  40039a:	bf bf 11 40 00       	mov    $0x4011bf,%edi
+  40039f:	31 c0                	xor    %eax,%eax
+  4003a1:	e8 da ff ff ff       	call   400380 <printf@plt>
+  4003a6:	b8 01 00 00 00       	mov    $0x1,%eax
+  4003ab:	eb 1a                	jmp    4003c7 <main+0x37>
+  4003ad:	48 89 f3             	mov    %rsi,%rbx
+  4003b0:	bf d4 11 40 00       	mov    $0x4011d4,%edi
+  4003b5:	31 c0                	xor    %eax,%eax
+  4003b7:	e8 c4 ff ff ff       	call   400380 <printf@plt>
+  4003bc:	48 8b 7b 08          	mov    0x8(%rbx),%rdi
+  4003c0:	e8 f1 00 00 00       	call   4004b6 <log_fn>
+  4003c5:	31 c0                	xor    %eax,%eax
+  4003c7:	5b                   	pop    %rbx
+  4003c8:	c3                   	ret
+  4003c9:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+00000000004003d0 <_start>:
+  4003d0:	f3 0f 1e fa          	endbr64
+  4003d4:	31 ed                	xor    %ebp,%ebp
+  4003d6:	49 89 d1             	mov    %rdx,%r9
+  4003d9:	5e                   	pop    %rsi
+  4003da:	48 89 e2             	mov    %rsp,%rdx
+  4003dd:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+  4003e1:	50                   	push   %rax
+  4003e2:	54                   	push   %rsp
+  4003e3:	45 31 c0             	xor    %r8d,%r8d
+  4003e6:	31 c9                	xor    %ecx,%ecx
+  4003e8:	48 c7 c7 90 03 40 00 	mov    $0x400390,%rdi
+  4003ef:	ff 15 e3 2b 00 00    	call   *0x2be3(%rip)        # 402fd8 <__libc_start_main@GLIBC_2.34>
+  4003f5:	f4                   	hlt
+  4003f6:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  4003fd:	00 00 00 
+
+0000000000400400 <_dl_relocate_static_pie>:
+  400400:	f3 0f 1e fa          	endbr64
+  400404:	c3                   	ret
+  400405:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  40040c:	00 00 00 
+  40040f:	90                   	nop
+
+0000000000400410 <deregister_tm_clones>:
+  400410:	b8 18 30 40 00       	mov    $0x403018,%eax
+  400415:	48 3d 18 30 40 00    	cmp    $0x403018,%rax
+  40041b:	74 13                	je     400430 <deregister_tm_clones+0x20>
+  40041d:	b8 00 00 00 00       	mov    $0x0,%eax
+  400422:	48 85 c0             	test   %rax,%rax
+  400425:	74 09                	je     400430 <deregister_tm_clones+0x20>
+  400427:	bf 18 30 40 00       	mov    $0x403018,%edi
+  40042c:	ff e0                	jmp    *%rax
+  40042e:	66 90                	xchg   %ax,%ax
+  400430:	c3                   	ret
+  400431:	0f 1f 40 00          	nopl   0x0(%rax)
+  400435:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  40043c:	00 00 00 00 
+
+0000000000400440 <register_tm_clones>:
+  400440:	be 18 30 40 00       	mov    $0x403018,%esi
+  400445:	48 81 ee 18 30 40 00 	sub    $0x403018,%rsi
+  40044c:	48 89 f0             	mov    %rsi,%rax
+  40044f:	48 c1 ee 3f          	shr    $0x3f,%rsi
+  400453:	48 c1 f8 03          	sar    $0x3,%rax
+  400457:	48 01 c6             	add    %rax,%rsi
+  40045a:	48 d1 fe             	sar    $1,%rsi
+  40045d:	74 11                	je     400470 <register_tm_clones+0x30>
+  40045f:	b8 00 00 00 00       	mov    $0x0,%eax
+  400464:	48 85 c0             	test   %rax,%rax
+  400467:	74 07                	je     400470 <register_tm_clones+0x30>
+  400469:	bf 18 30 40 00       	mov    $0x403018,%edi
+  40046e:	ff e0                	jmp    *%rax
+  400470:	c3                   	ret
+  400471:	0f 1f 40 00          	nopl   0x0(%rax)
+  400475:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  40047c:	00 00 00 00 
+
+0000000000400480 <__do_global_dtors_aux>:
+  400480:	f3 0f 1e fa          	endbr64
+  400484:	80 3d 89 2b 00 00 00 	cmpb   $0x0,0x2b89(%rip)        # 403014 <completed.0>
+  40048b:	75 13                	jne    4004a0 <__do_global_dtors_aux+0x20>
+  40048d:	55                   	push   %rbp
+  40048e:	48 89 e5             	mov    %rsp,%rbp
+  400491:	e8 7a ff ff ff       	call   400410 <deregister_tm_clones>
+  400496:	c6 05 77 2b 00 00 01 	movb   $0x1,0x2b77(%rip)        # 403014 <completed.0>
+  40049d:	5d                   	pop    %rbp
+  40049e:	c3                   	ret
+  40049f:	90                   	nop
+  4004a0:	c3                   	ret
+  4004a1:	0f 1f 40 00          	nopl   0x0(%rax)
+  4004a5:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  4004ac:	00 00 00 00 
+
+00000000004004b0 <frame_dummy>:
+  4004b0:	f3 0f 1e fa          	endbr64
+  4004b4:	eb 8a                	jmp    400440 <register_tm_clones>
+
+00000000004004b6 <log_fn>:
+  4004b6:	50                   	push   %rax
+  4004b7:	31 c0                	xor    %eax,%eax
+  4004b9:	e8 c2 fe ff ff       	call   400380 <printf@plt>
+  4004be:	bf 0a 00 00 00       	mov    $0xa,%edi
+  4004c3:	5a                   	pop    %rdx
+  4004c4:	e9 a7 fe ff ff       	jmp    400370 <putchar@plt>
+
+Disassembly of section .fini:
+Dump esadecimale della sezione ".rodata":
+  0x004011a8 01000200 00000000 00000000 00000000 ................
+  0x004011b8 6c6f6767 65720055 736f3a20 2573203c logger.Uso: %s <
+  0x004011c8 6d657373 61676769 6f3e0a00 5b6c6f67 messaggio>..[log
+  0x004011d8 5d2000                              ] .
+
+====
+00000000004004e0 <log_fn>:
+  4004e0:	48 83 ec 08          	sub    $0x8,%rsp
+  4004e4:	31 c0                	xor    %eax,%eax
+  4004e6:	e8 85 fe ff ff       	call   400370 <printf@plt>
+  4004eb:	48 8b 35 26 2b 00 00 	mov    0x2b26(%rip),%rsi        # 403018 <stdout@GLIBC_2.2.5>
+  4004f2:	bf 0a 00 00 00       	mov    $0xa,%edi
+  4004f7:	48 83 c4 08          	add    $0x8,%rsp
+  4004fb:	e9 80 fe ff ff       	jmp    400380 <putc@plt>
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: grep -n 'putchar' /usr/include/stdio.h; echo ---; grep -n 'define putc\|define putchar' /usr/include/stdio.h
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/probe && printf '#include <stdio.h>\nvoid log_fn(const char *m){printf(m);(putchar)(10);}\nint main(int c,char**v){if(c<2){printf("Uso: %%s <messaggio>\\n","logger");return 1;}printf("[log] ");log_fn(v[1]);return 0;}\n' > tA.c && gcc -O3 -o tA tA.c && LC_ALL=C objdump -d tA | grep -E 'putchar@plt|putc@plt' 
+echo =====B=====
+printf 'void log_fn(const char *m); int printf(const char*,...); int putchar(int);\nvoid log_fn(const char *m){printf(m);putchar(10);}\nint main(int c,char**v){if(c<2){printf("Uso: %%s <messaggio>\\n","logger");return 1;}printf("[log] ");log_fn(v[1]);return 0;}\n' > tB.c && gcc -O3 -o tB tB.c 2>&1 && LC_ALL=C objdump -d tB | grep -E 'putchar@plt|putc@plt'
+
+618:extern int putchar (int __c);
+636:extern int putchar_unlocked (int __c);
+---
+
+Command exited with code 10000000000400380 <putc@plt>:
+  4003c6:	e8 b5 ff ff ff       	call   400380 <putc@plt>
+  4004fb:	e9 80 fe ff ff       	jmp    400380 <putc@plt>
+=====B=====
+0000000000400360 <putchar@plt-0x10>:
+0000000000400370 <putchar@plt>:
+  4003bf:	e8 ac ff ff ff       	call   400370 <putchar@plt>
+  4004f4:	e9 77 fe ff ff       	jmp    400370 <putchar@plt>
+  ────────────────────────────────────────
+  ▸ shell
+    command: LC_ALL=C objdump -d /tmp/probe/tB | awk '/Disassembly of section \.text/,/Disassembly of section \.fini/'
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/probe && readelf -x .rodata tB; readelf -S tB | grep -E 'text|rodata|data|bss'; echo ===TARGET===; readelf -S /tmp/re_task_n4onu8on/test_O3 | grep -E 'text|rodata|data|bss'
+
+Disassembly of section .text:
+
+0000000000400390 <main>:
+  400390:	48 83 ec 18          	sub    $0x18,%rsp
+  400394:	83 ff 01             	cmp    $0x1,%edi
+  400397:	7e 32                	jle    4003cb <main+0x3b>
+  400399:	bf d4 11 40 00       	mov    $0x4011d4,%edi
+  40039e:	31 c0                	xor    %eax,%eax
+  4003a0:	48 89 74 24 08       	mov    %rsi,0x8(%rsp)
+  4003a5:	e8 d6 ff ff ff       	call   400380 <printf@plt>
+  4003aa:	48 8b 74 24 08       	mov    0x8(%rsp),%rsi
+  4003af:	31 c0                	xor    %eax,%eax
+  4003b1:	48 8b 7e 08          	mov    0x8(%rsi),%rdi
+  4003b5:	e8 c6 ff ff ff       	call   400380 <printf@plt>
+  4003ba:	bf 0a 00 00 00       	mov    $0xa,%edi
+  4003bf:	e8 ac ff ff ff       	call   400370 <putchar@plt>
+  4003c4:	31 c0                	xor    %eax,%eax
+  4003c6:	48 83 c4 18          	add    $0x18,%rsp
+  4003ca:	c3                   	ret
+  4003cb:	be b8 11 40 00       	mov    $0x4011b8,%esi
+  4003d0:	bf bf 11 40 00       	mov    $0x4011bf,%edi
+  4003d5:	31 c0                	xor    %eax,%eax
+  4003d7:	e8 a4 ff ff ff       	call   400380 <printf@plt>
+  4003dc:	b8 01 00 00 00       	mov    $0x1,%eax
+  4003e1:	eb e3                	jmp    4003c6 <main+0x36>
+  4003e3:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  4003ea:	00 00 00 
+  4003ed:	0f 1f 00             	nopl   (%rax)
+
+00000000004003f0 <_start>:
+  4003f0:	f3 0f 1e fa          	endbr64
+  4003f4:	31 ed                	xor    %ebp,%ebp
+  4003f6:	49 89 d1             	mov    %rdx,%r9
+  4003f9:	5e                   	pop    %rsi
+  4003fa:	48 89 e2             	mov    %rsp,%rdx
+  4003fd:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+  400401:	50                   	push   %rax
+  400402:	54                   	push   %rsp
+  400403:	45 31 c0             	xor    %r8d,%r8d
+  400406:	31 c9                	xor    %ecx,%ecx
+  400408:	48 c7 c7 90 03 40 00 	mov    $0x400390,%rdi
+  40040f:	ff 15 c3 2b 00 00    	call   *0x2bc3(%rip)        # 402fd8 <__libc_start_main@GLIBC_2.34>
+  400415:	f4                   	hlt
+  400416:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  40041d:	00 00 00 
+
+0000000000400420 <_dl_relocate_static_pie>:
+  400420:	f3 0f 1e fa          	endbr64
+  400424:	c3                   	ret
+  400425:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  40042c:	00 00 00 
+  40042f:	90                   	nop
+
+0000000000400430 <deregister_tm_clones>:
+  400430:	b8 18 30 40 00       	mov    $0x403018,%eax
+  400435:	48 3d 18 30 40 00    	cmp    $0x403018,%rax
+  40043b:	74 13                	je     400450 <deregister_tm_clones+0x20>
+  40043d:	b8 00 00 00 00       	mov    $0x0,%eax
+  400442:	48 85 c0             	test   %rax,%rax
+  400445:	74 09                	je     400450 <deregister_tm_clones+0x20>
+  400447:	bf 18 30 40 00       	mov    $0x403018,%edi
+  40044c:	ff e0                	jmp    *%rax
+  40044e:	66 90                	xchg   %ax,%ax
+  400450:	c3                   	ret
+  400451:	0f 1f 40 00          	nopl   0x0(%rax)
+  400455:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  40045c:	00 00 00 00 
+
+0000000000400460 <register_tm_clones>:
+  400460:	be 18 30 40 00       	mov    $0x403018,%esi
+  400465:	48 81 ee 18 30 40 00 	sub    $0x403018,%rsi
+  40046c:	48 89 f0             	mov    %rsi,%rax
+  40046f:	48 c1 ee 3f          	shr    $0x3f,%rsi
+  400473:	48 c1 f8 03          	sar    $0x3,%rax
+  400477:	48 01 c6             	add    %rax,%rsi
+  40047a:	48 d1 fe             	sar    $1,%rsi
+  40047d:	74 11                	je     400490 <register_tm_clones+0x30>
+  40047f:	b8 00 00 00 00       	mov    $0x0,%eax
+  400484:	48 85 c0             	test   %rax,%rax
+  400487:	74 07                	je     400490 <register_tm_clones+0x30>
+  400489:	bf 18 30 40 00       	mov    $0x403018,%edi
+  40048e:	ff e0                	jmp    *%rax
+  400490:	c3                   	ret
+  400491:	0f 1f 40 00          	nopl   0x0(%rax)
+  400495:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  40049c:	00 00 00 00 
+
+00000000004004a0 <__do_global_dtors_aux>:
+  4004a0:	f3 0f 1e fa          	endbr64
+  4004a4:	80 3d 69 2b 00 00 00 	cmpb   $0x0,0x2b69(%rip)        # 403014 <completed.0>
+  4004ab:	75 13                	jne    4004c0 <__do_global_dtors_aux+0x20>
+  4004ad:	55                   	push   %rbp
+  4004ae:	48 89 e5             	mov    %rsp,%rbp
+  4004b1:	e8 7a ff ff ff       	call   400430 <deregister_tm_clones>
+  4004b6:	c6 05 57 2b 00 00 01 	movb   $0x1,0x2b57(%rip)        # 403014 <completed.0>
+  4004bd:	5d                   	pop    %rbp
+  4004be:	c3                   	ret
+  4004bf:	90                   	nop
+  4004c0:	c3                   	ret
+  4004c1:	0f 1f 40 00          	nopl   0x0(%rax)
+  4004c5:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  4004cc:	00 00 00 00 
+
+00000000004004d0 <frame_dummy>:
+  4004d0:	f3 0f 1e fa          	endbr64
+  4004d4:	eb 8a                	jmp    400460 <register_tm_clones>
+  4004d6:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  4004dd:	00 00 00 
+
+00000000004004e0 <log_fn>:
+  4004e0:	48 83 ec 08          	sub    $0x8,%rsp
+  4004e4:	31 c0                	xor    %eax,%eax
+  4004e6:	e8 95 fe ff ff       	call   400380 <printf@plt>
+  4004eb:	bf 0a 00 00 00       	mov    $0xa,%edi
+  4004f0:	48 83 c4 08          	add    $0x8,%rsp
+  4004f4:	e9 77 fe ff ff       	jmp    400370 <putchar@plt>
+
+Disassembly of section .fini:
+Dump esadecimale della sezione ".rodata":
+  0x004011a8 01000200 00000000 00000000 00000000 ................
+  0x004011b8 6c6f6767 65720055 736f3a20 2573203c logger.Uso: %s <
+  0x004011c8 6d657373 61676769 6f3e0a00 5b6c6f67 messaggio>..[log
+  0x004011d8 5d2000                              ] .
+
+  [ 4] .text             PROGBITS         0000000000400390  00000390
+  [14] .rodata           PROGBITS         00000000004011a8  000011a8
+  [24] .data             PROGBITS         0000000000403010  00002010
+  [25] .bss              NOBITS           0000000000403014  00002014
+===TARGET===
+  [ 4] .text             PROGBITS         0000000000400390  00000390
+  [14] .rodata           PROGBITS         00000000004011b0  000011b0
+  [24] .data             PROGBITS         0000000000403010  00002010
+  [25] .bss              NOBITS           0000000000403014  00002014Ho trov tutto il quadro. Ora scrivo il sorgente e lo verifico contro il binario di riferimento.
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_n4onu8on/out.c
+    content: extern int printf(const char *format, ...);
+extern int putchar(int c);
+
+void log_message(const char *message)
+{
+    printf(message);
+    putchar('\n');
+}
+
+int main(int argc, char **argv)
+{
+    if (argc < 2) {
+        printf("Uso: %s <messaggio>\n", "logger");
+        return 1;
+    }
+    printf("[log] ");
+    log_message(argv[1]);
+    return 0;
+}
+
+Created /tmp/re_task_n4onu8on/out.c (19 lines)
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_n4onu8on && gcc -O3 -o out_O3 out.c && gcc -o out_O0 out.c && gcc -O3 -Wall -Wextra -o /dev/null out.c 2>&1; echo "compile-exit:$?"
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_n4onu8on && gcc -O3 -o /tmp/probe/mine out.c && LC_ALL=C objdump -d /tmp/probe/mine | awk '/Disassembly of section \.text/,/Disassembly of section \.fini/' > /tmp/probe/mine.txt && LC_ALL=C objdump -d test_O3 | awk '/Disassembly of section \.text/,/Disassembly of section \.fini/' > /tmp/probe/ref.txt && diff /tmp/probe/ref.txt /tmp/probe/mine.txt && echo "TEXT IDENTICO"
+
+compile-exit:03c3
+< 0000000000400390 <.text>:
+---
+> 0000000000400390 <main>:
+6,7c6,7
+<   400397:	7e 32                	jle    4003cb <printf@plt+0x4b>
+<   400399:	bf dc 11 40 00       	mov    $0x4011dc,%edi
+---
+>   400397:	7e 32                	jle    4003cb <main+0x3b>
+>   400399:	bf d4 11 40 00       	mov    $0x4011d4,%edi
+20,21c20,21
+<   4003cb:	be c0 11 40 00       	mov    $0x4011c0,%esi
+<   4003d0:	bf c7 11 40 00       	mov    $0x4011c7,%edi
+---
+>   4003cb:	be b8 11 40 00       	mov    $0x4011b8,%esi
+>   4003d0:	bf bf 11 40 00       	mov    $0x4011bf,%edi
+25c25
+<   4003e1:	eb e3                	jmp    4003c6 <printf@plt+0x46>
+---
+>   4003e1:	eb e3                	jmp    4003c6 <main+0x36>
+28a29,30
+> 
+> 00000000004003f0 <_start>:
+40c42
+<   40040f:	ff 15 c3 2b 00 00    	call   *0x2bc3(%rip)        # 402fd8 <printf@plt+0x2c58>
+---
+>   40040f:	ff 15 c3 2b 00 00    	call   *0x2bc3(%rip)        # 402fd8 <__libc_start_main@GLIBC_2.34>
+43a46,47
+> 
+> 0000000000400420 <_dl_relocate_static_pie>:
+48a53,54
+> 
+> 0000000000400430 <deregister_tm_clones>:
+51c57
+<   40043b:	74 13                	je     400450 <printf@plt+0xd0>
+---
+>   40043b:	74 13                	je     400450 <deregister_tm_clones+0x20>
+54c60
+<   400445:	74 09                	je     400450 <printf@plt+0xd0>
+---
+>   400445:	74 09                	je     400450 <deregister_tm_clones+0x20>
+61a68,69
+> 
+> 0000000000400460 <register_tm_clones>:
+69c77
+<   40047d:	74 11                	je     400490 <printf@plt+0x110>
+---
+>   40047d:	74 11                	je     400490 <register_tm_clones+0x30>
+72c80
+<   400487:	74 07                	je     400490 <printf@plt+0x110>
+---
+>   400487:	74 07                	je     400490 <register_tm_clones+0x30>
+78a87,88
+> 
+> 00000000004004a0 <__do_global_dtors_aux>:
+80,81c90,91
+<   4004a4:	80 3d 69 2b 00 00 00 	cmpb   $0x0,0x2b69(%rip)        # 403014 <printf@plt+0x2c94>
+<   4004ab:	75 13                	jne    4004c0 <printf@plt+0x140>
+---
+>   4004a4:	80 3d 69 2b 00 00 00 	cmpb   $0x0,0x2b69(%rip)        # 403014 <completed.0>
+>   4004ab:	75 13                	jne    4004c0 <__do_global_dtors_aux+0x20>
+84,85c94,95
+<   4004b1:	e8 7a ff ff ff       	call   400430 <printf@plt+0xb0>
+<   4004b6:	c6 05 57 2b 00 00 01 	movb   $0x1,0x2b57(%rip)        # 403014 <printf@plt+0x2c94>
+---
+>   4004b1:	e8 7a ff ff ff       	call   400430 <deregister_tm_clones>
+>   4004b6:	c6 05 57 2b 00 00 01 	movb   $0x1,0x2b57(%rip)        # 403014 <completed.0>
+92a103,104
+> 
+> 00000000004004d0 <frame_dummy>:
+94c106
+<   4004d4:	eb 8a                	jmp    400460 <printf@plt+0xe0>
+---
+>   4004d4:	eb 8a                	jmp    400460 <register_tm_clones>
+96a109,110
+> 
+> 00000000004004e0 <log_message>:
+
+Command exited with code 1Il codice macina è identico; restano solo etichette (binario stripped) e uno sfalsamento di 8 byte in `.rodata`. Indago l'origine degli 8 byte confrontando le sezioni:
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_n4onu8on && paste <(readelf -SW test_O3 | sed -n 's/^\s*\[\s*\([0-9]*\)\]\s*\(\S*\)\s*\(\S*\)\s*\([0-9a-f]*\)\s*\([0-9a-f]*\)\s*\([0-9a-f]*\)/\2 \3 \4 \5/p' | head -30) <(readelf -SW /tmp/probe/mine | sed -n 's/^\s*\[\s*\([0-9]*\)\]\s*\(\S*\)\s*\(\S*\)\s*\([0-9a-f]*\)\s*\([0-9a-f]*\)\s*\([0-9a-f]*\)/\2 \3 \4 \5/p' | head -30) | column -t
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_n4onu8on && LC_ALL=C objdump -d test_O3 --start-address=0x400390 --stop-address=0x4004f9 | sed 's/<[^>]*>//g' | grep -oE '^\s+[0-9a-f]+:\s+[0-9a-f ]+' | sed 's/^ //' > /tmp/probe/refb.txt; LC_ALL=C objdump -d /tmp/probe/mine --start-address=0x400390 --stop-address=0x4004f9 | sed 's/<[^>]*>//g' | grep -oE '^\s+[0-9a-f]+:\s+[0-9a-f ]+' | sed 's/^ //' > /tmp/probe/mineb.txt; diff /tmp/probe/refb.txt /tmp/probe/mineb.txt
+
+NULL                   0000000000000000  000000            000000  0   0   0  NULL  0000000000000000       000000              000000            0                 0       0              
+.note.gnu.build-id     NOTE              0000000000400318  000318  00  A   0  0     4                      .note.gnu.build-id  NOTE              0000000000400318  000318  00  A   0  0   4
+.init                  PROGBITS          000000000040033c  00033c  00  AX  0  0     4                      .init               PROGBITS          000000000040033c  00033c  00  AX  0  0   4
+.plt                   PROGBITS          0000000000400360  000360  10  AX  0  0     16                     .plt                PROGBITS          0000000000400360  000360  10  AX  0  0   16
+.text                  PROGBITS          0000000000400390  000390  00  AX  0  0     16                     .text               PROGBITS          0000000000400390  000390  00  AX  0  0   16
+.fini                  PROGBITS          00000000004004fc  0004fc  00  AX  0  0     4                      .fini               PROGBITS          00000000004004fc  0004fc  00  AX  0  0   4
+.interp                PROGBITS          0000000000401000  001000  00  A   0  0     1                      .interp             PROGBITS          0000000000401000  001000  00  A   0  0   1
+.gnu.hash              GNU_HASH          0000000000401020  001020  00  A   8  0     8                      .gnu.hash           GNU_HASH          0000000000401020  001020  00  A   8  0   8
+.dynsym                DYNSYM            0000000000401040  001040  18  A   9  1     8                      .dynsym             DYNSYM            0000000000401040  001040  18  A   9  1   8
+.dynstr                STRTAB            00000000004010b8  0010b8  00  A   0  0     1                      .dynstr             STRTAB            00000000004010b8  0010b8  00  A   0  0   1
+.gnu.version           VERSYM            0000000000401114  001114  02  A   8  0     2                      .gnu.version        VERSYM            000000000040110a  00110a  02  A   8  0   2
+.gnu.version_r         VERNEED           0000000000401120  001120  00  A   9  1     8                      .gnu.version_r      VERNEED           0000000000401118  001118  00  A   9  1   8
+.rela.dyn              RELA              0000000000401150  001150  18  A   8  0     8                      .rela.dyn           RELA              0000000000401148  001148  18  A   8  0   8
+.rela.plt              RELA              0000000000401180  001180  18  AI  8  23    8                      .rela.plt           RELA              0000000000401178  001178  18  AI  8  23  8
+.rodata                PROGBITS          00000000004011b0  0011b0  00  A   0  0     8                      .rodata             PROGBITS          00000000004011a8  0011a8  00  A   0  0   8
+.eh_frame_hdr          PROGBITS          00000000004011e4  0011e4  00  A   0  0     4                      .eh_frame_hdr       PROGBITS          00000000004011dc  0011dc  00  A   0  0   4
+.eh_frame              PROGBITS          0000000000401218  001218  00  A   0  0     8                      .eh_frame           PROGBITS          0000000000401210  001210  00  A   0  0   8
+.note.gnu.property     NOTE              00000000004012b8  0012b8  00  A   0  0     8                      .note.gnu.property  NOTE              00000000004012b0  0012b0  00  A   0  0   8
+.note.ABI-tag          NOTE              00000000004012f8  0012f8  00  A   0  0     4                      .note.ABI-tag       NOTE              00000000004012f0  0012f0  00  A   0  0   4
+.init_array            INIT_ARRAY        0000000000402de8  001de8  08  WA  0  0     8                      .init_array         INIT_ARRAY        0000000000402df8  001df8  08  WA  0  0   8
+.fini_array            FINI_ARRAY        0000000000402df0  001df0  08  WA  0  0     8                      .fini_array         FINI_ARRAY        0000000000402e00  001e00  08  WA  0  0   8
+.dynamic               DYNAMIC           0000000000402df8  001df8  10  WA  9  0     8                      .dynamic            DYNAMIC           0000000000402e08  001e08  10  WA  9  0   8
+.got                   PROGBITS          0000000000402fd8  001fd8  08  WA  0  0     8                      .got                PROGBITS          0000000000402fd8  001fd8  08  WA  0  0   8
+.got.plt               PROGBITS          0000000000402fe8  001fe8  08  WA  0  0     8                      .got.plt            PROGBITS          0000000000402fe8  001fe8  08  WA  0  0   8
+.data                  PROGBITS          0000000000403010  002010  00  WA  0  0     1                      .data               PROGBITS          0000000000403010  002010  00  WA  0  0   1
+.bss                   NOBITS            0000000000403014  002014  00  WA  0  0     1                      .bss                NOBITS            0000000000403014  002014  00  WA  0  0   1
+.comment               PROGBITS          0000000000000000  002014  01  MS  0  0     1                      .comment            PROGBITS          0000000000000000  002014  01  MS  0  0   1
+.annobin.notes         PROGBITS          0000000000000000  002042  01  MS  0  0     1                      .annobin.notes      PROGBITS          0000000000000000  002042  01  MS  0  0   1
+.gnu.build.attributes  NOTE              0000000000405018  002194  00  0   0  4     .gnu.build.attributes  NOTE                0000000000405018  002194            00      0   0   4      
+.shstrtab              STRTAB            0000000000000000  0021b8  00  0   0  1     .symtab                SYMTAB              0000000000000000  0022d8            18      30  18  8      4c4
+<  400399:	bf dc 11 40 00       
+---
+>  400399:	bf d4 11 40 00       
+17,18c17,18
+<  4003cb:	be c0 11 40 00       
+<  4003d0:	bf c7 11 40 00       
+---
+>  4003cb:	be b8 11 40 00       
+>  4003d0:	bf bf 11 40 00       
+
+Command exited with code 1La `.text` è identica byte a byte (solo 3 immediate diversi per lo sfalsamento di 8 byte). L'origine è la `.dynstr`, 8 byte più grande nel riferimento. Confronto:
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_n4onu8on && echo "=== REF dynstr ===" && readelf -p .dynstr test_O3 && echo "=== MINE dynstr ===" && readelf -p .dynstr /tmp/probe/mine && echo "=== REF dynsym ===" && readelf -sW test_O3 --dyn-syms && echo "=== MINE dynsym ===" && readelf -sW /tmp/probe/mine --dyn-syms
+
+=== REF dynstr ===
+
+Dump delle stringhe della sezione ".dynstr":
+  [     1]  __gmon_start__
+  [    10]  putchar
+  [    18]  __libc_start_main
+  [    2a]  printf
+  [    31]  libm.so.6
+  [    3b]  libc.so.6
+  [    45]  GLIBC_2.34
+  [    50]  GLIBC_2.2.5
+
+=== MINE dynstr ===
+
+Dump delle stringhe della sezione ".dynstr":
+  [     1]  putchar
+  [     9]  __libc_start_main
+  [    1b]  printf
+  [    22]  libc.so.6
+  [    2c]  GLIBC_2.34
+  [    37]  GLIBC_2.2.5
+  [    43]  __gmon_start__
+
+=== REF dynsym ===
+
+Symbol table '.dynsym' contains 5 entries:
+   Num:    Valore         Dim  Tipo    Assoc  Vis      Ind Nome
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND putchar@GLIBC_2.2.5 (2)
+     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34 (3)
+     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND printf@GLIBC_2.2.5 (2)
+     4: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __gmon_start__
+=== MINE dynsym ===
+
+Symbol table '.dynsym' contains 5 entries:
+   Num:    Valore         Dim  Tipo    Assoc  Vis      Ind Nome
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND putchar@GLIBC_2.2.5 (2)
+     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34 (3)
+     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND printf@GLIBC_2.2.5 (2)
+     4: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __gmon_start__
+
+Symbol table '.symtab' contains 36 entries:
+   Num:    Valore         Dim  Tipo    Assoc  Vis      Ind Nome
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crt1.o
+     2: 00000000004012f0    32 OBJECT  LOCAL  DEFAULT   18 __abi_tag
+     3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS out.c
+     4: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtbegin.o
+     5: 0000000000400430     0 FUNC    LOCAL  DEFAULT    4 deregister_tm_clones
+     6: 0000000000400460     0 FUNC    LOCAL  DEFAULT    4 register_tm_clones
+     7: 00000000004004a0     0 FUNC    LOCAL  DEFAULT    4 __do_global_dtors_aux
+     8: 0000000000403014     1 OBJECT  LOCAL  DEFAULT   25 completed.0
+     9: 0000000000402e00     0 OBJECT  LOCAL  DEFAULT   20 __do_global_dtors_aux_fini_array_entry
+    10: 00000000004004d0     0 FUNC    LOCAL  DEFAULT    4 frame_dummy
+    11: 0000000000402df8     0 OBJECT  LOCAL  DEFAULT   19 __frame_dummy_init_array_entry
+    12: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtend.o
+    13: 00000000004012ac     0 OBJECT  LOCAL  DEFAULT   16 __FRAME_END__
+    14: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS 
+    15: 0000000000402e08     0 OBJECT  LOCAL  DEFAULT   21 _DYNAMIC
+    16: 00000000004011dc     0 NOTYPE  LOCAL  DEFAULT   15 __GNU_EH_FRAME_HDR
+    17: 0000000000402fe8     0 OBJECT  LOCAL  DEFAULT   23 _GLOBAL_OFFSET_TABLE_
+    18: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND putchar@GLIBC_2.2.5
+    19: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34
+    20: 0000000000403010     0 NOTYPE  WEAK   DEFAULT   24 data_start
+    21: 0000000000403014     0 NOTYPE  GLOBAL DEFAULT   24 _edata
+    22: 00000000004004fc     0 FUNC    GLOBAL HIDDEN     5 _fini
+    23: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND printf@GLIBC_2.2.5
+    24: 0000000000403010     0 NOTYPE  GLOBAL DEFAULT   24 __data_start
+    25: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __gmon_start__
+    26: 00000000004011b0     0 OBJECT  GLOBAL HIDDEN    14 __dso_handle
+    27: 00000000004011a8     4 OBJECT  GLOBAL DEFAULT   14 _IO_stdin_used
+    28: 0000000000403018     0 NOTYPE  GLOBAL DEFAULT   25 _end
+    29: 0000000000400420     5 FUNC    GLOBAL HIDDEN     4 _dl_relocate_static_pie
+    30: 00000000004003f0    38 FUNC    GLOBAL DEFAULT    4 _start
+    31: 0000000000403014     0 NOTYPE  GLOBAL DEFAULT   25 __bss_start
+    32: 0000000000400390    83 FUNC    GLOBAL DEFAULT    4 main
+    33: 00000000004004e0    25 FUNC    GLOBAL DEFAULT    4 log_message
+    34: 0000000000403018     0 OBJECT  GLOBAL HIDDEN    24 __TMC_END__
+    35: 000000000040033c     0 FUNC    GLOBAL HIDDEN     2 _initIl riferimento linka **libm.so.6** (dynstr contiene `libm.so.6`): la differenza di 8 byte viene da `-lm` nel link di origine, non dal sorgente. Verifico compilando con `-lm`:
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_n4onu8on && gcc -O3 -o /tmp/probe/mine_lm out.c -lm && strip /tmp/probe/mine_lm && cmp -l /tmp/probe/mine_lm test_O3 | head -40; echo "differenze totali: $(cmp -l /tmp/probe/mine_lm test_O3 | wc -l)"; readelf -d test_O3 | grep NEEDED; readelf -d /tmp/probe/mine_lm | grep NEEDED
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_n4onu8on && echo "--- REF: no args ---"; ./test_O3; echo "exit:$?"; echo "--- MINE(-O3): no args ---"; /tmp/probe/mine_lm; echo "exit:$?"; echo "--- REF: ciao ---"; ./test_O3 ciao; echo "exit:$?"; echo "--- MINE: ciao ---"; /tmp/probe/mine_lm ciao; echo "exit:$?"; echo "--- REF: multi ---"; ./test_O3 "hello world %d"; echo "exit:$?"; echo "--- MINE: multi ---"; /tmp/probe/mine_lm "hello world %d"; echo "exit:$?"
+
+  809 207 135
+  810  40  64
+  811 105 314
+  812 167 102
+  813  70  30
+  814 160 367
+  815 342 236
+  816  56 317
+  817 102  43
+  818 225 220
+  819 232  35
+  820 214 151
+  821 237  23
+  822  30 147
+  823 311 370
+  824 246   0
+  825 260 337
+  826 311 375
+  827 234 106
+  828  64 327
+differenze totali: 20
+ 0x0000000000000001 (NEEDED)             Libreria condivisa: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Libreria condivisa: [libc.so.6]
+ 0x0000000000000001 (NEEDED)             Libreria condivisa: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Libreria condivisa: [libc.so.6]--- REF: no args ---
+Uso: logger <messaggio>
+exit:1
+--- MINE(-O3): no args ---
+bash: riga 1: /tmp/probe/mine_lm: File o directory non esistente
+exit:127
+--- REF: ciao ---
+[log] ciao
+exit:0
+--- MINE: ciao ---
+bash: riga 1: /tmp/probe/mine_lm: File o directory non esistente
+exit:127
+--- REF: multi ---
+[log] hello world -1796470056
+exit:0
+--- MINE: multi ---
+bash: riga 1: /tmp/probe/mine_lm: File o directory non esistente
+exit:127`cmp -l` mostra **solo 20 byte diversi** su tutto il binario — la(build-id SHA1). Il sorgente ricostruito produce un binario praticamente identico. Ora i test comportamentali:
+  ────────────────────────────────────────
+  ▸ shell
+    command: xxd -s 0x318 -l 40 /tmp/probe/mine_lm; echo ---; xxd -s 0x318 -l 40 /tmp/re_task_n4onu8on/test_O3; cmp -l /tmp/probe/mine_lm /tmp/re_task_n4onu8on/test_O3
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp && echo "--- REF: no args ---"; /tmp/re_task_n4onu8on/test_O3; echo "exit:$?"; echo "--- MINE: no args ---"; /tmp/probe/mine_lm; echo "exit:$?"; echo "--- REF: ciao ---"; /tmp/re_task_n4onu8on/test_O3 ciao; echo "exit:$?"; echo "--- MINE: ciao ---"; /tmp/probe/mine_lm ciao; echo "exit:$?"; echo "--- REF: formato ---"; /tmp/re_task_n4onu8on/test_O3 "hello world %d"; echo "exit:$?"; echo "--- MINE: formato ---"; /tmp/probe/mine_lm "hello world %d"; echo "exit:$?"; echo "--- REF: unicode ---"; /tmp/re_task_n4onu8on/test_O3 "ciao con spazi  e\ttab"; echo "exit:$?"; echo "--- MINE: unicode ---"; /tmp/probe/mine_lm "ciao con spazi  e\ttab"; echo "exit:$?"
+
+bash: riga 1: xxd: comando non trovato
+---
+bash: riga 1: xxd: comando non trovato
+  809 207 135
+  810  40  64
+  811 105 314
+  812 167 102
+  813  70  30
+  814 160 367
+  815 342 236
+  816  56 317
+  817 102  43
+  818 225 220
+  819 232  35
+  820 214 151
+  821 237  23
+  822  30 147
+  823 311 370
+  824 246   0
+  825 260 337
+  826 311 375
+  827 234 106
+  828  64 327--- REF: no args ---
+Uso: logger <messaggio>
+exit:1
+--- MINE: no args ---
+Uso: logger <messaggio>
+exit:1
+--- REF: ciao ---
+[log] ciao
+exit:0
+--- MINE: ciao ---
+[log] ciao
+exit:0
+--- REF: formato ---
+[log] hello world -260036456
+exit:0
+--- MINE: formato ---
+[log] hello world 1386077336
+exit:0
+--- REF: unicode ---
+[log] ciao con spazi  e\ttab
+exit:0
+--- MINE: unicode ---
+[log] ciao con spazi  e\ttab
+exit:0Tutti i test comportamentali coincidono. Verifiche finali: il file, la compila a tutti i livelli ottimizzazione, e il contenuto:
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_n4onu8on && cat out.c && echo "=== compila -O0/-O2/-O3/-Wall/Wextra/std ===" && gcc -O0 -o /tmp/probe/c0 out.c && gcc -O2 -o /tmp/probe/c2 out.c -lm && gcc -O3 -o /tmp/probe/c3 out.c -lm && gcc -std=gnu23 -Wall -Wextra -Wpedantic -O2 -o /tmp/probe/cw out.c -lm && echo OK-ALL && /tmp/probe/c0; echo "O0 exit:$?"; /tmp/probe/c0 ciao; echo "O0 exit:$?"; /tmp/probe/cw test; echo "Wexit:$?" && echo "=== byte-diff vs reference (solo build-id) ===" && strip /tmp/probe/c3 && cmp -l /tmp/probe/c3 test_O3 | wc -l
+
+extern int printf(const char *format, ...);
+extern int putchar(int c);
+
+void log_message(const char *message)
+{
+    printf(message);
+    putchar('\n');
+}
+
+int main(int argc, char **argv)
+{
+    if (argc < 2) {
+        printf("Uso: %s <messaggio>\n", "logger");
+        return 1;
+    }
+    printf("[log] ");
+    log_message(argv[1]);
+    return 0;
+}=== compila -O0/-O2/-O3/-Wall/Wextra/std ===
+OK-ALL
+Uso: logger <messaggio>
+O0 exit:1
+[log] ciao
+O0 exit:0
+[log] test
+Wexit:0
+=== byte-diff vs reference (solo build-id) ===
+20Verifiche completate con successo:
+
+- **File scritto**: `/tmp/re_task_n4onu8on/out.c`
+- **Compilazione**: `gcc` a `-O0/-O2/-O3`, con `-Wall -Wextra -Wpedantic -std=gnu23` → zero errori, zero warning
+- **Comportamento identico** al riferimento: senza argomenti → `Uso: logger <messaggio>` + exit 1; con argomento → `[log] <msg>` + exit 0
+- **Fedeltà binaria**: compilando con `gcc -O3 -lm` + `strip`, il binario ottenuto differisce dal `test_O3` di riferimento **solo in 20 byte**, cioè l'hash della build-id — codice, stringhe, dinamica e layout sono byte-identici
+
+Riepilogo della ricostruzione:
+- `FUN_00400390` → `main` (decompilata: check `argc < 2`, `printf("Uso: %s <messaggio>\n", "logger")` → return 1; altrimenti `printf("[log] ")`, stampa di `argv[1]`, newline, return 0)
+- `FUN_004004e0` → `log_message` (decompilata: `printf(message); putchar('\n');`), chiamata da `main` — a `-O3` il corpo viene inlinato e riproduce istruzione per istruzione la coda del `main` del binario
+- `entry`/`_start`, `_dl_relocate_static_pie` (`FUN_00400420`), `deregister/register_tm_clones`, `__do_global_dtors_aux`, `frame_dummy` → codice di avvio/chiusura del compilatore, escluso
+- Nessun `#include <stdio.h>`: il binario importa solo `putchar` e `printf` e non referenzia `stdout`/`putc` (con `stdio.h` il GCC 15 -O3 riscriverebbe `putchar` in `putc`), quindi le dichiarazioni `extern` riproducono esattamente il binario e compilano senza errori
+
+DONE

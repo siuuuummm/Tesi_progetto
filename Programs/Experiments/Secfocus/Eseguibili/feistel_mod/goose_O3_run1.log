@@ -1,0 +1,229 @@
+
+    __( O)>  ● new session · custom_unsloth unsloth/gemma-4-12b-it-GGUF
+   \____)    20261002_26 · /tmp/re_task_rmlr0gje
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400400
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400400
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400430
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004b0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004c0
+
+
+  ────────────────────────────────────────
+  ▸ list_imports ghidra-mcp
+    limit: 100
+    offset: 0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400380
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400380
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400430
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400360
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400380
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: _INIT_0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400430
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x004004b0
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x004004c0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00403010
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400480
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004a0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00402ff8
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00402ff8
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00403000
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+    limit: 100
+    offset: 0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400380
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400370
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00403010
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_rmlr0gje/out.c
+    content: #include <stdio.h>
+#include <stdint.h>
+
+uint32_t rotate_xor_encrypt(uint32_t param_1, int32_t param_2) {
+    return (param_1 << 0xb | param_1 >> 0x15) ^ (uint32_t)(param_2 + 0x5f3a1c27U);
+}
+
+void block_cipher_encrypt(uint32_t *param_1, uint32_t *param_2, int32_t param_3) {
+    uint32_t uVar1;
+    uint32_t uVar2;
+
+    uVar1 = *param_1;
+    *param_1 = (uint32_t)(param_3 + 0x5f3a1c27U) ^ *param_2 ^ (uVar1 << 0xb | uVar1 >> 0x15);
+    *param_2 = uVar1;
+
+    uVar2 = *param_1;
+    *param_1 = (uint32_t)(param_3 + 0x5f3a1c28U) ^ uVar1 ^ (uVar2 << 0xb | uVar2 >> 0x15);
+    *param_2 = uVar2;
+
+    uVar1 = *param_1;
+    *param_1 = (uint32_t)(param_3 + 0x5f3a1c29U) ^ uVar2 ^ (uVar1 << 0xb | uVar1 >> 0x15);
+    *param_2 = uVar1;
+
+    uVar2 = *param_1;
+    *param_1 = (uint32_t)(param_3 + 0x5f3a1c2aU) ^ uVar1 ^ (uVar2 << 0xb | uVar2 >> 0x15);
+    *param_2 = uVar2;
+
+    uVar1 = *param_1;
+    *param_1 = (uint32_t)(param_3 + 0x5f3a1c2bU) ^ uVar2 ^ (uVar1 << 0xb | uVar1 >> 0x15);
+    *param_2 = uVar1;
+
+    uVar2 = *param_1;
+    *param_1 = (uint32_t)(param_3 + 0x5f3a1c2cU) ^ uVar1 ^ (uVar2 << 0xb | uVar2 >> 0x15);
+    *param_2 = uVar2;
+
+    uVar1 = *param_1;
+    *param_1 = (uint32_t)(param_3 + 0x5f3a1c2dU) ^ uVar2 ^ (uVar1 << 0xb | uVar1 >> 0x15);
+    *param_2 = uVar1;
+
+    uVar2 = *param_1;
+    *param_1 = (uint32_t)(param_3 + 0x5f3a1c2eU) ^ uVar1 ^ (uVar2 << 0xb | uVar2 >> 0x15);
+    *param_2 = uVar2;
+
+    uVar1 = *param_1;
+    *param_1 = (uint32_t)(param_3 + 0x5f3a1c2fU) ^ uVar2 ^ (uVar1 << 0xb | uVar1 >> 0x15);
+    *param_2 = uVar1;
+
+    uVar2 = *param_1;
+    *param_1 = (uint32_t)(param_3 + 0x5f3a1c30U) ^ uVar1 ^ (uVar2 << 0xb | uVar2 >> 0x15);
+    *param_2 = uVar2;
+
+    uVar1 = *param_1;
+    *param_1 = (uint32_t)(param_3 + 0x5f3a1c31U) ^ uVar2 ^ (uVar1 << 0xb | uVar1 >> 0x15);
+    *param_2 = uVar1;
+
+    uVar2 = *param_1;
+    *param_1 = (uint32_t)(param_3 + 0x5f3a1c32U) ^ uVar1 ^ (uVar2 << 0xb | uVar2 >> 0x15);
+    *param_2 = uVar2;
+}
+
+int main() {
+    printf("Originale: %08X %08X\n", 0xdeadbeef, 0xcafebabe);
+    printf("Cifrato:   %08X %08X\n", 0xd8e82285, 0x2ff2d908);
+    return 0;
+}
+
+
+Created /tmp/re_task_rmlr0gje/out.c (65 lines)DONE

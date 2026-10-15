@@ -1,0 +1,114 @@
+
+    __( O)>  ● new session · custom_unsloth unsloth/gemma-4-12b-it-GGUF
+   \____)    20261002_29 · /tmp/re_task_rkkyb556
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    limit: 2000
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ search_functions_by_name ghidra-mcp
+    query: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003a0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_0040074e
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x0040074e
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400486
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+    limit: 100
+
+
+  ────────────────────────────────────────
+  ▸ list_segments ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    limit: 5000
+
+
+  ────────────────────────────────────────
+  ▸ search_functions_by_name ghidra-mcp
+    query: main
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003d0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003e0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400410
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+    limit: 1000
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    filter: Linea
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+    limit: 100
+    offset: 100
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00401238
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00401240
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    limit: 5000
+
+
+Error: Headless run interrupted

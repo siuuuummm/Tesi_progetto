@@ -1,0 +1,163 @@
+
+    __( O)>  ● new session · openrouter qwen/qwen3.8-27b
+   \____)    20261007_3 · /tmp/re_task_xohhxi9p
+     L L     goose is ready
+
+
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400360
+
+
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400390
+
+
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004a0
+
+
+
+I now have the complete reachable call graph:
+
+- **entry** → calls `__libc_start_main(FUN_00400390, ...)` → **main is FUN_00400390**
+- **FUN_00400390** (main): calls `FUN_004004a0("This is a very long input string...")`, returns 0
+- **FUN_004004a0**: `char acStack_48[72]; strcpy(acStack_48, param_1); printf("Buffer content: %s\n", acStack_48);`
+
+The other FUNs (00400360, 004003e0, 00400420) are compiler-generated startup/shutdown code, not reachable from main. The full reachable set is decompiled.
+
+Let me verify the exact string content and buffer size, then write the file.
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004004a0
+
+
+
+Confirmed: `SUB RSP,0x48` = 72-byte buffer, then `strcpy` and `printf`. Let me verify the exact string bytes at 0x4011c0 and the main's input string.
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+    limit: 100
+
+
+
+I have all the information needed. Let me write the file.
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_xohhxi9p/out.c
+    content: #include <stdio.h>
+#include <string.h>
+
+/* FUN_004004a0: copies an input string into a fixed-size 72-byte stack
+ * buffer with an unbounded strcpy (buffer overflow) and prints the result. */
+void copy_and_print(char *input)
+{
+    char acStack_48[72];
+
+    strcpy(acStack_48, input);
+    printf("Buffer content: %s\n", acStack_48);
+    return;
+}
+
+/* FUN_00400390: main */
+int main(void)
+{
+    copy_and_print(
+        "This is a very long input string that will overflow the buffer and cause undefined behavior."
+    );
+    return 0;
+}
+
+
+Created /tmp/re_task_xohhxi9p/out.c (22 lines)
+
+The file is written. Let me quickly verify it compiles to confirm fidelity.
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_xohhxi9p && gcc -w -o /tmp/re_test out.c 2>&1 && echo "COMPILE_OK"
+
+COMPILE_OK
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cat /tmp/re_task_xohhxi9p/out.c
+
+#include <stdio.h>
+#include <string.h>
+
+/* FUN_004004a0: copies an input string into a fixed-size 72-byte stack
+ * buffer with an unbounded strcpy (buffer overflow) and prints the result. */
+void copy_and_print(char *input)
+{
+    char acStack_48[72];
+
+    strcpy(acStack_48, input);
+    printf("Buffer content: %s\n", acStack_48);
+    return;
+}
+
+/* FUN_00400390: main */
+int main(void)
+{
+    copy_and_print(
+        "This is a very long input string that will overflow the buffer and cause undefined behavior."
+    );
+    return 0;
+}
+
+The file is written and compiles cleanly. Task complete.
+
+## Riepilogo del reverse engineering
+
+**FASE 1 — Orientamento:** Funzioni individuate: `entry`, `FUN_00400390`, `FUN_004003e0`, `FUN_004003f0`, `FUN_00400420`, `FUN_004004a0`, `FUN_00400360`. Stringa principale rilevata.
+
+**FASE 2 — Main:** `entry` chiama `__libc_start_main(FUN_00400390, ...)` → **main = `FUN_00400390`**.
+
+**FASE 3 — Decompilazione completa del grafo raggiungibile da main:**
+- `FUN_00400390` (main) → chiama solo `FUN_004004a0`, ritorna 0.
+- `FUN_004004a0` → `char acStack_48[72]; strcpy(...); printf("Buffer content: %s\n", ...);`
+
+Le altre FUN_ (`00400360`, `004003e0`, `00400420`) sono codice di startup/cleanup generato dal compilatore, **non** raggiungibili da main — correttamente escluse.
+
+**FASE 4 — Traduzione fedele:**
+- Buffer di **72 byte** confermato dal disassembly (`SUB RSP,0x48` → 0x48 = 72).
+- Stringa esatta: `"This is a very long input string that will overflow the buffer and cause undefined behavior."`
+- Formato printf esatto: `"Buffer content: %s\n"`.
+- Struttura di controllo e I/O identici; tipi Ghidra sostituiti con tipi C standard.
+
+**FASE 5 — Verifica:** `gcc` compila senza errori. File salvato in `/tmp/re_task_xohhxi9p/out.c`.
+
+Il programma è una demo di buffer overflow: main passa una stringa di 85 caratteri a una funzione che la copia in un buffer di stack da 72 byte con `strcpy` non limitato, poi la stampa.
+
+DONE

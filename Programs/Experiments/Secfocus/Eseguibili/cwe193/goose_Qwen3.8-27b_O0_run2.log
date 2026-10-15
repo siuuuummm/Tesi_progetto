@@ -1,0 +1,431 @@
+
+    __( O)>  ● new session · openrouter qwen/qwen3.8-27b
+   \____)    20261012_50 · /tmp/re_task_4750hqx5
+     L L     goose is ready
+
+
+I'll start by orienting myself. Let me get the list of functions and strings in parallel.
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+
+Let me get the strings and the detailed function list with addresses.
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_segments ghidra-mcp
+
+
+
+Only one string found. Let me examine the .rodata section directly and decompile the entry point to find main.
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_4750hqx5 && ls -la && file * 2>/dev/null; for f in *; do if file "$f" | grep -q ELF; then echo "=== $f ==="; objdump -h "$f" | grep -E 'rodata|text'; objdump -s -j .rodata "$f"; fi; done
+
+totale 12
+drwx------  2 fotoppo fotoppo    60 12 ott 13.35 .
+drwxrwxrwt 27 nobody  nobody   1140 12 ott 13.35 ..
+-rwxr-xr-x  1 fotoppo fotoppo 10888 12 ott 13.35 test_O0
+test_O0: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=15e1075e075e299a571d20f00b9cbee419312ea8, for GNU/Linux 3.2.0, stripped
+=== test_O0 ===
+  3 .text         00000215  00000000004003d0  00000000004003d0  000003d0  2**4
+ 13 .rodata       00000058  00000000004012d8  00000000004012d8  000012d8  2**3
+
+test_O0:     formato del file elf64-x86-64
+
+Contenuto della sezione .rodata:
+ 4012d8 01000200 00000000 00000000 00000000  ................
+ 4012e8 4e6f6d65 2074726f 70706f20 6c756e67  Nome troppo lung
+ 4012f8 6f3a2025 7a752063 61726174 74657269  o: %zu caratteri
+ 401308 0a000000 00000000 52656769 73747261  ........Registra
+ 401318 746f3a20 25732028 257a7520 63617261  to: %s (%zu cara
+ 401328 74746572 69290a00                    tteri)..        
+
+Main is `FUN_00400507`. Let me decompile it and the other functions in parallel.
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400507
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004b6
+
+
+
+Main calls only `FUN_004004b6` (a name-registration helper) plus libc functions. Let me verify the remaining `FUN_...` are PLT stubs (not program logic) before finalizing.
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_4750hqx5 && objdump -d test_O0 | sed -n '/400357:/,/400460:/p'
+
+(no output)
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_4750hqx5 && objdump -d -M intel test_O0
+
+
+test_O0:     formato del file elf64-x86-64
+
+
+Disassemblamento della sezione .init:
+
+000000000040033c <.init>:
+  40033c:	f3 0f 1e fa          	endbr64
+  400340:	48 83 ec 08          	sub    rsp,0x8
+  400344:	48 8b 05 95 2c 00 00 	mov    rax,QWORD PTR [rip+0x2c95]        # 402fe0 <setvbuf@plt+0x2c20>
+  40034b:	48 85 c0             	test   rax,rax
+  40034e:	74 02                	je     400352 <free@plt-0x1e>
+  400350:	ff d0                	call   rax
+  400352:	48 83 c4 08          	add    rsp,0x8
+  400356:	c3                   	ret
+
+Disassemblamento della sezione .plt:
+
+0000000000400360 <free@plt-0x10>:
+  400360:	ff 35 8a 2c 00 00    	push   QWORD PTR [rip+0x2c8a]        # 402ff0 <setvbuf@plt+0x2c30>
+  400366:	ff 25 8c 2c 00 00    	jmp    QWORD PTR [rip+0x2c8c]        # 402ff8 <setvbuf@plt+0x2c38>
+  40036c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+
+0000000000400370 <free@plt>:
+  400370:	ff 25 8a 2c 00 00    	jmp    QWORD PTR [rip+0x2c8a]        # 403000 <setvbuf@plt+0x2c40>
+  400376:	68 00 00 00 00       	push   0x0
+  40037b:	e9 e0 ff ff ff       	jmp    400360 <free@plt-0x10>
+
+0000000000400380 <strcpy@plt>:
+  400380:	ff 25 82 2c 00 00    	jmp    QWORD PTR [rip+0x2c82]        # 403008 <setvbuf@plt+0x2c48>
+  400386:	68 01 00 00 00       	push   0x1
+  40038b:	e9 d0 ff ff ff       	jmp    400360 <free@plt-0x10>
+
+0000000000400390 <strlen@plt>:
+  400390:	ff 25 7a 2c 00 00    	jmp    QWORD PTR [rip+0x2c7a]        # 403010 <setvbuf@plt+0x2c50>
+  400396:	68 02 00 00 00       	push   0x2
+  40039b:	e9 c0 ff ff ff       	jmp    400360 <free@plt-0x10>
+
+00000000004003a0 <printf@plt>:
+  4003a0:	ff 25 72 2c 00 00    	jmp    QWORD PTR [rip+0x2c72]        # 403018 <setvbuf@plt+0x2c58>
+  4003a6:	68 03 00 00 00       	push   0x3
+  4003ab:	e9 b0 ff ff ff       	jmp    400360 <free@plt-0x10>
+
+00000000004003b0 <malloc@plt>:
+  4003b0:	ff 25 6a 2c 00 00    	jmp    QWORD PTR [rip+0x2c6a]        # 403020 <setvbuf@plt+0x2c60>
+  4003b6:	68 04 00 00 00       	push   0x4
+  4003bb:	e9 a0 ff ff ff       	jmp    400360 <free@plt-0x10>
+
+00000000004003c0 <setvbuf@plt>:
+  4003c0:	ff 25 62 2c 00 00    	jmp    QWORD PTR [rip+0x2c62]        # 403028 <setvbuf@plt+0x2c68>
+  4003c6:	68 05 00 00 00       	push   0x5
+  4003cb:	e9 90 ff ff ff       	jmp    400360 <free@plt-0x10>
+
+Disassemblamento della sezione .text:
+
+00000000004003d0 <.text>:
+  4003d0:	f3 0f 1e fa          	endbr64
+  4003d4:	31 ed                	xor    ebp,ebp
+  4003d6:	49 89 d1             	mov    r9,rdx
+  4003d9:	5e                   	pop    rsi
+  4003da:	48 89 e2             	mov    rdx,rsp
+  4003dd:	48 83 e4 f0          	and    rsp,0xfffffffffffffff0
+  4003e1:	50                   	push   rax
+  4003e2:	54                   	push   rsp
+  4003e3:	45 31 c0             	xor    r8d,r8d
+  4003e6:	31 c9                	xor    ecx,ecx
+  4003e8:	48 c7 c7 07 05 40 00 	mov    rdi,0x400507
+  4003ef:	ff 15 e3 2b 00 00    	call   QWORD PTR [rip+0x2be3]        # 402fd8 <setvbuf@plt+0x2c18>
+  4003f5:	f4                   	hlt
+  4003f6:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+  4003fd:	00 00 00 
+  400400:	f3 0f 1e fa          	endbr64
+  400404:	c3                   	ret
+  400405:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+  40040c:	00 00 00 
+  40040f:	90                   	nop
+  400410:	b8 38 30 40 00       	mov    eax,0x403038
+  400415:	48 3d 38 30 40 00    	cmp    rax,0x403038
+  40041b:	74 13                	je     400430 <setvbuf@plt+0x70>
+  40041d:	b8 00 00 00 00       	mov    eax,0x0
+  400422:	48 85 c0             	test   rax,rax
+  400425:	74 09                	je     400430 <setvbuf@plt+0x70>
+  400427:	bf 38 30 40 00       	mov    edi,0x403038
+  40042c:	ff e0                	jmp    rax
+  40042e:	66 90                	xchg   ax,ax
+  400430:	c3                   	ret
+  400431:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+  400435:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+  40043c:	00 00 00 00 
+  400440:	be 38 30 40 00       	mov    esi,0x403038
+  400445:	48 81 ee 38 30 40 00 	sub    rsi,0x403038
+  40044c:	48 89 f0             	mov    rax,rsi
+  40044f:	48 c1 ee 3f          	shr    rsi,0x3f
+  400453:	48 c1 f8 03          	sar    rax,0x3
+  400457:	48 01 c6             	add    rsi,rax
+  40045a:	48 d1 fe             	sar    rsi,1
+  40045d:	74 11                	je     400470 <setvbuf@plt+0xb0>
+  40045f:	b8 00 00 00 00       	mov    eax,0x0
+  400464:	48 85 c0             	test   rax,rax
+  400467:	74 07                	je     400470 <setvbuf@plt+0xb0>
+  400469:	bf 38 30 40 00       	mov    edi,0x403038
+  40046e:	ff e0                	jmp    rax
+  400470:	c3                   	ret
+  400471:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+  400475:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+  40047c:	00 00 00 00 
+  400480:	f3 0f 1e fa          	endbr64
+  400484:	80 3d b5 2b 00 00 00 	cmp    BYTE PTR [rip+0x2bb5],0x0        # 403040 <stdout@GLIBC_2.2.5+0x8>
+  40048b:	75 13                	jne    4004a0 <setvbuf@plt+0xe0>
+  40048d:	55                   	push   rbp
+  40048e:	48 89 e5             	mov    rbp,rsp
+  400491:	e8 7a ff ff ff       	call   400410 <setvbuf@plt+0x50>
+  400496:	c6 05 a3 2b 00 00 01 	mov    BYTE PTR [rip+0x2ba3],0x1        # 403040 <stdout@GLIBC_2.2.5+0x8>
+  40049d:	5d                   	pop    rbp
+  40049e:	c3                   	ret
+  40049f:	90                   	nop
+  4004a0:	c3                   	ret
+  4004a1:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+  4004a5:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+  4004ac:	00 00 00 00 
+  4004b0:	f3 0f 1e fa          	endbr64
+  4004b4:	eb 8a                	jmp    400440 <setvbuf@plt+0x80>
+  4004b6:	55                   	push   rbp
+  4004b7:	48 89 e5             	mov    rbp,rsp
+  4004ba:	48 83 ec 20          	sub    rsp,0x20
+  4004be:	48 89 7d e8          	mov    QWORD PTR [rbp-0x18],rdi
+  4004c2:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  4004c6:	48 89 c7             	mov    rdi,rax
+  4004c9:	e8 c2 fe ff ff       	call   400390 <strlen@plt>
+  4004ce:	48 89 45 f8          	mov    QWORD PTR [rbp-0x8],rax
+  4004d2:	48 83 7d f8 10       	cmp    QWORD PTR [rbp-0x8],0x10
+  4004d7:	76 07                	jbe    4004e0 <setvbuf@plt+0x120>
+  4004d9:	b8 00 00 00 00       	mov    eax,0x0
+  4004de:	eb 25                	jmp    400505 <setvbuf@plt+0x145>
+  4004e0:	bf 10 00 00 00       	mov    edi,0x10
+  4004e5:	e8 c6 fe ff ff       	call   4003b0 <malloc@plt>
+  4004ea:	48 89 45 f0          	mov    QWORD PTR [rbp-0x10],rax
+  4004ee:	48 8b 55 e8          	mov    rdx,QWORD PTR [rbp-0x18]
+  4004f2:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+  4004f6:	48 89 d6             	mov    rsi,rdx
+  4004f9:	48 89 c7             	mov    rdi,rax
+  4004fc:	e8 7f fe ff ff       	call   400380 <strcpy@plt>
+  400501:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+  400505:	c9                   	leave
+  400506:	c3                   	ret
+  400507:	55                   	push   rbp
+  400508:	48 89 e5             	mov    rbp,rsp
+  40050b:	48 83 ec 20          	sub    rsp,0x20
+  40050f:	89 7d ec             	mov    DWORD PTR [rbp-0x14],edi
+  400512:	48 89 75 e0          	mov    QWORD PTR [rbp-0x20],rsi
+  400516:	48 8b 05 1b 2b 00 00 	mov    rax,QWORD PTR [rip+0x2b1b]        # 403038 <stdout@GLIBC_2.2.5>
+  40051d:	b9 00 00 00 00       	mov    ecx,0x0
+  400522:	ba 02 00 00 00       	mov    edx,0x2
+  400527:	be 00 00 00 00       	mov    esi,0x0
+  40052c:	48 89 c7             	mov    rdi,rax
+  40052f:	e8 8c fe ff ff       	call   4003c0 <setvbuf@plt>
+  400534:	c7 45 fc 01 00 00 00 	mov    DWORD PTR [rbp-0x4],0x1
+  40053b:	e9 92 00 00 00       	jmp    4005d2 <setvbuf@plt+0x212>
+  400540:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+  400543:	48 98                	cdqe
+  400545:	48 8d 14 c5 00 00 00 	lea    rdx,[rax*8+0x0]
+  40054c:	00 
+  40054d:	48 8b 45 e0          	mov    rax,QWORD PTR [rbp-0x20]
+  400551:	48 01 d0             	add    rax,rdx
+  400554:	48 8b 00             	mov    rax,QWORD PTR [rax]
+  400557:	48 89 c7             	mov    rdi,rax
+  40055a:	e8 57 ff ff ff       	call   4004b6 <setvbuf@plt+0xf6>
+  40055f:	48 89 45 f0          	mov    QWORD PTR [rbp-0x10],rax
+  400563:	48 83 7d f0 00       	cmp    QWORD PTR [rbp-0x10],0x0
+  400568:	75 33                	jne    40059d <setvbuf@plt+0x1dd>
+  40056a:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+  40056d:	48 98                	cdqe
+  40056f:	48 8d 14 c5 00 00 00 	lea    rdx,[rax*8+0x0]
+  400576:	00 
+  400577:	48 8b 45 e0          	mov    rax,QWORD PTR [rbp-0x20]
+  40057b:	48 01 d0             	add    rax,rdx
+  40057e:	48 8b 00             	mov    rax,QWORD PTR [rax]
+  400581:	48 89 c7             	mov    rdi,rax
+  400584:	e8 07 fe ff ff       	call   400390 <strlen@plt>
+  400589:	48 89 c6             	mov    rsi,rax
+  40058c:	bf e8 12 40 00       	mov    edi,0x4012e8
+  400591:	b8 00 00 00 00       	mov    eax,0x0
+  400596:	e8 05 fe ff ff       	call   4003a0 <printf@plt>
+  40059b:	eb 31                	jmp    4005ce <setvbuf@plt+0x20e>
+  40059d:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+  4005a1:	48 89 c7             	mov    rdi,rax
+  4005a4:	e8 e7 fd ff ff       	call   400390 <strlen@plt>
+  4005a9:	48 89 c2             	mov    rdx,rax
+  4005ac:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+  4005b0:	48 89 c6             	mov    rsi,rax
+  4005b3:	bf 10 13 40 00       	mov    edi,0x401310
+  4005b8:	b8 00 00 00 00       	mov    eax,0x0
+  4005bd:	e8 de fd ff ff       	call   4003a0 <printf@plt>
+  4005c2:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+  4005c6:	48 89 c7             	mov    rdi,rax
+  4005c9:	e8 a2 fd ff ff       	call   400370 <free@plt>
+  4005ce:	83 45 fc 01          	add    DWORD PTR [rbp-0x4],0x1
+  4005d2:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+  4005d5:	3b 45 ec             	cmp    eax,DWORD PTR [rbp-0x14]
+  4005d8:	0f 8c 62 ff ff ff    	jl     400540 <setvbuf@plt+0x180>
+  4005de:	b8 00 00 00 00       	mov    eax,0x0
+  4005e3:	c9                   	leave
+  4005e4:	c3                   	ret
+
+Disassemblamento della sezione .fini:
+
+00000000004005e8 <.fini>:
+  4005e8:	f3 0f 1e fa          	endbr64
+  4005ec:	48 83 ec 08          	sub    rsp,0x8
+  4005f0:	48 83 c4 08          	add    rsp,0x8
+  4005f4:	c3                   	ret
+
+I now have the complete picture from both the decompilation and the raw disassembly. Let me summarize what I found before writing:
+
+**Program logic (only 2 real functions; everything else is PLT stubs / CRT startup-shutdown):**
+
+- **`main` @ 0x400507** — `setvbuf(stdout, 0, 2, 0)`, then loops `i` from 1 to `argc-1`, calls the helper on each `argv[i]`; if result is NULL prints the "too long" message, else prints the "registered" message and `free`s the buffer. Returns 0.
+- **`register_name` @ 0x4004b6** — `len = strlen(name)`; if `len <= 0x10` (16) it does `malloc(0x10)` (16 bytes) + `strcpy`, else returns NULL. This reproduces the exact off-by-one: a 16-char name → 17 bytes written into a 16-byte buffer (1-byte heap overflow), which I must preserve as-is.
+
+The remaining `FUN_00400360/400400/400410/400440` are the PLT resolver and `__do_global_dtors_aux`/`__frame_dummy`-style CRT code (confirmed by disassembly: they only reference the `0x403038`/`0x403040` global-init flags and the PLT jump table), so they are not part of the program.
+
+Strings confirmed from `.rodata`:
+- `0x4012e8`: `Nome troppo lungo: %zu caratteri\n`
+- `0x401310`: `Registrato: %s (%zu caratteri)\n`
+
+Now writing the faithful translation:
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_4750hqx5/out.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/*
+ * Decompiled from test_O0 (stripped x86-64) - original at 0x004004b6.
+ *
+ * Behaviour observed in the binary:
+ *   - measure the input length
+ *   - if the length is <= 0x10 (16): allocate 0x10 (16) bytes and copy the
+ *     whole string with strcpy
+ *   - otherwise return NULL
+ *
+ * Note: for a string of length 16, strcpy writes 17 bytes (16 + NUL) into the
+ * 16-byte allocation. This overflow is reproduced faithfully as found in the
+ * original binary and is intentionally NOT "fixed".
+ */
+char *register_name(char *name)
+{
+    size_t len;
+    char *dest;
+
+    len = strlen(name);
+    if (len <= 0x10) {
+        dest = (char *)malloc(0x10);
+        strcpy(dest, name);
+    }
+    else {
+        dest = (char *)0x0;
+    }
+    return dest;
+}
+
+/*
+ * Decompiled from test_O0 (stripped x86-64) - original main at 0x00400507.
+ *
+ * For every argument (from argv[1]) it attempts to "register" the name:
+ *   - on success (non-NULL): print the registered name and its length, free it
+ *   - on failure (NULL):     print that the name is too long with its length
+ */
+int main(int argc, char **argv)
+{
+    char *name;
+    size_t len;
+    int i;
+
+    setvbuf(stdout, (char *)0x0, 2, 0);
+    for (i = 1; i < argc; i = i + 1) {
+        name = register_name(argv[i]);
+        if (name == (char *)0x0) {
+            len = strlen(argv[i]);
+            printf("Nome troppo lungo: %zu caratteri\n", len);
+        }
+        else {
+            len = strlen(name);
+            printf("Registrato: %s (%zu caratteri)\n", name, len);
+            free(name);
+        }
+    }
+    return 0;
+}
+
+
+Created /tmp/re_task_4750hqx5/out.c (61 lines)
+
+Now let me verify the reconstruction compiles cleanly and behaves identically to the original binary.
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_4750hqx5 && gcc -o out_recon out.c 2>&1 && echo "=== COMPILE OK ===" && echo "--- short name (5 chars) ---" && ./out_recon "ciao" && echo "--- 16-char name (boundary) ---" && ./out_recon "1234567890123456" && echo "--- 17-char name (too long) ---" && ./out_recon "12345678901234567" && echo "--- multiple args ---" && ./out_recon "abc" "toooooongname" "xy"
+echo "==================== ORIGINAL BINARY ===================="
+./test_O0 "ciao" && ./test_O0 "1234567890123456" && ./test_O0 "12345678901234567" && ./test_O0 "abc" "toooooongname" "xy"
+
+=== COMPILE OK ===
+--- short name (5 chars) ---
+Registrato: ciao (4 caratteri)
+--- 16-char name (boundary) ---
+Registrato: 1234567890123456 (16 caratteri)
+--- 17-char name (too long) ---
+Nome troppo lungo: 17 caratteri
+--- multiple args ---
+Registrato: abc (3 caratteri)
+Registrato: toooooongname (13 caratteri)
+Registrato: xy (2 caratteri)
+==================== ORIGINAL BINARY ====================
+Registrato: ciao (4 caratteri)
+Registrato: 1234567890123456 (16 caratteri)
+Nome troppo lungo: 17 caratteri
+Registrato: abc (3 caratteri)
+Registrato: toooooongname (13 caratteri)
+Registrato: xy (2 caratteri)
+
+The reconstruction compiles with no errors and produces **byte-identical output** to the original `test_O0` binary across every test case (short name, the 16-char boundary, the 17-char "too long" case, and multiple arguments).
+
+## Summary
+
+I reverse-engineered the stripped x86-64 binary `test_O0` and faithfully reconstructed its source into `/tmp/re_task_4750hqx5/out.c`.
+
+**Process followed:**
+1. **Orientation** — listed all functions and strings; got the `.rodata` strings via `objdump`.
+2. **Found `main`** — `entry` calls `__libc_start_main(FUN_00400507, ...)` → `main` is `FUN_00400507`.
+3. **Decompiled the reachable functions** — `main` (`FUN_00400507`) and the helper `FUN_004004b6` (named `register_name`). Confirmed via disassembly that `FUN_00400360/400400/400410/400440` are the PLT resolver and CRT startup/shutdown code (`__do_global_dtors_aux` / `__frame_dummy` style), so they were correctly excluded.
+4. **Cross-validated** the decompilation line-by-line against the raw `objdump -d` output — every constant, delta, and branch matched.
+5. **Verified** by compiling and running against the original binary.
+
+**Key details faithfully reproduced (not "corrected"):**
+- `setvbuf(stdout, 0, 2, 0)` (mode 2 = `_IONBF`).
+- Loop `for (i = 1; i < argc; i++)` over `argv`.
+- `register_name`: `len = strlen(name)`; if `len <= 0x10` (16) → `malloc(0x10)` (16 bytes) + `strcpy`; else `NULL`.
+- Exact format strings: `Nome troppo largo`/`Nome troppo lungo: %zu caratteri\n` and `Registrato: %s (%zu caratteri)\n`.
+
+**Preserved vulnerability:** the helper allocates `0x10` (16) bytes but accepts strings up to length 16 (`len <= 0x10`), so a 16-character name makes `strcpy` write 17 bytes (16 + NUL) into the 16-byte buffer — a 1-byte heap off-by-one overflow. Per the task rules this bug is reproduced exactly, not fixed.
+
+DONE

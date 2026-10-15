@@ -1,0 +1,72 @@
+
+    __( O)>  ● new session · custom_unsloth unsloth/gemma-4-26B-A4B-it-GGUF
+   \____)    20261014_59 · /tmp/re_task_n3rgz1eq
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400400
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+    limit: 100
+    offset: 0
+
+Network error: Stream decode error: error decoding response body
+
+Please resend your message to try again.
+
+
+=== NUDGE 1/2 ===
+
+    __( O)>  ● resuming · custom_unsloth unsloth/gemma-4-26B-A4B-it-GGUF
+   \____)    20261014_59 · /tmp/re_task_n3rgz1eq
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: ls -R
+
+.:
+test_O3
+  ────────────────────────────────────────
+  ▸ shell
+    command: hexdump -C test_O3 | grep "000013"
+
+00000130  e8 2d 40 00 00 00 00 00  e8 2d 40 00 00 00 00 00  |.-@......-@.....|
+00001300  01 00 02 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+00001310  54 72 6f 70 70 69 20 65  6c 65 6d 65 6e 74 69 00  |Troppi elementi.|
+00001320  53 6f 6d 6d 61 3a 20 25  75 0a 00 00 00 00 00 00  |Somma: %u.......|
+00001330  45 6c 65 6d 65 6e 74 69  3a 20 25 75 2c 20 62 79  |Elementi: %u, by|
+00001340  74 65 20 61 6c 6c 6f 63  61 74 69 3a 20 25 75 0a  |te allocati: %u.|
+00001350  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+00001360  00 00 00 00 01 00 00 00  02 00 00 00 03 00 00 00  |................|
+00001370  01 00 00 00 01 00 00 00  01 00 00 00 01 00 00 00  |................|
+00001380  04 00 00 00 04 00 00 00  04 00 00 00 04 00 00 00  |................|
+00001390  01 1b 03 3b 2c 00 00 00  04 00 00 00 d0 ef ff ff  |...;,...........|
+000013a0  70 00 00 00 70 f0 ff ff  98 00 00 00 f0 f1 ff ff  |p...p...........|
+000013b0  48 00 00 00 20 f2 ff ff  5c 00 00 00 00 00 00 00  |H... ...\.......|
+000013c0  14 00 00 00 00 00 00 00  01 7a 52 00 01 78 10 01  |.........zR..x..|
+000013d0  1b 0c 07 08 90 01 00 00  10 00 00 00 1c 00 00 00  |................|
+000013e0  a0 f1 ff ff 26 00 00 00  00 44 07 10 10 00 00 00  |....&....D......|
+000013f0  30 00 00 00 bc f1 ff ff  05 00 00 00 00 00 00 00  |0...............|
+
+=== NUDGE 2/2 ===
+
+    __( O)>  ● resuming · custom_unsloth unsloth/gemma-4-26B-A4B-it-GGUF
+   \____)    20261014_59 · /tmp/re_task_n3rgz1eq
+     L L     goose is ready

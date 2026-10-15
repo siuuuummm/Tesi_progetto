@@ -1,0 +1,130 @@
+
+    __( O)>  ● new session · openrouter qwen/qwen3.8-27b
+   \____)    20261015_4 · /tmp/re_task_c_2rc0fq
+     L L     goose is ready
+
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004f1
+
+
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004b6
+
+
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400400
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400410
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400440
+
+
+
+I have decompiled all functions reachable from main. The relevant program functions are `FUN_004004f1` (main) and `FUN_004004b6` (the helper). The others (FUN_00400400, 400410, 400440) are compiler-generated startup/exit stubs.
+
+Let me verify the string constants used and check the exact strings.
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    filter: caratteri
+
+
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_c_2rc0fq/out.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char *register_name(const char *input)
+{
+    size_t len;
+    char *dest;
+
+    len = strlen(input);
+    dest = NULL;
+    if (len < 0x11) {
+        dest = (char *)malloc(0x10);
+        strcpy(dest, input);
+    }
+    return dest;
+}
+
+int main(int argc, char *argv[])
+{
+    setvbuf(stdout, (char *)0x0, 2, 0);
+    if (1 < argc) {
+        char **ptr = &argv[1];
+        do {
+            char *result = register_name(*ptr);
+            if (result == NULL) {
+                size_t len = strlen(*ptr);
+                printf("Nome troppo lungo: %zu caratteri\n", len);
+            }
+            else {
+                size_t len = strlen(result);
+                printf("Registrato: %s (%zu caratteri)\n", result, len);
+                free(result);
+            }
+            ptr = ptr + 1;
+        } while (ptr != &argv[2 + (argc - 2)]);
+    }
+    return 0;
+}
+
+
+Created /tmp/re_task_c_2rc0fq/out.c (39 lines)
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_c_2rc0fq && gcc -o /tmp/test_out out.c && /tmp/test_out hello longwordthisistoolong; echo "exit=$?"
+
+Registrato: hello (5 caratteri)
+Nome troppo lungo: 21 caratteri
+exit=0
+
+The code compiles and runs correctly. 
+
+Analysis summary:
+- **main** (`FUN_004004f1`): sets `setvbuf(stdout, NULL, 2, 0)`, iterates over all `argv` arguments. For each, calls the helper; on failure prints "Nome troppo lungo: %zu caratteri", on success prints "Registrato: %s (%zu caratteri)" and frees the buffer.
+- **register_name** (`FUN_004004b6`): computes `strlen`; only if length < 0x11 (17) does it `malloc(0x10)` (16 bytes) and `strcpy` — an off-by-one buffer overflow vulnerability (copies up to 16 chars + null into 16 bytes). I faithfully preserved this.
+
+The other `FUN_...` functions are compiler-generated startup/exit stubs and are not part of the program.
+
+DONE

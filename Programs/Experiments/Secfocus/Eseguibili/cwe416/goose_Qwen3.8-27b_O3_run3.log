@@ -1,0 +1,616 @@
+
+    __( O)>  ● new session · openrouter qwen/qwen3.8-27b
+   \____)    20261012_45 · /tmp/re_task_jw3zjofa
+     L L     goose is ready
+
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+
+Let me look at the strings more thoroughly and decompile entry to find main.
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    limit: 5000
+    filter: 
+
+
+
+Main is `FUN_004003f0`. Let me decompile it plus the other program functions.
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004003f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400510
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400520
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400550
+
+
+
+Let me disassemble main to verify exact semantics, especially the return value and byte writes.
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004003f0
+
+
+
+Let me verify the string constants at those addresses.
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: for a in 00401378 00401393 0040139a 004013aa 004013c8; do printf "%s: " $a; done; echo "--- checking via ghidra list_strings with offset ---"
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    filter: Sessione
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    filter: Accesso
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    filter: Logout
+
+00401378: 00401393: 0040139a: 004013aa: 004013c8: --- checking via ghidra list_strings with offset ---
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_jw3zjofa 2>/dev/null; ls -la; echo "=== parent ==="; ls -la /tmp/re_task_jw3zjofa/.. 2>/dev/null | head -50
+
+totale 12
+drwx------  2 fotoppo fotoppo    60 12 ott 13.21 .
+drwxrwxrwt 27 nobody  nobody   1120 12 ott 13.22 ..
+-rwxr-xr-x  1 fotoppo fotoppo 10936 12 ott 13.21 test_O3
+=== parent ===
+totale 208
+drwxrwxrwt 27 nobody  nobody   1120 12 ott 13.22 .
+dr-xr-xr-x  1 root    root       78  2 ott 09.55 ..
+-rw-r--r--  1 fotoppo fotoppo     0 12 ott 10.42 arch-update.lock
+drwx------  2 fotoppo fotoppo    80 12 ott 09.05 .com.valvesoftware.Steam.mDNFrP
+-rwxr-xr-x  1 fotoppo fotoppo 12920 12 ott 13.15 dbg
+-rwxr-xr-x  1 fotoppo fotoppo 12920 12 ott 13.15 dbg0
+-rwxr-xr-x  1 fotoppo fotoppo 12968 12 ott 13.16 dbg2
+-rw-r--r--  1 fotoppo fotoppo   723 12 ott 13.16 dbg2.c
+-rw-r--r--  1 fotoppo fotoppo   580 12 ott 13.15 dbg.c
+drwxr-x--T  6 fotoppo fotoppo   140 12 ott 09.05 dumps
+drwxrwxrwt  2 nobody  nobody     40 12 ott 09.04 .font-unix
+drwx--x---  2 fotoppo fotoppo   120 12 ott 13.22 fotoppo-ghidra
+drwxr-xr-x 47 fotoppo fotoppo  3640 12 ott 13.22 ghidra_auto
+-rw-------  1 fotoppo fotoppo  1251 12 ott 13.14 goose-0jbjcx.txt
+drwxr-xr-x  2 fotoppo fotoppo    60 12 ott 13.21 hsperfdata_fotoppo
+drwxrwxrwt  2 nobody  nobody     60 12 ott 09.05 .ICE-unix
+drwx------  2 fotoppo fotoppo    60 12 ott 13.13 lu6727ik9l.tmp
+-rw-r--r--  1 fotoppo fotoppo    46 12 ott 12.14 o1.txt
+-rw-r--r--  1 fotoppo fotoppo    46 12 ott 12.14 o2.txt
+-rw-r--r--  1 fotoppo fotoppo    56 12 ott 11.20 o_new
+-rw-r--r--  1 fotoppo fotoppo    56 12 ott 11.20 o_orig
+srwxr-xr-x  1 fotoppo fotoppo     0 12 ott 09.19 OSL_PIPE_1000_SingleOfficeIPC_4cf0fdb4df652a13e9ec15329362b811
+-rwxr-xr-x  1 fotoppo fotoppo 12928 12 ott 11.26 out_bin
+-rwxr-xr-x  1 fotoppo fotoppo 12928 12 ott 11.27 out_bin2
+-rwxr-xr-x  1 fotoppo fotoppo 12928 12 ott 13.14 out_test
+-rwxr-xr-x  1 fotoppo fotoppo 12968 12 ott 13.16 out_test0
+-rwxr-xr-x  1 fotoppo fotoppo 12616 12 ott 09.50 out_verify
+drwx------  2 fotoppo fotoppo    40 12 ott 09.05 plasma-csd-generator.CKcxLB
+srwxr-xr-x  1 nobody  nobody      0 12 ott 09.04 plasmalogin-auth-48d38701-be4a-4c95-b390-8bcf35ed2289
+srwx------  1 nobody  nobody      0 12 ott 09.04 plasmalogin--BaxVAI
+drwxr-xr-x  4 fotoppo fotoppo    80 12 ott 09.05 pressure-vessel-libs-ULRtZK
+drwxr-xr-x  2 fotoppo fotoppo   560 12 ott 11.02 probe
+-rw-r-----  1 fotoppo fotoppo     0 12 ott 09.05 qipc_sharedmemory_ckbnextd34b1627e8259cabff2983bc9e1b02bc2e54b0bf
+-rw-r-----  1 fotoppo fotoppo     0 12 ott 09.05 qipc_systemsem_ckbnextd34b1627e8259cabff2983bc9e1b02bc2e54b0bf
+drwx------  2 fotoppo fotoppo    60 12 ott 13.21 re_task_jw3zjofa
+drwx------  2 fotoppo fotoppo    80 12 ott 09.05 scoped_dirvVG4JA
+drwxr-xr-x  2 fotoppo fotoppo    40 12 ott 09.05 steam
+drwxr-xr-x  2 fotoppo fotoppo    40 12 ott 09.05 steamafFClC
+srwxr-xr-x  1 fotoppo fotoppo     0 12 ott 09.05 steam_chrome_shmem_uid1000_spid2479
+drwx------  3 nobody  nobody     60 12 ott 09.04 systemd-private-04f98b37587146a7a830f44425f56c8c-ananicy-cpp.service-gPu8iQ
+drwx------  3 nobody  nobody     60 12 ott 09.04 systemd-private-04f98b37587146a7a830f44425f56c8c-NetworkManager.service-YvtUS2
+drwx------  3 nobody  nobody     60 12 ott 09.05 systemd-private-04f98b37587146a7a830f44425f56c8c-polkit.service-cbi5Ro
+drwx------  3 nobody  nobody     60 12 ott 09.05 systemd-private-04f98b37587146a7a830f44425f56c8c-power-profiles-daemon.service-ELSNj8
+drwx------  3 nobody  nobody     60 12 ott 09.04 systemd-private-04f98b37587146a7a830f44425f56c8c-systemd-logind.service-1agN29
+drwx------  3 nobody  nobody     60 12 ott 09.05 systemd-private-04f98b37587146a7a830f44425f56c8c-upower.service-AUzP6a
+-rw-r--r--  1 fotoppo fotoppo  3038 12 ott 09.49 t_A.txt
+-rw-r--r--  1 fotoppo fotoppo  3038 12 ott 09.49 t_B.txt
+-rw-r--r--  1 fotoppo fotoppo  3038 12 ott 09.49 t_D.txt
+drwxr-xr-x  2 fotoppo fotoppo    40 12 ott 13.22 .tmpYtZbcJ
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_jw3zjofa
+echo "=== readelf -S ==="
+readelf -S test_O3 2>/dev/null
+echo "=== strings (all) ==="
+strings -n 4 test_O3
+
+=== readelf -S ===
+There are 30 section headers, starting at offset 0x2338:
+
+Intestazioni di sezione:
+  [N°] Nome              Tipo             Indirizzo         Offset
+       Dimensione        DimEnt           Flag   Link  Info  Allin
+  [ 0]                   NULL             0000000000000000  00000000
+       0000000000000000  0000000000000000           0     0     0
+  [ 1] .note.gnu.bu[...] NOTE             0000000000400318  00000318
+       0000000000000024  0000000000000000   A       0     0     4
+  [ 2] .init             PROGBITS         000000000040033c  0000033c
+       000000000000001b  0000000000000000  AX       0     0     4
+  [ 3] .plt              PROGBITS         0000000000400360  00000360
+       0000000000000090  0000000000000010  AX       0     0     16
+  [ 4] .text             PROGBITS         00000000004003f0  000003f0
+       00000000000001d6  0000000000000000  AX       0     0     16
+  [ 5] .fini             PROGBITS         00000000004005c8  000005c8
+       000000000000000d  0000000000000000  AX       0     0     4
+  [ 6] .interp           PROGBITS         0000000000401000  00001000
+       000000000000001c  0000000000000000   A       0     0     1
+  [ 7] .gnu.hash         GNU_HASH         0000000000401020  00001020
+       0000000000000024  0000000000000000   A       8     0     8
+  [ 8] .dynsym           DYNSYM           0000000000401048  00001048
+       0000000000000120  0000000000000018   A       9     1     8
+  [ 9] .dynstr           STRTAB           0000000000401168  00001168
+       000000000000009e  0000000000000000   A       0     0     1
+  [10] .gnu.version      VERSYM           0000000000401206  00001206
+       0000000000000018  0000000000000002   A       8     0     2
+  [11] .gnu.version_r    VERNEED          0000000000401220  00001220
+       0000000000000040  0000000000000000   A       9     1     8
+  [12] .rela.dyn         RELA             0000000000401260  00001260
+       0000000000000048  0000000000000018   A       8     0     8
+  [13] .rela.plt         RELA             00000000004012a8  000012a8
+       00000000000000c0  0000000000000018  AI       8    23     8
+  [14] .rodata           PROGBITS         0000000000401368  00001368
+       000000000000007f  0000000000000000   A       0     0     8
+  [15] .eh_frame_hdr     PROGBITS         00000000004013e8  000013e8
+       000000000000002c  0000000000000000   A       0     0     4
+  [16] .eh_frame         PROGBITS         0000000000401418  00001418
+       00000000000000a8  0000000000000000   A       0     0     8
+  [17] .note.gnu.pr[...] NOTE             00000000004014c0  000014c0
+       0000000000000040  0000000000000000   A       0     0     8
+  [18] .note.ABI-tag     NOTE             0000000000401500  00001500
+       0000000000000020  0000000000000000   A       0     0     4
+  [19] .init_array       INIT_ARRAY       0000000000402de8  00001de8
+       0000000000000008  0000000000000008  WA       0     0     8
+  [20] .fini_array       FINI_ARRAY       0000000000402df0  00001df0
+       0000000000000008  0000000000000008  WA       0     0     8
+  [21] .dynamic          DYNAMIC          0000000000402df8  00001df8
+       00000000000001e0  0000000000000010  WA       9     0     8
+  [22] .got              PROGBITS         0000000000402fd8  00001fd8
+       0000000000000010  0000000000000008  WA       0     0     8
+  [23] .got.plt          PROGBITS         0000000000402fe8  00001fe8
+       0000000000000058  0000000000000008  WA       0     0     8
+  [24] .data             PROGBITS         0000000000403040  00002040
+       0000000000000004  0000000000000000  WA       0     0     1
+  [25] .bss              NOBITS           0000000000403048  00002044
+       0000000000000010  0000000000000000  WA       0     0     8
+  [26] .comment          PROGBITS         0000000000000000  00002044
+       000000000000002e  0000000000000001  MS       0     0     1
+  [27] .annobin.notes    PROGBITS         0000000000000000  00002072
+       000000000000014f  0000000000000001  MS       0     0     1
+  [28] .gnu.build.a[...] NOTE             0000000000405058  000021c4
+       0000000000000048  0000000000000000           0     0     4
+  [29] .shstrtab         STRTAB           0000000000000000  0000220c
+       000000000000012b  0000000000000000           0     0     1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+  L (link order), O (extra OS processing required), G (group), T (TLS),
+  C (compressed), x (unknown), o (OS specific), E (exclude),
+  D (mbind), l (large), p (processor specific)
+=== strings (all) ===
+ATUH
+u,Z1
+[]A\A^
+PTE1
+H=H0@
+/lib64/ld-linux-x86-64.so.2
+__gmon_start__
+setvbuf
+puts
+strncpy
+free
+__isoc23_strtol
+stdout
+__libc_start_main
+calloc
+printf
+strcmp
+libm.so.6
+libc.so.6
+GLIBC_2.38
+GLIBC_2.34
+GLIBC_2.2.5
+Sessione %d aperta per %s
+logout
+Logout eseguito
+Accesso utente per %s
+Accesso amministratore per %s
+;*3$"
+GCC: (GNU) 15.3.1 20260722 (Red Hat 15.3.1-1)
+AV:4p1299
+RV:running gcc 15.3.1 20260722
+BV:annobin gcc 15.3.1 20260722
+GW:0x7d60562 ../sysdeps/x86/abi-note.c
+SP:3
+SC:1
+CF:8 ../sysdeps/x86/abi-note.c
+FL:0 ../sysdeps/x86/abi-note.c
+GA:1
+PI:4
+SE:0
+iS:0
+GW:0x7d60562 init.c
+CF:8 init.c
+FL:0 init.c
+GW:0x7d60562 static-reloc.c
+SP:0 static-reloc.c
+CF:8 static-reloc.c
+FL:0 static-reloc.c
+.shstrtab
+.note.gnu.build-id
+.init
+.text
+.fini
+.interp
+.gnu.hash
+.dynsym
+.dynstr
+.gnu.version
+.gnu.version_r
+.rela.dyn
+.rela.plt
+.rodata
+.eh_frame_hdr
+.eh_frame
+.note.gnu.property
+.note.ABI-tag
+.init_array
+.fini_array
+.dynamic
+.got
+.got.plt
+.data
+.bss
+.comment
+.annobin.notes
+.gnu.build.attributes
+
+The `.rodata` maps as offset = VA − 0x400000. Let me dump the rodata region to confirm exact string bytes/order.
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_jw3zjofa
+echo "=== xxd rodata 0x1368..0x13e8 (VA 0x401368..0x4013e8) ==="
+xxd -s 0x1368 -l 0x80 test_O3
+echo "=== verify each string addr ==="
+for a in 0x1378 0x1393 0x139a 0x13aa 0x13c8; do
+  off=$(printf "%d" $a)
+  len=$(($(printf "%d" $(xxd -s $a test_O3 | head -1 | awk '{print $2}') )-$(printf "%d" $(xxd -s $a test_O3 | head -1 | awk '{print $2}'))))
+done
+# simpler: use dd to print null-terminated
+for a in 0x1378 0x1393 0x139a 0x13aa 0x13c8; do
+  printf "%s -> " $a
+  dd if=test_O3 bs=1 skip=$(printf "%d" $a) count=40 2>/dev/null | tr -d '\0'
+  echo ""
+done
+
+=== xxd rodata 0x1368..0x13e8 (VA 0x401368..0x4013e8) ===
+bash: riga 3: xxd: comando non trovato
+=== verify each string addr ===
+bash: riga 7: xxd: comando non trovato
+bash: riga 7: xxd: comando non trovato
+bash: riga 7: xxd: comando non trovato
+bash: riga 7: xxd: comando non trovato
+bash: riga 7: xxd: comando non trovato
+bash: riga 7: xxd: comando non trovato
+bash: riga 7: xxd: comando non trovato
+bash: riga 7: xxd: comando non trovato
+bash: riga 7: xxd: comando non trovato
+bash: riga 7: xxd: comando non trovato
+0x1378 -> Sessione %d aperta per %s
+logoutLogout
+0x1393 -> logoutLogout eseguitoAccesso utente pe
+0x139a -> Logout eseguitoAccesso utente per %s
+
+0x13aa -> Accesso utente per %s
+Accesso am
+0x13c8 -> Accesso amministratore per %s
+;,
+
+Let me confirm the exact byte content (including trailing newlines) of each format string using Python.
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_jw3zjofa
+python3 - <<'EOF'
+data = open('test_O3','rb').read()
+def cstr(off):
+    end = data.index(b'\x00', off)
+    return data[off:end]
+for va in [0x401378,0x401393,0x40139a,0x4013aa,0x4013c8]:
+    off = va - 0x400000
+    s = cstr(off)
+    print(hex(va), repr(s))
+EOF
+
+0x401378 b'Sessione %d aperta per %s\n'
+0x401393 b'logout'
+0x40139a b'Logout eseguito'
+0x4013aa b'Accesso utente per %s\n'
+0x4013c8 b'Accesso amministratore per %s\n'
+
+I have all the strings confirmed. Now let me verify the three empty `FUN_` functions are compiler startup/shutdown code (not part of the program) by checking their xrefs and the init/fini arrays.
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400510
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400520
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400550
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+    filter: array
+    limit: 50
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_jw3zjofa
+echo "=== .init_array @0x402de8 (file 0x1de8) and .fini_array @0x402df0 (file 0x1df0) ==="
+python3 - <<'EOF'
+import struct
+d=open('test_O3','rb').read()
+def off(va): return va-0x400000
+for name,va in [('init_array',0x402de8),('fini_array',0x402df0)]:
+    v=struct.unpack('<Q', d[off(va):off(va)+8])[0]
+    print(name,'-> 0x%x'%v)
+# GOT @0x402fd8 (file 0x1fd8)
+for i in range(0,0x10,8):
+    v=struct.unpack('<Q', d[off(0x402fd8):off(0x402fd8)+8])[0]
+    print('got[0x%x]=0x%x'%(i,v))
+EOF
+echo "=== disasm of the 3 stubs ==="
+objdump -d -M intel --start-address=0x400510 --stop-address=0x4005a0 test_O3 2>/dev/null | sed -n '1,80p'
+
+=== .init_array @0x402de8 (file 0x1de8) and .fini_array @0x402df0 (file 0x1df0) ===
+Traceback (most recent call last):
+  File "<stdin>", line 5, in <module>
+struct.error: unpack requires a buffer of 8 bytes
+=== disasm of the 3 stubs ===
+
+test_O3:     formato del file elf64-x86-64
+
+
+Disassemblamento della sezione .text:
+
+0000000000400510 <.text+0x120>:
+  400510:	f3 0f 1e fa          	endbr64
+  400514:	c3                   	ret
+  400515:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+  40051c:	00 00 00 
+  40051f:	90                   	nop
+  400520:	b8 48 30 40 00       	mov    eax,0x403048
+  400525:	48 3d 48 30 40 00    	cmp    rax,0x403048
+  40052b:	74 13                	je     400540 <setvbuf@plt+0x160>
+  40052d:	b8 00 00 00 00       	mov    eax,0x0
+  400532:	48 85 c0             	test   rax,rax
+  400535:	74 09                	je     400540 <setvbuf@plt+0x160>
+  400537:	bf 48 30 40 00       	mov    edi,0x403048
+  40053c:	ff e0                	jmp    rax
+  40053e:	66 90                	xchg   ax,ax
+  400540:	c3                   	ret
+  400541:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+  400545:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+  40054c:	00 00 00 00 
+  400550:	be 48 30 40 00       	mov    esi,0x403048
+  400555:	48 81 ee 48 30 40 00 	sub    rsi,0x403048
+  40055c:	48 89 f0             	mov    rax,rsi
+  40055f:	48 c1 ee 3f          	shr    rsi,0x3f
+  400563:	48 c1 f8 03          	sar    rax,0x3
+  400567:	48 01 c6             	add    rsi,rax
+  40056a:	48 d1 fe             	sar    rsi,1
+  40056d:	74 11                	je     400580 <setvbuf@plt+0x1a0>
+  40056f:	b8 00 00 00 00       	mov    eax,0x0
+  400574:	48 85 c0             	test   rax,rax
+  400577:	74 07                	je     400580 <setvbuf@plt+0x1a0>
+  400579:	bf 48 30 40 00       	mov    edi,0x403048
+  40057e:	ff e0                	jmp    rax
+  400580:	c3                   	ret
+  400581:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+  400585:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+  40058c:	00 00 00 00 
+  400590:	f3 0f 1e fa          	endbr64
+  400594:	80 3d b5 2a 00 00 00 	cmp    BYTE PTR [rip+0x2ab5],0x0        # 403050 <stdout@GLIBC_2.2.5+0x8>
+  40059b:	75 13                	jne    4005b0 <setvbuf@plt+0x1d0>
+  40059d:	55                   	push   rbp
+  40059e:	48                   	rex.W
+  40059f:	89                   	.byte 0x89
+
+This confirms the three stub functions are GCC startup artifacts:
+- `FUN_00400510` = `deregister_tm_clones` (called from `.eh_frame_hdr` at 0x40140c/0x40144c)
+- `FUN_00400520` = `register_tm_clones`
+- `FUN_00400550` = frame_dummy / `__do_global_dtors_aux`
+
+They are compiler init/shutdown code, not part of the program, and are not referenced by `main`. Only `FUN_004003f0` (main) is the real program code.
+
+I have everything I need. Let me write the faithful C translation and verify it compiles.
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_jw3zjofa/out.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char **argv)
+{
+    if (argc < 3) {
+        return 1;
+    }
+
+    setvbuf(stdout, NULL, 2, 0);
+
+    char *dest = (char *)calloc(0x20, 1);
+    strncpy(dest, argv[1], 0x17);
+    *(int *)(dest + 0x1c) = 1000;
+    printf("Sessione %d aperta per %s\n", 1000, dest);
+
+    int is_logout = strcmp(argv[2], "logout");
+    if (is_logout == 0) {
+        free(dest);
+        puts("Logout eseguito");
+    }
+
+    if (argc != 3) {
+        strtol(argv[3], NULL, 10);
+    }
+
+    if (*(int *)(dest + 0x18) == 0) {
+        printf("Accesso utente per %s\n", dest);
+    } else {
+        printf("Accesso amministratore per %s\n", dest);
+    }
+
+    if (is_logout != 0) {
+        free(dest);
+    }
+
+    return 0;
+}
+
+
+Created /tmp/re_task_jw3zjofa/out.c (39 lines)
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_jw3zjofa
+gcc -O3 -o out_test out.c && echo "COMPILE OK (-O3)"
+gcc -o out_test0 out.c && echo "COMPILE OK (default)"
+echo "=== behavior comparison ==="
+run() {
+  echo "--- args: $* ---"
+  echo -n "orig : "; ./test_O3 "$@" 2>&1; echo "  [rc=$?]"
+  echo -n "mine : "; ./out_test "$@" 2>&1; echo "  [rc=$?]"
+}
+run
+run "alice" "logout"
+run "bob" "keep"
+run "carol" "keep" "42"
+run "verylongusernamehere" "logout"
+run "x"
+run "a" "b" "c" "d" "e"
+
+COMPILE OK (-O3)
+COMPILE OK (default)
+=== behavior comparison ===
+--- args:  ---
+orig :   [rc=1]
+mine :   [rc=1]
+--- args: alice logout ---
+orig : Sessione 1000 aperta per alice
+Logout eseguito
+Accesso utente per �F
+  [rc=0]
+mine : Sessione 1000 aperta per alice
+Logout eseguito
+Accesso utente per �f
+  [rc=0]
+--- args: bob keep ---
+orig : Sessione 1000 aperta per bob
+Accesso utente per bob
+  [rc=0]
+mine : Sessione 1000 aperta per bob
+Accesso utente per bob
+  [rc=0]
+--- args: carol keep 42 ---
+orig : Sessione 1000 aperta per carol
+Accesso utente per carol
+  [rc=0]
+mine : Sessione 1000 aperta per carol
+Accesso utente per carol
+  [rc=0]
+--- args: verylongusernamehere logout ---
+orig : Sessione 1000 aperta per verylongusernamehere
+Logout eseguito
+Accesso utente per �
+  [rc=0]
+mine : Sessione 1000 aperta per verylongusernamehere
+Logout eseguito
+Accesso utente per �=
+  [rc=0]
+--- args: x ---
+orig :   [rc=1]
+mine :   [rc=1]
+--- args: a b c d e ---
+orig : Sessione 1000 aperta per a
+Accesso utente per a
+  [rc=0]
+mine : Sessione 1000 aperta per a
+Accesso utente per a
+  [rc=0]
+
+The reconstruction compiles cleanly and its behavior matches the original binary exactly across all input cases. The only differences in the `logout` case are the heap-garbage bytes in the `Accesso utente per <…>` line — that's inherent to the **use-after-free** the original performs (it `free`s `dest`, then reads the freed `dest[0x18]` and `printf`s the freed buffer), which I have faithfully reproduced rather than "fixed". Control flow, all format strings, numeric values (`0x20`, `0x17`, `0x1c`, `0x18`, `1000`, `2`, `0`), and return codes are identical.
+
+Summary of the reverse engineering:
+
+| Ghidra symbol | Identity | Action |
+|---|---|---|
+| `entry` | CRT entry | `__libc_start_main(FUN_004003f0, …)` → main is `FUN_004003f0` |
+| `FUN_004003f0` | **`main`** | decompiled + disassembled, translated faithfully |
+| `FUN_00400510` | `deregister_tm_clones` | GCC startup stub (xref from `.eh_frame_hdr`) — excluded |
+| `FUN_00400520` | `register_tm_clones` | GCC startup stub — excluded |
+| `FUN_00400550` | `frame_dummy` / `__do_global_dtors_aux` | GCC shutdown stub — excluded |
+
+Key faithfully-reproduced (non-canonical) details, all read from the decompile/disassembly:
+- `calloc(0x20, 1)` then `strncpy(dest, argv[1], 0x17)` (bounded at 23 bytes)
+- `*(int *)(dest + 0x1c) = 1000;` — a single 4-byte store (`MOV DWORD PTR [rbx+0x1c],0x3e8`), and `1000` is also the `%d` argument
+- `strcmp(argv[2], "logout")`; on match → `free(dest)` **and continue using `dest`** (UAF), on non-match → `free(dest)` at the end
+- Role branch on `*(int *)(dest + 0x18) == 0` → "Accesso utente" vs "Accesso amministratore"
+
+The file is saved at `/tmp/re_task_jw3zjofa/out.c`.
+
+DONE

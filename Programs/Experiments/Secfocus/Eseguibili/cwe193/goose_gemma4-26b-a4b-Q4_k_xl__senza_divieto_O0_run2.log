@@ -1,0 +1,90 @@
+
+    __( O)>  ● new session · custom_unsloth unsloth/gemma-4-26B-A4B-it-GGUF
+   \____)    20261008_39 · /tmp/re_task_ua9n20qk
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400507
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004b6
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400410
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400440
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400360
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400400
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_ua9n20qk/out.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char *register_name(char *name) {
+    size_t len = strlen(name);
+    char *dest;
+    if (len < 0x11) {
+        dest = (char *)malloc(0x10);
+        strcpy(dest, name);
+    } else {
+        dest = NULL;
+    }
+    return dest;
+}
+
+int main(int argc, char *argv[]) {
+    char *name;
+    size_t len;
+    int i;
+
+    setvbuf(stdout, NULL, 2, 0);
+
+    for (i = 1; i < argc; i++) {
+        name = register_name(argv[i]);
+        if (name == NULL) {
+            len = strlen(argv[i]);
+            printf("Nome troppo lungo: %zu caratteri\n", len);
+        } else {
+            len = strlen(name);
+            printf("Registrato: %s (%zu caratteri)\n", name, len);
+            free(name);
+        }
+    }
+    return 0;
+}
+
+
+Created /tmp/re_task_ua9n20qk/out.c (36 lines)DONE

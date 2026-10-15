@@ -1,0 +1,51 @@
+
+    __( O)>  ● new session · custom_unsloth unsloth/gemma-4-26B-A4B-it-GGUF
+   \____)    20261014_32 · /tmp/re_task_rn7wxq6z
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004a0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400476
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_rn7wxq6z/out.c
+    content: #include <stdio.h>
+#include <stdbool.h>
+
+void log_message(char *message) {
+    printf(message);
+    putchar(10);
+}
+
+int main(int argc, char **argv) {
+    if (argc < 2) {
+        printf("Uso: %s <messaggio>\n", "logger");
+    } else {
+        printf("[log] ");
+        log_message(argv[1]);
+    }
+    return (argc < 2);
+}
+
+
+Created /tmp/re_task_rn7wxq6z/out.c (17 lines)DONE

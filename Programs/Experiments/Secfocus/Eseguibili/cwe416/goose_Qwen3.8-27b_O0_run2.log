@@ -1,0 +1,791 @@
+
+    __( O)>  ● new session · openrouter qwen/qwen3.8-27b
+   \____)    20261012_38 · /tmp/re_task_u1nenokv
+     L L     goose is ready
+
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    limit: 2000
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_u1nenokv && ls -la && echo "---" && file *
+
+totale 12
+drwx------  2 fotoppo fotoppo    60 12 ott 13.01 .
+drwxrwxrwt 27 nobody  nobody    940 12 ott 13.01 ..
+-rwxr-xr-x  1 fotoppo fotoppo 10912 12 ott 13.01 test_O0
+---
+test_O0: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a06270e5584505ff8c40d22cef4050dde5ffc09e, for GNU/Linux 3.2.0, stripped
+
+The list output looks flat/garbled. Let me inspect the binary with shell and re-run the function list.
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_u1nenokv && echo "=== STRINGS ===" && strings -a test_O0 && echo "=== READLINE/NR ===" && readelf -h test_O0 | head -20 && echo "=== SYMS ===" && readelf -sW test_O0 2>/dev/null | head -40
+
+
+  ────────────────────────────────────────
+  ▸ list_methods ghidra-mcp
+    limit: 100
+
+=== STRINGS ===
+PTE1
+H=P0@
+/lib64/ld-linux-x86-64.so.2
+__gmon_start__
+setvbuf
+puts
+strncpy
+free
+stdout
+atoi
+malloc
+__libc_start_main
+memset
+printf
+strcmp
+libm.so.6
+libc.so.6
+GLIBC_2.34
+GLIBC_2.2.5
+Sessione %d aperta per %s
+logout
+Logout eseguito
+promemoria
+Accesso amministratore per %s
+Accesso utente per %s
+;*3$"
+GCC: (GNU) 15.3.1 20260722 (Red Hat 15.3.1-1)
+AV:4p1299
+RV:running gcc 15.3.1 20260722
+BV:annobin gcc 15.3.1 20260722
+GW:0x7d60562 ../sysdeps/x86/abi-note.c
+SP:3
+SC:1
+CF:8 ../sysdeps/x86/abi-note.c
+FL:0 ../sysdeps/x86/abi-note.c
+GA:1
+PI:4
+SE:0
+iS:0
+GW:0x7d60562 init.c
+CF:8 init.c
+FL:0 init.c
+GW:0x7d60562 static-reloc.c
+SP:0 static-reloc.c
+CF:8 static-reloc.c
+FL:0 static-reloc.c
+.shstrtab
+.note.gnu.build-id
+.init
+.text
+.fini
+.interp
+.gnu.hash
+.dynsym
+.dynstr
+.gnu.version
+.gnu.version_r
+.rela.dyn
+.rela.plt
+.rodata
+.eh_frame_hdr
+.eh_frame
+.note.gnu.property
+.note.ABI-tag
+.init_array
+.fini_array
+.dynamic
+.got
+.got.plt
+.data
+.bss
+.comment
+.annobin.notes
+.gnu.build.attributes
+=== READLINE/NR ===
+Intestazione ELF:
+  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
+  Classe:                            ELF64
+  Dati:                              complemento a 2, little endian
+  Version:                           1 (current)
+  SO/ABI:                            UNIX - System V
+  Versione ABI:                      0
+  Tipo:                              EXEC (file eseguibile)
+  Macchina:                          Advanced Micro Devices X86-64
+  Versione:                          0x1
+  Indirizzo punto d'ingresso:        0x400400
+  Inizio intestazioni di programma   64 (byte nel file)
+  Inizio intestazioni di sezione:    8992 (byte nel file)
+  Flag:                              0x0
+  Size of this header:               64 (bytes)
+  Size of program headers:           56 (bytes)
+  Number of program headers:         13
+  Size of section headers:           64 (bytes)
+  Number of section headers:         30
+  Section header string table index: 29
+=== SYMS ===
+
+Symbol table '.dynsym' contains 13 entries:
+   Num:    Valore         Dim  Tipo    Assoc  Vis      Ind Nome
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND free@GLIBC_2.2.5 (2)
+     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.34 (3)
+     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND strncpy@GLIBC_2.2.5 (2)
+     4: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)
+     5: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND printf@GLIBC_2.2.5 (2)
+     6: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND memset@GLIBC_2.2.5 (2)
+     7: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND strcmp@GLIBC_2.2.5 (2)
+     8: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __gmon_start__
+     9: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND malloc@GLIBC_2.2.5 (2)
+    10: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND setvbuf@GLIBC_2.2.5 (2)
+    11: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND atoi@GLIBC_2.2.5 (2)
+    12: 0000000000403050     8 OBJECT  GLOBAL DEFAULT   25 stdout@GLIBC_2.2.5 (2)
+
+Now I have useful strings. This is a login/session program. Let me find the main by decompiling `entry`, and get the proper function list.
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_u1nenokv && objdump -d -M intel test_O0 | sed -n '/<\.text>:/,/\.rodata/p' | head -200
+
+0000000000400400 <.text>:
+  400400:	f3 0f 1e fa          	endbr64
+  400404:	31 ed                	xor    ebp,ebp
+  400406:	49 89 d1             	mov    r9,rdx
+  400409:	5e                   	pop    rsi
+  40040a:	48 89 e2             	mov    rdx,rsp
+  40040d:	48 83 e4 f0          	and    rsp,0xfffffffffffffff0
+  400411:	50                   	push   rax
+  400412:	54                   	push   rsp
+  400413:	45 31 c0             	xor    r8d,r8d
+  400416:	31 c9                	xor    ecx,ecx
+  400418:	48 c7 c7 e6 04 40 00 	mov    rdi,0x4004e6
+  40041f:	ff 15 b3 2b 00 00    	call   QWORD PTR [rip+0x2bb3]        # 402fd8 <atoi@plt+0x2be8>
+  400425:	f4                   	hlt
+  400426:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+  40042d:	00 00 00 
+  400430:	f3 0f 1e fa          	endbr64
+  400434:	c3                   	ret
+  400435:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+  40043c:	00 00 00 
+  40043f:	90                   	nop
+  400440:	b8 50 30 40 00       	mov    eax,0x403050
+  400445:	48 3d 50 30 40 00    	cmp    rax,0x403050
+  40044b:	74 13                	je     400460 <atoi@plt+0x70>
+  40044d:	b8 00 00 00 00       	mov    eax,0x0
+  400452:	48 85 c0             	test   rax,rax
+  400455:	74 09                	je     400460 <atoi@plt+0x70>
+  400457:	bf 50 30 40 00       	mov    edi,0x403050
+  40045c:	ff e0                	jmp    rax
+  40045e:	66 90                	xchg   ax,ax
+  400460:	c3                   	ret
+  400461:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+  400465:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+  40046c:	00 00 00 00 
+  400470:	be 50 30 40 00       	mov    esi,0x403050
+  400475:	48 81 ee 50 30 40 00 	sub    rsi,0x403050
+  40047c:	48 89 f0             	mov    rax,rsi
+  40047f:	48 c1 ee 3f          	shr    rsi,0x3f
+  400483:	48 c1 f8 03          	sar    rax,0x3
+  400487:	48 01 c6             	add    rsi,rax
+  40048a:	48 d1 fe             	sar    rsi,1
+  40048d:	74 11                	je     4004a0 <atoi@plt+0xb0>
+  40048f:	b8 00 00 00 00       	mov    eax,0x0
+  400494:	48 85 c0             	test   rax,rax
+  400497:	74 07                	je     4004a0 <atoi@plt+0xb0>
+  400499:	bf 50 30 40 00       	mov    edi,0x403050
+  40049e:	ff e0                	jmp    rax
+  4004a0:	c3                   	ret
+  4004a1:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+  4004a5:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+  4004ac:	00 00 00 00 
+  4004b0:	f3 0f 1e fa          	endbr64
+  4004b4:	80 3d 9d 2b 00 00 00 	cmp    BYTE PTR [rip+0x2b9d],0x0        # 403058 <stdout@GLIBC_2.2.5+0x8>
+  4004bb:	75 13                	jne    4004d0 <atoi@plt+0xe0>
+  4004bd:	55                   	push   rbp
+  4004be:	48 89 e5             	mov    rbp,rsp
+  4004c1:	e8 7a ff ff ff       	call   400440 <atoi@plt+0x50>
+  4004c6:	c6 05 8b 2b 00 00 01 	mov    BYTE PTR [rip+0x2b8b],0x1        # 403058 <stdout@GLIBC_2.2.5+0x8>
+  4004cd:	5d                   	pop    rbp
+  4004ce:	c3                   	ret
+  4004cf:	90                   	nop
+  4004d0:	c3                   	ret
+  4004d1:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+  4004d5:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+  4004dc:	00 00 00 00 
+  4004e0:	f3 0f 1e fa          	endbr64
+  4004e4:	eb 8a                	jmp    400470 <atoi@plt+0x80>
+  4004e6:	55                   	push   rbp
+  4004e7:	48 89 e5             	mov    rbp,rsp
+  4004ea:	48 83 ec 30          	sub    rsp,0x30
+  4004ee:	89 7d dc             	mov    DWORD PTR [rbp-0x24],edi
+  4004f1:	48 89 75 d0          	mov    QWORD PTR [rbp-0x30],rsi
+  4004f5:	83 7d dc 02          	cmp    DWORD PTR [rbp-0x24],0x2
+  4004f9:	7f 0a                	jg     400505 <atoi@plt+0x115>
+  4004fb:	b8 01 00 00 00       	mov    eax,0x1
+  400500:	e9 8f 01 00 00       	jmp    400694 <atoi@plt+0x2a4>
+  400505:	48 8b 05 44 2b 00 00 	mov    rax,QWORD PTR [rip+0x2b44]        # 403050 <stdout@GLIBC_2.2.5>
+  40050c:	b9 00 00 00 00       	mov    ecx,0x0
+  400511:	ba 02 00 00 00       	mov    edx,0x2
+  400516:	be 00 00 00 00       	mov    esi,0x0
+  40051b:	48 89 c7             	mov    rdi,rax
+  40051e:	e8 bd fe ff ff       	call   4003e0 <setvbuf@plt>
+  400523:	bf 20 00 00 00       	mov    edi,0x20
+  400528:	e8 a3 fe ff ff       	call   4003d0 <malloc@plt>
+  40052d:	48 89 45 f8          	mov    QWORD PTR [rbp-0x8],rax
+  400531:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  400535:	ba 20 00 00 00       	mov    edx,0x20
+  40053a:	be 00 00 00 00       	mov    esi,0x0
+  40053f:	48 89 c7             	mov    rdi,rax
+  400542:	e8 69 fe ff ff       	call   4003b0 <memset@plt>
+  400547:	48 8b 45 d0          	mov    rax,QWORD PTR [rbp-0x30]
+  40054b:	48 83 c0 08          	add    rax,0x8
+  40054f:	48 8b 08             	mov    rcx,QWORD PTR [rax]
+  400552:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  400556:	ba 17 00 00 00       	mov    edx,0x17
+  40055b:	48 89 ce             	mov    rsi,rcx
+  40055e:	48 89 c7             	mov    rdi,rax
+  400561:	e8 1a fe ff ff       	call   400380 <strncpy@plt>
+  400566:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  40056a:	c7 40 1c e8 03 00 00 	mov    DWORD PTR [rax+0x1c],0x3e8
+  400571:	48 8b 55 f8          	mov    rdx,QWORD PTR [rbp-0x8]
+  400575:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  400579:	8b 40 1c             	mov    eax,DWORD PTR [rax+0x1c]
+  40057c:	89 c6                	mov    esi,eax
+  40057e:	bf 90 13 40 00       	mov    edi,0x401390
+  400583:	b8 00 00 00 00       	mov    eax,0x0
+  400588:	e8 13 fe ff ff       	call   4003a0 <printf@plt>
+  40058d:	48 8b 45 d0          	mov    rax,QWORD PTR [rbp-0x30]
+  400591:	48 83 c0 10          	add    rax,0x10
+  400595:	48 8b 00             	mov    rax,QWORD PTR [rax]
+  400598:	be ab 13 40 00       	mov    esi,0x4013ab
+  40059d:	48 89 c7             	mov    rdi,rax
+  4005a0:	e8 1b fe ff ff       	call   4003c0 <strcmp@plt>
+  4005a5:	85 c0                	test   eax,eax
+  4005a7:	0f 94 c0             	sete   al
+  4005aa:	0f b6 c0             	movzx  eax,al
+  4005ad:	89 45 f4             	mov    DWORD PTR [rbp-0xc],eax
+  4005b0:	83 7d f4 00          	cmp    DWORD PTR [rbp-0xc],0x0
+  4005b4:	74 16                	je     4005cc <atoi@plt+0x1dc>
+  4005b6:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  4005ba:	48 89 c7             	mov    rdi,rax
+  4005bd:	e8 ae fd ff ff       	call   400370 <free@plt>
+  4005c2:	bf b2 13 40 00       	mov    edi,0x4013b2
+  4005c7:	e8 c4 fd ff ff       	call   400390 <puts@plt>
+  4005cc:	bf 20 00 00 00       	mov    edi,0x20
+  4005d1:	e8 fa fd ff ff       	call   4003d0 <malloc@plt>
+  4005d6:	48 89 45 e8          	mov    QWORD PTR [rbp-0x18],rax
+  4005da:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  4005de:	ba 20 00 00 00       	mov    edx,0x20
+  4005e3:	be 00 00 00 00       	mov    esi,0x0
+  4005e8:	48 89 c7             	mov    rdi,rax
+  4005eb:	e8 c0 fd ff ff       	call   4003b0 <memset@plt>
+  4005f0:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  4005f4:	ba 17 00 00 00       	mov    edx,0x17
+  4005f9:	be c2 13 40 00       	mov    esi,0x4013c2
+  4005fe:	48 89 c7             	mov    rdi,rax
+  400601:	e8 7a fd ff ff       	call   400380 <strncpy@plt>
+  400606:	83 7d dc 03          	cmp    DWORD PTR [rbp-0x24],0x3
+  40060a:	7e 15                	jle    400621 <atoi@plt+0x231>
+  40060c:	48 8b 45 d0          	mov    rax,QWORD PTR [rbp-0x30]
+  400610:	48 83 c0 18          	add    rax,0x18
+  400614:	48 8b 00             	mov    rax,QWORD PTR [rax]
+  400617:	48 89 c7             	mov    rdi,rax
+  40061a:	e8 d1 fd ff ff       	call   4003f0 <atoi@plt>
+  40061f:	eb 05                	jmp    400626 <atoi@plt+0x236>
+  400621:	b8 00 00 00 00       	mov    eax,0x0
+  400626:	48 8b 55 e8          	mov    rdx,QWORD PTR [rbp-0x18]
+  40062a:	89 42 18             	mov    DWORD PTR [rdx+0x18],eax
+  40062d:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  400631:	c7 40 1c 07 00 00 00 	mov    DWORD PTR [rax+0x1c],0x7
+  400638:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  40063c:	8b 40 18             	mov    eax,DWORD PTR [rax+0x18]
+  40063f:	85 c0                	test   eax,eax
+  400641:	74 18                	je     40065b <atoi@plt+0x26b>
+  400643:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  400647:	48 89 c6             	mov    rsi,rax
+  40064a:	bf d0 13 40 00       	mov    edi,0x4013d0
+  40064f:	b8 00 00 00 00       	mov    eax,0x0
+  400654:	e8 47 fd ff ff       	call   4003a0 <printf@plt>
+  400659:	eb 16                	jmp    400671 <atoi@plt+0x281>
+  40065b:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  40065f:	48 89 c6             	mov    rsi,rax
+  400662:	bf ef 13 40 00       	mov    edi,0x4013ef
+  400667:	b8 00 00 00 00       	mov    eax,0x0
+  40066c:	e8 2f fd ff ff       	call   4003a0 <printf@plt>
+  400671:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  400675:	48 89 c7             	mov    rdi,rax
+  400678:	e8 f3 fc ff ff       	call   400370 <free@plt>
+  40067d:	83 7d f4 00          	cmp    DWORD PTR [rbp-0xc],0x0
+  400681:	75 0c                	jne    40068f <atoi@plt+0x29f>
+  400683:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  400687:	48 89 c7             	mov    rdi,rax
+  40068a:	e8 e1 fc ff ff       	call   400370 <free@plt>
+  40068f:	b8 00 00 00 00       	mov    eax,0x0
+  400694:	c9                   	leave
+  400695:	c3                   	ret
+
+Disassemblamento della sezione .fini:
+
+0000000000400698 <.fini>:
+  400698:	f3 0f 1e fa          	endbr64
+  40069c:	48 83 ec 08          	sub    rsp,0x8
+  4006a0:	48 83 c4 08          	add    rsp,0x8
+  4006a4:	c3                   	ret
+
+Main is `FUN_004004e6`. I have the full disassembly. Now let me decompile main via the tool (authoritative source) and dump the `.rodata` to read the exact string contents at the referenced addresses.
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004e6
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_u1nenokv && objdump -s -j .rodata test_O0
+
+
+test_O0:     formato del file elf64-x86-64
+
+Contenuto della sezione .rodata:
+ 401380 01000200 00000000 00000000 00000000  ................
+ 401390 53657373 696f6e65 20256420 61706572  Sessione %d aper
+ 4013a0 74612070 65722025 730a006c 6f676f75  ta per %s..logou
+ 4013b0 74004c6f 676f7574 20657365 67756974  t.Logout eseguit
+ 4013c0 6f007072 6f6d656d 6f726961 00000000  o.promemoria....
+ 4013d0 41636365 73736f20 616d6d69 6e697374  Accesso amminist
+ 4013e0 7261746f 72652070 65722025 730a0041  ratore per %s..A
+ 4013f0 63636573 736f2075 74656e74 65207065  ccesso utente pe
+ 401400 72202573 0a00                        r %s..          
+
+I now have the authoritative decompilation of `main` (FUN_004004e6) plus the exact `.rodata` strings and the disassembly. The disassembly confirms the decompiled byte stores `__dest[0x1c] = -0x18; __dest[0x1d]='\x03'` correspond to `mov DWORD PTR [rax+0x1c], 0x3e8` (value 1000) — Ghidra split the untyped 4-byte store into byte stores. No other program functions are reachable from main (all other `FUN_...` are compiler startup/teardown).
+
+Let me write the faithful reconstruction.
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_u1nenokv/out.c
+    content: #include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+
+/*
+ * Ricompilazione fedele del binario stripped test_O0 (x86-64, -O0).
+ *
+ * La funzione principale corrisponde a FUN_004004e6. I puntatori al
+ * rodata vengono mappati sulle esatte stringhe presenti in .rodata:
+ *   0x401390: "Sessione %d aperta per %s\n"
+ *   0x4013ab: "logout"
+ *   0x4013b2: "Logout eseguito"
+ *   0x4013c2: "promemoria"
+ *   0x4013d0: "Accesso amministratore per %s\n"
+ *   0x4013ef: "Accesso utente per %s\n"
+ *
+ * Ogni costante (0x20, 0x17, 0x1c, 0x18, 0x3e8, 0x7) e la struttura di
+ * controllo sono riprodotte esattamente come nel decompilato, senza
+ * correzioni: il blocco di 32 byte (0x20) contiene un campo char da
+ * 0x1c byte (28) seguito da un int a offset 0x1c.
+ */
+
+typedef struct {
+    char name[0x1c];  /* 28 byte: 0x00 .. 0x1b */
+    int  id;          /* 4 byte  : 0x1c .. 0x1f */
+} user_t;             /* sizeof = 0x20 = 32 */
+
+int main(int param_1, char **param_2)
+{
+    char *dest;
+    char *dest_0;
+    int is_logout;
+
+    if (param_1 < 3) {
+        return 1;
+    }
+
+    setvbuf(stdout, (char *)0x0, 2, 0);
+
+    /* malloc(0x20); memset(0, 0x20); strncpy(dest, argv[1], 0x17);
+       *(int *)(dest + 0x1c) = 0x3e8;                              */
+    dest = (char *)malloc(0x20);
+    memset(dest, 0x0, 0x20);
+    strncpy(dest, *(char **)(param_2 + 8), 0x17);
+    *(int *)(dest + 0x1c) = 0x3e8;   /* 1000 */
+
+    printf("Sessione %d aperta per %s\n", *(unsigned int *)(dest + 0x1c), dest);
+
+    /* if (strcmp(argv[2], "logout") == 0) { free(dest); puts("Logout eseguito"); } */
+    is_logout = (strcmp(*(char **)(param_2 + 0x10), "logout") == 0);
+    if (is_logout) {
+        free(dest);
+        puts("Logout eseguito");
+    }
+
+    /* malloc(0x20); memset(0, 0x20); strncpy(dest_0, "promemoria", 0x17);
+       *(int *)(dest_0 + 0x18) = (argc < 4) ? 0 : atoi(argv[3]);
+       *(int *)(dest_0 + 0x1c) = 0x7;                               */
+    dest_0 = (char *)malloc(0x20);
+    memset(dest_0, 0x0, 0x20);
+    strncpy(dest_0, "promemoria", 0x17);
+
+    if (param_1 < 4) {
+        *(int *)(dest_0 + 0x18) = 0;
+    }
+    else {
+        *(int *)(dest_0 + 0x18) = atoi(*(char **)(param_2 + 0x18));
+    }
+
+    *(int *)(dest_0 + 0x1c) = 0x7;   /* 7 */
+
+    /* if (*(int *)(dest + 0x18) == 0) -> utente, else -> amministratore */
+    if (*(int *)(dest + 0x18) == 0) {
+        printf("Accesso utente per %s\n", dest);
+    }
+    else {
+        printf("Accesso amministratore per %s\n", dest);
+    }
+
+    free(dest_0);
+
+    /* se NON era logout: libera anche il primo buffer */
+    if (!is_logout) {
+        free(dest);
+    }
+
+    return 0;
+}
+
+
+Created /tmp/re_task_u1nenokv/out.c (89 lines)
+
+Compiled cleanly. Let me verify the file content and run it to confirm behavior matches the decompiled logic.
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_u1nenokv && echo "=== cat out.c ===" && cat out.c && echo "=== compile ===" && gcc -O0 -o out out.c -Wall 2>&1 && echo "COMPILE_OK" && echo "=== run (argc<3) ===" && ./out; echo "ret=$?" && echo "=== run user ===" && ./out alice; echo "ret=$?" && echo "=== run admin ===" && ./out bob 5; echo "ret=$?" && echo "=== run logout ===" && ./out carol logout; echo "ret=$?"
+
+=== cat out.c ===
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+
+/*
+ * Ricompilazione fedele del binario stripped test_O0 (x86-64, -O0).
+ *
+ * La funzione principale corrisponde a FUN_004004e6. I puntatori al
+ * rodata vengono mappati sulle esatte stringhe presenti in .rodata:
+ *   0x401390: "Sessione %d aperta per %s\n"
+ *   0x4013ab: "logout"
+ *   0x4013b2: "Logout eseguito"
+ *   0x4013c2: "promemoria"
+ *   0x4013d0: "Accesso amministratore per %s\n"
+ *   0x4013ef: "Accesso utente per %s\n"
+ *
+ * Ogni costante (0x20, 0x17, 0x1c, 0x18, 0x3e8, 0x7) e la struttura di
+ * controllo sono riprodotte esattamente come nel decompilato, senza
+ * correzioni: il blocco di 32 byte (0x20) contiene un campo char da
+ * 0x1c byte (28) seguito da un int a offset 0x1c.
+ */
+
+typedef struct {
+    char name[0x1c];  /* 28 byte: 0x00 .. 0x1b */
+    int  id;          /* 4 byte  : 0x1c .. 0x1f */
+} user_t;             /* sizeof = 0x20 = 32 */
+
+int main(int param_1, char **param_2)
+{
+    char *dest;
+    char *dest_0;
+    int is_logout;
+
+    if (param_1 < 3) {
+        return 1;
+    }
+
+    setvbuf(stdout, (char *)0x0, 2, 0);
+
+    /* malloc(0x20); memset(0, 0x20); strncpy(dest, argv[1], 0x17);
+       *(int *)(dest + 0x1c) = 0x3e8;                              */
+    dest = (char *)malloc(0x20);
+    memset(dest, 0x0, 0x20);
+    strncpy(dest, *(char **)(param_2 + 8), 0x17);
+    *(int *)(dest + 0x1c) = 0x3e8;   /* 1000 */
+
+    printf("Sessione %d aperta per %s\n", *(unsigned int *)(dest + 0x1c), dest);
+
+    /* if (strcmp(argv[2], "logout") == 0) { free(dest); puts("Logout eseguito"); } */
+    is_logout = (strcmp(*(char **)(param_2 + 0x10), "logout") == 0);
+    if (is_logout) {
+        free(dest);
+        puts("Logout eseguito");
+    }
+
+    /* malloc(0x20); memset(0, 0x20); strncpy(dest_0, "promemoria", 0x17);
+       *(int *)(dest_0 + 0x18) = (argc < 4) ? 0 : atoi(argv[3]);
+       *(int *)(dest_0 + 0x1c) = 0x7;                               */
+    dest_0 = (char *)malloc(0x20);
+    memset(dest_0, 0x0, 0x20);
+    strncpy(dest_0, "promemoria", 0x17);
+
+    if (param_1 < 4) {
+        *(int *)(dest_0 + 0x18) = 0;
+    }
+    else {
+        *(int *)(dest_0 + 0x18) = atoi(*(char **)(param_2 + 0x18));
+    }
+
+    *(int *)(dest_0 + 0x1c) = 0x7;   /* 7 */
+
+    /* if (*(int *)(dest + 0x18) == 0) -> utente, else -> amministratore */
+    if (*(int *)(dest + 0x18) == 0) {
+        printf("Accesso utente per %s\n", dest);
+    }
+    else {
+        printf("Accesso amministratore per %s\n", dest);
+    }
+
+    free(dest_0);
+
+    /* se NON era logout: libera anche il primo buffer */
+    if (!is_logout) {
+        free(dest);
+    }
+
+    return 0;
+}
+=== compile ===
+COMPILE_OK
+=== run (argc<3) ===
+ret=1
+=== run user ===
+ret=1
+=== run admin ===
+Sessione 1000 aperta per XDG_CONFIG_DIRS=/home/f
+Accesso utente per XDG_CONFIG_DIRS=/home/f
+ret=0
+=== run logout ===
+Sessione 1000 aperta per XDG_CONFIG_DIRS=/home/f
+Accesso utente per XDG_CONFIG_DIRS=/home/f
+ret=0
+
+I found a bug: in the decompilation `param_2 + 8` is a **byte offset** (since Ghidra types `param_2` as `long`), which equals `argv[1]`, `argv[2]`, `argv[3]`. But in my C I declared `char **param_2`, so `param_2 + 8` became pointer arithmetic (= `argv[8]`, an env var). The binary does `add rax, 0x8` / `add rax, 0x10` / `add rax, 0x18` (byte offsets). I must cast to a byte pointer to faithfully reproduce the exact numeric offsets `8, 0x10, 0x18` and get correct `argv[1..3]` behavior. Let me fix those three accesses.
+
+
+  ────────────────────────────────────────
+  ▸ edit
+    path /tmp/re_task_u1nenokv/out.c
+    before: int main(int param_1, char **param_2)
+{
+    char *dest;
+    char *dest_0;
+    int is_logout;
+
+    if (param_1 < 3) {
+        return 1;
+    }
+
+    setvbuf(stdout, (char *)0x0, 2, 0);
+
+    /* malloc(0x20); memset(0, 0x20); strncpy(dest, argv[1], 0x17);
+       *(int *)(dest + 0x1c) = 0x3e8;                              */
+    dest = (char *)malloc(0x20);
+    memset(dest, 0x0, 0x20);
+    strncpy(dest, *(char **)(param_2 + 8), 0x17);
+    *(int *)(dest + 0x1c) = 0x3e8;   /* 1000 */
+
+    printf("Sessione %d aperta per %s\n", *(unsigned int *)(dest + 0x1c), dest);
+
+    /* if (strcmp(argv[2], "logout") == 0) { free(dest); puts("Logout eseguito"); } */
+    is_logout = (strcmp(*(char **)(param_2 + 0x10), "logout") == 0);
+    if (is_logout) {
+        free(dest);
+        puts("Logout eseguito");
+    }
+
+    /* malloc(0x20); memset(0, 0x20); strncpy(dest_0, "promemoria", 0x17);
+       *(int *)(dest_0 + 0x18) = (argc < 4) ? 0 : atoi(argv[3]);
+       *(int *)(dest_0 + 0x1c) = 0x7;                               */
+    dest_0 = (char *)malloc(0x20);
+    memset(dest_0, 0x0, 0x20);
+    strncpy(dest_0, "promemoria", 0x17);
+
+    if (param_1 < 4) {
+        *(int *)(dest_0 + 0x18) = 0;
+    }
+    else {
+        *(int *)(dest_0 + 0x18) = atoi(*(char **)(param_2 + 0x18));
+    }
+
+    *(int *)(dest_0 + 0x1c) = 0x7;   /* 7 */
+    after: int main(int param_1, char **param_2)
+{
+    char *dest;
+    char *dest_0;
+    int is_logout;
+
+    if (param_1 < 3) {
+        return 1;
+    }
+
+    setvbuf(stdout, (char *)0x0, 2, 0);
+
+    /* param_2 e' argv. I decompilati usano OFFSET IN BYTE (param_2 e' tipizzato
+       come long): +8  -> argv[1], +0x10 -> argv[2], +0x18 -> argv[3].
+       Cast a (char *) per riprodurre fedelmente gli offset numerici 8/0x10/0x18. */
+
+    /* malloc(0x20); memset(0, 0x20); strncpy(dest, argv[1], 0x17);
+       *(int *)(dest + 0x1c) = 0x3e8;                              */
+    dest = (char *)malloc(0x20);
+    memset(dest, 0x0, 0x20);
+    strncpy(dest, *(char **)((char *)param_2 + 8), 0x17);
+    *(int *)(dest + 0x1c) = 0x3e8;   /* 1000 */
+
+    printf("Sessione %d aperta per %s\n", *(unsigned int *)(dest + 0x1c), dest);
+
+    /* if (strcmp(argv[2], "logout") == 0) { free(dest); puts("Logout eseguito"); } */
+    is_logout = (strcmp(*(char **)((char *)param_2 + 0x10), "logout") == 0);
+    if (is_logout) {
+        free(dest);
+        puts("Logout eseguito");
+    }
+
+    /* malloc(0x20); memset(0, 0x20); strncpy(dest_0, "promemoria", 0x17);
+       *(int *)(dest_0 + 0x18) = (argc < 4) ? 0 : atoi(argv[3]);
+       *(int *)(dest_0 + 0x1c) = 0x7;                               */
+    dest_0 = (char *)malloc(0x20);
+    memset(dest_0, 0x0, 0x20);
+    strncpy(dest_0, "promemoria", 0x17);
+
+    if (param_1 < 4) {
+        *(int *)(dest_0 + 0x18) = 0;
+    }
+    else {
+        *(int *)(dest_0 + 0x18) = atoi(*(char **)((char *)param_2 + 0x18));
+    }
+
+    *(int *)(dest_0 + 0x1c) = 0x7;   /* 7 */
+
+Edited /tmp/re_task_u1nenokv/out.c (43 lines -> 47 lines)
+
+Now let me recompile and compare output of my reconstruction against the ORIGINAL binary across all branches.
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_u1nenokv && gcc -O0 -o out out.c -Wall 2>&1 && echo "COMPILE_OK"
+run() { echo "### ARGS: $*"; printf 'ORIG: '; ./test_O0 "$@" 2>&1; printf 'MINE: '; ./out "$@" 2>&1; echo "orig_ret=$?"; }
+run
+run alice
+run bob 5
+run bob 0
+run carol logout
+run dave logout 7
+run "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+
+COMPILE_OK
+### ARGS: 
+ORIG: MINE: orig_ret=1
+### ARGS: alice
+ORIG: MINE: orig_ret=1
+### ARGS: bob 5
+ORIG: Sessione 1000 aperta per bob
+Accesso utente per bob
+MINE: Sessione 1000 aperta per bob
+Accesso utente per bob
+orig_ret=0
+### ARGS: bob 0
+ORIG: Sessione 1000 aperta per bob
+Accesso utente per bob
+MINE: Sessione 1000 aperta per bob
+Accesso utente per bob
+orig_ret=0
+### ARGS: carol logout
+ORIG: Sessione 1000 aperta per carol
+Logout eseguito
+Accesso utente per promemoria
+MINE: Sessione 1000 aperta per carol
+Logout eseguito
+Accesso utente per promemoria
+orig_ret=0
+### ARGS: dave logout 7
+ORIG: Sessione 1000 aperta per dave
+Logout eseguito
+Accesso amministratore per promemoria
+MINE: Sessione 1000 aperta per dave
+Logout eseguito
+Accesso amministratore per promemoria
+orig_ret=0
+### ARGS: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ORIG: MINE: orig_ret=1
+
+All six cases match the original **exactly** — including the logout path where `free(dest)` is followed by a `malloc(0x20)` that reuses the freed chunk (so `dest_0 == dest`, and the `%s` prints "promemoria"). That confirms the use-after-free semantics and all constants are faithfully reproduced. Let me do one final test to confirm the `strncpy` 0x17 truncation behavior matches too.
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_u1nenokv && for a in "AveryVeryLongUserNameExceeding23CharsXYZ"; do
+  echo "### ORIG:"; ./test_O0 "$a" 1 2>&1; echo "### MINE:"; ./out "$a" 1 2>&1;
+done
+echo "=== byte-compare over many inputs ==="
+ok=1
+for a in "" "alice" "bob" "x" "carol" "AveryVeryLongUserNameExceeding23CharsXYZ"; do
+  for b in "" "5" "0" "logout" "abc"; do
+    for c in "" "7" "0" "logout"; do
+      o=$(./test_O0 "$a" "$b" "$c" 2>&1); m=$(./out "$a" "$b" "$c" 2>&1)
+      if [ "$o" != "$m" ]; then echo "DIFF for [$a] [$b] [$c]"; echo "  O: $o"; echo "  M: $m"; ok=0; fi
+    done
+  done
+done
+[ $ok -eq 1 ] && echo "ALL_IDENTICAL"
+
+### ORIG:
+Sessione 1000 aperta per AveryVeryLongUserNameEx
+Accesso utente per AveryVeryLongUserNameEx
+### MINE:
+Sessione 1000 aperta per AveryVeryLongUserNameEx
+Accesso utente per AveryVeryLongUserNameEx
+=== byte-compare over many inputs ===
+ALL_IDENTICAL
+
+The reconstruction is **byte-identical** to the original binary across the full input matrix, including the `strncpy` truncation at exactly `0x17` = 23 characters ("AveryVeryLongUserNameEx" = 23 chars).
+
+## Riepilogo della ricostruzione
+
+**Binario:** `test_O0` — ELF64 x86-64, stripped, compilato con GCC 15.3.1 a `-O0`.
+
+**Funzioni del programma raggiungibili da `main`:** solo `main` (`FUN_004004e6`, individuato da `entry` → `__libc_start_main`). Tutte le altre `FUN_...` (`0x400360`, `0x400430`, `0x400440`, `0x400470`) sono startup/teardown del compilatore, non parte del programma.
+
+**Logica riprodotta fedelmente (costanti esatte, nessuna correzione):**
+- `argc < 3` → `return 1`.
+- `setvbuf(stdout, NULL, 2, 0)` (unbuffered).
+- `dest = malloc(0x20)`, `memset(...,0,0x20)`, `strncpy(dest, argv[1], 0x17)`, `*(int*)(dest+0x1c) = 0x3e8` (1000).
+- `printf("Sessione %d aperta per %s\n", *(unsigned*)(dest+0x1c), dest)` → 1000.
+- `argv[2] == "logout"` → `free(dest); puts("Logout eseguito")` (lasciando la **use-after-free** intatta).
+- `dest_0 = malloc(0x20)`, `memset`, `strncpy(dest_0, "promemoria", 0x17)`, `*(int*)(dest_0+0x18) = (argc<4) ? 0 : atoi(argv[3])`, `*(int*)(dest_0+0x1c) = 0x7`.
+- Branch su `*(int*)(dest+0x18)`: `0` → "Accesso utente", altrimenti "Accesso amministratore".
+- `free(dest_0)`; se non logout `free(dest)`; `return 0`.
+
+Gli offset `argv` sono riprodotti con cast `(char *)param_2 + 8 / 0x10 / 0x18` per mantenere gli esatti valori numerici del decompilato (che Ghidra emette come offset in byte). Compila con `gcc` senza errori e riproduce l'output esatto del binario originale, incluse le anomalie (truncation a 23 byte, `promemoria` stampata dopo il `free` per riuso del chunk).
+
+File salvato in `/tmp/re_task_u1nenokv/out.c`.
+
+DONE

@@ -1,0 +1,550 @@
+
+    __( O)>  ● new session · openrouter xiaomi/mimo-v2.6-flash
+   \____)    20261008_20 · /tmp/re_task_2y4zg4uf
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+Ran into this error: Server error: Provider returned error.
+
+Please retry if you think this is a transient or recoverable error.
+
+
+=== NUDGE 1/2 ===
+
+    __( O)>  ● resuming · openrouter xiaomi/mimo-v2.6-flash
+   \____)    20261008_20 · /tmp/re_task_2y4zg4uf
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004005b0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004005c0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004005f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400360
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400400
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    filter: Elementi
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400400
+
+
+  ────────────────────────────────────────
+  ▸ list_segments ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp_2
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    filter: Troppi
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    filter: Somma
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: ls -la /tmp/re_task_2y4zg4uf/
+
+totale 12
+drwx------  2 fotoppo fotoppo    60  8 ott 11.28 .
+drwxrwxrwt 27 nobody  nobody    740  8 ott 11.29 ..
+-rwxr-xr-x  1 fotoppo fotoppo 10920  8 ott 11.28 test_O3
+  ────────────────────────────────────────
+  ▸ shell
+    command: xxd -s 0x1300 -l 0x90 /tmp/re_task_2y4zg4uf/test_O3; echo ---; xxd -s 0x1300 -l 0x90 -e /tmp/re_task_2y4zg4uf/test_O3
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: strings -t x /tmp/re_task_2y4zg4uf/test_O3 | head -50; echo ---; readelf -S /tmp/re_task_2y4zg4uf/test_O3 | sed -n '1,40p'
+
+bash: riga 1: xxd: comando non trovato
+---
+bash: riga 1: xxd: comando non trovato
+
+Command exited with code 127    336 $IST
+    591 PTE1
+    5c5 H=80@
+   1000 /lib64/ld-linux-x86-64.so.2
+   1139 __gmon_start__
+   1148 setvbuf
+   1150 puts
+   1155 free
+   115a __isoc23_strtol
+   116a stdout
+   1171 malloc
+   1178 __libc_start_main
+   118a printf
+   1191 libm.so.6
+   119b libc.so.6
+   11a5 GLIBC_2.38
+   11b0 GLIBC_2.34
+   11bb GLIBC_2.2.5
+   1310 Troppi elementi
+   1320 Somma: %u
+   1330 Elementi: %u, byte allocati: %u
+   141f ;*3$"
+   2034 GCC: (GNU) 15.3.1 20260722 (Red Hat 15.3.1-1)
+   2062 AV:4p1299
+   206c RV:running gcc 15.3.1 20260722
+   208b BV:annobin gcc 15.3.1 20260722
+   20aa GW:0x7d60562 ../sysdeps/x86/abi-note.c
+   20d1 SP:3
+   20d6 SC:1
+   20db CF:8 ../sysdeps/x86/abi-note.c
+   20fa FL:0 ../sysdeps/x86/abi-note.c
+   2119 GA:1
+   211e PI:4
+   2123 SE:0
+   2128 iS:0
+   212d GW:0x7d60562 init.c
+   2141 CF:8 init.c
+   214d FL:0 init.c
+   2159 GW:0x7d60562 static-reloc.c
+   2175 SP:0 static-reloc.c
+   2189 CF:8 static-reloc.c
+   219d FL:0 static-reloc.c
+   21fd .shstrtab
+   2207 .note.gnu.build-id
+   221a .init
+   2220 .text
+   2226 .fini
+   222c .interp
+   2234 .gnu.hash
+   223e .dynsym
+---
+There are 30 section headers, starting at offset 0x2328:
+
+Intestazioni di sezione:
+  [N°] Nome              Tipo             Indirizzo         Offset
+       Dimensione        DimEnt           Flag   Link  Info  Allin
+  [ 0]                   NULL             0000000000000000  00000000
+       0000000000000000  0000000000000000           0     0     0
+  [ 1] .note.gnu.bu[...] NOTE             0000000000400318  00000318
+       0000000000000024  0000000000000000   A       0     0     4
+  [ 2] .init             PROGBITS         000000000040033c  0000033c
+       000000000000001b  0000000000000000  AX       0     0     4
+  [ 3] .plt              PROGBITS         0000000000400360  00000360
+       0000000000000070  0000000000000010  AX       0     0     16
+  [ 4] .text             PROGBITS         0000000000400400  00000400
+       0000000000000266  0000000000000000  AX       0     0     64
+  [ 5] .fini             PROGBITS         0000000000400668  00000668
+       000000000000000d  0000000000000000  AX       0     0     4
+  [ 6] .interp           PROGBITS         0000000000401000  00001000
+       000000000000001c  0000000000000000   A       0     0     1
+  [ 7] .gnu.hash         GNU_HASH         0000000000401020  00001020
+       0000000000000024  0000000000000000   A       8     0     8
+  [ 8] .dynsym           DYNSYM           0000000000401048  00001048
+       00000000000000f0  0000000000000018   A       9     1     8
+  [ 9] .dynstr           STRTAB           0000000000401138  00001138
+       000000000000008f  0000000000000000   A       0     0     1
+  [10] .gnu.version      VERSYM           00000000004011c8  000011c8
+       0000000000000014  0000000000000002   A       8     0     2
+  [11] .gnu.version_r    VERNEED          00000000004011e0  000011e0
+       0000000000000040  0000000000000000   A       9     1     8
+  [12] .rela.dyn         RELA             0000000000401220  00001220
+       0000000000000048  0000000000000018   A       8     0     8
+  [13] .rela.plt         RELA             0000000000401268  00001268
+       0000000000000090  0000000000000018  AI       8    23     8
+  [14] .rodata           PROGBITS         0000000000401300  00001300
+       0000000000000090  0000000000000000   A       0     0     16
+  [15] .eh_frame_hdr     PROGBITS         0000000000401390  00001390
+       000000000000002c  0000000000000000   A       0     0     4
+  [16] .eh_frame         PROGBITS         00000000004013c0  000013c0
+       00000000000000a4  0000000000000000   A       0     0     8
+  [17] .note.gnu.pr[...] NOTE             0000000000401468  00001468
+  ────────────────────────────────────────
+  ▸ shell
+    command: python3 -c "
+f=open('/tmp/re_task_2y4zg4uf/test_O3','rb')
+f.seek(0x1300)
+d=f.read(0x90)
+import binascii
+for i in range(0,len(d),16):
+    print('%04x: %s  %s' % (0x401300+i, binascii.hexlify(d[i:i+16],' ',2).decode(), ''.join(chr(c) if 32<=c<127 else '.' for c in d[i:i+16])))
+print()
+import struct
+for name,off in [('xmm2@1360',0x60),('xmm4@1370',0x70),('xmm3@1380',0x80)]:
+    vals=struct.unpack('<4I',d[off:off+16])
+    print(name, [hex(v) for v in vals], vals)
+"
+
+401300: 0100 0200 0000 0000 0000 0000 0000 0000  ................
+401310: 5472 6f70 7069 2065 6c65 6d65 6e74 6900  Troppi elementi.
+401320: 536f 6d6d 613a 2025 750a 0000 0000 0000  Somma: %u.......
+401330: 456c 656d 656e 7469 3a20 2575 2c20 6279  Elementi: %u, by
+401340: 7465 2061 6c6c 6f63 6174 693a 2025 750a  te allocati: %u.
+401350: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+401360: 0000 0000 0100 0000 0200 0000 0300 0000  ................
+401370: 0100 0000 0100 0000 0100 0000 0100 0000  ................
+401380: 0400 0000 0400 0000 0400 0000 0400 0000  ................
+
+xmm2@1360 ['0x0', '0x1', '0x2', '0x3'] (0, 1, 2, 3)
+xmm4@1370 ['0x1', '0x1', '0x1', '0x1'] (1, 1, 1, 1)
+xmm3@1380 ['0x4', '0x4', '0x4', '0x4'] (4, 4, 4, 4)Ho tutti gli elementi: main è `FUN_00400400`, le stringhe e le costanti .rodata sono note. Scrivo il file e ne verifico la compilazione.
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_2y4zg4uf/out.c
+    content: #define _GNU_SOURCE
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+
+/*
+ * Costanti in .roda Lettura esatta dei dati referenziati dal main:
+ *   0x00401360: dword {0, 1, 2, 3}   (vettore iniziale degli indici per lane)
+ *   0x00401370: dword {1, 1, 1, 1}   (addendo costante per lane)
+ *   0x00401380: dword {4, 4, 4, 4}   (incremento per lane)
+ */
+static const int DAT_00401360[4] = {0, 1, 2, 3};
+static const int DAT_00401370[4] = {1, 1, 1, 1};
+static const int DAT_00401380[4] = {4, 4, 4, 4};
+
+/* FUN_00400400: entry point passato a __libc_start_main */
+int main(int param_1, long param_2)
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  int iVar6;
+  int iVar7;
+  int iVar8;
+  uint32_t uVar9;
+  uint32_t uVar10;
+  uint64_t uVar11;
+  int *__ptr;
+  int *piVar12;
+  int *piVar13;
+  int iVar14;
+  int iVar15;
+  int iVar16;
+  int iVar17;
+  int iVar18;
+  uint32_t uVar19;
+  int iVar20;
+  int iVar21;
+  int iVar22;
+  int iVar23;
+  int iVar24;
+  int iVar25;
+  int iVar26;
+
+  if (param_1 < 2) {
+    return 1;
+  }
+  setvbuf(stdout, (char *)0x0, 2, 0);
+  uVar11 = (uint64_t)__isoc23_strtol(*(char **)(param_2 + 8), (char *)0, 10);
+  uVar9 = (uint32_t)uVar11;
+  if (100 < uVar9) {
+    puts("Troppi elementi");
+    return 1;
+  }
+  __ptr = (int *)malloc((uint64_t)(uVar9 * 4 & 0xff));
+  printf("Elementi: %u, byte allocati: %u\n",
+         (unsigned int)(uVar11 & 0xffffffff),
+         (unsigned int)(uint8_t)(uVar9 * 4));
+  iVar8 = DAT_00401380[3];
+  iVar7 = DAT_00401380[2];
+  iVar6 = DAT_00401380[1];
+  iVar5 = DAT_00401380[0];
+  iVar4 = DAT_00401370[3];
+  iVar3 = DAT_00401370[2];
+  iVar2 = DAT_00401370[1];
+  iVar1 = DAT_00401370[0];
+  uVar19 = uVar9;
+  if (uVar9 != 0) {
+    if (uVar9 - 1 < 4) {
+      uVar10 = 0;
+      uVar19 = 0;
+    }
+    else {
+      iVar18 = 0;
+      iVar20 = 0;
+      iVar21 = 0;
+      iVar22 = 0;
+      piVar12 = __ptr;
+      iVar23 = DAT_00401360[0];
+      iVar24 = DAT_00401360[1];
+      iVar25 = DAT_00401360[2];
+      iVar26 = DAT_00401360[3];
+      do {
+        piVar13 = piVar12 + 4;
+        iVar14 = iVar23 * 3;
+        iVar15 = iVar24 * 3;
+        iVar16 = iVar25 * 3;
+        iVar17 = iVar26 * 3;
+        iVar23 = iVar23 + iVar5;
+        iVar24 = iVar24 + iVar6;
+        iVar25 = iVar25 + iVar7;
+        iVar26 = iVar26 + iVar8;
+        iVar14 = iVar14 + iVar1;
+        iVar15 = iVar15 + iVar2;
+        iVar16 = iVar16 + iVar3;
+        iVar17 = iVar17 + iVar4;
+        *piVar12 = iVar14;
+        piVar12[1] = iVar15;
+        piVar12[2] = iVar16;
+        piVar12[3] = iVar17;
+        iVar18 = iVar18 + iVar14;
+        iVar20 = iVar20 + iVar15;
+        iVar21 = iVar21 + iVar16;
+        iVar22 = iVar22 + iVar17;
+        piVar12 = piVar13;
+      } while (__ptr + (uVar11 >> 2 & 0x3fffffff) * 4 != piVar13);
+      uVar19 = iVar18 + iVar21 + iVar20 + iVar22;
+      if ((uVar11 & 3) == 0) goto LAB_00400538;
+      uVar10 = uVar9 & 0xfffffffc;
+    }
+    iVar1 = uVar10 * 3;
+    uVar19 = iVar1 + 1 + uVar19;
+    if (((uVar10 + 1 < uVar9) && (uVar19 = iVar1 + 4 + uVar19, uVar10 + 2 < uVar9)) &&
+        (uVar19 = iVar1 + 7 + uVar19, uVar10 + 3 < uVar9)) {
+      uVar19 = iVar1 + 10 + uVar19;
+    }
+  }
+LAB_00400538:
+  printf("Somma: %u\n", (unsigned int)uVar19);
+  free(__ptr);
+  return 0;
+}
+
+Created /tmp/re_task_2y4zg4uf/out.c (125 lines)
+  ────────────────────────────────────────
+  ▸ edit
+    path /tmp/re_task_2y4zg4uf/out.c
+    before:  * Costanti in .roda Lettura esatta dei dati referenziati dal main:
+    after:  * Dati in .rodata letti esattamente dai riferimenti del main:
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_2y4zg4uf && gcc -std=gnu23 -Wall -o out out.c 2>&1; echo "EXIT=$?"
+
+Edited /tmp/re_task_2y4zg4uf/out.c (1 lines -> 1 lines)out.c:18:5: warning: second argument of ‘main’ should be ‘char **’ [-Wmain]
+   18 | int main(int param_1, long param_2)
+      |     ^~~~
+out.c: In function ‘main’:
+out.c:52:22: error: implicit declaration of function ‘__isoc23_strtol’ [-Wimplicit-function-declaration]
+   52 |   uVar11 = (uint64_t)__isoc23_strtol(*(char **)(param_2 + 8), (char *)0, 10);
+      |                      ^~~~~~~~~~~~~~~
+EXIT=1
+  ────────────────────────────────────────
+  ▸ shell
+    command: grep -rn "isoc23_strtol" /usr/include/stdlib.h /usr/include/bits/*.h /usr/include/features.h 2>/dev/null | head; echo ---; grep -n "ISOC23\|IEC_60559_BFP_EXT_C2X" /usr/include/features.h | head -20; echo ---; gcc --version | head -1; ldd --version | head -1
+
+/usr/include/stdlib.h:217:					 int __base), __isoc23_strtol)
+/usr/include/stdlib.h:228:					      int __base), __isoc23_strtoll)
+/usr/include/stdlib.h:240:					       int __base), __isoc23_strtoll)
+/usr/include/stdlib.h:249:extern long int __isoc23_strtol (const char *__restrict __nptr,
+/usr/include/stdlib.h:257:extern long long int __isoc23_strtoll (const char *__restrict __nptr,
+/usr/include/stdlib.h:265:#  define strtol __isoc23_strtol
+/usr/include/stdlib.h:268:#   define strtoq __isoc23_strtoll
+/usr/include/stdlib.h:271:#  define strtoll __isoc23_strtoll
+/usr/include/stdlib.h:368:				__isoc23_strtol_l)
+/usr/include/stdlib.h:381:				     __isoc23_strtoll_l)
+---
+27:   _ISOC23_SOURCE	Extensions to ISO C99 from ISO C23.
+28:   _ISOC2X_SOURCE	Old name for _ISOC23_SOURCE.
+153:#undef	__GLIBC_USE_ISOC23
+204:/* Remap the old name _ISOC2X_SOURCE to _ISOC23_SOURCE.  */
+207:# undef _ISOC23_SOURCE
+208:# define _ISOC23_SOURCE	1
+219:# undef  _ISOC23_SOURCE
+220:# define _ISOC23_SOURCE	1
+246:	 && !defined _ISOC23_SOURCE && !defined _ISOC2Y_SOURCE	\
+262:#if (defined _ISOC23_SOURCE || defined _ISOC2Y_SOURCE \
+264:# define __GLIBC_USE_ISOC23	1
+266:# define __GLIBC_USE_ISOC23	0
+270:#if (defined _ISOC11_SOURCE || defined _ISOC23_SOURCE	\
+278:     || defined _ISOC23_SOURCE || defined _ISOC2Y_SOURCE		\
+285:     || defined _ISOC23_SOURCE || defined _ISOC2Y_SOURCE		\
+494:#if __GLIBC_USE (ISOC23)
+---
+gcc (GCC) 15.3.1 20260722 (Red Hat 15.3.1-1)
+ldd (GNU libc) 2.42
+  ────────────────────────────────────────
+  ▸ shell
+    command: sed -n '200,270p' /usr/include/stdlib.h; echo =====; sed -n '240,270p' /usr/include/features.h; echo =====; sed -n '210,225p' /usr/include/features.h
+
+__extension__
+extern long long int strtoll (const char *__restrict __nptr,
+			      char **__restrict __endptr, int __base)
+     __THROW __nonnull ((1));
+/* Convert a string to an unsigned quadword integer.  */
+__extension__
+extern unsigned long long int strtoull (const char *__restrict __nptr,
+					char **__restrict __endptr, int __base)
+     __THROW __nonnull ((1));
+#endif /* ISO C99 or use MISC.  */
+
+/* Versions of the above functions that handle '0b' and '0B' prefixes
+   in base 0 or 2.  */
+#if __GLIBC_USE (C23_STRTOL)
+# ifdef __REDIRECT
+extern long int __REDIRECT_NTH (strtol, (const char *__restrict __nptr,
+					 char **__restrict __endptr,
+					 int __base), __isoc23_strtol)
+     __nonnull ((1));
+extern unsigned long int __REDIRECT_NTH (strtoul,
+					 (const char *__restrict __nptr,
+					  char **__restrict __endptr,
+					  int __base), __isoc23_strtoul)
+     __nonnull ((1));
+#  ifdef __USE_MISC
+__extension__
+extern long long int __REDIRECT_NTH (strtoq, (const char *__restrict __nptr,
+					      char **__restrict __endptr,
+					      int __base), __isoc23_strtoll)
+     __nonnull ((1));
+__extension__
+extern unsigned long long int __REDIRECT_NTH (strtouq,
+					      (const char *__restrict __nptr,
+					       char **__restrict __endptr,
+					       int __base), __isoc23_strtoull)
+     __nonnull ((1));
+#  endif
+__extension__
+extern long long int __REDIRECT_NTH (strtoll, (const char *__restrict __nptr,
+					       char **__restrict __endptr,
+					       int __base), __isoc23_strtoll)
+     __nonnull ((1));
+__extension__
+extern unsigned long long int __REDIRECT_NTH (strtoull,
+					      (const char *__restrict __nptr,
+					       char **__restrict __endptr,
+					       int __base), __isoc23_strtoull)
+     __nonnull ((1));
+# else
+extern long int __isoc23_strtol (const char *__restrict __nptr,
+				 char **__restrict __endptr, int __base)
+     __THROW __nonnull ((1));
+extern unsigned long int __isoc23_strtoul (const char *__restrict __nptr,
+					   char **__restrict __endptr,
+					   int __base)
+     __THROW __nonnull ((1));
+__extension__
+extern long long int __isoc23_strtoll (const char *__restrict __nptr,
+				       char **__restrict __endptr, int __base)
+     __THROW __nonnull ((1));
+__extension__
+extern unsigned long long int __isoc23_strtoull (const char *__restrict __nptr,
+						 char **__restrict __endptr,
+						 int __base)
+     __THROW __nonnull ((1));
+#  define strtol __isoc23_strtol
+#  define strtoul __isoc23_strtoul
+#  ifdef __USE_MISC
+#   define strtoq __isoc23_strtoll
+#   define strtouq __isoc23_strtoull
+#  endif
+=====
+
+/* If nothing (other than _GNU_SOURCE and _DEFAULT_SOURCE) is defined,
+   define _DEFAULT_SOURCE.  */
+#if (defined _DEFAULT_SOURCE					\
+     || (!defined __STRICT_ANSI__				\
+	 && !defined _ISOC99_SOURCE && !defined _ISOC11_SOURCE	\
+	 && !defined _ISOC23_SOURCE && !defined _ISOC2Y_SOURCE	\
+	 && !defined _POSIX_SOURCE && !defined _POSIX_C_SOURCE	\
+	 && !defined _XOPEN_SOURCE))
+# undef  _DEFAULT_SOURCE
+# define _DEFAULT_SOURCE	1
+#endif
+
+/* This is to enable the ISO C2Y extension.  */
+#if (defined _ISOC2Y_SOURCE \
+     || (defined __STDC_VERSION__ && __STDC_VERSION__ > 202311L))
+# define __GLIBC_USE_ISOC2Y	1
+#else
+# define __GLIBC_USE_ISOC2Y	0
+#endif
+
+/* This is to enable the ISO C23 extension.  */
+#if (defined _ISOC23_SOURCE || defined _ISOC2Y_SOURCE \
+     || (defined __STDC_VERSION__ && __STDC_VERSION__ > 201710L))
+# define __GLIBC_USE_ISOC23	1
+#else
+# define __GLIBC_USE_ISOC23	0
+#endif
+
+/* This is to enable the ISO C11 extension.  */
+#if (defined _ISOC11_SOURCE || defined _ISOC23_SOURCE	\
+=====
+
+/* If _GNU_SOURCE was defined by the user, turn on all the other features.  */
+#ifdef _GNU_SOURCE
+# undef  _ISOC95_SOURCE
+# define _ISOC95_SOURCE	1
+# undef  _ISOC99_SOURCE
+# define _ISOC99_SOURCE	1
+# undef  _ISOC11_SOURCE
+# define _ISOC11_SOURCE	1
+# undef  _ISOC23_SOURCE
+# define _ISOC23_SOURCE	1
+# undef  _ISOC2Y_SOURCE
+# define _ISOC2Y_SOURCE	1
+# undef  _POSIX_SOURCE
+# define _POSIX_SOURCE	1
+# undef  _POSIX_C_SOURCE`__isoc23_strtol` non è dichiarato dal header con `__REDIRECT`: aggiungo la dichiarazione esplicita (il simbolo è un import del binario) e ricompilo.
+  ────────────────────────────────────────
+  ▸ edit
+    path /tmp/re_task_2y4zg4uf/out.c
+    before: static const int DAT_00401360[4] = {0, 1, 2, 3};
+static const int DAT_00401370[4] = {1, 1, 1, 1};
+static const int DAT_00401380[4] = {4, 4, 4, 4};
+    new_string: static const int DAT_00401360[4] = {0, 1, 2, 3};
+static const int DAT_00401370[4] = {1, 1, 1, 1};
+static const int DAT_00401380[4] = {4, 4, 4, 4};
+
+/* Simbolo importato dal binario (glibc 2.38+, redirect asm di strtol) */
+extern long int __isoc23_strtol(const char *__restrict __nptr,
+                                char **__restrict __endptr, int __base);
+
+Error: Failed to parse arguments: missing field `after`Ran into this error: Server error: Provider returned error.
+
+Please retry if you think this is a transient or recoverable error.

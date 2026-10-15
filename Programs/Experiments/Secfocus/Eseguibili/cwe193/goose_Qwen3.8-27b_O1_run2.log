@@ -1,0 +1,290 @@
+
+    __( O)>  ● new session · openrouter qwen/qwen3.8-27b
+   \____)    20261012_51 · /tmp/re_task_puf2rood
+     L L     goose is ready
+
+
+Inizio con la FASE 1 — Orientamento.
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    limit: 2000
+
+
+
+Il programma è piccolo. Funzioni candidate: `FUN_00400400`, `FUN_00400410`, `FUN_00400440`, `FUN_004004b6`, `FUN_004004f1`. Ora trovo il main decompilando `entry`.
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004f1
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400400
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400410
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400440
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004b6
+
+
+
+Tutte le funzioni raggiungibili sono decompilate. Verifico che le tre funzioni vuole (`FUN_00400400`, `FUN_00400410`, `FUN_00400440`) non siano referenziate dal codice del programma.
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400400
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400410
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400440
+
+
+
+Ci sono cross-riferimenti inaspettati verso le funzioni "vuote". Verifico la disassembliatura di queste zone per capire cosa c'è davvero.
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400440
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x0040134c
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x004004b4
+
+
+
+The `0x400440` function is PLT code (using GOT `0x403038`), not program code. Check the segments to verify the memory layout and make sure that no program code is being overlooked.
+
+
+  ────────────────────────────────────────
+  ▸ list_segments ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_imports ghidra-mcp
+
+
+
+Ora ho chiaro il layout. Verifico il contenuto di `.rodata` (0x401248) per confermare le stringhe di formato, e controllo se ci sono altre stringhe nel binario.
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    filter: caratteri
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400360
+
+
+
+Ho decompilato tutte le funzioni raggiungibili dal main (`FUN_004004f1` = main, `FUN_004004b6` = la funzione che elabora il nome). Le altre funzioni (`FUN_00400360` = `_DT_INIT`, `FUN_00400400/410/440` = thunks/avvio, `entry`) sono codice di avvio/gestione generato dal compilatore, non logica del programma.
+
+Analisi del comportamento:
+- **main** (`FUN_004004f1`): disattiva il buffer di stdout, poi per ogni argomento (da argv[1] a argv[argc-1]) chiama `register_name`. Se restituisce NULL stampa "Nome troppo lungo", altrimenti stampa "Registrato" con il contenuto e la lunghezza, e libera la memoria.
+- **register_name** (`FUN_004004b6`): se `strlen(input) < 0x11` (17) alloca `malloc(0x10)` (16 byte) e fa `strcpy`, altrimenti restituisce NULL.
+
+Ora scrivo il file C ricostruito.
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_puf2rood/out.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+
+/* Original name: FUN_004004b6
+ * Copies a name into a fixed 16-byte buffer when its length is < 17,
+ * otherwise returns NULL.
+ */
+char *register_name(char *name)
+{
+    size_t len;
+    char *dest;
+
+    len = strlen(name);
+    dest = (char *)0x0;
+    if (len < 0x11) {
+        dest = (char *)malloc(0x10);
+        strcpy(dest, name);
+    }
+    return dest;
+}
+
+/* Original name: FUN_004004f1 (main) */
+int main(int argc, char **argv)
+{
+    char *s;
+    char *result;
+    size_t len;
+    char **p;
+
+    setvbuf(stdout, (char *)0x0, 2, 0);
+    if (1 < argc) {
+        p = &argv[1];
+        do {
+            s = *p;
+            result = register_name(s);
+            if (result == (char *)0x0) {
+                len = strlen(s);
+                printf("Nome troppo lungo: %zu caratteri\n", len);
+            }
+            else {
+                len = strlen(result);
+                printf("Registrato: %s (%zu caratteri)\n", result, len);
+                free(result);
+            }
+            p = p + 1;
+        } while (p != &argv[argc]);
+    }
+    return 0;
+}
+
+
+Created /tmp/re_task_puf2rood/out.c (51 lines)
+
+Verifico la compilazione con gcc.
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_puf2rood && gcc -Wall -o out_test out.c && echo "COMPILE_OK" && ./out_test Alice Bob "StringaPiùLungaDi16Car" && echo "RUN_DONE"
+
+COMPILE_OK
+Registrato: Alice (5 caratteri)
+Registrato: Bob (3 caratteri)
+Nome troppo lungo: 23 caratteri
+RUN_DONE
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_puf2rood && rm -f out_test && ls -la
+
+totale 16
+drwx------  2 fotoppo fotoppo    80 12 ott 13.38 .
+drwxrwxrwt 27 nobody  nobody   1140 12 ott 13.38 ..
+-rw-r--r--  1 fotoppo fotoppo  1141 12 ott 13.38 out.c
+-rwxr-xr-x  1 fotoppo fotoppo 10888 12 ott 13.36 test_O1
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cat /tmp/re_task_puf2rood/out.c
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+
+/* Original name: FUN_004004b6
+ * Copies a name into a fixed 16-byte buffer when its length is < 17,
+ * otherwise returns NULL.
+ */
+char *register_name(char *name)
+{
+    size_t len;
+    char *dest;
+
+    len = strlen(name);
+    dest = (char *)0x0;
+    if (len < 0x11) {
+        dest = (char *)malloc(0x10);
+        strcpy(dest, name);
+    }
+    return dest;
+}
+
+/* Original name: FUN_004004f1 (main) */
+int main(int argc, char **argv)
+{
+    char *s;
+    char *result;
+    size_t len;
+    char **p;
+
+    setvbuf(stdout, (char *)0x0, 2, 0);
+    if (1 < argc) {
+        p = &argv[1];
+        do {
+            s = *p;
+            result = register_name(s);
+            if (result == (char *)0x0) {
+                len = strlen(s);
+                printf("Nome troppo lungo: %zu caratteri\n", len);
+            }
+            else {
+                len = strlen(result);
+                printf("Registrato: %s (%zu caratteri)\n", result, len);
+                free(result);
+            }
+            p = p + 1;
+        } while (p != &argv[argc]);
+    }
+    return 0;
+}
+
+# Riassunto della ricostruzione
+
+## Fasi eseguite
+
+**FASE 1 — Orientamento:** Binario piccolo; funzioni: `entry`, `FUN_00400360` (`_DT_INIT`), `FUN_00400400/410/440` (stub PLT), `FUN_004004b6`, `FUN_004004f1`. Stringhe: format string in `.rodata` (0x401248).
+
+**FASE 2 — Main:** Decompilando `entry` → `__libc_start_main(FUN_004004f1, ...)`. **Main = `FUN_004004f1`.**
+
+**FASE 3 — Decompilazione:** Tutte le funzioni raggiungibili dal main:
+- **`FUN_004004f1` (main):** `setvbuf(stdout, NULL, 2, 0)`, poi per ogni `argv[i]` (i=1..argc-1, con struttura do-while a puntatori) chiama `register_name`; se NULL → `printf("Nome troppo lungo: %zu caratteri\n", strlen(input))`, altrimenti → `printf("Registrato: %s (%zu caratteri)\n", out, strlen(out))` + `free`.
+- **`FUN_004004b6` (`register_name`):** `len = strlen(input)`; se `len < 0x11` → `malloc(0x10)` + `strcpy(dest, input)`; altrimenti NULL.
+
+Verificato che `FUN_00400400/410/440` siano stub PLT (disassembliatura con accessi relativi a GOT `0x403038`) e `FUN_00400360` sia init generato dal compilatore → esclusi dal sorgente.
+
+**FASE 4 — Codice C:** Trascrizione fedele con costanti esatte (`0x11`, `0x10`, mode `2`), stringhe identiche, stessa struttura do-while a puntatori. **Bug preservato fedelmente:** heap off-by-one — `strcpy` in buffer da 16 byte per stringhe di lunghezza 16 (terminatore NUL oltre l'allocazione).
+
+**FASE 5 — File salvato** in `/tmp/re_task_puf2rood/out.c`.
+
+## Verifica
+- `gcc -Wall` → compilazione pulita, zero avvisi.
+- Esecuzione test: `Registrato: Alice (5 caratteri)`, `Registrato: Bob (3 caratteri)`, `Nome troppo lungo: 23 caratteri` — coerente con la logica decompilata.
+
+DONE

@@ -1,0 +1,180 @@
+
+    __( O)>  ● new session · openrouter qwen/qwen3.8-27b
+   \____)    20261015_9 · /tmp/re_task_nrvay14r
+     L L     goose is ready
+
+
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+
+I have the function list. Now let me find main by decompiling `entry`.
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+
+Main is `FUN_004003c0`. Now let me decompile main and the other program functions.
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004003c0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400520
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400530
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400560
+
+
+
+Main is `FUN_004003c0`. The three other `FUN_...` (0x520, 0x530, 0x560) are all empty (`return;`) and are compiler/runtime init stubs (`_init`/`_fini`/frame_dummy), not reachable from main. Let me verify reachability from main to be thorough.
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_from ghidra-mcp
+    address: 0x004003c0
+
+
+
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400520
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400530
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400560
+
+Confirmed: `FUN_00400520/530/560` are referenced only from the runtime init/fini chain (0x4013xx, 0x4005b1, 0x4005d4), not from main. So the only program function is `FUN_004003c0` (main), fully decompiled.
+
+**Analysis summary:**
+
+- `entry` → `__libc_start_main(FUN_004003c0, ...)` ⇒ main = `FUN_004003c0`
+- `main(argc, argv)`:
+  - `setvbuf(stdout, NULL, 2, 0)`
+  - if `1 < argc`: iterate `argv[1]` … `argv[argc-1]` (pointer loop from `argv+1` to `argv+argc`)
+  - for each arg: `len = strlen(s)`; if `16 < len` → `printf("Nome troppo lungo: %zu caratteri\n", len)` and continue
+  - else: `buf = malloc(16)` (0x10), copy `len+1` bytes (the unrolled 8-byte-vector block is gcc's inlined `__builtin_memcpy`)
+  - `printf("Registrato: %s (%zu caratteri)\n", buf, len)`, `free(buf)`
+  - early `return 0` on last element
+  - return 0
+
+Note the intentional heap overflow: copies `len+1` bytes (up to 17) into a 16-byte `malloc(0x10)` when `len == 16`. I reproduce it exactly as-is.
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_nrvay14r/out.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/*
+ * Ricostruzione fedele del binario stripped.
+ * main decompilato a 0x004003c0 (entry -> __libc_start_main(FUN_004003c0)).
+ * L'unica funzione del programma raggiungibile da entry/main e' questa;
+ * FUN_00400520/FUN_00400530/FUN_00400560 sono stub di runtime (init/fini)
+ * richiamati solo dalla catena di avvio, non dal main.
+ */
+
+int main(int argc, char **argv)
+{
+    char *s;
+    char *buf;
+    size_t len;
+    int i;
+
+    setvbuf(stdout, (char *)0, 2, 0);
+    if (1 < argc) {
+        for (i = 1; i < argc; i++) {
+            s = argv[i];
+            len = strlen(s);
+            if (16 < len) {
+                printf("Nome troppo lungo: %zu caratteri\n", len);
+                continue;
+            }
+            buf = malloc(0x10);
+            memcpy(buf, s, len + 1);
+            printf("Registrato: %s (%zu caratteri)\n", buf, len);
+            free(buf);
+        }
+    }
+    return 0;
+}
+
+
+Created /tmp/re_task_nrvay14r/out.c (36 lines)Now let me verify it compiles cleanly with gcc:
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_nrvay14r && gcc -o /tmp/re_task_nrvay14r/out_test out.c 2>&1 && echo "COMPILE_OK" && /tmp/re_task_nrvay14r/out_test "Mario" "Xavier" "abcdefghijklmnopqrstuvwxyz" ""
+
+COMPILE_OK
+Registrato: Mario (5 caratteri)
+Registrato: Xavier (6 caratteri)
+Nome troppo lungo: 26 caratteri
+Registrato:  (0 caratteri)Compilation and behavior verified — output matches the decompiled logic exactly. Let me clean up the test artifact:
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: rm -f /tmp/re_task_nrvay14r/out_test && ls -la /tmp/re_task_nrvay14r/
+
+totale 16
+drwx------  2 fotoppo fotoppo    80 15 ott 18.27 .
+drwxrwxrwt 27 nobody  nobody    720 15 ott 18.27 ..
+-rw-r--r--  1 fotoppo fotoppo   959 15 ott 18.27 out.c
+-rwxr-xr-x  1 fotoppo fotoppo 10880 15 ott 18.23 test_O2Task complete. Summary of the reconstruction:
+
+## Fasi eseguite
+
+**Fase 1 – Orientamento**: 
+- `list_functions`: identificato il set completo (`entry`, `FUN_004003c0`, `FUN_00400520/530/560`, più runtime e import libc).
+- `list_strings`: l'unico stringa nel dynamic section è il nome del loader; le stringhe di formato sono state lette direttamente dal decompilato.
+
+**Fase 2 – Main**: `decompile_function("entry")` ha mostrato `__libc_start_main(FUN_004003c0, ...)` → **main = `FUN_004003c0`**.
+
+**Fase 3 – Decompilazione**: decompilate tutte le `FUN_...` del programma:
+- `FUN_004003c0` (main) — decompilata per nome;
+- `FUN_00400520`, `FUN_00400530`, `FUN_00400560` — tutte vuote (`return;`); via `get_xrefs_to` confermato che sono richiamate solo dalla catena init/fini di runtime (0x401314, 0x4005b1, 0x4005d4), non dal main → non sono parte del programma.
+
+**Fase 4 – Codice C**: main ricostruito fedelmente:
+- `setvbuf(stdout, (char *)0, 2, 0)`;
+- loop su `argv[1]..argv[argc-1]` (nel binario: puntatori da `argv+1` a `argv+argc`);
+- `len = strlen(s)`; se `16 < len` → `"Nome troppo lungo: %zu caratteri\n"` e continue;
+- altrimenti `malloc(0x10)` e copia di `len+1` bytes (il blocco unrollato a vettori da 8 byte è l'`__builtin_memcpy` inlinato dal compilatore);
+- `printf("Registrato: %s (%zu caratteri)\n", buf, len)`; `free(buf)`;
+- **l'overflow heap è conservato esattamente**: con `len == 16` si copiano 17 byte in un buffer da 16.
+
+**Fase 5 – Salvataggio**: file scritto in `/tmp/re_task_nrvay14r/out.c`, compilato con gcc senza errori e verificato funzionalmente (output coerente con la logica decompilata).
+
+DONE

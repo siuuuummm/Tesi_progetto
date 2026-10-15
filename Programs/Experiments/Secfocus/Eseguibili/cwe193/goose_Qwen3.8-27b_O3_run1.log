@@ -1,0 +1,468 @@
+
+    __( O)>  ● new session · openrouter qwen/qwen3.8-27b
+   \____)    20261012_49 · /tmp/re_task_h88ttnqq
+     L L     goose is ready
+
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    limit: 2000
+
+
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+    limit: 200
+
+
+
+The entry calls `__libc_start_main` with main at `0x004003c0`. Decompiling main:
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004003c0
+
+
+
+I've decompiled the main function and found it's a small C program that takes command-line arguments, checks their length, allocates a 16-byte buffer, and copies the argument into it. Now I'll verify there are no other reachable functions from main and check for any additional strings I might have missed.
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_from ghidra-mcp
+    address: 0x004003c0
+    limit: 100
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: ls -la /tmp/re_task_h88ttnqq; find /tmp/re_task_h88ttnqq -type f | head; 
+
+totale 12
+drwx------  2 fotoppo fotoppo    60 12 ott 13.31 .
+drwxrwxrwt 27 nobody  nobody   1120 12 ott 13.31 ..
+-rwxr-xr-x  1 fotoppo fotoppo 10880 12 ott 13.31 test_O3
+/tmp/re_task_h88ttnqq/test_O3
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: strings -a /tmp/re_task_h88ttnqq/test_O3 | head -40; echo ---; objdump -d /tmp/re_task_h88ttnqq/test_O3 | sed -n '/<.text>:/,/<.fini>/p' | grep -E "call|ret" | head -40
+
+AUATI
+]A\A]A^
+PTE1
+H=00@
+/lib64/ld-linux-x86-64.so.2
+__gmon_start__
+setvbuf
+free
+strlen
+stdout
+malloc
+__libc_start_main
+printf
+libm.so.6
+libc.so.6
+GLIBC_2.34
+GLIBC_2.2.5
+Nome troppo lungo: %zu caratteri
+Registrato: %s (%zu caratteri)
+;*3$"
+GCC: (GNU) 15.3.1 20260722 (Red Hat 15.3.1-1)
+AV:4p1299
+RV:running gcc 15.3.1 20260722
+BV:annobin gcc 15.3.1 20260722
+GW:0x7d60562 ../sysdeps/x86/abi-note.c
+SP:3
+SC:1
+CF:8 ../sysdeps/x86/abi-note.c
+FL:0 ../sysdeps/x86/abi-note.c
+GA:1
+PI:4
+SE:0
+iS:0
+GW:0x7d60562 init.c
+CF:8 init.c
+FL:0 init.c
+GW:0x7d60562 static-reloc.c
+SP:0 static-reloc.c
+CF:8 static-reloc.c
+FL:0 static-reloc.c
+---
+  4003dd:	e8 ce ff ff ff       	call   4003b0 <setvbuf@plt>
+  400429:	e8 62 ff ff ff       	call   400390 <printf@plt>
+  400435:	e8 36 ff ff ff       	call   400370 <free@plt>
+  400445:	e8 36 ff ff ff       	call   400380 <strlen@plt>
+  400458:	e8 43 ff ff ff       	call   4003a0 <malloc@plt>
+  4004ae:	e8 dd fe ff ff       	call   400390 <printf@plt>
+  4004c2:	c3                   	ret
+  40050f:	ff 15 c3 2a 00 00    	call   *0x2ac3(%rip)        # 402fd8 <setvbuf@plt+0x2c28>
+  400524:	c3                   	ret
+  400550:	c3                   	ret
+  400590:	c3                   	ret
+  4005b1:	e8 7a ff ff ff       	call   400530 <setvbuf@plt+0x180>
+  4005be:	c3                   	ret
+  4005c0:	c3                   	ret
+  4005e9:	e8 92 fd ff ff       	call   400380 <strlen@plt>
+  4005fe:	e8 9d fd ff ff       	call   4003a0 <malloc@plt>
+  400643:	c3                   	ret
+
+I noticed that `FUN_004005e0` is calling `strlen` and `malloc`, so it looks like actual program code rather than a startup function. Let me check the entry point and that function more carefully.
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400520
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: objdump -d /tmp/re_task_h88ttnqq/test_O3 | awk '/4003[0-9a-f]{2}: /,/\.fini/' | head -100
+
+(no output)
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: objdump -d /tmp/re_task_h88ttnqq/test_O3 > /tmp/dis.txt; grep -n "^[0-9a-f]* <" /tmp/dis.txt | head -30
+
+7:000000000040033c <.init>:
+19:0000000000400360 <free@plt-0x10>:
+24:0000000000400370 <free@plt>:
+29:0000000000400380 <strlen@plt>:
+34:0000000000400390 <printf@plt>:
+39:00000000004003a0 <malloc@plt>:
+44:00000000004003b0 <setvbuf@plt>:
+51:00000000004003c0 <.text>:
+269:0000000000400684 <.fini>:
+
+I found that `.text` is a continuous block from 0x4003c0 to 0x400684. Now I'll examine the full disassembly to understand how the code is actually organized and how `entry` passes `main`.
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: sed -n '51,269p' /tmp/dis.txt
+
+00000000004003c0 <.text>:
+  4003c0:	41 56                	push   %r14
+  4003c2:	31 c9                	xor    %ecx,%ecx
+  4003c4:	ba 02 00 00 00       	mov    $0x2,%edx
+  4003c9:	41 55                	push   %r13
+  4003cb:	41 54                	push   %r12
+  4003cd:	49 89 f4             	mov    %rsi,%r12
+  4003d0:	31 f6                	xor    %esi,%esi
+  4003d2:	55                   	push   %rbp
+  4003d3:	89 fd                	mov    %edi,%ebp
+  4003d5:	48 8b 3d 54 2c 00 00 	mov    0x2c54(%rip),%rdi        # 403030 <stdout@GLIBC_2.2.5>
+  4003dc:	53                   	push   %rbx
+  4003dd:	e8 ce ff ff ff       	call   4003b0 <setvbuf@plt>
+  4003e2:	83 fd 01             	cmp    $0x1,%ebp
+  4003e5:	0f 8e cd 00 00 00    	jle    4004b8 <setvbuf@plt+0x108>
+  4003eb:	8d 45 fe             	lea    -0x2(%rbp),%eax
+  4003ee:	49 8d 5c 24 08       	lea    0x8(%r12),%rbx
+  4003f3:	49 8d 6c c4 10       	lea    0x10(%r12,%rax,8),%rbp
+  4003f8:	eb 45                	jmp    40043f <setvbuf@plt+0x8f>
+  4003fa:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+  400400:	a8 04                	test   $0x4,%al
+  400402:	0f 85 bb 00 00 00    	jne    4004c3 <setvbuf@plt+0x113>
+  400408:	85 c0                	test   %eax,%eax
+  40040a:	74 10                	je     40041c <setvbuf@plt+0x6c>
+  40040c:	41 0f b6 55 00       	movzbl 0x0(%r13),%edx
+  400411:	41 88 16             	mov    %dl,(%r14)
+  400414:	a8 02                	test   $0x2,%al
+  400416:	0f 85 bf 00 00 00    	jne    4004db <setvbuf@plt+0x12b>
+  40041c:	4c 89 e2             	mov    %r12,%rdx
+  40041f:	4c 89 f6             	mov    %r14,%rsi
+  400422:	bf d0 12 40 00       	mov    $0x4012d0,%edi
+  400427:	31 c0                	xor    %eax,%eax
+  400429:	e8 62 ff ff ff       	call   400390 <printf@plt>
+  40042e:	48 83 c3 08          	add    $0x8,%rbx
+  400432:	4c 89 f7             	mov    %r14,%rdi
+  400435:	e8 36 ff ff ff       	call   400370 <free@plt>
+  40043a:	48 39 eb             	cmp    %rbp,%rbx
+  40043d:	74 79                	je     4004b8 <setvbuf@plt+0x108>
+  40043f:	4c 8b 2b             	mov    (%rbx),%r13
+  400442:	4c 89 ef             	mov    %r13,%rdi
+  400445:	e8 36 ff ff ff       	call   400380 <strlen@plt>
+  40044a:	49 89 c4             	mov    %rax,%r12
+  40044d:	48 83 f8 10          	cmp    $0x10,%rax
+  400451:	77 4d                	ja     4004a0 <setvbuf@plt+0xf0>
+  400453:	bf 10 00 00 00       	mov    $0x10,%edi
+  400458:	e8 43 ff ff ff       	call   4003a0 <malloc@plt>
+  40045d:	49 89 c6             	mov    %rax,%r14
+  400460:	49 8d 44 24 01       	lea    0x1(%r12),%rax
+  400465:	83 f8 08             	cmp    $0x8,%eax
+  400468:	72 96                	jb     400400 <setvbuf@plt+0x50>
+  40046a:	89 c2                	mov    %eax,%edx
+  40046c:	83 e8 01             	sub    $0x1,%eax
+  40046f:	49 8b 4c 15 f8       	mov    -0x8(%r13,%rdx,1),%rcx
+  400474:	49 89 4c 16 f8       	mov    %rcx,-0x8(%r14,%rdx,1)
+  400479:	83 f8 08             	cmp    $0x8,%eax
+  40047c:	72 9e                	jb     40041c <setvbuf@plt+0x6c>
+  40047e:	83 e0 f8             	and    $0xfffffff8,%eax
+  400481:	31 d2                	xor    %edx,%edx
+  400483:	89 d1                	mov    %edx,%ecx
+  400485:	83 c2 08             	add    $0x8,%edx
+  400488:	49 8b 74 0d 00       	mov    0x0(%r13,%rcx,1),%rsi
+  40048d:	49 89 34 0e          	mov    %rsi,(%r14,%rcx,1)
+  400491:	39 c2                	cmp    %eax,%edx
+  400493:	72 ee                	jb     400483 <setvbuf@plt+0xd3>
+  400495:	eb 85                	jmp    40041c <setvbuf@plt+0x6c>
+  400497:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+  40049e:	00 00 
+  4004a0:	48 89 c6             	mov    %rax,%rsi
+  4004a3:	bf a8 12 40 00       	mov    $0x4012a8,%edi
+  4004a8:	31 c0                	xor    %eax,%eax
+  4004aa:	48 83 c3 08          	add    $0x8,%rbx
+  4004ae:	e8 dd fe ff ff       	call   400390 <printf@plt>
+  4004b3:	48 39 eb             	cmp    %rbp,%rbx
+  4004b6:	75 87                	jne    40043f <setvbuf@plt+0x8f>
+  4004b8:	5b                   	pop    %rbx
+  4004b9:	31 c0                	xor    %eax,%eax
+  4004bb:	5d                   	pop    %rbp
+  4004bc:	41 5c                	pop    %r12
+  4004be:	41 5d                	pop    %r13
+  4004c0:	41 5e                	pop    %r14
+  4004c2:	c3                   	ret
+  4004c3:	41 8b 55 00          	mov    0x0(%r13),%edx
+  4004c7:	89 c0                	mov    %eax,%eax
+  4004c9:	41 89 16             	mov    %edx,(%r14)
+  4004cc:	41 8b 54 05 fc       	mov    -0x4(%r13,%rax,1),%edx
+  4004d1:	41 89 54 06 fc       	mov    %edx,-0x4(%r14,%rax,1)
+  4004d6:	e9 41 ff ff ff       	jmp    40041c <setvbuf@plt+0x6c>
+  4004db:	89 c0                	mov    %eax,%eax
+  4004dd:	41 0f b7 54 05 fe    	movzwl -0x2(%r13,%rax,1),%edx
+  4004e3:	66 41 89 54 06 fe    	mov    %dx,-0x2(%r14,%rax,1)
+  4004e9:	e9 2e ff ff ff       	jmp    40041c <setvbuf@plt+0x6c>
+  4004ee:	66 90                	xchg   %ax,%ax
+  4004f0:	f3 0f 1e fa          	endbr64
+  4004f4:	31 ed                	xor    %ebp,%ebp
+  4004f6:	49 89 d1             	mov    %rdx,%r9
+  4004f9:	5e                   	pop    %rsi
+  4004fa:	48 89 e2             	mov    %rsp,%rdx
+  4004fd:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+  400501:	50                   	push   %rax
+  400502:	54                   	push   %rsp
+  400503:	45 31 c0             	xor    %r8d,%r8d
+  400506:	31 c9                	xor    %ecx,%ecx
+  400508:	48 c7 c7 c0 03 40 00 	mov    $0x4003c0,%rdi
+  40050f:	ff 15 c3 2a 00 00    	call   *0x2ac3(%rip)        # 402fd8 <setvbuf@plt+0x2c28>
+  400515:	f4                   	hlt
+  400516:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  40051d:	00 00 00 
+  400520:	f3 0f 1e fa          	endbr64
+  400524:	c3                   	ret
+  400525:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  40052c:	00 00 00 
+  40052f:	90                   	nop
+  400530:	b8 30 30 40 00       	mov    $0x403030,%eax
+  400535:	48 3d 30 30 40 00    	cmp    $0x403030,%rax
+  40053b:	74 13                	je     400550 <setvbuf@plt+0x1a0>
+  40053d:	b8 00 00 00 00       	mov    $0x0,%eax
+  400542:	48 85 c0             	test   %rax,%rax
+  400545:	74 09                	je     400550 <setvbuf@plt+0x1a0>
+  400547:	bf 30 30 40 00       	mov    $0x403030,%edi
+  40054c:	ff e0                	jmp    *%rax
+  40054e:	66 90                	xchg   %ax,%ax
+  400550:	c3                   	ret
+  400551:	0f 1f 40 00          	nopl   0x0(%rax)
+  400555:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  40055c:	00 00 00 00 
+  400560:	be 30 30 40 00       	mov    $0x403030,%esi
+  400565:	48 81 ee 30 30 40 00 	sub    $0x403030,%rsi
+  40056c:	48 89 f0             	mov    %rsi,%rax
+  40056f:	48 c1 ee 3f          	shr    $0x3f,%rsi
+  400573:	48 c1 f8 03          	sar    $0x3,%rax
+  400577:	48 01 c6             	add    %rax,%rsi
+  40057a:	48 d1 fe             	sar    $1,%rsi
+  40057d:	74 11                	je     400590 <setvbuf@plt+0x1e0>
+  40057f:	b8 00 00 00 00       	mov    $0x0,%eax
+  400584:	48 85 c0             	test   %rax,%rax
+  400587:	74 07                	je     400590 <setvbuf@plt+0x1e0>
+  400589:	bf 30 30 40 00       	mov    $0x403030,%edi
+  40058e:	ff e0                	jmp    *%rax
+  400590:	c3                   	ret
+  400591:	0f 1f 40 00          	nopl   0x0(%rax)
+  400595:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  40059c:	00 00 00 00 
+  4005a0:	f3 0f 1e fa          	endbr64
+  4005a4:	80 3d 8d 2a 00 00 00 	cmpb   $0x0,0x2a8d(%rip)        # 403038 <stdout@GLIBC_2.2.5+0x8>
+  4005ab:	75 13                	jne    4005c0 <setvbuf@plt+0x210>
+  4005ad:	55                   	push   %rbp
+  4005ae:	48 89 e5             	mov    %rsp,%rbp
+  4005b1:	e8 7a ff ff ff       	call   400530 <setvbuf@plt+0x180>
+  4005b6:	c6 05 7b 2a 00 00 01 	movb   $0x1,0x2a7b(%rip)        # 403038 <stdout@GLIBC_2.2.5+0x8>
+  4005bd:	5d                   	pop    %rbp
+  4005be:	c3                   	ret
+  4005bf:	90                   	nop
+  4005c0:	c3                   	ret
+  4005c1:	0f 1f 40 00          	nopl   0x0(%rax)
+  4005c5:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  4005cc:	00 00 00 00 
+  4005d0:	f3 0f 1e fa          	endbr64
+  4005d4:	eb 8a                	jmp    400560 <setvbuf@plt+0x1b0>
+  4005d6:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  4005dd:	00 00 00 
+  4005e0:	55                   	push   %rbp
+  4005e1:	48 89 fd             	mov    %rdi,%rbp
+  4005e4:	53                   	push   %rbx
+  4005e5:	48 83 ec 08          	sub    $0x8,%rsp
+  4005e9:	e8 92 fd ff ff       	call   400380 <strlen@plt>
+  4005ee:	31 d2                	xor    %edx,%edx
+  4005f0:	48 83 f8 10          	cmp    $0x10,%rax
+  4005f4:	77 44                	ja     40063a <setvbuf@plt+0x28a>
+  4005f6:	bf 10 00 00 00       	mov    $0x10,%edi
+  4005fb:	48 89 c3             	mov    %rax,%rbx
+  4005fe:	e8 9d fd ff ff       	call   4003a0 <malloc@plt>
+  400603:	48 89 c2             	mov    %rax,%rdx
+  400606:	48 8d 43 01          	lea    0x1(%rbx),%rax
+  40060a:	83 f8 08             	cmp    $0x8,%eax
+  40060d:	72 39                	jb     400648 <setvbuf@plt+0x298>
+  40060f:	89 c1                	mov    %eax,%ecx
+  400611:	83 e8 01             	sub    $0x1,%eax
+  400614:	48 8b 74 0d f8       	mov    -0x8(%rbp,%rcx,1),%rsi
+  400619:	48 89 74 0a f8       	mov    %rsi,-0x8(%rdx,%rcx,1)
+  40061e:	83 f8 08             	cmp    $0x8,%eax
+  400621:	72 17                	jb     40063a <setvbuf@plt+0x28a>
+  400623:	83 e0 f8             	and    $0xfffffff8,%eax
+  400626:	31 c9                	xor    %ecx,%ecx
+  400628:	89 ce                	mov    %ecx,%esi
+  40062a:	83 c1 08             	add    $0x8,%ecx
+  40062d:	48 8b 7c 35 00       	mov    0x0(%rbp,%rsi,1),%rdi
+  400632:	48 89 3c 32          	mov    %rdi,(%rdx,%rsi,1)
+  400636:	39 c1                	cmp    %eax,%ecx
+  400638:	72 ee                	jb     400628 <setvbuf@plt+0x278>
+  40063a:	48 83 c4 08          	add    $0x8,%rsp
+  40063e:	48 89 d0             	mov    %rdx,%rax
+  400641:	5b                   	pop    %rbx
+  400642:	5d                   	pop    %rbp
+  400643:	c3                   	ret
+  400644:	0f 1f 40 00          	nopl   0x0(%rax)
+  400648:	a8 04                	test   $0x4,%al
+  40064a:	75 24                	jne    400670 <setvbuf@plt+0x2c0>
+  40064c:	85 c0                	test   %eax,%eax
+  40064e:	74 ea                	je     40063a <setvbuf@plt+0x28a>
+  400650:	0f b6 4d 00          	movzbl 0x0(%rbp),%ecx
+  400654:	88 0a                	mov    %cl,(%rdx)
+  400656:	a8 02                	test   $0x2,%al
+  400658:	74 e0                	je     40063a <setvbuf@plt+0x28a>
+  40065a:	89 c0                	mov    %eax,%eax
+  40065c:	0f b7 4c 05 fe       	movzwl -0x2(%rbp,%rax,1),%ecx
+  400661:	66 89 4c 02 fe       	mov    %cx,-0x2(%rdx,%rax,1)
+  400666:	eb d2                	jmp    40063a <setvbuf@plt+0x28a>
+  400668:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+  40066f:	00 
+  400670:	8b 4d 00             	mov    0x0(%rbp),%ecx
+  400673:	89 c0                	mov    %eax,%eax
+  400675:	89 0a                	mov    %ecx,(%rdx)
+  400677:	8b 4c 05 fc          	mov    -0x4(%rbp,%rax,1),%ecx
+  40067b:	89 4c 02 fc          	mov    %ecx,-0x4(%rdx,%rax,1)
+  40067f:	eb b9                	jmp    40063a <setvbuf@plt+0x28a>
+
+Disassemblamento della sezione .fini:
+
+0000000000400684 <.fini>:
+
+I've confirmed that `0x4005e0` is a helper function that duplicates the buffer allocation and copy logic from main, which was likely inlined by the compiler. Now I'll decompile it to verify.
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004005e0
+
+
+
+I've confirmed the helper function performs a length check, allocates a 16-byte buffer, and copies the string into it. Now I'll write the final C code to `/tmp/re_task_h88ttnqq/out.c`.
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_h88ttnqq/out.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char *alloca_nome(char *s)
+{
+    size_t len = strlen(s);
+    char *buf = NULL;
+    if (len < 0x11) {
+        buf = malloc(0x10);
+        memcpy(buf, s, len + 1);
+    }
+    return buf;
+}
+
+int main(int argc, char *argv[])
+{
+    setvbuf(stdout, NULL, 2, 0);
+    if (argc > 1) {
+        char **arg = argv + 1;
+        char **end = argv + argc;
+        while (arg != end) {
+            size_t len = strlen(*arg);
+            if (len > 0x10) {
+                arg++;
+                printf("Nome troppo lungo: %zu caratteri\n", len);
+                continue;
+            }
+            char *buf = malloc(0x10);
+            memcpy(buf, *arg, len + 1);
+            printf("Registrato: %s (%zu caratteri)\n", buf, len);
+            arg++;
+            free(buf);
+        }
+    }
+    return 0;
+}
+
+
+Created /tmp/re_task_h88ttnqq/out.c (37 lines)
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_h88ttnqq && gcc -O3 -o out out.c -Wall && echo "OK" && ./out; ./out Alice Bob; ./out "$(python3 -c 'print("A"*25)')" Alice; echo "--- original:"; ./test_O3; ./test_O3 Alice Bob; ./test_O3 "$(python3 -c 'print("A"*25)')" Alice
+
+OK
+Registrato: Alice (5 caratteri)
+Registrato: Bob (3 caratteri)
+Nome troppo lungo: 25 caratteri
+Registrato: Alice (5 caratteri)
+--- original:
+Registrato: Alice (5 caratteri)
+Registrato: Bob (3 caratteri)
+Nome troppo lungo: 25 caratteri
+Registrato: Alice (5 caratteri)
+
+Verifica completata — tutto è coerente:
+
+**Analisi del binario (`test_O3`, x86-64, stripped, GCC 15.3.1 -O3):**
+
+| Indirizzo | Funzione identificata | Trattamento |
+|---|---|---|
+| `0x4003c0` | `main` (passato a `__libc_start_main` in `entry`, confermato dal disassembly `mov $0x4003c0,%rdi`) | **decompilato** |
+| `0x4005e0` | Helper `alloca_nome`: `strlen`, se `len < 0x11` → `malloc(0x10)` + copia di `len+1` byte, altrimenti `NULL` | **decompilato** (logica di programma, non startup) |
+| `0x400360`, `0x400520`, `0x400530`, `0x400560`, `entry`, `_INIT_0`, `_FINI_0` | Codice di avvio/chiusura del compilatore (`.init`, `frame_dummy`, `register/deregister_tm_clones`) | esclusi, come da strategia |
+
+**Logica del programma (trascritta esattamente dal decompilato):**
+- `main(argc, argv)`: `setvbuf(stdout, NULL, 2, 0)`; se `argc > 1`, per ogni argomento: `len = strlen(arg)`; se `len > 0x10` → `printf("Nome troppo lungo: %zu caratteri\n", len)`; altrimenti `buf = malloc(0x10)`, copia di `len + 1` byte (che per `len == 0x10` sovrascrive 1 byte oltre il buffer — l'overflow è riprodotto fedelmente, non corretto), `printf("Registrato: %s (%zu caratteri)\n", buf, len)`, `free(buf)`; `return 0`.
+- Le costanti sono quelle lette nel binario: soglia `0x10`, dimensione allocazione `0x10`, copia di `len + 1`, flag `2` in `setvbuf`.
+
+**Verifica di coerenza:** compilazione con `gcc -O3 -Wall` senza errori/avvisi; l'output comportamentale è identico a quello del binario originale in tutti i casi testati (senza argomenti, nomi brevi, nome da 25 caratteri misto a nome breve).
+
+Il codice è stato salvato in `/tmp/re_task_h88ttnqq/out.c`.
+
+DONE
