@@ -3,7 +3,9 @@
 ghidra_11.3.2_PUBLIC/
 
 # binari e log rigenerati dalla pipeline
-Programs/Experiments/Secfocus/Eseguibili/
+Programs/Experiments/Secfocus/Eseguibili/**
+!Programs/Experiments/Secfocus/Eseguibili/**/
+!Programs/Experiments/Secfocus/Eseguibili/**/goose_*.log
 *.gpr
 *.rep/
 
