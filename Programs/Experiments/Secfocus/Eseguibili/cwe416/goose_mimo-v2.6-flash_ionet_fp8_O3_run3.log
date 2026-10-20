@@ -1,0 +1,581 @@
+
+    __( O)>  ● new session · openrouter xiaomi/mimo-v2.6-flash
+   \____)    20261009_24 · /tmp/re_task_ufltkgij
+     L L     goose is ready
+Inizio la FASE 1 — orientamento.
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+Main = `FUN_004003f0`. Decompilo il main.
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004003f0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: FUN_004003f0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004003f0
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    filter: Accesso
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    filter: Sessione
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: ls -la /tmp/re_task_ufltkgij
+
+total 12
+drwx------.  2 pippo  pippo     60 Oct  9 12:28 .
+drwxrwxrwt. 28 nobody nobody   800 Oct  9 12:28 ..
+-rwxr-xr-x.  1 pippo  pippo  10936 Oct  9 12:28 test_O3
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_ufltkgij && strings -t x test_O3 | head -50; echo ---; xxd -s 0x1378 -l 128 test_O3
+
+    405 ATUH
+    49e u,Z1
+    4a3 []A\A^
+    4f1 PTE1
+    525 H=H0@
+   1000 /lib64/ld-linux-x86-64.so.2
+   1169 __gmon_start__
+   1178 setvbuf
+   1180 puts
+   1185 strncpy
+   118d free
+   1192 __isoc23_strtol
+   11a2 stdout
+   11a9 __libc_start_main
+   11bb calloc
+   11c2 printf
+   11c9 strcmp
+   11d0 libm.so.6
+   11da libc.so.6
+   11e4 GLIBC_2.38
+   11ef GLIBC_2.34
+   11fa GLIBC_2.2.5
+   1378 Sessione %d aperta per %s
+   1393 logout
+   139a Logout eseguito
+   13aa Accesso utente per %s
+   13c8 Accesso amministratore per %s
+   1477 ;*3$"
+   2044 GCC: (GNU) 15.2.1 20260123 (Red Hat 15.2.1-7)
+   2072 AV:4p1299
+   207c RV:running gcc 15.2.1 20260123
+   209b BV:annobin gcc 15.2.1 20260123
+   20ba GW:0x7d60562 ../sysdeps/x86/abi-note.c
+   20e1 SP:3
+   20e6 SC:1
+   20eb CF:8 ../sysdeps/x86/abi-note.c
+   210a FL:0 ../sysdeps/x86/abi-note.c
+   2129 GA:1
+   212e PI:4
+   2133 SE:0
+   2138 iS:0
+   213d GW:0x7d60562 init.c
+   2151 CF:8 init.c
+   215d FL:0 init.c
+   2169 GW:0x7d60562 static-reloc.c
+   2185 SP:0 static-reloc.c
+   2199 CF:8 static-reloc.c
+   21ad FL:0 static-reloc.c
+   220d .shstrtab
+   2217 .note.gnu.build-id
+---
+/bin/bash: line 1: xxd: command not found
+
+Command exited with code 127
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_ufltkgij && od -A x -t x1z -j 0x1378 -N 128 test_O3
+
+001378 53 65 73 73 69 6f 6e 65 20 25 64 20 61 70 65 72  >Sessione %d aper<
+001388 74 61 20 70 65 72 20 25 73 0a 00 6c 6f 67 6f 75  >ta per %s..logou<
+001398 74 00 4c 6f 67 6f 75 74 20 65 73 65 67 75 69 74  >t.Logout eseguit<
+0013a8 6f 00 41 63 63 65 73 73 6f 20 75 74 65 6e 74 65  >o.Accesso utente<
+0013b8 20 70 65 72 20 25 73 0a 00 00 00 00 00 00 00 00  > per %s.........<
+0013c8 41 63 63 65 73 73 6f 20 61 6d 6d 69 6e 69 73 74  >Accesso amminist<
+0013d8 72 61 74 6f 72 65 20 70 65 72 20 25 73 0a 00 00  >ratore per %s...<
+0013e8 01 1b 03 3b 2c 00 00 00 04 00 00 00 78 ef ff ff  >...;,.......x...<
+0013f8
+
+
+=== NUDGE 1/2 ===
+
+    __( O)>  ● resuming · openrouter xiaomi/mimo-v2.6-flash
+   \____)    20261009_24 · /tmp/re_task_ufltkgij
+     L L     goose is ready
+
+
+
+=== NUDGE 2/2 ===
+
+    __( O)>  ● resuming · openrouter xiaomi/mimo-v2.6-flash
+   \____)    20261009_24 · /tmp/re_task_ufltkgij
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_ufltkgij/out.c
+    content: #include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char **argv)
+{
+    char *session;
+    int logout_cmp;
+
+    if (argc < 3) {
+        return 1;
+    }
+
+    setvbuf(stdout, (char *)0x0, 2, 0);
+
+    session = (char *)calloc(0x20, 1);
+    strncpy(session, argv[1], 0x17);
+    *(uint32_t *)(session + 0x1c) = 1000;
+
+    printf("Sessione %d aperta per %s\n", 1000, session);
+
+    logout_cmp = strcmp(argv[2], "logout");
+    if (logout_cmp == 0) {
+        free(session);
+        puts("Logout eseguito");
+    }
+
+    if (argc != 3) {
+        __isoc23_strtol(argv[3], (char *)0x0, 10);
+    }
+
+    if (*(int *)(session + 0x18) == 0) {
+        printf("Accesso utente per %s\n", session);
+    } else {
+        printf("Accesso amministratore per %s\n", session);
+    }
+
+    if (logout_cmp != 0) {
+        free(session);
+    }
+
+    return 0;
+}
+
+
+Created /tmp/re_task_ufltkgij/out.c (44 lines)
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_ufltkgij && gcc -Wall -o /tmp/out_test out.c 2>&1 | head -20; echo "exit=$?"
+
+out.c: In function ‘main’:
+out.c:30:9: error: implicit declaration of function ‘__isoc23_strtol’ [-Wimplicit-function-declaration]
+   30 |         __isoc23_strtol(argv[3], (char *)0x0, 10);
+      |         ^~~~~~~~~~~~~~~
+exit=0
+  ────────────────────────────────────────
+  ▸ edit
+    path /tmp/re_task_ufltkgij/out.c
+    before: #include <stdio.h>
+    after: #define _GNU_SOURCE
+#include <stdio.h>
+
+Edited /tmp/re_task_ufltkgij/out.c (1 lines -> 2 lines)
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_ufltkgij && gcc -Wall -o /tmp/out_test out.c 2>&1 | head -20; echo "exit=$?"
+
+out.c: In function ‘main’:
+out.c:31:9: error: implicit declaration of function ‘__isoc23_strtol’ [-Wimplicit-function-declaration]
+   31 |         __isoc23_strtol(argv[3], (char *)0x0, 10);
+      |         ^~~~~~~~~~~~~~~
+exit=0
+  ────────────────────────────────────────
+  ▸ shell
+    command: grep -rn "__isoc23_strtol" /usr/include/stdlib.h | head; grep -n -B8 "IEC_60559_BEXT_EXT" /usr/include/features.h | head -60
+
+217:					 int __base), __isoc23_strtol)
+228:					      int __base), __isoc23_strtoll)
+240:					       int __base), __isoc23_strtoll)
+249:extern long int __isoc23_strtol (const char *__restrict __nptr,
+257:extern long long int __isoc23_strtoll (const char *__restrict __nptr,
+265:#  define strtol __isoc23_strtol
+268:#   define strtoq __isoc23_strtoll
+271:#  define strtoll __isoc23_strtoll
+368:				__isoc23_strtol_l)
+381:				     __isoc23_strtoll_l)
+  ────────────────────────────────────────
+  ▸ shell
+    command: sed -n 200,270p /usr/include/stdlib.h; echo ====; grep -n "IEC_60559_BEXT_EXT\|GLIBC_USE (IEC" /usr/include/features.h
+
+__extension__
+extern long long int strtoll (const char *__restrict __nptr,
+			      char **__restrict __endptr, int __base)
+     __THROW __nonnull ((1));
+/* Convert a string to an unsigned quadword integer.  */
+__extension__
+extern unsigned long long int strtoull (const char *__restrict __nptr,
+					char **__restrict __endptr, int __base)
+     __THROW __nonnull ((1));
+#endif /* ISO C99 or use MISC.  */
+
+/* Versions of the above functions that handle '0b' and '0B' prefixes
+   in base 0 or 2.  */
+#if __GLIBC_USE (C23_STRTOL)
+# ifdef __REDIRECT
+extern long int __REDIRECT_NTH (strtol, (const char *__restrict __nptr,
+					 char **__restrict __endptr,
+					 int __base), __isoc23_strtol)
+     __nonnull ((1));
+extern unsigned long int __REDIRECT_NTH (strtoul,
+					 (const char *__restrict __nptr,
+					  char **__restrict __endptr,
+					  int __base), __isoc23_strtoul)
+     __nonnull ((1));
+#  ifdef __USE_MISC
+__extension__
+extern long long int __REDIRECT_NTH (strtoq, (const char *__restrict __nptr,
+					      char **__restrict __endptr,
+					      int __base), __isoc23_strtoll)
+     __nonnull ((1));
+__extension__
+extern unsigned long long int __REDIRECT_NTH (strtouq,
+					      (const char *__restrict __nptr,
+					       char **__restrict __endptr,
+					       int __base), __isoc23_strtoull)
+     __nonnull ((1));
+#  endif
+__extension__
+extern long long int __REDIRECT_NTH (strtoll, (const char *__restrict __nptr,
+					       char **__restrict __endptr,
+					       int __base), __isoc23_strtoll)
+     __nonnull ((1));
+__extension__
+extern unsigned long long int __REDIRECT_NTH (strtoull,
+					      (const char *__restrict __nptr,
+					       char **__restrict __endptr,
+					       int __base), __isoc23_strtoull)
+     __nonnull ((1));
+# else
+extern long int __isoc23_strtol (const char *__restrict __nptr,
+				 char **__restrict __endptr, int __base)
+     __THROW __nonnull ((1));
+extern unsigned long int __isoc23_strtoul (const char *__restrict __nptr,
+					   char **__restrict __endptr,
+					   int __base)
+     __THROW __nonnull ((1));
+__extension__
+extern long long int __isoc23_strtoll (const char *__restrict __nptr,
+				       char **__restrict __endptr, int __base)
+     __THROW __nonnull ((1));
+__extension__
+extern unsigned long long int __isoc23_strtoull (const char *__restrict __nptr,
+						 char **__restrict __endptr,
+						 int __base)
+     __THROW __nonnull ((1));
+#  define strtol __isoc23_strtol
+#  define strtoul __isoc23_strtoul
+#  ifdef __USE_MISC
+#   define strtoq __isoc23_strtoll
+#   define strtouq __isoc23_strtoull
+#  endif
+====
+
+Command exited with code 1
+  ────────────────────────────────────────
+  ▸ shell
+    command: grep -rn "C23_STRTOL" /usr/include/*.h /usr/include/bits/*.h 2>/dev/null | head -20; echo ===; grep -rn "define __GLIBC_USE" /usr/include/features.h | head
+
+/usr/include/features.h:157:#undef	__GLIBC_USE_C23_STRTOL
+/usr/include/features.h:495:# define __GLIBC_USE_C23_STRTOL 1
+/usr/include/features.h:497:# define __GLIBC_USE_C23_STRTOL 0
+/usr/include/inttypes.h:382:#if __GLIBC_USE (C23_STRTOL)
+/usr/include/stdio.h:443:# if __GLIBC_USE (C23_STRTOL)
+/usr/include/stdio.h:511:#  if __GLIBC_USE (C23_STRTOL)
+/usr/include/stdlib.h:213:#if __GLIBC_USE (C23_STRTOL)
+/usr/include/stdlib.h:363:# if __GLIBC_USE (C23_STRTOL)
+/usr/include/wchar.h:498:#if __GLIBC_USE (C23_STRTOL)
+/usr/include/wchar.h:582:# if __GLIBC_USE (C23_STRTOL)
+/usr/include/wchar.h:793:#  if __GLIBC_USE (C23_STRTOL)
+/usr/include/wchar.h:873:#  if __GLIBC_USE (C23_STRTOL)
+/usr/include/bits/stdio-ldbl.h:31:#  if __GLIBC_USE (C23_STRTOL)
+/usr/include/bits/stdio-ldbl.h:41:#  if __GLIBC_USE (C23_STRTOL)
+/usr/include/bits/stdio-ldbl.h:67:#   if __GLIBC_USE (C23_STRTOL)
+/usr/include/bits/stdio-ldbl.h:77:#   if __GLIBC_USE (C23_STRTOL)
+/usr/include/bits/wchar-ldbl.h:32:#   if __GLIBC_USE (C23_STRTOL)
+/usr/include/bits/wchar-ldbl.h:42:#   if __GLIBC_USE (C23_STRTOL)
+/usr/include/bits/wchar-ldbl.h:69:#   if __GLIBC_USE (C23_STRTOL)
+/usr/include/bits/wchar-ldbl.h:79:#   if __GLIBC_USE (C23_STRTOL)
+===
+191:#define __GLIBC_USE(F)	__GLIBC_USE_ ## F
+256:# define __GLIBC_USE_ISOC2Y	1
+258:# define __GLIBC_USE_ISOC2Y	0
+264:# define __GLIBC_USE_ISOC23	1
+266:# define __GLIBC_USE_ISOC23	0
+463:# define __GLIBC_USE_DEPRECATED_GETS 0
+465:# define __GLIBC_USE_DEPRECATED_GETS 1
+484:# define __GLIBC_USE_DEPRECATED_SCANF 1
+486:# define __GLIBC_USE_DEPRECATED_SCANF 0
+495:# define __GLIBC_USE_C23_STRTOL 1
+  ────────────────────────────────────────
+  ▸ shell
+    command: sed -n 488,500p /usr/include/features.h; sed -n 250,270p /usr/include/features.h
+
+
+/* ISO C23 added support for a 0b or 0B prefix on binary constants as
+   inputs to strtol-family functions (base 0 or 2).  This macro is
+   used to condition redirection in headers to allow that redirection
+   to be disabled when building those functions, despite _GNU_SOURCE
+   being defined.  */
+#if __GLIBC_USE (ISOC23)
+# define __GLIBC_USE_C23_STRTOL 1
+#else
+# define __GLIBC_USE_C23_STRTOL 0
+#endif
+
+/* Get definitions of __STDC_* predefined macros, if the compiler has
+# define _DEFAULT_SOURCE	1
+#endif
+
+/* This is to enable the ISO C2Y extension.  */
+#if (defined _ISOC2Y_SOURCE \
+     || (defined __STDC_VERSION__ && __STDC_VERSION__ > 202311L))
+# define __GLIBC_USE_ISOC2Y	1
+#else
+# define __GLIBC_USE_ISOC2Y	0
+#endif
+
+/* This is to enable the ISO C23 extension.  */
+#if (defined _ISOC23_SOURCE || defined _ISOC2Y_SOURCE \
+     || (defined __STDC_VERSION__ && __STDC_VERSION__ > 201710L))
+# define __GLIBC_USE_ISOC23	1
+#else
+# define __GLIBC_USE_ISOC23	0
+#endif
+
+/* This is to enable the ISO C11 extension.  */
+#if (defined _ISOC11_SOURCE || defined _ISOC23_SOURCE	\
+  ────────────────────────────────────────
+  ▸ edit
+    path /tmp/re_task_ufltkgij/out.c
+    before: #include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+    after: #include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+
+extern long int __isoc23_strtol(const char *nptr, char **endptr, int base);
+
+Edited /tmp/re_task_ufltkgij/out.c (4 lines -> 6 lines)
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_ufltkgij && cat out.c && echo ==== && gcc -Wall -Wextra -o /tmp/out_test out.c && echo "COMPILE OK" && /tmp/out_test a b; echo "rc=$?"
+
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+
+extern long int __isoc23_strtol(const char *nptr, char **endptr, int base);
+
+int main(int argc, char **argv)
+{
+    char *session;
+    int logout_cmp;
+
+    if (argc < 3) {
+        return 1;
+    }
+
+    setvbuf(stdout, (char *)0x0, 2, 0);
+
+    session = (char *)calloc(0x20, 1);
+    strncpy(session, argv[1], 0x17);
+    *(uint32_t *)(session + 0x1c) = 1000;
+
+    printf("Sessione %d aperta per %s\n", 1000, session);
+
+    logout_cmp = strcmp(argv[2], "logout");
+    if (logout_cmp == 0) {
+        free(session);
+        puts("Logout eseguito");
+    }
+
+    if (argc != 3) {
+        __isoc23_strtol(argv[3], (char *)0x0, 10);
+    }
+
+    if (*(int *)(session + 0x18) == 0) {
+        printf("Accesso utente per %s\n", session);
+    } else {
+        printf("Accesso amministratore per %s\n", session);
+    }
+
+    if (logout_cmp != 0) {
+        free(session);
+    }
+
+    return 0;
+}
+====
+out.c: In function ‘main’:
+out.c:33:34: error: passing argument 2 of ‘__isoc23_strtol’ from incompatible pointer type [-Wincompatible-pointer-types]
+   33 |         __isoc23_strtol(argv[3], (char *)0x0, 10);
+      |                                  ^~~~~~~~~~~
+      |                                  |
+      |                                  char *
+out.c:7:58: note: expected ‘char **’ but argument is of type ‘char *’
+    7 | extern long int __isoc23_strtol(const char *nptr, char **endptr, int base);
+      |                                                   ~~~~~~~^~~~~~
+rc=1
+  ────────────────────────────────────────
+  ▸ edit
+    path /tmp/re_task_ufltkgij/out.c
+    after:         __isoc23_strtol(argv[3], (char **)0x0, 10);
+    before:         __isoc23_strtol(argv[3], (char *)0x0, 10);
+
+Edited /tmp/re_task_ufltkgij/out.c (1 lines -> 1 lines)
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_ufltkgij && gcc -Wall -Wextra -o /tmp/out_test out.c && echo "COMPILE OK" && echo "== run A ==" && /tmp/out_test utente normal; echo "rc=$?"; echo "== run B ==" && /tmp/out_test utente logout extra; echo "rc=$?"; echo "== run C ==" && /tmp/out_test utente normal 42; echo "rc=$?"; echo "== run D ==" && /tmp/out_test; echo "rc=$?"
+
+COMPILE OK
+== run A ==
+Sessione 1000 aperta per utente
+Accesso utente per utente
+rc=0
+== run B ==
+Sessione 1000 aperta per utente
+Logout eseguito
+Accesso utente per ��
+rc=0
+== run C ==
+Sessione 1000 aperta per utente
+Accesso utente per utente
+rc=0
+== run D ==
+rc=1
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_ufltkgij && echo "== orig A ==" && ./test_O3 utente normal; echo "rc=$?"; echo "== orig B ==" && ./test_O3 utente logout extra; echo "rc=$?"; echo "== orig C ==" && ./test_O3 utente normal 42; echo "rc=$?"; echo "== orig D ==" && ./test_O3; echo "rc=$?"
+
+== orig A ==
+Sessione 1000 aperta per utente
+Accesso utente per utente
+rc=0
+== orig B ==
+Sessione 1000 aperta per utente
+Logout eseguito
+Accesso utente per ��
+rc=0
+== orig C ==
+Sessione 1000 aperta per utente
+Accesso utente per utente
+rc=0
+== orig D ==
+rc=1
+  ────────────────────────────────────────
+  ▸ shell
+    command: cat /tmp/re_task_ufltkgij/out.c
+
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+
+extern long int __isoc23_strtol(const char *nptr, char **endptr, int base);
+
+int main(int argc, char **argv)
+{
+    char *session;
+    int logout_cmp;
+
+    if (argc < 3) {
+        return 1;
+    }
+
+    setvbuf(stdout, (char *)0x0, 2, 0);
+
+    session = (char *)calloc(0x20, 1);
+    strncpy(session, argv[1], 0x17);
+    *(uint32_t *)(session + 0x1c) = 1000;
+
+    printf("Sessione %d aperta per %s\n", 1000, session);
+
+    logout_cmp = strcmp(argv[2], "logout");
+    if (logout_cmp == 0) {
+        free(session);
+        puts("Logout eseguito");
+    }
+
+    if (argc != 3) {
+        __isoc23_strtol(argv[3], (char **)0x0, 10);
+    }
+
+    if (*(int *)(session + 0x18) == 0) {
+        printf("Accesso utente per %s\n", session);
+    } else {
+        printf("Accesso amministratore per %s\n", session);
+    }
+
+    if (logout_cmp != 0) {
+        free(session);
+    }
+
+    return 0;
+}Il file `/tmp/re_task_ufltkgij/out.c` è stato scritto e verificato.
+
+## Riepilogo della ricostruzione
+
+**FASE 1–2 (orientamento e main):** `list_functions` ha mostrato `FUN_004003f0` come unica funzione del programma (le altre sono PLT/import, `_DT_INIT`, `_INIT_0`, `_FINI_0` e le tre `FUN_00400510/520/550` di avvio runtime). `entry` → main = `FUN_004003f0`.
+
+**FASE 3 (decadicomentazione):** Ho decompilato `FUN_004003f0` e verificato ogni istruzione con `disassemble_function` a `0x004003f0` (il disassembly ha chiarito ambiguità del decompilatore):
+
+- `CMP EDI,0x2 / JG ... MOV EAX,1 / RET` → `if (argc < 3) return 1;`
+- `MOV dword ptr [RBX+0x1c],0x3e8` → `*(uint32_t *)(session+0x1c) = 1000;` (il decompilatore aveva scomposto lo store in 4 byte: `0xe8,0x03,0x00,0x00` = 1000 little-endian)
+- `strncpy(dest, argv[1], 0x17)`, `calloc(0x20,1)`, `setvbuf(stdout,0,2,0)`
+- salti condizionati identici per `strcmp(argv[2],"logout")`, `argc != 3 → __isoc23_strtol(argv[3],0,10)`, test dword `[RBX+0x18]`, e `free` finale solo se `strcmp != 0`
+
+Il main chiama solo import libc: nessun'altra `FUN_` è raggiungibile (verificato anche dall'assenza di puntatori a funzione nel disassembly).
+
+**Stringhe** verificate byte-per-byte con `od` sul binario (`0x401378`: `"Sessione %d aperta per %s\n"`, `0x401393`: `"logout"`, `0x40139a`: `"Logout eseguito"`, `0x4013aa`: `"Accesso utente per %s\n"`, `0x4013c8`: `"Accesso amministratore per %s\n"`).
+
+**Verifica finale (identicità comportamentale):**
+
+| caso | `test_O3` | `out.c` compilato |
+|---|---|---|
+| `utente normal` | `Sessione 1000 aperta per utente` / `Accesso utente per utente`, rc=0 | identico |
+| `utente logout extra` | `Sessione 1000...` / `Logout eseguito` / `Accesso utente per <byte casuali>` (use-after-free preservato!), rc=0 | identico |
+| `utente normal 42` | identico | identico |
+| solo `test_O3` | rc=1, nessun output | identico |
+
+Il codice compila con `gcc -Wall -Wextra` senza errori e riproduce fedelmente anche il bug use-after-free (stampa del buffer dopo la `free` nel percorso logout) senza alcuna correzione.
+
+DONE

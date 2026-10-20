@@ -1,0 +1,93 @@
+
+    __( O)>  ● new session · openrouter xiaomi/mimo-v2.6-flash
+   \____)    20261009_10 · /tmp/re_task_xo727as0
+     L L     goose is ready
+Inizio la FASE 1 — ORIENTAMENTO: elenco funzioni e stringhe.
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+Main = `FUN_004004f1`. FASE 3 — decompiilo il main e le funzioni raggiungibili.
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004f1
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004b6
+
+Tutte le funzioni raggiungibili dal main sono decompilate:
+- `FUN_004004f1` = main
+- `FUN_004004b6` = funzione di registrazione (chiamata dal main)
+
+Le altre (`FUN_00400400/410/440`) sono codice di avvio del compilatore, non raggiungibili dal main. Verifica: il main chiama solo `setvbuf`, `FUN_004004b6`, `strlen`, `printf`, `free`. ✓
+
+**FASE 4/5** — Scrivo il codice C fedele al decompilato:
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_xo727as0/out.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+
+/* FUN_004004b6: copia il nome solo se la lunghezza e' strettamente minore
+   di 0x11 (17); altrimenti ritorna NULL. Alloca esattamente 0x10 byte. */
+char *register_name(char *name)
+{
+    size_t len;
+    char *dest;
+
+    len = strlen(name);
+    dest = (char *)0x0;
+    if (len < 0x11) {
+        dest = (char *)malloc(0x10);
+        strcpy(dest, name);
+    }
+    return dest;
+}
+
+/* FUN_004004f1: main */
+int main(int argc, char **argv)
+{
+    char *name;
+    char *copy;
+    size_t len;
+    char **p;
+
+    setvbuf(stdout, (char *)0x0, 2, 0);
+    if (1 < argc) {
+        p = (char **)(argv + 1);
+        do {
+            name = *p;
+            copy = register_name(name);
+            if (copy == (char *)0x0) {
+                len = strlen(name);
+                printf("Nome troppo lungo: %zu caratteri\n", len);
+            } else {
+                len = strlen(copy);
+                printf("Registrato: %s (%zu caratteri)\n", copy, len);
+                free(copy);
+            }
+            p = p + 1;
+        } while (p != (char **)((char *)argv + 0x10 + (unsigned long)(argc - 2) * 8));
+    }
+    return 0;
+}
+
+
+Created /tmp/re_task_xo727as0/out.c (48 lines)Il file `/tmp/re_task_xo727as0/scritto con successo. Riepilogo della ricostruzione:
+
+- **`FUN_004004f1` → `main`**: imposta `setvbuf(stdout, NULL, 2, 0)`, itera su `argv[1..argc-1]` con la stessa aritmetica di puntatori del binario (condizione finale `argv + 0x10 + (argc-2)*8` byte), chiama la funzione di registrazione e stampa i due messaggi di formato osservati.
+- **`FUN_004004b6` → `register_name`**: `strlen < 0x11` → `malloc(0x10)` + `strcpy` (incluso il sovrascrittura-buffer del binario, riprodotta fedelmente), altrimenti `NULL`.
+
+DONE

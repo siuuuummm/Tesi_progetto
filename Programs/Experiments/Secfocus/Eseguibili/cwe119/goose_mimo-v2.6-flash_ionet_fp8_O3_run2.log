@@ -1,0 +1,889 @@
+
+    __( O)>  ● new session · openrouter xiaomi/mimo-v2.6-flash
+   \____)    20261011_27 · /tmp/re_task_la866c1u
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: ls -la /tmp/re_task_la866c1u/; sleep 3; curl -s -m 2 http://127.0.0.1:8080/ || echo "ghidra still down"
+
+total 12
+drwx------.  2 pippo  pippo     60 Oct 11 14:24 .
+drwxrwxrwt. 35 nobody nobody   880 Oct 11 14:24 ..
+-rwxr-xr-x.  1 pippo  pippo  10856 Oct 11 14:24 test_O3
+Operazione non supportata dal server headless: 
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400390
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400390
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400360
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400430
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400440
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400470
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: _INIT_0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: _FINI_0
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    filter: This_is
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_la866c1u && strings -t x test_O3 | head -50; echo ---; ./test_O3; echo "exit=$?"; echo ---; objdump -s -j .rodata test_O3 2>/dev/null | head -30
+
+    3c0 )D$ f
+    3cd )D$0f
+    3da )D$@f
+    411 PTE1
+   1000 /lib64/ld-linux-x86-64.so.2
+   10b9 __gmon_start__
+   10c8 strcpy
+   10cf __libc_start_main
+   10e1 printf
+   10e8 libm.so.6
+   10f2 libc.so.6
+   10fc GLIBC_2.2.5
+   1108 GLIBC_2.34
+   11c0 Buffer content: %s
+   11e0 This is a very long input string that will overflow the buffer and cause undefinfined behavior.
+   12d7 ;*3$"
+   2014 GCC: (GNU) 15.2.1 20260123 (Red Hat 15.2.1-7)
+   2042 AV:4p1299
+   204c RV:running gcc 15.2.1 20260123
+   206b BV:annobin gcc 15.2.1 20260123
+   208a GW:0x7d60562 ../sysdeps/x86/abi-note.c
+   20b1 SP:3
+   20b6 SC:1
+   20bb CF:8 ../sysdeps/x86/abi-note.c
+   20da FL:0 ../sysdeps/x86/abi-note.c
+   20f9 GA:1
+   20fe PI:4
+   2103 SE:0
+   2108 iS:0
+   210d GW:0x7d60562 init.c
+   2121 CF:8 init.c
+   212d FL:0 init.c
+   2139 GW:0x7d60562 static-reloc.c
+   2155 SP:0 static-reloc.c
+   2169 CF:8 static-reloc.c
+   217d FL:0 static-reloc.c
+   21b9 .shstrtab
+   21c3 .note.gnu.build-id
+   21d6 .init
+   21dc .text
+   21e2 .fini
+   21e8 .interp
+   21f0 .gnu.hash
+   21fa .dynsym
+   2202 .dynstr
+   220a .gnu.version
+   2217 .gnu.version_r
+   2226 .rela.dyn
+   2230 .rela.plt
+   223a .rodata
+---
+/bin/bash: line 1: 48124 Segmentation fault         (core dumped) ./test_O3
+exit=139
+---
+
+test_O3:     file format elf64-x86-64
+
+Contents of section .rodata:
+ 4011b0 01000200 00000000 00000000 00000000  ................
+ 4011c0 42756666 65722063 6f6e7465 6e743a20  Buffer content: 
+ 4011d0 25730a00 00000000 00000000 00000000  %s..............
+ 4011e0 54686973 20697320 61207665 7279206c  This is a very l
+ 4011f0 6f6e6720 696e7075 74207374 72696e67  ong input string
+ 401200 20746861 74207769 6c6c206f 76657266   that will overf
+ 401210 6c6f7720 74686520 62756666 65722061  low the buffer a
+ 401220 6e642063 61757365 20756e64 6566696e  nd cause undefin
+ 401230 66696e65 64206265 68617669 6f722e00  fined behavior..
+
+
+=== NUDGE 1/2 ===
+
+    __( O)>  ● resuming · openrouter xiaomi/mimo-v2.6-flash
+   \____)    20261011_27 · /tmp/re_task_la866c1u
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400390
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400430
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400440
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400470
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x004004f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function_by_address ghidra-mcp
+    address: 0x00400360
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400360
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400430
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400440
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400470
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004f0
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_imports ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400390
+
+
+  ────────────────────────────────────────
+  ▸ list_exports ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_segments ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x00400390
+
+
+  ────────────────────────────────────────
+  ▸ list_methods ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_namespaces ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_classes ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ search_functions_by_name ghidra-mcp
+    query: main
+
+
+  ────────────────────────────────────────
+  ▸ get_function_xrefs ghidra-mcp
+    name: FUN_00400390
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_from ghidra-mcp
+    address: 0x00400390
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400390
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400430
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400440
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400470
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x004004f0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: _DT_INIT
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: _INIT_0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: _FINI_0
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: _DT_FINI
+
+
+  ────────────────────────────────────────
+  ▸ get_current_function ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ get_current_address ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ set_function_prototype ghidra-mcp
+    function_address: 0x00400390
+    prototype: int main(int argc, char **argv)
+
+
+  ────────────────────────────────────────
+  ▸ rename_function ghidra-mcp
+    old_name: FUN_00400390
+    new_name: main
+
+
+  ────────────────────────────────────────
+  ▸ rename_function_by_address ghidra-mcp
+    function_address: 0x00400390
+    new_name: main
+
+
+  ────────────────────────────────────────
+  ▸ rename_function ghidra-mcp
+    old_name: FUN_00400440
+    new_name: init_buffer
+
+
+  ────────────────────────────────────────
+  ▸ rename_function ghidra-mcp
+    old_name: FUN_00400470
+    new_name: run_program
+
+
+  ────────────────────────────────────────
+  ▸ rename_function ghidra-mcp
+    old_name: FUN_00400430
+    new_name: register_tm_clones_stub
+
+
+  ────────────────────────────────────────
+  ▸ rename_function ghidra-mcp
+    old_name: FUN_004004f0
+    new_name: frame_dummy
+
+
+  ────────────────────────────────────────
+  ▸ rename_function ghidra-mcp
+    old_name: FUN_00400360
+    new_name: init
+
+
+  ────────────────────────────────────────
+  ▸ rename_data ghidra-mcp
+    address: 0x004011c0
+    new_name: fmt_buffer_content
+
+
+  ────────────────────────────────────────
+  ▸ rename_data ghidra-mcp
+    address: 0x004011e0
+    new_name: long_input_string
+
+
+  ────────────────────────────────────────
+  ▸ set_decompiler_comment ghidra-mcp
+    address: 0x00400390
+    comment: Main function: initializes buffer, copies long input, prints buffer content
+
+
+  ────────────────────────────────────────
+  ▸ set_disassembly_comment ghidra-mcp
+    address: 0x00400390
+    comment: Main function
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400390
+    variable_name: buffer
+    new_type: char[64]
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400470
+    variable_name: buf
+    new_type: char[64]
+
+
+  ────────────────────────────────────────
+  ▸ rename_variable ghidra-mcp
+    function_name: main
+    old_name: buffer
+    new_name: buf
+
+
+  ────────────────────────────────────────
+  ▸ rename_variable ghidra-mcp
+    function_name: main
+    old_name: local_buf
+    new_name: buf
+
+
+  ────────────────────────────────────────
+  ▸ rename_variable ghidra-mcp
+    function_name: run_program
+    old_name: local_buf
+    new_name: buf
+
+
+  ────────────────────────────────────────
+  ▸ rename_variable ghidra-mcp
+    function_name: init_buffer
+    old_name: local_buf
+    new_name: buf
+
+
+  ────────────────────────────────────────
+  ▸ rename_variable ghidra-mcp
+    function_name: main
+    old_name: param_1
+    new_name: argc
+
+
+  ────────────────────────────────────────
+  ▸ rename_variable ghidra-mcp
+    function_name: main
+    old_name: param_2
+    new_name: argv
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: i
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400470
+    variable_name: len
+    new_type: size_t
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400390
+    variable_name: ret
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400390
+    variable_name: input
+    new_type: char *
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400470
+    variable_name: dst
+    new_type: char *
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400470
+    variable_name: src
+    new_type: const char *
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: buf
+    new_type: char[64]
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: n
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400390
+    variable_name: buf
+    new_type: char[64]
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400390
+    variable_name: str
+    new_type: char *
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400470
+    variable_name: buf
+    new_type: char[64]
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400470
+    variable_name: result
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: val
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: count
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400390
+    variable_name: c
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400470
+    variable_name: c
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400470
+    variable_name: i
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400470
+    variable_name: j
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: idx
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: ptr
+    new_type: char *
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: s
+    new_type: char *
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: size
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400390
+    variable_name: n
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400390
+    variable_name: total
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400390
+    variable_name: ch
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400390
+    variable_name: s
+    new_type: char *
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: tmp
+    new_type: char *
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: x
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: y
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: z
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400470
+    variable_name: p
+    new_type: char *
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400470
+    variable_name: q
+    new_type: char *
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400470
+    variable_name: a
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400470
+    variable_name: b
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400390
+    variable_name: a
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400390
+    variable_name: b
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400390
+    variable_name: res
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: res
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400470
+    variable_name: res
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: a
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: b
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ set_local_variable_type ghidra-mcp
+    function_address: 0x00400440
+    variable_name: c
+    new_type: int
+
+
+  ────────────────────────────────────────
+  ▸ ghidra-m
+
+    -32002: Tool 'ghidra-m' not found
+
+
+
+=== NUDGE 2/2 ===
+
+    __( O)>  ● resuming · openrouter xiaomi/mimo-v2.6-flash
+   \____)    20261011_27 · /tmp/re_task_la866c1u
+     L L     goose is ready
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400390
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400360
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400430
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400440
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400470
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004f0
+
+
+  ────────────────────────────────────────
+  ▸ get_function_xrefs ghidra-mcp
+    name: FUN_004004f0
+
+
+  ────────────────────────────────────────
+  ▸ disassemble_function ghidra-mcp
+    address: 0x00400390
+
+
+  ────────────────────────────────────────
+  ▸ get_function_by_address ghidra-mcp
+    address: 0x0040126c
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_from ghidra-mcp
+    address: 0x004004f0
+
+
+  ────────────────────────────────────────
+  ▸ get_xrefs_to ghidra-mcp
+    address: 0x00400390
+
+
+  ────────────────────────────────────────
+  ▸ list_segments ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_la866c1u && objdump -d test_O3 --start-address=0x400390 --stop-address=0x400400 | cat; echo ====; objdump -d test_O3 --start-address=0x4004f0 --stop-address=0x400515 | cat
+
+
+test_O3:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000400390 <.text>:
+  400390:	48 83 ec 48          	sub    $0x48,%rsp
+  400394:	66 0f 6f 05 44 0e 00 	movdqa 0xe44(%rip),%xmm0        # 4011e0 <printf@plt+0xe60>
+  40039b:	00 
+  40039c:	bf c0 11 40 00       	mov    $0x4011c0,%edi
+  4003a1:	31 c0                	xor    %eax,%eax
+  4003a3:	48 89 e6             	mov    %rsp,%rsi
+  4003a6:	0f 29 04 24          	movaps %xmm0,(%rsp)
+  4003aa:	66 0f 6f 05 3e 0e 00 	movdqa 0xe3e(%rip),%xmm0        # 4011f0 <printf@plt+0xe70>
+  4003b1:	00 
+  4003b2:	0f 29 44 24 10       	movaps %xmm0,0x10(%rsp)
+  4003b7:	66 0f 6f 05 41 0e 00 	movdqa 0xe41(%rip),%xmm0        # 401200 <printf@plt+0xe80>
+  4003be:	00 
+  4003bf:	0f 29 44 24 20       	movaps %xmm0,0x20(%rsp)
+  4003c4:	66 0f 6f 05 44 0e 00 	movdqa 0xe44(%rip),%xmm0        # 401210 <printf@plt+0xe90>
+  4003cb:	00 
+  4003cc:	0f 29 44 24 30       	movaps %xmm0,0x30(%rsp)
+  4003d1:	66 0f 6f 05 47 0e 00 	movdqa 0xe47(%rip),%xmm0        # 401220 <printf@plt+0xea0>
+  4003d8:	00 
+  4003d9:	0f 29 44 24 40       	movaps %xmm0,0x40(%rsp)
+  4003de:	66 0f 6f 05 4a 0e 00 	movdqa 0xe4a(%rip),%xmm0        # 401230 <printf@plt+0xeb0>
+  4003e5:	00 
+  4003e6:	0f 11 44 24 4d       	movups %xmm0,0x4d(%rsp)
+  4003eb:	e8 90 ff ff ff       	call   400380 <printf@plt>
+  4003f0:	31 c0                	xor    %eax,%eax
+  4003f2:	48 83 c4 48          	add    $0x48,%rsp
+  4003f6:	c3                   	ret
+  4003f7:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+  4003fe:	00 00 
+====
+
+test_O3:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+00000000004004f0 <.text+0x160>:
+  4004f0:	48 83 ec 48          	sub    $0x48,%rsp
+  4004f4:	48 89 fe             	mov    %rdi,%rsi
+  4004f7:	48 89 e7             	mov    %rsp,%rdi
+  4004fa:	e8 71 fe ff ff       	call   400370 <strcpy@plt>
+  4004ff:	48 89 e6             	mov    %rsp,%rsi
+  400502:	bf c0 11 40 00       	mov    $0x4011c0,%edi
+  400507:	31 c0                	xor    %eax,%eax
+  400509:	e8 72 fe ff ff       	call   400380 <printf@plt>
+  40050e:	48 83 c4 48          	add    $0x48,%rsp
+  400512:	c3                   	ret
+
+Disassembly of section .fini:
+
+0000000000400514 <.fini>:
+  400514:	f3                   	repz

@@ -1,0 +1,89 @@
+
+    __( O)>  ● new session · openrouter xiaomi/mimo-v2.6-flash
+   \____)    20261009_45 · /tmp/re_task_xz1sq2i5
+     L L     goose is ready
+Inizio la FASE 1 — orientamento sul binario.
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+Ora FASE 2 — trovo il main decompilando `entry`.
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+Il main è `FUN_00400507`. Decompilo il main e le altre funzioni program-specifiche.
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400507
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004b6
+
+Ho decompilato tutte le funzioni raggiungibili dal main: `FUN_00400507` (main) e `FUN_004004b6` (registrazione nome). Scrivo il codice C fedele al decompilato.
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_xz1sq2i5/out.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/* FUN_004004b6: duplica la stringa in ingresso se la sua lunghezza è
+ * strettamente minore di 0x11 (17) caratteri, allocando un buffer di
+ * 0x10 (16) byte. Altrimenti restituisce NULL. */
+static char *register_name(const char *name)
+{
+    size_t len;
+    char *dest;
+
+    len = strlen(name);
+    if (len < 0x11) {
+        dest = (char *)malloc(0x10);
+        strcpy(dest, name);
+    } else {
+        dest = (char *)0x0;
+    }
+    return dest;
+}
+
+/* FUN_00400507: entry point dichiarato come main. */
+int main(int argc, char **argv)
+{
+    char *reg;
+    size_t len;
+    int i;
+
+    setvbuf(stdout, (char *)0x0, 2, 0);
+    for (i = 1; i < argc; i = i + 1) {
+        reg = register_name(argv[i]);
+        if (reg == (char *)0x0) {
+            len = strlen(argv[i]);
+            printf("Nome troppo lungo: %zu caratteri\n", len);
+        } else {
+            len = strlen(reg);
+            printf("Registrato: %s (%zu caratteri)\n", reg, len);
+            free(reg);
+        }
+    }
+    return 0;
+}
+
+
+Created /tmp/re_task_xz1sq2i5/out.c (43 lines)Verifico che il codice compili correttamente.
+  ────────────────────────────────────────
+  ▸ shell
+    command: gcc -Wall -Wextra -o /tmp/re_task_xz1sq2i5/out /tmp/re_task_xz1sq2i5/out.c && echo COMPILE_OK && /tmp/re_task_xz1sq2i5/out Mario Rossi QuestoNomeEDavveroTroppoLungo
+
+COMPILE_OK
+Registrato: Mario (5 caratteri)
+Registrato: Rossi (5 caratteri)
+Nome troppo lungo: 29 caratteriIl codice compila senza errori e funziona correttamente, riproducendo esattamente la logica del binario (soglia `0x11`, allocazione `0x10`, stesse stringhe di formato).
+
+File salvato in `/tmp/re_task_xz1sq2i5/out.c`.
+
+DONE
