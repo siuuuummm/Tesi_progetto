@@ -1,0 +1,122 @@
+
+    __( O)>  ● new session · openrouter qwen/qwen3.8-27b
+   \____)    20261015_18 · /tmp/re_task_8n3f32xw
+     L L     goose is ready
+
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400400
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400410
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400440
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004b6
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400507
+
+
+
+All reachable functions decompiled: `main` (FUN_00400507) → `FUN_004004b6`. The others are C runtime startup/teardown stubs.
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_8n3f32xw/out.c
+    content: #include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+
+/* FUN_004004b6: se la stringa ha meno di 0x11 caratteri la duplica
+ * in un buffer di 0x10 byte, altrimenti restituisce NULL. */
+static char *clone_if_short(const char *src)
+{
+    size_t len;
+    char *dst;
+
+    len = strlen(src);
+    if (len < 0x11) {
+        dst = (char *)malloc(0x10);
+        strcpy(dst, src);
+    }
+    else {
+        dst = (char *)0x0;
+    }
+    return dst;
+}
+
+int main(int argc, char **argv)
+{
+    char *s;
+    size_t len;
+    int i;
+
+    setvbuf(stdout, (char *)0x0, 2, 0);
+    for (i = 1; i < argc; i = i + 1) {
+        s = clone_if_short(argv[i]);
+        if (s == (char *)0x0) {
+            len = strlen(argv[i]);
+            printf("Nome troppo lungo: %zu caratteri\n", len);
+        }
+        else {
+            len = strlen(s);
+            printf("Registrato: %s (%zu caratteri)\n", s, len);
+            free(s);
+        }
+    }
+    return 0;
+}
+
+
+Created /tmp/re_task_8n3f32xw/out.c (44 lines)
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_8n3f32xw && gcc -o /tmp/test_out out.c 2>&1 && /tmp/test_out aaaa bbbbbbbbbbbbbbbb "exactly 16 chars!"; echo "exit $?"
+
+Registrato: aaaa (4 caratteri)
+Registrato: bbbbbbbbbbbbbbbb (16 caratteri)
+Nome troppo lungo: 17 caratteri
+exit 0
+
+Reconstruction complete and verified. The binary's logic:
+
+- **`main`** (FUN_00400507): sets unbuffered stdout, iterates over `argv[1..argc-1]`, and for each argument either registers it (if short) or reports it as too long.
+- **`clone_if_short`** (FUN_004004b6): if the argument length is `< 0x11` (17) it allocates a `0x10`-byte buffer and copies the string into it; otherwise returns `NULL`.
+
+The remaining `FUN_...` entries are compiler-generated startup/teardown stubs (`_INIT_0`, `_FINI_0`, `_DT_INIT`, no-op `FUN_00400400/410/440`) and were correctly excluded.
+
+I tested the compiled output: a 16-char argument prints `Registrato: ... (16 caratteri)`, a 17-char one prints `Nome troppo lungo: 17 caratteri`, matching the decompiled threshold exactly.
+
+DONE

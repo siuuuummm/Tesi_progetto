@@ -1,0 +1,163 @@
+
+    __( O)>  ● new session · openrouter qwen/qwen3.8-27b
+   \____)    20261015_22 · /tmp/re_task_32d8da3t
+     L L     goose is ready
+
+
+
+
+  ────────────────────────────────────────
+  ▸ list_functions ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+
+
+
+The list looks garbled. Let me get proper function listings with addresses and check the data/strings more.
+
+
+  ────────────────────────────────────────
+  ▸ list_methods ghidra-mcp
+
+
+  ────────────────────────────────────────
+  ▸ list_strings ghidra-mcp
+    limit: 500
+
+
+
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: entry
+
+
+  ────────────────────────────────────────
+  ▸ list_data_items ghidra-mcp
+    limit: 200
+
+
+
+Main is `FUN_00400507`. Let me decompile it, along with the other program functions.
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400507
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_004004b6
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400400
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400410
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400440
+
+
+  ────────────────────────────────────────
+  ▸ decompile_function ghidra-mcp
+    name: FUN_00400360
+
+
+
+All program functions reachable from `main` are now decompiled:
+
+- **`entry`** → calls `__libc_start_main(FUN_00400507, ...)` → **main = `FUN_00400507`**
+- **`FUN_00400507` (main)**: `setvbuf(stdout, NULL, 2, 0)`; loops `i = 1..argc-1`, calls `FUN_004004b6(argv[i])`; if NULL prints `"Nome troppo lungo: %zu caratteri\n"`, else prints `"Registrato: %s (%zu caratteri)\n"` and frees.
+- **`FUN_004004b6`**: `strlen` check `< 0x11` → `malloc(0x10)` + `strcpy`, else returns NULL.
+- The remaining `FUN_` addresses (`00400360`, `00400400`, `00400410`, `00400440`) are compiler/libc startup-shutdown stubs (empty bodies), not program code — correctly excluded.
+
+Verification of internal consistency: all constants observed (0x11, 0x10, 2, loop bounds 1..argc-1) are reproduced exactly; format strings match the decompiled printf calls; no function is stubbed.
+
+Now writing the faithful translation:
+
+
+  ────────────────────────────────────────
+  ▸ write
+    path /tmp/re_task_32d8da3t/out.c
+    content: #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/* Original symbol: FUN_004004b6 */
+char *register_name(char *name)
+{
+    size_t len;
+    char *dest;
+
+    len = strlen(name);
+    if (len < 0x11) {
+        dest = (char *)malloc(0x10);
+        strcpy(dest, name);
+    }
+    else {
+        dest = (char *)0x0;
+    }
+    return dest;
+}
+
+/* Original symbol: FUN_00400507 (main, first argument of __libc_start_main) */
+int main(int argc, char **argv)
+{
+    char *s;
+    size_t len;
+    int i;
+
+    setvbuf(stdout, (char *)0x0, 2, 0);
+    for (i = 1; i < argc; i = i + 1) {
+        s = register_name(*(char **)(argv + i));
+        if (s == (char *)0x0) {
+            len = strlen(*(char **)(argv + i));
+            printf("Nome troppo lungo: %zu caratteri\n", len);
+        }
+        else {
+            len = strlen(s);
+            printf("Registrato: %s (%zu caratteri)\n", s, len);
+            free(s);
+        }
+    }
+    return 0;
+}
+
+
+Created /tmp/re_task_32d8da3t/out.c (43 lines)
+
+Quick verification that the file compiles cleanly with gcc:
+
+
+  ────────────────────────────────────────
+  ▸ shell
+    command: cd /tmp/re_task_32d8da3t && gcc -o out_test out.c && ./out_test "abc" "verylongnamethatisdefinitelytoobig" "exact16charsssss" "17charssssssssss" && rm -f out_test
+
+Registrato: abc (3 caratteri)
+Nome troppo lungo: 34 caratteri
+Registrato: exact16charsssss (16 caratteri)
+Registrato: 17charssssssssss (16 caratteri)
+
+Done. Reconstruction complete:
+
+**Summary of the reverse engineering:**
+- **Entry point** (`entry` @ 0x4003f0) passes `FUN_00400507` as the first argument to `__libc_start_main` → that is `main`.
+- **`main` (FUN_00400507)**: disables stdout buffering (`setvbuf(stdout, NULL, 2, 0)`), then iterates over command-line arguments 1..argc-1, calling the name-registration helper for each.
+- **`FUN_004004b6`**: the core logic — if `strlen(name) < 0x11` (17) it allocates `malloc(0x10)` (16 bytes) and `strcpy`s the name into it; otherwise returns NULL. (Notably a classic off-by-one overflow vulnerability: 16-char names are accepted into a 16-byte buffer.)
+- `main` prints either `"Nome troppo lungo: %zu caratteri\n"` (on NULL) or `"Registrato: %s (%zu caratteri)\n"` (on success, followed by `free`).
+- Remaining `FUN_` stubs (00400360, 00400400, 00400410, 00400440) are compiler/libc startup-shutdown functions (empty bodies) and were correctly excluded per strategy.
+
+All constants (0x11, 0x10, 2), loop bounds, and format strings were transcribed exactly from the decompiled output. The file compiles cleanly with gcc and its runtime behavior matches the binary logic. Saved to `/tmp/re_task_32d8da3t/out.c`.
+
+DONE
