@@ -35,6 +35,7 @@ originale tramite AddressSanitizer e test funzionali.
     │   ├── <modello>/              ricostruzioni nella condizione standard
     │   ├── <modello>__senza_divieto/  ricostruzioni nella condizione di controllo
     │   └── Archivio1/ 2/ 3/        prove preliminari, non usate nei risultati
+    ├── baseline_ghidra/            termine di confronto: il solo Ghidra sugli stessi 20 binari
     └── Secfocus/Eseguibili/<programma>/
         └── goose_<modello>_<livello>_run<n>.log   log completo di ogni sessione
 ```
@@ -133,9 +134,23 @@ Le chiavi dei fornitori restano nella configurazione di Goose (portachiavi di
 sistema) e non sono nel repository. La generazione non è deterministica: una
 nuova esecuzione produce ricostruzioni diverse da quelle salvate qui.
 
+## Baseline con il solo Ghidra
+
+`Programs/Experiments/baseline_ghidra/` valuta il codice di Ghidra sugli stessi
+venti binari, reso compilabile solo con dichiarazioni aggiunte. Script, file
+valutati e risultati sono descritti nel suo README.
+
 ## Prove preliminari
 
 `Archivio1/`, `Archivio2/` e `Archivio3/` contengono le prove fatte prima di
 fissare la configurazione dell'esperimento (maggio–ottobre 2026), con altri
 modelli, altri programmi e versioni precedenti del prompt e della pipeline. Non
 sono usate nei risultati della tesi.
+
+## Licenza
+
+Il codice scritto per la tesi è distribuito con licenza MIT (file `LICENSE`).
+Il bridge MCP in `GhidraMCP-release-1-4/` (`bridge_mcp_ghidra.py` e l'archivio
+`GhidraMCP-1-4.zip`) appartiene al progetto
+[GhidraMCP](https://github.com/LaurieWired/GhidraMCP) ed è distribuito con la sua
+licenza Apache-2.0. Gli articoli citati nella tesi non sono inclusi.
